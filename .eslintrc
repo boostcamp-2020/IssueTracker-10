@@ -2,7 +2,7 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["prettier"],
   "rules": {
-    "no-unused-vars": ["error", { "args": "all" }],
+    "no-unused-vars": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
@@ -10,7 +10,7 @@
     "import/newline-after-import": "error",
     "import/prefer-default-export": 0,
     "semi": "error",
-    "id-denylist": ["error", "data", "err", "e", "cb", "callback"]
+    "id-denylist": ["error", "data", "e", "cb", "callback"]
   },
   "globals": {
     "window": true,
