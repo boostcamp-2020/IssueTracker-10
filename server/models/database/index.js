@@ -21,7 +21,6 @@ fs.readdirSync(__dirname)
   });
 
 // 관계 설정
-console.log(db);
 // user-issue 1:N 관계
 db.user.hasMany(db.issue, {
   foreignKey: 'author',
@@ -30,7 +29,7 @@ db.issue.belongsTo(db.user, {
   foreignKey: 'author',
 });
 
-// milestion-isuue 1:N 관계
+// milestion-issue 1:N 관계
 db.milestone.hasMany(db.issue, {
   foreignKey: 'milestoneId',
 });
@@ -38,7 +37,59 @@ db.issue.belongsTo(db.milestone, {
   foreignKey: 'milestoneId',
 });
 
-//
+// label-issue M:N 관계
+db.issue.belongsToMany(db.label, { through: 'issueLabel', timestamps: false });
+db.label.belongsToMany(db.issue, { through: 'issueLabel', timestamps: false });
+
+// user-issue M:N 관계 (assignee)
+db.user.belongsToMany(db.issue, {
+  through: 'issueAssignee',
+  timestamps: false,
+});
+db.issue.belongsToMany(db.user, {
+  through: 'issueAssignee',
+  timestamps: false,
+});
+
+// user-comment 1:N 관계
+db.user.hasMany(db.comment, {
+  foreignKey: 'userId',
+});
+db.comment.belongsTo(db.user, {
+  foreignKey: 'userId',
+});
+
+// issue-comment 1:N 관계
+db.issue.hasMany(db.comment, {
+  foreignKey: 'issueId',
+});
+db.comment.belongsTo(db.issue, {
+  foreignKey: 'issueId',
+});
+
+// user-reaction 1:N 관계
+db.user.hasMany(db.reaction, {
+  foreignKey: 'userId',
+});
+db.reaction.belongsTo(db.user, {
+  foreignKey: 'userId',
+});
+
+// emoticon-reaction 1:N 관계
+db.emoticon.hasMany(db.reaction, {
+  foreignKey: 'emoticonId',
+});
+db.reaction.belongsTo(db.emoticon, {
+  foreignKey: 'emoticonId',
+});
+
+// comment-reaction 1:N 관계
+db.comment.hasMany(db.reaction, {
+  foreignKey: 'commentId',
+});
+db.reaction.belongsTo(db.comment, {
+  foreignKey: 'commentId',
+});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
