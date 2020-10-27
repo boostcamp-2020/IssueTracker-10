@@ -5,9 +5,8 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const config = require('../config/sequelize');
 
-const db = {};
-
 const sequelize = new Sequelize(config);
+const db = {};
 
 fs.readdirSync(__dirname)
   .filter((file) => {
@@ -22,8 +21,24 @@ fs.readdirSync(__dirname)
   });
 
 // 관계 설정
+console.log(db);
+// user-issue 1:N 관계
+db.user.hasMany(db.issue, {
+  foreignKey: 'author',
+});
+db.issue.belongsTo(db.user, {
+  foreignKey: 'author',
+});
 
-// ----
+// milestion-isuue 1:N 관계
+db.milestone.hasMany(db.issue, {
+  foreignKey: 'milestoneId',
+});
+db.issue.belongsTo(db.milestone, {
+  foreignKey: 'milestoneId',
+});
+
+//
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
