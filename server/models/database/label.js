@@ -1,11 +1,11 @@
 module.exports = ({ sequelize, DataTypes }) => {
   return sequelize.define('label', {
     title: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING(320),
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING(250),
+      type: DataTypes.STRING(300),
       allowNull: true,
     },
     color: {
