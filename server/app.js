@@ -1,17 +1,28 @@
 const createError = require('http-errors');
-const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
+const express = require('express');
 const logger = require('morgan');
-const sequelize = require('sequelize');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 
 const app = express();
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const { sequelize } = require('./models/database');
+
+sequelize
+  .sync()
+  .then(() => console.log('DB 연결 성공'))
+  .catch((err) => console.log(err));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
 
 app.use((req, res, next) => {
   next(createError(404));

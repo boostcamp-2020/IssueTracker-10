@@ -2,6 +2,7 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["prettier"],
   "rules": {
+    "no-dynamic-require": 0,
     "no-unused-vars": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prop-types": 0,
@@ -22,7 +23,8 @@
     "navigator": true,
     "Headers": true,
     "Request": true,
-    "fetch": true
+    "fetch": true,
+    "console": true
   },
   "parser": "babel-eslint"
 }
