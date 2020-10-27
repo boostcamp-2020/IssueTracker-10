@@ -7,14 +7,7 @@ const config = require('../config/sequelize');
 
 const db = {};
 
-const sequelize = new Sequelize({
-  host: config.host,
-  username: config.username,
-  password: config.password,
-  prot: config.port,
-  database: config.database,
-  dialect: config.dialect,
-});
+const sequelize = new Sequelize(config);
 
 fs.readdirSync(__dirname)
   .filter((file) => {

@@ -11,11 +11,13 @@ module.exports = ({ sequelize, DataTypes }) => {
     },
     avatar: {
       type: DataTypes.STRING(250),
+      allowNull: true,
       defaultValue:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg',
     },
     password: {
       type: DataTypes.STRING(250),
+      allowNull: true,
     },
   });
 };
