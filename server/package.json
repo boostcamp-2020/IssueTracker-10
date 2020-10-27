@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "helmet": "^4.1.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "eslint": "^7.12.1",
+    "prettier": "^2.1.2"
+  }
+}
