@@ -22,7 +22,6 @@ extension UIView {
 		externalBorder.name = Constants.ExternalBorderName
 		
 		layer.insertSublayer(externalBorder, at: 0)
-		print("\(content) \(externalBorder.frame)")
 		layer.masksToBounds = false
 	}
 

@@ -18,8 +18,9 @@ class IssueViewController: UIViewController {
 	}
 	
 	@IBOutlet weak var IssueCollectionView: UICollectionView!
-
-	var dataSource: UICollectionViewDiffableDataSource<Section, Issue>!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var dataSource: UICollectionViewDiffableDataSource<Section, Issue>!
 	let issueManager = IssueManager()
 	
 	override func viewDidLoad() {
