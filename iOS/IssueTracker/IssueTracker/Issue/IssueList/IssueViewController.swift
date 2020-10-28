@@ -19,16 +19,58 @@ class IssueViewController: UIViewController {
 	
 	@IBOutlet weak var IssueCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
+	@IBAction func editButtonTouched(_ sender: UIBarButtonItem) {
+		if isEditing {
+			closeIssues(animated: true)
+		}
+		setEditing(!isEditing, animated: true)		
+		updateUserInterface()
+	}
     
     var dataSource: UICollectionViewDiffableDataSource<Section, Issue>!
 	let issueManager = IssueManager()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		IssueCollectionView.delegate = self
 		IssueCollectionView.collectionViewLayout = createLayout()
 		configureDataSource()
 		performQuery(with: "")
     }
+	
+	func updateUserInterface() {
+		guard let editButton = navigationItem.rightBarButtonItem else { return }
+		editButton.title = isEditing ? "Done" : "Edit"
+	}
+	
+	func deleteIssues(animiated: Bool) {
+		let paths = IssueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
+		paths?.forEach{ issueManager.delete(at: $0.row) }
+		
+		updateDataSource(issues: issueManager.opened())
+	}
+	
+	func closeIssues(animated: Bool) {
+		let paths = IssueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
+		guard let indexPaths = paths else { return }
+		let identifiers = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
+		identifiers.forEach{ issueManager.close(with: $0) }
+		
+		updateDataSource(issues: issueManager.opened())
+	}
+	
+	func updateDataSource(issues: [Issue]) {
+		var snapshot = NSDiffableDataSourceSnapshot<Section, Issue>()
+		snapshot.appendSections([.main])
+		snapshot.appendItems(issues)
+		dataSource.apply(snapshot, animatingDifferences: true)
+	}
+	
+	override func setEditing(_ editing: Bool, animated: Bool) {
+		guard isEditing != editing else { return }
+		super.setEditing(editing, animated: animated)
+		IssueCollectionView.allowsMultipleSelection = editing
+	}
 	
 	func createLayout() -> UICollectionViewLayout {
 		let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -38,7 +80,7 @@ class IssueViewController: UIViewController {
 		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
 											   heightDimension: .fractionalHeight(0.15))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-		let spacing = CGFloat(10)
+		let spacing = CGFloat(0)
 		group.interItemSpacing = .fixed(spacing)
 
 		let section = NSCollectionLayoutSection(group: group)
@@ -48,8 +90,6 @@ class IssueViewController: UIViewController {
 		let layout = UICollectionViewCompositionalLayout(section: section)
 		return layout
 	}
-	
-
 }
 
 extension IssueViewController {
@@ -67,11 +107,32 @@ extension IssueViewController {
 	}
 	
 	func performQuery(with filter: String?) {
-		let issues = issueManager.issues
+		let issues = issueManager.opened()
+		updateDataSource(issues: issues)
+	}
+}
 
-		var snapshot = NSDiffableDataSourceSnapshot<Section, Issue>()
-		snapshot.appendSections([.main])
-		snapshot.appendItems(issues)
-		dataSource.apply(snapshot, animatingDifferences: true)
+extension IssueViewController: UICollectionViewDelegate {
+	func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
+		self.setEditing(true, animated: true)
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		guard isEditing == true else { /* 디테일뷰로 이동하기 */ return }
+		
+		let cell = collectionView.cellForItem(at: indexPath)
+		if cell?.isSelected == true {
+			cell?.backgroundColor = UIColor.systemGray6
+		}
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+		guard isEditing == true else { return }
+		let cell = collectionView.cellForItem(at: indexPath)
+		cell?.backgroundColor = nil
 	}
 }
