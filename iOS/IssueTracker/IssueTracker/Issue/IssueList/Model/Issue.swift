@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Issue {
+struct Issue: Hashable {
 	let id: Int
 	let title: String
 	let author: Int
@@ -15,4 +15,7 @@ struct Issue {
 	let milestoneId: Int
 	let createdAt: Date
 	let updatedAt: Date
+	
+	let description: String // firstComment
+	let labels: [String]
 }
