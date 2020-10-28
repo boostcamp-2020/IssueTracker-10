@@ -5,9 +5,14 @@ const userType = {
   github: 1,
 };
 
-const findUserById = (userId) => {
+const findUserById = async (id) => {
   try {
-    // TODO : DB에서 user select 해오기
+    const userInfo = await user.find({
+      attributes: ['id', 'username'],
+      where: { id },
+    });
+
+    return userInfo;
   } catch (err) {
     throw new Error('유저 데이터 find 실패');
   }
