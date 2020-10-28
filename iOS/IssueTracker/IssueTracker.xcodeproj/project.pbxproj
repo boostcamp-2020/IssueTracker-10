@@ -24,6 +24,7 @@
 		E0B3D4052547E9F20040D5AF /* IssueNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D4042547E9F20040D5AF /* IssueNavigationViewController.swift */; };
 		E0B3D40A2547EBC20040D5AF /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D4092547EBC20040D5AF /* IssueDetailViewController.swift */; };
 		E0B3D40F2547F9590040D5AF /* IssueCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D40E2547F9590040D5AF /* IssueCreateViewController.swift */; };
+		E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D43B2549AFC90040D5AF /* Criteria.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		E0B3D4042547E9F20040D5AF /* IssueNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueNavigationViewController.swift; sourceTree = "<group>"; };
 		E0B3D4092547EBC20040D5AF /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		E0B3D40E2547F9590040D5AF /* IssueCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCreateViewController.swift; sourceTree = "<group>"; };
+		E0B3D43B2549AFC90040D5AF /* Criteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Criteria.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				C3414FAC2548018D003C845A /* Issue.swift */,
 				C3414FC325481BF6003C845A /* IssueManager.swift */,
+				E0B3D43B2549AFC90040D5AF /* Criteria.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				E0B3D3C92546C8660040D5AF /* ViewController.swift in Sources */,
 				C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */,
 				C3414FA525480104003C845A /* LabelViewController.swift in Sources */,
+				E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */,
 				E0B3D3C52546C8660040D5AF /* AppDelegate.swift in Sources */,
 				E0B3D3C72546C8660040D5AF /* SceneDelegate.swift in Sources */,
 				E0B3D4052547E9F20040D5AF /* IssueNavigationViewController.swift in Sources */,
