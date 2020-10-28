@@ -26,7 +26,7 @@ class OpenCriteria: IssueCriteria {
     }
 }
 
-class WriterCriteria: IssueCriteria {
+class TitleCriteria: IssueCriteria {
     
     let inputText: String
     
@@ -35,7 +35,9 @@ class WriterCriteria: IssueCriteria {
     }
     
     func apply(issues: [Issue]) -> [Issue] {
-        return issues.filter { $0.title.contains(inputText)}
+        return issues.filter {
+            $0.title.lowercased().contains(inputText.lowercased())
+        }
     }
 }
 

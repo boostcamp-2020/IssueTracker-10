@@ -26,7 +26,7 @@ class IssueViewController: UIViewController {
 		super.viewDidLoad()
 		IssueCollectionView.collectionViewLayout = createLayout()
 		configureDataSource()
-		performQuery(with: "")
+        performQuery(issues: issueManager.issues, filter: nil)
         setupSearchController()
     }
 
@@ -76,20 +76,23 @@ extension IssueViewController {
 		dataSource = UICollectionViewDiffableDataSource<Section, Issue>(collectionView: IssueCollectionView, cellProvider: cellProvider)
 	}
 	
-	func performQuery(with filter: String) {
-        let issues = issueManager.issues
-
+    func performQuery(issues: [Issue], filter: IssueCriteria?) {
+        
+        var data = issues
+        if let filter = filter {
+            data = filter.apply(issues: issues)
+        }
 		var snapshot = NSDiffableDataSourceSnapshot<Section, Issue>()
 		snapshot.appendSections([.main])
-		snapshot.appendItems(issues)
+		snapshot.appendItems(data)
 		dataSource.apply(snapshot, animatingDifferences: true)
 	}
 }
 
 extension IssueViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
-        performQuery(with: text)
+        guard let text = searchController.searchBar.text, text != "" else { return }
+        performQuery(issues: issueManager.issues, filter: TitleCriteria(input: text))
     }
     
     
