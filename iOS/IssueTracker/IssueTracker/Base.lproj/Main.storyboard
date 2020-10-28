@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="4Tn-fz-g0o">
-                                <rect key="frame" x="0.0" y="140" width="358" height="56"/>
+                                <rect key="frame" x="10" y="140" width="348" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="gqd-TV-g8P"/>
                                 </constraints>
@@ -28,6 +28,9 @@
                                     <string>Title</string>
                                     <string>Title</string>
                                 </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="kBj-uM-5je"/>
+                                </connections>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dtf-0h-GnG">
                                 <rect key="frame" x="0.0" y="196" width="414" height="617"/>
@@ -87,7 +90,7 @@
                             <constraint firstItem="Dtf-0h-GnG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YTT-qk-CDk"/>
                             <constraint firstItem="sY6-S4-uWq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="amF-A1-5IO"/>
                             <constraint firstItem="sY6-S4-uWq" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="iUX-tW-aXG"/>
-                            <constraint firstItem="4Tn-fz-g0o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vTi-ly-msg"/>
+                            <constraint firstItem="4Tn-fz-g0o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="vTi-ly-msg"/>
                             <constraint firstItem="Dtf-0h-GnG" firstAttribute="top" secondItem="4Tn-fz-g0o" secondAttribute="bottom" id="vce-Di-vAl"/>
                         </constraints>
                     </view>
@@ -96,6 +99,9 @@
                             <color key="tintColor" systemColor="systemIndigoColor"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="4Tn-fz-g0o" id="aoY-kJ-XOB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -154,7 +160,7 @@
         <!--Issue Navigation View Controller-->
         <scene sceneID="G1c-wU-2mT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IsW-Wp-QnB" customClass="IssueNavigationViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenKeyboardAppears="YES" id="IsW-Wp-QnB" customClass="IssueNavigationViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="k4w-nN-ePc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Lhs-VV-xXX">
