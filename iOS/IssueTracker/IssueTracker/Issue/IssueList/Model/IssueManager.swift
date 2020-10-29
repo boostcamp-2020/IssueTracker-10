@@ -7,9 +7,15 @@
 
 import Foundation
 
+extension Notification.Name {
+    static let issueDidChanged = Notification.Name.init("issueDidChanged")
+}
+
 class IssueManager {
 	
-    var issues: [Issue]
+    var issues: [Issue] {
+        didSet { NotificationCenter.default.post(name: .issueDidChanged, object: nil)}
+    }
     
     init(issues: [Issue]) {
         self.issues = issues
