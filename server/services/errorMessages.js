@@ -14,6 +14,7 @@ const errorMessages = {
     notFoundError: "Can't find milestone",
   },
   server: 'INTERNAL ERROR : Unexpected error occurred',
+  unauthorized: 'AUTH ERROR : The request is not authorized',
 };
 
 module.exports = errorMessages;
