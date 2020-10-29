@@ -41,6 +41,11 @@ const selectIssueById = async (req, res, next) => {
   try {
     const { issueId } = req.params;
     const issueInfo = await issueModel.findIssueById(issueId);
+
+    if(!issueInfo) {
+      return res.status(404).json({ message: errorMessages.issue.notFoundError });
+    }
+    
     const commentCount = await commentModel.commentCountById(issueId);
 
     const data = {
@@ -48,7 +53,7 @@ const selectIssueById = async (req, res, next) => {
       commentCount,
     };
 
-    res.status(200).json({ message: 'The request is successfully processed', data });
+    return res.status(200).json({ message: successMessages.issue.read, data });
   } catch (err) {
     next(err);
   }
