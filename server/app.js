@@ -19,6 +19,7 @@ sequelize
   .catch((err) => console.log(err));
 
 const router = require('./controllers');
+const issueRouter = require('./controllers/issue');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use(helmet());
 passportConfig();
 
 app.use(router);
+app.use('/api/issue', issueRouter);
 
 app.use((req, res, next) => {
   next(createError(404));
