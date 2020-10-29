@@ -26,6 +26,7 @@ db.user.hasMany(db.issue, {
   foreignKey: 'author',
 });
 db.issue.belongsTo(db.user, {
+  as: 'owner',
   foreignKey: 'author',
 });
 
@@ -48,6 +49,7 @@ db.user.belongsToMany(db.issue, {
 });
 db.issue.belongsToMany(db.user, {
   through: 'issueAssignee',
+  as: 'assignees',
   timestamps: false,
 });
 
