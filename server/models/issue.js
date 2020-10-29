@@ -101,10 +101,42 @@ const countAllOpenIssues = async () => {
   }
 };
 
+const compareAuthor = async (userId, issueId) => {
+  try {
+    const result = issue.findOne({
+      where: {
+        id: issueId,
+        author: userId,
+      }
+    });
+
+    return result;
+  } catch (err) {
+    throw new Error(errorMessages.issue.compareAuthorFailed);
+  }
+};
+
+const updateIssueTitle = async (id, title) => {
+  try {
+    const result = issue.update({
+      title
+    },
+    {
+      where: { id }
+    });
+
+    return result;
+  } catch (err) {
+    throw new Error(errorMessages.issue.updateFailed);
+  }
+};
+
 module.exports = {
   createIssue,
   findIssueById,
   findIssueAll,
   countAllClosedIssues,
   countAllOpenIssues,
+  compareAuthor,
+  updateIssueTitle,
 };

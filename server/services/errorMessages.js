@@ -5,6 +5,10 @@ const errorMessages = {
   },
   issue: {
     notFoundError: "Can't find issue!",
+    noRequestData: 'Can\'t find request data',
+    notAuthor: 'not issue auther',
+    compareAuthorFailed: 'Error on comparing issue author',
+    updateFailed: 'Error on updating an issue',
   },
   label: {
     notFoundError: "Can't find label",
