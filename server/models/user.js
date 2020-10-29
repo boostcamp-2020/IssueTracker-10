@@ -1,4 +1,5 @@
 const { user } = require('./database');
+const errorMessages = require('../services/errorMessages');
 
 const userType = {
   local: 0,
@@ -14,7 +15,7 @@ const findUserById = async (id) => {
 
     return userInfo;
   } catch (err) {
-    throw new Error('유저 데이터 find 실패');
+    throw new Error(errorMessages.user.notFoundError);
   }
 };
 
@@ -28,11 +29,24 @@ const findOrCreateUserById = async ({ username, avatar }) => {
 
     return userInfo;
   } catch (err) {
-    throw new Error('유저 데이터 findOrCreate 실패');
+    throw new Error(errorMessages.user.invalidUsername);
+  }
+};
+
+const findUserAll = async () => {
+  try {
+    const users = await user.findAll({
+      attributes: ['id', 'username', 'avatar'],
+    });
+
+    return users;
+  } catch (err) {
+    throw new Error(errorMessages.user.notFoundError);
   }
 };
 
 module.exports = {
   findUserById,
   findOrCreateUserById,
+  findUserAll,
 };
