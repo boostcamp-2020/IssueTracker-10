@@ -29,8 +29,7 @@ describe('POST /api/issue API는', () => {
     request(app)
       .post('/api/issue')
       .set({
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYnllb2wzIiwiaWF0IjoxNjAzOTU0MjMxLCJleHAiOjE2MDQwNDA2MzF9.ZoJJkc353IdfFIh2RSBAwmtO1BtA84yEN0ZGOhj3xHU',
+        Authorization: process.env.TEST_TOKEN,
         'Content-Type': 'application/json',
       })
       .send({
@@ -51,8 +50,7 @@ describe('POST /api/issue API는', () => {
     request(app)
       .post('/api/issue')
       .set({
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYnllb2wzIiwiaWF0IjoxNjAzOTU0MjMxLCJleHAiOjE2MDQwNDA2MzF9.ZoJJkc353IdfFIh2RSBAwmtO1BtA84yEN0ZGOhj3xHU',
+        Authorization: process.env.TEST_TOKEN,
         'Content-Type': 'application/json',
       })
       .send({
