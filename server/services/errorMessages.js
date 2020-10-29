@@ -6,6 +6,7 @@ const errorMessages = {
   issue: {
     invalid: 'INVALID ERROR : the received data is invalid',
     notFoundError: "Can't find issue!",
+    unprocessable: 'UNPROCESSABLE : The request data is unprocessable',
   },
   label: {
     notFoundError: "Can't find label",

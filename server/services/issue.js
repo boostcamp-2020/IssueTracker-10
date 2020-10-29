@@ -61,8 +61,9 @@ const toggleState = async (req, res) => {
     if (!checkValidation.toggle(stateData)) {
       return res.status(400).json({ message: errorMessages.issue.invalid });
     }
-    await issueModel.updateStateOfIssues(stateData);
-    return res.status(200).json({ message: successMessages.issue.update });
+    const result = await issueModel.updateStateOfIssues(stateData);
+    if (result) return res.status(200).json({ message: successMessages.issue.update });
+    return res.status(422).json({ message: errorMessages.issue.update });
   } catch (err) {
     return res.status(500).json({ message: errorMessages.server });
   }

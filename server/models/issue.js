@@ -117,7 +117,7 @@ const updateStateOfIssues = async (stateData) => {
         },
       },
     );
-    return updatedResult;
+    return updatedResult === issueIds.length;
   } catch (err) {
     throw new Error(err);
   }
