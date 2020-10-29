@@ -32,7 +32,20 @@ const findOrCreateUserById = async ({ username, avatar }) => {
   }
 };
 
+const findUserAll = async () => {
+  try {
+    const users = await user.findAll({
+      attributes: ['id', 'username', 'avatar'],
+    });
+
+    return users;
+  } catch (err) {
+    throw new Error('모든 user 찾기 실패');
+  }
+};
+
 module.exports = {
   findUserById,
   findOrCreateUserById,
+  findUserAll,
 };
