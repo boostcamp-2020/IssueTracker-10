@@ -36,7 +36,7 @@ class TitleCriteria: IssueCriteria {
     
     func apply(issues: [Issue]) -> [Issue] {
         return issues.filter {
-            $0.title.lowercased().contains(inputText.lowercased())
+            $0.title.lowercased().contains(inputText.lowercased()) || inputText == ""
         }
     }
 }

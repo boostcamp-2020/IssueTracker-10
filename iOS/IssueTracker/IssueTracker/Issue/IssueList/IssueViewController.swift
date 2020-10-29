@@ -91,9 +91,7 @@ extension IssueViewController {
 
 extension IssueViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text, text != "" else { return }
+        guard let text = searchController.searchBar.text else { return }
         performQuery(issues: issueManager.issues, filter: TitleCriteria(input: text))
     }
-    
-    
 }
