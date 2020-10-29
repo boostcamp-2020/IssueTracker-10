@@ -26,8 +26,7 @@ class IssueCollectionViewCell: UICollectionViewCell {
 	func configure(issue: Issue) {
 		setTitle(with: issue.title)
 		setDescription(with: issue.description)
-		//setLabel(with: issue.label, backgroundColor: .systemOrange)
-		issue.labels.forEach { setLabel(with: $0, backgroundColor: .systemOrange) }
+        setLabels(issue: issue)
 		setMilestone(with: "\(issue.milestoneId)")
 	}
 	
@@ -39,6 +38,10 @@ class IssueCollectionViewCell: UICollectionViewCell {
 		firstComment.text = description
 	}
 	
+    private func setLabels(issue: Issue) {
+        issue.labels.forEach { setLabel(with: $0, backgroundColor: .systemOrange) }
+    }
+    
 	private func setLabel(with name: String, backgroundColor: UIColor) {
 		issueLabel.text = name
 		layoutIfNeeded() // layer는 자동으로 안바뀌는 듯 하다

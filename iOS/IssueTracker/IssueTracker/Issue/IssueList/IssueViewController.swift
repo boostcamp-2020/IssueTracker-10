@@ -18,7 +18,6 @@ class IssueViewController: UIViewController {
 	}
 	
 	@IBOutlet weak var IssueCollectionView: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     var dataSource: UICollectionViewDiffableDataSource<Section, Issue>!
 	let issueManager = IssueManager()
@@ -27,16 +26,27 @@ class IssueViewController: UIViewController {
 		super.viewDidLoad()
 		IssueCollectionView.collectionViewLayout = createLayout()
 		configureDataSource()
-		performQuery(with: "")
+        performQuery(issues: issueManager.issues, filter: nil)
+        setupSearchController()
     }
-	
+
+    private func setupSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search issues"
+        searchController.searchResultsUpdater = self
+        self.navigationItem.searchController = searchController
+        self.navigationItem.searchController?.hidesNavigationBarDuringPresentation = true
+        self.definesPresentationContext = true
+    }
+    
 	func createLayout() -> UICollectionViewLayout {
 		let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
 											 heightDimension: .fractionalHeight(1.0))
 		let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
 		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-											   heightDimension: .fractionalHeight(0.15))
+											   heightDimension: .fractionalHeight(0.13))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 		let spacing = CGFloat(10)
 		group.interItemSpacing = .fixed(spacing)
@@ -48,9 +58,9 @@ class IssueViewController: UIViewController {
 		let layout = UICollectionViewCompositionalLayout(section: section)
 		return layout
 	}
-	
 
 }
+
 
 extension IssueViewController {
 	func configureDataSource() {
@@ -66,12 +76,22 @@ extension IssueViewController {
 		dataSource = UICollectionViewDiffableDataSource<Section, Issue>(collectionView: IssueCollectionView, cellProvider: cellProvider)
 	}
 	
-	func performQuery(with filter: String?) {
-		let issues = issueManager.issues
-
+    func performQuery(issues: [Issue], filter: IssueCriteria?) {
+        
+        var data = issues
+        if let filter = filter {
+            data = filter.apply(issues: issues)
+        }
 		var snapshot = NSDiffableDataSourceSnapshot<Section, Issue>()
 		snapshot.appendSections([.main])
-		snapshot.appendItems(issues)
+		snapshot.appendItems(data)
 		dataSource.apply(snapshot, animatingDifferences: true)
 	}
+}
+
+extension IssueViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        performQuery(issues: issueManager.issues, filter: TitleCriteria(input: text))
+    }
 }
