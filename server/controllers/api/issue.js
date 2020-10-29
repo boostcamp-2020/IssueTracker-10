@@ -7,5 +7,6 @@ const issueService = require('../../services/issue');
 router.post('/', createIssue);
 
 router.get('/:issueId', issueService.selectIssueById);
+router.delete('/:issueId', issueService.deleteIssue);
 
 module.exports = router;

@@ -4,6 +4,7 @@ const successMessages = {
   },
   issue: {
     read: 'Success to find issue!',
+    delete: 'Success to delete issue!',
   },
   label: {
     read: 'Success to find label!',
