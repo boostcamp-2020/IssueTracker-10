@@ -20,9 +20,6 @@ class IssueViewController: UIViewController {
 	@IBOutlet weak var IssueCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
 	@IBAction func editButtonTouched(_ sender: UIBarButtonItem) {
-		if isEditing {
-			closeIssues(animated: true)
-		}
 		setEditing(!isEditing, animated: true)		
 		updateUserInterface()
 	}
@@ -36,11 +33,32 @@ class IssueViewController: UIViewController {
 		IssueCollectionView.collectionViewLayout = createLayout()
 		configureDataSource()
 		performQuery(with: "")
+		
+		makeToolBar()
     }
+	
+	func makeToolBar() {
+		let close = UIBarButtonItem(title: "선택 이슈 닫기", style: .done , target: self, action: #selector(closeTapped))
+		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+		toolbarItems = [spacer, close]
+	}
+	
+	@objc func closeTapped() {
+		closeIssues(animated: true)
+		isEditing.toggle()
+		updateUserInterface()
+	}
+	
+	func toolBar(isShown: Bool) {
+		navigationController?.setToolbarHidden(!isShown, animated: false)
+		tabBarController?.tabBar.isHidden = isShown
+	}
 	
 	func updateUserInterface() {
 		guard let editButton = navigationItem.rightBarButtonItem else { return }
-		editButton.title = isEditing ? "Done" : "Edit"
+		editButton.title = isEditing ? "Cancel" : "Edit"
+		
+		toolBar(isShown: isEditing)
 	}
 	
 	func deleteIssues(animiated: Bool) {
