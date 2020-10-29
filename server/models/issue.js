@@ -120,7 +120,7 @@ const compareAuthor = async (userId, issueId) => {
       where: {
         id: issueId,
         author: userId,
-      }
+      },
     });
 
     return result;
@@ -131,16 +131,19 @@ const compareAuthor = async (userId, issueId) => {
 
 const updateIssueTitle = async (id, title) => {
   try {
-    const result = issue.update({
-      title
-    },
-    {
-      where: { id }
-    });
-
+    const result = issue.update(
+      {
+        title,
+      },
+      {
+        where: { id },
+      },
+    );
     return result;
   } catch (err) {
     throw new Error(errorMessages.issue.updateFailed);
+  }
+};
 
 const updateStateOfIssues = async (stateData) => {
   try {
