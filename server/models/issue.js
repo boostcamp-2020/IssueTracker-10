@@ -1,5 +1,8 @@
+const sequelize = require('sequelize');
 const { issue, user, milestone, label } = require('./database');
 const errorMessages = require('../services/errorMessages');
+
+const { Op } = sequelize;
 
 const issueType = {
   closed: 0,
@@ -111,6 +114,25 @@ const countAllOpenIssues = async () => {
   }
 };
 
+const updateStateOfIssues = async (stateData) => {
+  try {
+    const { state, issueIds } = stateData;
+    const updatedResult = await issue.update(
+      { state },
+      {
+        where: {
+          id: {
+            [Op.in]: issueIds,
+          },
+        },
+      },
+    );
+    return updatedResult === issueIds.length;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports = {
   createIssue,
   deleteIssueById,
@@ -118,4 +140,5 @@ module.exports = {
   findIssueAll,
   countAllClosedIssues,
   countAllOpenIssues,
+  updateStateOfIssues,
 };
