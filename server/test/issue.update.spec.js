@@ -62,6 +62,27 @@ describe('PUT /api/issue/{issudId} API는', () => {
         }
       });
   });
+  it('수정하려는 이슈가 없을 경우 404를 리턴한다.', (done) => {
+    request(app)
+      .put('/api/issue/1000')
+      .set({
+        Authorization: process.env.TEST_TOKEN,
+        'Content-Type': 'application/json',
+      })
+      .send({
+        title: 'no issue data',
+      })
+      .expect('Content-Type', /json/)
+      .expect(403)
+      .end((err, result) => {
+        if (err) {
+          done(err);
+        } else {
+          done();
+          console.log(result.body);
+        }
+      });
+  });
   it('정상적일 경우에는 200 코드와 json을 리턴한다.', (done) => {
     request(app)
       .put('/api/issue/1')
