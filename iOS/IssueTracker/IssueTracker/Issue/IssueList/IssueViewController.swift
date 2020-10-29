@@ -8,30 +8,23 @@
 import UIKit
 
 class IssueViewController: UIViewController {
+
 	
-	enum Section: CaseIterable {
-		case main
-	}
-	
-	struct Identifier {
-		static let issueCell = "issueCell"
-	}
-	
-	@IBOutlet weak var IssueCollectionView: UICollectionView!
+	@IBOutlet weak var issueCollectionView: UICollectionView!
 	@IBAction func editButtonTouched(_ sender: UIBarButtonItem) {
 		setEditing(!isEditing, animated: true)		
 		updateUserInterface()
 	}
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, Issue>!
 	let issueManager = IssueManager()
-	
+    var dataSource: IssueDiffableDataSource!
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		IssueCollectionView.delegate = self
-		IssueCollectionView.collectionViewLayout = createLayout()
-		configureDataSource()
-        performQuery(issues: issueManager.issues, filter: nil)
+		issueCollectionView.delegate = self
+		issueCollectionView.collectionViewLayout = createLayout()
+        dataSource = IssueDiffableDataSource(collectionView: issueCollectionView)
+        dataSource.performQuery(issues: issueManager.issues, filter: nil)
         setupSearchController()
 		makeToolBar()
     }
@@ -72,32 +65,24 @@ class IssueViewController: UIViewController {
 	}
 	
 	func deleteIssues(animiated: Bool) {
-		let paths = IssueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
+		let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
 		paths?.forEach{ issueManager.delete(at: $0.row) }
-		
-		updateDataSource(issues: issueManager.opened())
+        dataSource.updateDataSource(issues: issueManager.opened())
 	}
 	
 	func closeIssues(animated: Bool) {
-		let paths = IssueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
+		let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
 		guard let indexPaths = paths else { return }
-		let identifiers = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
+        let identifiers = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
 		identifiers.forEach{ issueManager.close(with: $0) }
 		
-		updateDataSource(issues: issueManager.opened())
-	}
-	
-	func updateDataSource(issues: [Issue]) {
-		var snapshot = NSDiffableDataSourceSnapshot<Section, Issue>()
-		snapshot.appendSections([.main])
-		snapshot.appendItems(issues)
-		dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource.updateDataSource(issues: issueManager.opened())
 	}
 	
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		guard isEditing != editing else { return }
 		super.setEditing(editing, animated: animated)
-		IssueCollectionView.allowsMultipleSelection = editing
+		issueCollectionView.allowsMultipleSelection = editing
 	}
 	
 	func createLayout() -> UICollectionViewLayout {
@@ -122,27 +107,7 @@ class IssueViewController: UIViewController {
 
 
 extension IssueViewController {
-	func configureDataSource() {
-		let cellProvider = { (collectionView: UICollectionView, indexPath: IndexPath, issue: Issue) -> UICollectionViewCell? in
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.issueCell, for: indexPath)
-			if let issueCell = cell as? IssueCollectionViewCell {
-				issueCell.configure(issue: issue)
-				return cell
-			}
-			return nil
-		}
-		
-		dataSource = UICollectionViewDiffableDataSource<Section, Issue>(collectionView: IssueCollectionView, cellProvider: cellProvider)
-	}
-	
-    func performQuery(issues: [Issue], filter: IssueCriteria?) {
-        
-        var data = issues
-        if let filter = filter {
-            data = filter.apply(issues: issues)
-        }
-        updateDataSource(issues: data)
-    }
+
 }
 
 extension IssueViewController: UICollectionViewDelegate {
@@ -173,6 +138,6 @@ extension IssueViewController: UICollectionViewDelegate {
 extension IssueViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        performQuery(issues: issueManager.issues, filter: TitleCriteria(input: text))
+        dataSource.performQuery(issues: issueManager.issues, filter: TitleCriteria(input: text))
     }
 }
