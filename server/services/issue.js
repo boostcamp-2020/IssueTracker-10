@@ -27,8 +27,8 @@ const createIssue = async (req, res) => {
     return res.status(200).json({ message: '' });
   } catch (err) {
     return res.status(500).json({ message: '' });
-
-
+  }
+};
 
 const selectIssueById = async (req, res, next) => {
   try {
@@ -38,11 +38,11 @@ const selectIssueById = async (req, res, next) => {
 
     const data = {
       issueInfo,
-      commentCount
+      commentCount,
     };
 
     res.status(200).json({ message: 'The request is successfully processed', data });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };

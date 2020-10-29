@@ -20,7 +20,7 @@ const createIssue = async (issueData) => {
   } catch (err) {
     throw new Error('Error on creating an issue');
   }
-}
+};
 
 const findIssueById = async (id) => {
   try {
@@ -42,7 +42,7 @@ const findIssueById = async (id) => {
           attributes: ['id', 'title', 'color'],
           through: {
             attributes: [],
-          }
+          },
         },
         {
           model: user,
@@ -50,10 +50,10 @@ const findIssueById = async (id) => {
           attributes: ['id', 'username', 'avatar'],
           through: {
             attributes: [],
-          }
+          },
         },
       ],
-      where: {id}
+      where: { id },
     });
 
     return issueInfo;

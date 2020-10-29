@@ -11,7 +11,7 @@
     "import/newline-after-import": "error",
     "import/prefer-default-export": 0,
     "semi": "error",
-    "id-denylist": ["error", "data", "e", "cb", "callback"]
+    "id-denylist": ["error", "e", "cb", "callback"]
   },
   "globals": {
     "window": true,

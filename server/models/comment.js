@@ -13,11 +13,13 @@ const createComment = async (commentData) => {
     return commentInfo;
   } catch (err) {
     throw new Error('Error on creating an issue');
+  }
+};
 
 const commentCountById = async (id) => {
   try {
     const commentCount = comment.count({
-      where: {id}
+      where: { id },
     });
 
     return commentCount;
