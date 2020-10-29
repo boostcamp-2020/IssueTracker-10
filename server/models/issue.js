@@ -25,27 +25,21 @@ const findIssueAll = async () => {
   }
 };
 
-const findIssueClosed = async () => {
+const countAllClosedIssues = async () => {
   try {
-    const issues = await issue.findAll({
-      attributes: ['id', 'title', 'state', 'author', 'createdAt', 'updatedAt'],
-      where: { state: issueType.close },
-    });
+    const closedCount = await issue.count({ where: { state: issueType.close } });
 
-    return issues;
+    return closedCount;
   } catch (err) {
     throw new Error(errorMessages.issue.notFoundError);
   }
 };
 
-const findIssueOpen = async () => {
+const countAllOpenIssues = async () => {
   try {
-    const issues = await issue.findAll({
-      attributes: ['id', 'title', 'state', 'author', 'createdAt', 'updatedAt'],
-      where: { state: issueType.open },
-    });
+    const openCount = await issue.count({ where: { state: issueType.open } });
 
-    return issues;
+    return openCount;
   } catch (err) {
     throw new Error(errorMessages.issue.notFoundError);
   }
@@ -53,6 +47,6 @@ const findIssueOpen = async () => {
 
 module.exports = {
   findIssueAll,
-  findIssueClosed,
-  findIssueOpen,
+  countAllClosedIssues,
+  countAllOpenIssues,
 };
