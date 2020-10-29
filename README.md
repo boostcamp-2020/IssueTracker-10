@@ -7,11 +7,11 @@
 
 👨‍👩‍👦‍👦왕10리
 
-> 🐳**공태경** [J012]  [@Taeg92](https://github.com/Taeg92)
- 🐈**박수연** [J079]  [@Park-SooYeon](https://github.com/Park-SooYeon)
-🐘**안샛별** [J109] [@sbyeol3](https://github.com/sbyeol3)
-🐧**강민석** [S001]  [@kati-kms](https://github.com/kati-kms)
-🐥**채훈기** [S058] [@hoonv](https://github.com/hoonv)
+> 🐳**공태경** [J012]  [@Taeg92](https://github.com/Taeg92) <br/>
+ 🐈**박수연** [J079]  [@Park-SooYeon](https://github.com/Park-SooYeon) <br/>
+🐘**안샛별** [J109] [@sbyeol3 ](https://github.com/sbyeol3) <br/>
+🐧**강민석** [S001]  [@kati-kms](https://github.com/kati-kms) <br/>
+🐥**채훈기** [S058] [@hoonv](https://github.com/hoonv) <br/>
 
 
 ## WIKI 🗒
@@ -25,7 +25,8 @@
 - [Commit Template](https://github.com/boostcamp-2020/IssueTracker-10/wiki/03.-Commit-Template)
 - [Git Flows & Branch Naming Convention](https://github.com/boostcamp-2020/IssueTracker-10/wiki/04.-Git-Flows-&-Branch-Naming-Convention)
   
-​  
+
+  
 ## Project
 - [project backlogs](https://docs.google.com/spreadsheets/d/1EuBIlPTZk7xBFAkUquUIizwFApHUo1B9y8EUyKeIBO4/edit?usp=sharing)
 - ERD
@@ -44,12 +45,12 @@
 ```
 
 ---
-​
+
 ​
 ## 1️⃣ Server
 > Server에 관한 설명입니다.
 
-​
+
 ### 1. root/pacakage.json
 
 ```json
@@ -102,5 +103,21 @@
 - `pm2` 기반으로 nCloud 서버에 배포
 
 ## 2️⃣ iOS
+
+### filter 
+
+<img width="600" alt="스크린샷 2020-10-29 오후 8 04 01" src="https://user-images.githubusercontent.com/46335714/97560360-e5686880-1a21-11eb-89a0-da7447b0e9dd.png">
+
+### Demo
+
+#####  Edit
+
+![edit 시나리오](https://user-images.githubusercontent.com/46335714/97559219-7cccbc00-1a20-11eb-8d4b-406ad6e92f0d.gif)
+
+
+
+##### search
+
+![search 시나리오](https://user-images.githubusercontent.com/46335714/97560497-12b51680-1a22-11eb-8b60-544c8a10750b.gif)
 
 ## 3️⃣ Client
