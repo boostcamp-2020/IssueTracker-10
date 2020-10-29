@@ -29,7 +29,8 @@ describe('POST /api/issue API는', () => {
     request(app)
       .post('/api/issue')
       .set({
-        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYnllb2wzIiwiaWF0IjoxNjAzOTU0MjMxLCJleHAiOjE2MDQwNDA2MzF9.ZoJJkc353IdfFIh2RSBAwmtO1BtA84yEN0ZGOhj3xHU',
         'Content-Type': 'application/json',
       })
       .send({
@@ -50,11 +51,12 @@ describe('POST /api/issue API는', () => {
     request(app)
       .post('/api/issue')
       .set({
-        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYnllb2wzIiwiaWF0IjoxNjAzOTU0MjMxLCJleHAiOjE2MDQwNDA2MzF9.ZoJJkc353IdfFIh2RSBAwmtO1BtA84yEN0ZGOhj3xHU',
         'Content-Type': 'application/json',
       })
       .send({
-        title: 'issue example 1',
+        title: 'issue example 10',
         content: null,
       })
       .expect('Content-Type', /json/)
