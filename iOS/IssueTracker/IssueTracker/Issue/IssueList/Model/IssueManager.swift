@@ -27,9 +27,10 @@ class IssueManager {
 		return issues.filter{ $0.state == 1 }
 	}
 	
-	func delete(at index: Int) {
+	func delete(with issue: Issue) {
+		guard let index = issues.firstIndex(of: issue) else { return }
 		issues.remove(at: index)
-        NotificationCenter.default.post(name: .issueDidChanged, object: nil)
+		NotificationCenter.default.post(name: .issueDidChanged, object: nil)	
 	}
 	
 	func close(with id: Int) {

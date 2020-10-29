@@ -100,15 +100,18 @@ class IssueViewController: UIViewController {
 	}
 	
 	func deleteIssues() {
-		let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
-        paths?.forEach{ viewModel.issueManager.delete(at: $0.row) }
+		selectedIssues().forEach{ viewModel.issueManager.delete(with: $0) }
 	}
 	
 	func closeIssues() {
+		selectedIssues().forEach{ viewModel.issueManager.close(with: $0) }
+	}
+	
+	func selectedIssues() -> [Issue] {
 		let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
-		guard let indexPaths = paths else { return }
-        let identifiers = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
-        identifiers.forEach{ viewModel.issueManager.close(with: $0) }
+		guard let indexPaths = paths else { return [] }
+		let identifiers = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
+		return identifiers
 	}
 	
 	private func presentViewController<T:UIViewController> (identifier: String, type: T, option: Option) {
