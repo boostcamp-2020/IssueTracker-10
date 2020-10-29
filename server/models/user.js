@@ -7,11 +7,10 @@ const userType = {
 
 const findUserById = async (id) => {
   try {
-    const userInfo = await user.find({
+    const userInfo = await user.findOne({
       attributes: ['id', 'username'],
       where: { id },
     });
-
     return userInfo;
   } catch (err) {
     throw new Error('유저 데이터 find 실패');
