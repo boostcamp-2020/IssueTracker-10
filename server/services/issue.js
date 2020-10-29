@@ -86,7 +86,7 @@ const updateIssueTitle = async (req, res, next) => {
 
     if(updateResult) return res.status(200).json({message: successMessages.issue.update});
 
-    return res.status(500).json({message: errorMessages.issue.updateFailed});
+    return res.status(422).json({message: errorMessages.issue.updateFailed});
   } catch (err) {
     next(err);
   }
