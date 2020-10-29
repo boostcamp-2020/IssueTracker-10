@@ -38,6 +38,17 @@ const createIssue = async (req, res) => {
   }
 };
 
+const deleteIssue = async (req, res) => {
+  try {
+    const { issueId } = req.params;
+    const isSuccess = await issueModel.deleteIssueById(issueId);
+    if (isSuccess) return res.status(200).json({ message: successMessages.issue.delete });
+    return res.status(404).json({ message: errorMessages.issue.notFoundError });
+  } catch (err) {
+    return res.status(500).json({ message: '' });
+  }
+};
+
 const selectIssueById = async (req, res, next) => {
   try {
     const { issueId } = req.params;
@@ -73,4 +84,5 @@ module.exports = {
   createIssue,
   selectIssueById,
   toggleState,
+  deleteIssue,
 };
