@@ -16,6 +16,7 @@
 		E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1C9B254A939500A1FADF /* IssueDataSource.swift */; };
 		E09C1CA2254A996A00A1FADF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1CA1254A996A00A1FADF /* HomeViewController.swift */; };
 		E09C1CAA254A99C400A1FADF /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1CA9254A99C400A1FADF /* HomeTableViewCell.swift */; };
+		E09C1CB4254AA2C000A1FADF /* IssueFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1CB3254AA2C000A1FADF /* IssueFactory.swift */; };
 		E0B3D3C52546C8660040D5AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D3C42546C8660040D5AF /* AppDelegate.swift */; };
 		E0B3D3C72546C8660040D5AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D3C62546C8660040D5AF /* SceneDelegate.swift */; };
 		E0B3D3C92546C8660040D5AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D3C82546C8660040D5AF /* ViewController.swift */; };
@@ -57,6 +58,7 @@
 		E09C1C9B254A939500A1FADF /* IssueDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataSource.swift; sourceTree = "<group>"; };
 		E09C1CA1254A996A00A1FADF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E09C1CA9254A99C400A1FADF /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		E09C1CB3254AA2C000A1FADF /* IssueFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFactory.swift; sourceTree = "<group>"; };
 		E0B3D3C12546C8660040D5AF /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0B3D3C42546C8660040D5AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0B3D3C62546C8660040D5AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				C3414FAC2548018D003C845A /* Issue.swift */,
 				C3414FC325481BF6003C845A /* IssueManager.swift */,
 				E0B3D43B2549AFC90040D5AF /* Criteria.swift */,
+				E09C1CB3254AA2C000A1FADF /* IssueFactory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				E09C1CA2254A996A00A1FADF /* HomeViewController.swift in Sources */,
 				C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */,
 				E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */,
+				E09C1CB4254AA2C000A1FADF /* IssueFactory.swift in Sources */,
 				C3414FA525480104003C845A /* LabelViewController.swift in Sources */,
 				E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */,
 				E0B3D3C52546C8660040D5AF /* AppDelegate.swift in Sources */,

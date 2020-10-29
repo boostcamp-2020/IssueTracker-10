@@ -16,7 +16,7 @@ class IssueViewController: UIViewController {
 		updateUserInterface()
 	}
     
-	let issueManager = IssueManager()
+    let issueManager = IssueManager(issues: IssueFactory.make(count: 8))
     var dataSource: IssueDiffableDataSource!
 
 	override func viewDidLoad() {
@@ -93,7 +93,7 @@ class IssueViewController: UIViewController {
 		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
 											   heightDimension: .fractionalHeight(0.13))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-		let spacing = CGFloat(0)
+		let spacing = CGFloat(5)
 		group.interItemSpacing = .fixed(spacing)
 
 		let section = NSCollectionLayoutSection(group: group)
