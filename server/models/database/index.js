@@ -10,9 +10,7 @@ const db = {};
 
 fs.readdirSync(__dirname)
   .filter((file) => {
-    return (
-      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
-    );
+    return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
   })
   .forEach((file) => {
     const definedModel = require(path.join(__dirname, file));
@@ -26,7 +24,9 @@ db.user.hasMany(db.issue, {
   foreignKey: 'author',
 });
 db.issue.belongsTo(db.user, {
+  as: 'owner',
   foreignKey: 'author',
+  onDelete: 'CASCADE',
 });
 
 // milestion-issue 1:N 관계
@@ -45,10 +45,13 @@ db.label.belongsToMany(db.issue, { through: 'issueLabel', timestamps: false });
 db.user.belongsToMany(db.issue, {
   through: 'issueAssignee',
   timestamps: false,
+  onDelete: 'CASCADE',
 });
 db.issue.belongsToMany(db.user, {
   through: 'issueAssignee',
+  as: 'assignees',
   timestamps: false,
+  onDelete: 'CASCADE',
 });
 
 // user-comment 1:N 관계
@@ -57,6 +60,7 @@ db.user.hasMany(db.comment, {
 });
 db.comment.belongsTo(db.user, {
   foreignKey: 'userId',
+  onDelete: 'CASCADE',
 });
 
 // issue-comment 1:N 관계
@@ -65,6 +69,7 @@ db.issue.hasMany(db.comment, {
 });
 db.comment.belongsTo(db.issue, {
   foreignKey: 'issueId',
+  onDelete: 'CASCADE',
 });
 
 // user-reaction 1:N 관계
@@ -73,6 +78,7 @@ db.user.hasMany(db.reaction, {
 });
 db.reaction.belongsTo(db.user, {
   foreignKey: 'userId',
+  onDelete: 'CASCADE',
 });
 
 // emoticon-reaction 1:N 관계
@@ -81,6 +87,7 @@ db.emoticon.hasMany(db.reaction, {
 });
 db.reaction.belongsTo(db.emoticon, {
   foreignKey: 'emoticonId',
+  onDelete: 'CASCADE',
 });
 
 // comment-reaction 1:N 관계
@@ -89,6 +96,7 @@ db.comment.hasMany(db.reaction, {
 });
 db.reaction.belongsTo(db.comment, {
   foreignKey: 'commentId',
+  onDelete: 'CASCADE',
 });
 
 db.sequelize = sequelize;
