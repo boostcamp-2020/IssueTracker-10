@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		C3414FB2254802A4003C845A /* IssueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FB1254802A4003C845A /* IssueCollectionViewCell.swift */; };
 		C3414FC425481BF6003C845A /* IssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FC325481BF6003C845A /* IssueManager.swift */; };
 		C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FCF2548650C003C845A /* UIView+addExternalBorder.swift */; };
+		E09C1C91254A917200A1FADF /* hvNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = E09C1C90254A917200A1FADF /* hvNetwork */; };
 		E0B3D3C52546C8660040D5AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D3C42546C8660040D5AF /* AppDelegate.swift */; };
 		E0B3D3C72546C8660040D5AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D3C62546C8660040D5AF /* SceneDelegate.swift */; };
 		E0B3D3C92546C8660040D5AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D3C82546C8660040D5AF /* ViewController.swift */; };
@@ -76,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E09C1C91254A917200A1FADF /* hvNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +232,9 @@
 			dependencies = (
 			);
 			name = IssueTracker;
+			packageProductDependencies = (
+				E09C1C90254A917200A1FADF /* hvNetwork */,
+			);
 			productName = IssueTracker;
 			productReference = E0B3D3C12546C8660040D5AF /* IssueTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -301,6 +306,9 @@
 				Base,
 			);
 			mainGroup = E0B3D3B82546C8660040D5AF;
+			packageReferences = (
+				E09C1C8F254A917200A1FADF /* XCRemoteSwiftPackageReference "hvNetwork" */,
+			);
 			productRefGroup = E0B3D3C22546C8660040D5AF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -685,6 +693,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E09C1C8F254A917200A1FADF /* XCRemoteSwiftPackageReference "hvNetwork" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hoonv/hvNetwork";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E09C1C90254A917200A1FADF /* hvNetwork */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E09C1C8F254A917200A1FADF /* XCRemoteSwiftPackageReference "hvNetwork" */;
+			productName = hvNetwork;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E0B3D3B92546C8660040D5AF /* Project object */;
 }
