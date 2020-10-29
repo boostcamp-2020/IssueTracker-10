@@ -4,6 +4,7 @@ const errorMessages = {
     invalidUsername: 'This username is already exist!',
   },
   issue: {
+    invalid: 'INVALID ERROR : the received data is invalid',
     notFoundError: "Can't find issue!",
   },
   label: {
@@ -12,6 +13,7 @@ const errorMessages = {
   milestone: {
     notFoundError: "Can't find milestone",
   },
+  server: 'INTERNAL ERROR : Unexpected error occurred',
 };
 
 module.exports = errorMessages;

@@ -1,5 +1,7 @@
 const issueModel = require('../models/issue');
 const commentModel = require('../models/comment');
+const successMessages = require('./successMessages');
+const errorMessages = require('./errorMessages');
 
 const checkValidation = {
   create: (issueData) => {
@@ -11,6 +13,12 @@ const checkValidation = {
     if (milestone && !Array.isArray(milestone)) return false;
     return true;
   },
+  toggle: (stateData) => {
+    const { state, issueIds } = stateData;
+    if (state !== 0 && state !== 1) return false;
+    if (!Array.isArray(issueIds) || issueIds.length === 0) return false;
+    return true;
+  },
 };
 
 const createIssue = async (req, res) => {
@@ -18,15 +26,15 @@ const createIssue = async (req, res) => {
     const issueData = req.body;
     const { id } = req.user;
     if (!checkValidation.create(issueData)) {
-      return res.status(400).json({ message: '' });
+      return res.status(400).json({ message: errorMessages.issue.invalid });
     }
 
     const { content } = issueData;
     const { id: issueId } = await issueModel.createIssue({ ...issueData, userId: id });
     await commentModel.createComment({ userId: id, issueId, content });
-    return res.status(200).json({ message: '' });
+    return res.status(200).json({ message: successMessages.issue.create });
   } catch (err) {
-    return res.status(500).json({ message: '' });
+    return res.status(500).json({ message: errorMessages.server });
   }
 };
 
@@ -47,7 +55,21 @@ const selectIssueById = async (req, res, next) => {
   }
 };
 
+const toggleState = async (req, res) => {
+  try {
+    const stateData = req.body;
+    if (!checkValidation.toggle(stateData)) {
+      return res.status(400).json({ message: errorMessages.issue.invalid });
+    }
+    await issueModel.updateStateOfIssues(stateData);
+    return res.status(200).json({ message: successMessages.issue.update });
+  } catch (err) {
+    return res.status(500).json({ message: errorMessages.server });
+  }
+};
+
 module.exports = {
   createIssue,
   selectIssueById,
+  toggleState,
 };
