@@ -86,7 +86,6 @@
                                             <outlet property="issueLabel" destination="FiA-B5-Vgj" id="xFj-Yd-TrB"/>
                                             <outlet property="milestone" destination="J5Q-t5-LJp" id="MfO-jB-ovL"/>
                                             <outlet property="title" destination="dhE-lZ-Oef" id="pMj-gE-C3m"/>
-                                            <segue destination="Cda-2a-Dr8" kind="show" id="9Zt-By-2JE"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -107,6 +106,9 @@
                     <navigationItem key="navigationItem" title="Issue" largeTitleDisplayMode="always" id="qFA-xM-Sgo">
                         <barButtonItem key="leftBarButtonItem" title="Edit" id="wVF-B1-3Tn">
                             <color key="tintColor" name="GithubMainColor"/>
+                            <connections>
+                                <action selector="editButtonTouched:" destination="BYZ-38-t0r" id="9h5-EJ-zCM"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" image="square.and.pencil" catalog="system" id="EsE-N4-qbL">
                             <color key="tintColor" name="GithubMainColor"/>
