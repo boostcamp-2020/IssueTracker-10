@@ -8,11 +8,11 @@ const userType = {
 
 const findUserById = async (id) => {
   try {
-    const userInfo = await user.find({
+    const userInfo = await user.findOne({
       attributes: ['id', 'username'],
       where: { id },
+      raw: true,
     });
-
     return userInfo;
   } catch (err) {
     throw new Error(errorMessages.user.notFoundError);
@@ -21,10 +21,11 @@ const findUserById = async (id) => {
 
 const findOrCreateUserById = async ({ username, avatar }) => {
   try {
-    const userInfo = await user.findOrCreate({
+    const [userInfo] = await user.findOrCreate({
       attributes: ['id', 'username'],
       where: { username },
       defaults: { username, state: userType.github, avatar },
+      raw: true,
     });
 
     return userInfo;

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "test": "mocha ./test/*.spec.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -24,6 +25,8 @@
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
     "cors": "^2.8.5",
-    "mocha": "^8.2.0"
+    "mocha": "^8.2.0",
+    "should": "^13.2.3",
+    "supertest": "^6.0.0"
   }
 }

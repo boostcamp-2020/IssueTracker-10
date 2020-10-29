@@ -2,9 +2,25 @@ const { issue, user, milestone, label } = require('./database');
 const errorMessages = require('../services/errorMessages');
 
 const issueType = {
-  close: 0,
+  closed: 0,
   open: 1,
 };
+
+const createIssue = async (issueData) => {
+  try {
+    const { userId, title } = issueData;
+    const issueInfo = (
+      await issue.create({
+        author: userId,
+        title,
+        state: issueType.open,
+      })
+    ).get({ plain: true });
+    return issueInfo;
+  } catch (err) {
+    throw new Error('Error on creating an issue');
+  }
+}
 
 const findIssueById = async (id) => {
   try {
@@ -86,6 +102,7 @@ const countAllOpenIssues = async () => {
 };
 
 module.exports = {
+  createIssue,
   findIssueById,
   findIssueAll,
   countAllClosedIssues,
