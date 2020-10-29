@@ -145,9 +145,12 @@
                             <constraint firstItem="Dtf-0h-GnG" firstAttribute="top" secondItem="4Tn-fz-g0o" secondAttribute="bottom" id="vce-Di-vAl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Issue" largeTitleDisplayMode="always" id="qFA-xM-Sgo">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="EsE-N4-qbL">
+                    <navigationItem key="navigationItem" title="Issue" id="hMu-Fj-We9">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="r34-GD-0yY">
                             <color key="tintColor" systemColor="systemIndigoColor"/>
+                            <connections>
+                                <action selector="editButtonTouched:" destination="BYZ-38-t0r" id="ugd-xa-Y6I"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
