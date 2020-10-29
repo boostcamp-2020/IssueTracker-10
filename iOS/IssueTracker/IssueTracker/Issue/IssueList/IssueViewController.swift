@@ -15,8 +15,7 @@ class IssueViewController: UIViewController {
 		setEditing(!isEditing, animated: true)		
 		updateUserInterface()
 	}
-    
-    let issueManager = IssueManager(issues: IssueFactory.make(count: 8))
+    var viewModel = IssueViewModel()
     var dataSource: IssueDiffableDataSource!
 
 	override func viewDidLoad() {
@@ -24,9 +23,18 @@ class IssueViewController: UIViewController {
 		issueCollectionView.delegate = self
 		issueCollectionView.collectionViewLayout = createLayout()
         dataSource = IssueDiffableDataSource(collectionView: issueCollectionView)
-        dataSource.performQuery(issues: issueManager.issues, filter: nil)
+        dataSource.performQuery(issues: viewModel.issues, filter: nil)
         setupSearchController()
 		makeToolBar()
+        binding()
+        viewModel.request()
+    }
+    
+    func binding() {
+        viewModel.issueDataSource = { [weak self] issues, filter in
+            guard let self = self else { return }
+            self.dataSource.performQuery(issues: issues, filter: filter)
+        }
     }
 
     private func setupSearchController() {
@@ -39,7 +47,6 @@ class IssueViewController: UIViewController {
         self.definesPresentationContext = true
     }
     
-	
 	func makeToolBar() {
 		let close = UIBarButtonItem(title: "선택 이슈 닫기", style: .done , target: self, action: #selector(closeTapped))
 		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
@@ -47,7 +54,7 @@ class IssueViewController: UIViewController {
 	}
 	
 	@objc func closeTapped() {
-		closeIssues(animated: true)
+		closeIssues()
 		isEditing.toggle()
 		updateUserInterface()
 	}
@@ -60,23 +67,19 @@ class IssueViewController: UIViewController {
 	func updateUserInterface() {
 		guard let editButton = navigationItem.rightBarButtonItem else { return }
 		editButton.title = isEditing ? "Cancel" : "Edit"
-		
 		toolBar(isShown: isEditing)
 	}
 	
-	func deleteIssues(animiated: Bool) {
+	func deleteIssues() {
 		let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
-		paths?.forEach{ issueManager.delete(at: $0.row) }
-        dataSource.updateDataSource(issues: issueManager.opened())
+        paths?.forEach{ viewModel.issueManager.delete(at: $0.row) }
 	}
 	
-	func closeIssues(animated: Bool) {
+	func closeIssues() {
 		let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
 		guard let indexPaths = paths else { return }
         let identifiers = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
-		identifiers.forEach{ issueManager.close(with: $0) }
-		
-        dataSource.updateDataSource(issues: issueManager.opened())
+        identifiers.forEach{ viewModel.issueManager.close(with: $0) }
 	}
 	
 	override func setEditing(_ editing: Bool, animated: Bool) {
@@ -89,7 +92,6 @@ class IssueViewController: UIViewController {
 		let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
 											 heightDimension: .fractionalHeight(1.0))
 		let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
 		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
 											   heightDimension: .fractionalHeight(0.13))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
@@ -103,11 +105,6 @@ class IssueViewController: UIViewController {
 		let layout = UICollectionViewCompositionalLayout(section: section)
 		return layout
 	}
-}
-
-
-extension IssueViewController {
-
 }
 
 extension IssueViewController: UICollectionViewDelegate {
@@ -138,6 +135,6 @@ extension IssueViewController: UICollectionViewDelegate {
 extension IssueViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        dataSource.performQuery(issues: issueManager.issues, filter: TitleCriteria(input: text))
+        dataSource.performQuery(issues: viewModel.issues, filter: TitleCriteria(input: text))
     }
 }
