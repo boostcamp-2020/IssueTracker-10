@@ -31,8 +31,7 @@ const verifyGithub = async (accessToken, refreshToken, profile, done) => {
     const { username, photos } = profile;
     const [photo] = photos;
     const { value: avatar } = photo;
-    const [user] = await userModel.findOrCreateUserById({ username, avatar });
-
+    const user = await userModel.findOrCreateUserById({ username, avatar });
     if (user) return done(null, user);
     return done(null, false, { reason: '올바르지 않은 인증정보입니다.' });
   } catch (err) {
