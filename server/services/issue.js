@@ -1,5 +1,5 @@
-const IssueModel = require('../models/issue');
-const CommentModel = require('../models/comment');
+const issueModel = require('../models/issue');
+const commentModel = require('../models/comment');
 
 const checkValidation = {
   create: (issueData) => {
@@ -22,14 +22,32 @@ const createIssue = async (req, res) => {
     }
 
     const { content } = issueData;
-    const { id: issueId } = await IssueModel.createIssue({ ...issueData, userId: id });
-    await CommentModel.createComment({ userId: id, issueId, content });
+    const { id: issueId } = await issueModel.createIssue({ ...issueData, userId: id });
+    await commentModel.createComment({ userId: id, issueId, content });
     return res.status(200).json({ message: '' });
   } catch (err) {
     return res.status(500).json({ message: '' });
+
+
+
+const selectIssueById = async (req, res, next) => {
+  try {
+    const { issueId } = req.params;
+    const issueInfo = await issueModel.findIssueById(issueId);
+    const commentCount = await commentModel.commentCountById(issueId);
+
+    const data = {
+      issueInfo,
+      commentCount
+    };
+
+    res.status(200).json({ message: 'The request is successfully processed', data });
+  } catch(err) {
+    next(err);
   }
 };
 
 module.exports = {
   createIssue,
+  selectIssueById,
 };
