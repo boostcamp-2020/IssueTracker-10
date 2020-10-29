@@ -25,6 +25,16 @@ const createIssue = async (issueData) => {
   }
 };
 
+const deleteIssueById = async (issueId) => {
+  try {
+    const result = await issue.destroy({ where: { id: issueId } });
+    if (result) return true;
+    return false;
+  } catch (err) {
+    throw new Error(errorMessages.issue.notFoundError);
+  }
+};
+
 const findIssueById = async (id) => {
   try {
     const issueInfo = issue.findOne({
@@ -125,6 +135,7 @@ const updateStateOfIssues = async (stateData) => {
 
 module.exports = {
   createIssue,
+  deleteIssueById,
   findIssueById,
   findIssueAll,
   countAllClosedIssues,
