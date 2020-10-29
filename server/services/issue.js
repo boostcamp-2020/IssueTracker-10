@@ -1,5 +1,7 @@
 const issueModel = require('../models/issue');
 const commentModel = require('../models/comment');
+const errorMessages = require('./errorMessages');
+const successMessages = require('./successMessages');
 
 const checkValidation = {
   create: (issueData) => {
@@ -30,6 +32,17 @@ const createIssue = async (req, res) => {
   }
 };
 
+const deleteIssue = async (req, res) => {
+  try {
+    const { issueId } = req.params;
+    const isSuccess = await issueModel.deleteIssueById(issueId);
+    if (isSuccess) return res.status(200).json({ message: successMessages.issue.delete });
+    return res.status(404).json({ message: errorMessages.issue.notFoundError });
+  } catch (err) {
+    return res.status(500).json({ message: '' });
+  }
+};
+
 const selectIssueById = async (req, res, next) => {
   try {
     const { issueId } = req.params;
@@ -50,4 +63,5 @@ const selectIssueById = async (req, res, next) => {
 module.exports = {
   createIssue,
   selectIssueById,
+  deleteIssue,
 };
