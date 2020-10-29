@@ -3,8 +3,11 @@ const successMessages = {
     read: 'Success to find user!',
   },
   issue: {
+    create: 'SUCCESS : The issue data is successfully created',
     read: 'Success to find issue!',
-    update: 'Success to update issue!'
+    update: 'Success to update issue!',
+    update: 'SUCCESS : The issue data is successfully updated',
+    delete: 'Success to delete issue!',
   },
   label: {
     read: 'Success to find label!',

@@ -1,12 +1,12 @@
 const express = require('express');
 
 const router = express.Router();
-const { createIssue, selectIssueById, updateIssueTitle } = require('../../services/issue');
+const issueService = require('../../services/issue');
 
-router.post('/', createIssue);
-
-router.get('/:issueId', selectIssueById);
-
-router.put('/:issueId', updateIssueTitle);
+router.post('/', issueService.createIssue);
+router.get('/:issueId', issueService.selectIssueById);
+router.put('/state', issueService.toggleState);
+router.put('/:issueId', issueService.updateIssueTitle);
+router.delete('/:issueId', issueService.deleteIssue);
 
 module.exports = router;
