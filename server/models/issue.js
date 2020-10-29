@@ -148,7 +148,7 @@ const updateIssueTitle = async (id, title) => {
 const updateStateOfIssues = async (stateData) => {
   try {
     const { state, issueIds } = stateData;
-    const updatedResult = await issue.update(
+    const [updatedResult] = await issue.update(
       { state },
       {
         where: {
