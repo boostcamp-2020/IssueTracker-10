@@ -104,10 +104,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Issue" largeTitleDisplayMode="always" id="qFA-xM-Sgo">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" image="square.and.pencil" catalog="system" id="EsE-N4-qbL">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="EsE-N4-qbL">
                             <color key="tintColor" name="GithubMainColor"/>
                             <connections>
-                                <segue destination="4x2-xD-dVG" kind="presentation" id="fBQ-Uh-ilv"/>
+                                <action selector="editButtonTouched:" destination="BYZ-38-t0r" id="zFc-5W-lbD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -187,17 +187,31 @@
             </objects>
             <point key="canvasLocation" x="2561" y="135"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Issue Filter View Controller-->
+        <scene sceneID="UlG-O1-fZl">
+            <objects>
+                <viewController storyboardIdentifier="IssueFilterViewController" id="T1Q-nG-0Tr" customClass="IssueFilterViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vcY-Op-g4k">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="oQa-Zg-MnH"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12f-qp-Lq8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2165" y="836"/>
+        </scene>
+        <!--Create Issue Navigation View Controller-->
         <scene sceneID="FiN-SW-7nS">
             <objects>
-                <navigationController id="4x2-xD-dVG" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="IssueCreateViewController" id="4x2-xD-dVG" customClass="CreateIssueNavigationViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="Vyp-rk-Q17"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sH5-Ep-qGK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J0q-da-1Ry">
-                        <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -213,11 +227,11 @@
             <objects>
                 <viewController id="u0F-xc-XS7" customClass="IssueCreateViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0X0-Kb-Nwd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xso-JB-2al">
-                                <rect key="frame" x="20" y="76" width="374" height="34"/>
+                                <rect key="frame" x="20" y="108" width="374" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="vNS-nF-vvX"/>
                                 </constraints>
@@ -225,7 +239,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wJS-CB-xKg">
-                                <rect key="frame" x="20" y="211" width="374" height="400"/>
+                                <rect key="frame" x="20" y="243" width="374" height="400"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="kUb-OZ-Ugy"/>
@@ -236,7 +250,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2gE-hj-pOY">
-                                <rect key="frame" x="121" y="150" width="173" height="32"/>
+                                <rect key="frame" x="121" y="182" width="173" height="32"/>
                                 <segments>
                                     <segment title="MarkDown"/>
                                     <segment title="Preview"/>
@@ -288,7 +302,6 @@
     </scenes>
     <resources>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <namedColor name="GithubMainColor">
             <color red="0.14509803921568629" green="0.16470588235294117" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -303,6 +316,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

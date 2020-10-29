@@ -42,7 +42,7 @@ class IssueFactory {
         return (0..<count).map { Issue(id: $0,
                                        title: titles[$0],
                                        author: $0,
-                                       state: 0,
+                                       state: 1,
                                        milestoneId: 1000,
                                        createdAt: Date(),
                                        updatedAt: Date(),

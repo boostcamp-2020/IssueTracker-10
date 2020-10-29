@@ -13,9 +13,7 @@ extension Notification.Name {
 
 class IssueManager {
 	
-    var issues: [Issue] {
-        didSet { NotificationCenter.default.post(name: .issueDidChanged, object: nil)}
-    }
+    var issues: [Issue]
     
     init(issues: [Issue]) {
         self.issues = issues
@@ -31,6 +29,7 @@ class IssueManager {
 	
 	func delete(at index: Int) {
 		issues.remove(at: index)
+        NotificationCenter.default.post(name: .issueDidChanged, object: nil)
 	}
 	
 	func close(with id: Int) {
@@ -40,6 +39,7 @@ class IssueManager {
 	
 	func close(with issue: Issue) {
 		issue.state = 0
+        NotificationCenter.default.post(name: .issueDidChanged, object: nil)
 	}
 	
 	func find(with id: Int) -> Issue? {

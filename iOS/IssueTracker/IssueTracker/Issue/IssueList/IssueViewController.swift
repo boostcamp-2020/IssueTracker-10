@@ -8,7 +8,11 @@
 import UIKit
 
 class IssueViewController: UIViewController {
-
+	
+	enum Option {
+		case present
+		case push
+	}
 	
 	@IBOutlet weak var issueCollectionView: UICollectionView!
 	@IBAction func editButtonTouched(_ sender: UIBarButtonItem) {
@@ -17,7 +21,7 @@ class IssueViewController: UIViewController {
 	}
     var viewModel = IssueViewModel()
     var dataSource: IssueDiffableDataSource!
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		issueCollectionView.delegate = self
@@ -25,9 +29,9 @@ class IssueViewController: UIViewController {
         dataSource = IssueDiffableDataSource(collectionView: issueCollectionView)
         dataSource.performQuery(issues: viewModel.issues, filter: nil)
         setupSearchController()
-		makeToolBar()
+		setDefaultToolBar()
+		showToolBar()
         binding()
-        viewModel.request()
     }
     
     func binding() {
@@ -47,10 +51,40 @@ class IssueViewController: UIViewController {
         self.definesPresentationContext = true
     }
     
-	func makeToolBar() {
-		let close = UIBarButtonItem(title: "선택 이슈 닫기", style: .done , target: self, action: #selector(closeTapped))
+	func setDefaultToolBar() {
+		let add = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .done, target: self, action: #selector(addTapped))
+		add.tintColor = UIColor(named: "GithubMainColor")
 		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-		toolbarItems = [spacer, close]
+		let filter = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .done, target: self, action: #selector(filterTapped))
+		filter.tintColor = UIColor(named: "GithubMainColor")
+		toolbarItems = [filter, spacer, add]
+	}
+	
+	func showToolBar() {
+		navigationController?.setToolbarHidden(false, animated: false)
+	}
+	
+	func editModeToolBar() {
+		let close = UIBarButtonItem(title: "Close", style: .done , target: self, action: #selector(closeTapped))
+		close.tintColor = UIColor(named: "GithubMainColor")
+		let delete = UIBarButtonItem(title: "Delete", style: .done , target: self, action: #selector(deleteTapped))
+		delete.tintColor = UIColor.systemRed
+		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+		toolbarItems = [delete, spacer, close]
+	}
+	
+	@objc func addTapped() {
+		presentViewController(identifier: "IssueCreateViewController", type: CreateIssueNavigationViewController(), option: .present)
+	}
+	
+	@objc func filterTapped() {
+		presentViewController(identifier: "IssueFilterViewController", type: IssueFilterViewController(), option: .present)
+	}
+	
+	@objc func deleteTapped() {
+		deleteIssues()
+		isEditing.toggle()
+		updateUserInterface()
 	}
 	
 	@objc func closeTapped() {
@@ -59,15 +93,10 @@ class IssueViewController: UIViewController {
 		updateUserInterface()
 	}
 	
-	func toolBar(isShown: Bool) {
-		navigationController?.setToolbarHidden(!isShown, animated: false)
-		tabBarController?.tabBar.isHidden = isShown
-	}
-	
 	func updateUserInterface() {
 		guard let editButton = navigationItem.rightBarButtonItem else { return }
 		editButton.title = isEditing ? "Cancel" : "Edit"
-		toolBar(isShown: isEditing)
+		isEditing ? editModeToolBar() : setDefaultToolBar()
 	}
 	
 	func deleteIssues() {
@@ -81,6 +110,19 @@ class IssueViewController: UIViewController {
         let identifiers = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
         identifiers.forEach{ viewModel.issueManager.close(with: $0) }
 	}
+	
+	private func presentViewController<T:UIViewController> (identifier: String, type: T, option: Option) {
+		let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+		if let viewController: T = mainStoryboard.instantiateViewController(withIdentifier: identifier) as? T {
+			switch option {
+			case .present:
+				self.present(viewController, animated: true, completion: nil)
+			case .push:
+				self.navigationController?.pushViewController(viewController, animated: true)
+			}
+		}
+	}
+	
 	
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		guard isEditing != editing else { return }
@@ -117,7 +159,10 @@ extension IssueViewController: UICollectionViewDelegate {
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		guard isEditing == true else { /* 디테일뷰로 이동하기 */ return }
+		guard isEditing == true else {
+			presentViewController(identifier: "IssueDetailViewController", type: IssueDetailViewController(), option: .push)
+			return
+		}
 		
 		let cell = collectionView.cellForItem(at: indexPath)
 		if cell?.isSelected == true {
