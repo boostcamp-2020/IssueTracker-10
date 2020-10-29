@@ -19,8 +19,7 @@ class IssueViewController: UIViewController {
 		setEditing(!isEditing, animated: true)		
 		updateUserInterface()
 	}
-    
-	let issueManager = IssueManager()
+    var viewModel = IssueViewModel()
     var dataSource: IssueDiffableDataSource!
 	
 	override func viewDidLoad() {
@@ -28,10 +27,18 @@ class IssueViewController: UIViewController {
 		issueCollectionView.delegate = self
 		issueCollectionView.collectionViewLayout = createLayout()
         dataSource = IssueDiffableDataSource(collectionView: issueCollectionView)
-        dataSource.performQuery(issues: issueManager.issues, filter: nil)
+        dataSource.performQuery(issues: viewModel.issues, filter: nil)
         setupSearchController()
 		setDefaultToolBar()
 		showToolBar()
+        binding()
+    }
+    
+    func binding() {
+        viewModel.issueDataSource = { [weak self] issues, filter in
+            guard let self = self else { return }
+            self.dataSource.performQuery(issues: issues, filter: filter)
+        }
     }
 
     private func setupSearchController() {
@@ -94,17 +101,14 @@ class IssueViewController: UIViewController {
 	
 	func deleteIssues() {
 		let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
-		paths?.forEach{ issueManager.delete(at: $0.row) }
-        dataSource.updateDataSource(issues: issueManager.opened())
+        paths?.forEach{ viewModel.issueManager.delete(at: $0.row) }
 	}
 	
 	func closeIssues() {
 		let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
 		guard let indexPaths = paths else { return }
         let identifiers = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
-		identifiers.forEach{ issueManager.close(with: $0) }
-		
-        dataSource.updateDataSource(issues: issueManager.opened())
+        identifiers.forEach{ viewModel.issueManager.close(with: $0) }
 	}
 	
 	private func presentViewController<T:UIViewController> (identifier: String, type: T, option: Option) {
@@ -130,11 +134,10 @@ class IssueViewController: UIViewController {
 		let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
 											 heightDimension: .fractionalHeight(1.0))
 		let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
 		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
 											   heightDimension: .fractionalHeight(0.13))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-		let spacing = CGFloat(0)
+		let spacing = CGFloat(5)
 		group.interItemSpacing = .fixed(spacing)
 
 		let section = NSCollectionLayoutSection(group: group)
@@ -177,6 +180,6 @@ extension IssueViewController: UICollectionViewDelegate {
 extension IssueViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        dataSource.performQuery(issues: issueManager.issues, filter: TitleCriteria(input: text))
+        dataSource.performQuery(issues: viewModel.issues, filter: TitleCriteria(input: text))
     }
 }
