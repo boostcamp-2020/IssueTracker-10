@@ -9,6 +9,11 @@ import UIKit
 
 class IssueViewController: UIViewController {
 	
+	enum Option {
+		case present
+		case push
+	}
+	
 	@IBOutlet weak var issueCollectionView: UICollectionView!
 	@IBAction func editButtonTouched(_ sender: UIBarButtonItem) {
 		setEditing(!isEditing, animated: true)		
@@ -43,7 +48,9 @@ class IssueViewController: UIViewController {
 		let add = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .done, target: self, action: #selector(addTapped))
 		add.tintColor = UIColor(named: "GithubMainColor")
 		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-		toolbarItems = [spacer, add]
+		let filter = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .done, target: self, action: #selector(filterTapped))
+		filter.tintColor = UIColor(named: "GithubMainColor")
+		toolbarItems = [filter, spacer, add]
 	}
 	
 	func showToolBar() {
@@ -60,10 +67,11 @@ class IssueViewController: UIViewController {
 	}
 	
 	@objc func addTapped() {
-		let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-		if let issueCreateViewController: CreateIssueNavigationViewController = mainStoryboard.instantiateViewController(withIdentifier: "CreateIssue") as? CreateIssueNavigationViewController {
-			self.present(issueCreateViewController, animated: true, completion: nil)
-		}
+		presentViewController(identifier: "IssueCreateViewController", type: CreateIssueNavigationViewController(), option: .present)
+	}
+	
+	@objc func filterTapped() {
+		presentViewController(identifier: "IssueFilterViewController", type: IssueFilterViewController(), option: .present)
 	}
 	
 	@objc func deleteTapped() {
@@ -98,6 +106,19 @@ class IssueViewController: UIViewController {
 		
         dataSource.updateDataSource(issues: issueManager.opened())
 	}
+	
+	private func presentViewController<T:UIViewController> (identifier: String, type: T, option: Option) {
+		let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+		if let viewController: T = mainStoryboard.instantiateViewController(withIdentifier: identifier) as? T {
+			switch option {
+			case .present:
+				self.present(viewController, animated: true, completion: nil)
+			case .push:
+				self.navigationController?.pushViewController(viewController, animated: true)
+			}
+		}
+	}
+	
 	
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		guard isEditing != editing else { return }
@@ -135,7 +156,10 @@ extension IssueViewController: UICollectionViewDelegate {
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		guard isEditing == true else { /* 디테일뷰로 이동하기 */ return }
+		guard isEditing == true else {
+			presentViewController(identifier: "IssueDetailViewController", type: IssueDetailViewController(), option: .push)
+			return
+		}
 		
 		let cell = collectionView.cellForItem(at: indexPath)
 		if cell?.isSelected == true {
