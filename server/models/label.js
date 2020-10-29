@@ -1,4 +1,5 @@
 const { label } = require('./database');
+const errorMessages = require('../services/errorMessages');
 
 const findLabelAll = async () => {
   try {
@@ -8,7 +9,7 @@ const findLabelAll = async () => {
 
     return labels;
   } catch (err) {
-    throw new Error('모든 label 찾기 실패');
+    throw new Error(errorMessages.label.notFoundError);
   }
 };
 

@@ -1,4 +1,5 @@
 const { milestone } = require('./database');
+const errorMessages = require('../services/errorMessages');
 
 const findMilestoneAll = async () => {
   try {
@@ -8,7 +9,7 @@ const findMilestoneAll = async () => {
 
     return milestones;
   } catch (err) {
-    throw new Error('모든 milestone 찾기 실패');
+    throw new Error(errorMessages.milestone.notFoundError);
   }
 };
 

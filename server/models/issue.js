@@ -1,4 +1,5 @@
 const { issue, user } = require('./database');
+const errorMessages = require('../services/errorMessages');
 
 const issueType = {
   close: 0,
@@ -20,7 +21,7 @@ const findIssueAll = async () => {
 
     return issues;
   } catch (err) {
-    throw new Error('유저 데이터 find 실패');
+    throw new Error(errorMessages.issue.notFoundError);
   }
 };
 
@@ -33,7 +34,7 @@ const findIssueClosed = async () => {
 
     return issues;
   } catch (err) {
-    throw new Error('유저 데이터 find 실패');
+    throw new Error(errorMessages.issue.notFoundError);
   }
 };
 
@@ -46,7 +47,7 @@ const findIssueOpen = async () => {
 
     return issues;
   } catch (err) {
-    throw new Error('유저 데이터 find 실패');
+    throw new Error(errorMessages.issue.notFoundError);
   }
 };
 
