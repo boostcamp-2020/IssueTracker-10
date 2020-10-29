@@ -69,6 +69,12 @@ const updateIssueTitle = async (req, res, next) => {
       return res.status(400).json({ message: errorMessages.issue.noRequestData });
     }
 
+    const issueInfo = await issueModel.findIssueById(issueId);
+
+    if(!issueInfo) {
+      return res.status(404).json({ message: errorMessages.issue.notFoundError });
+    }
+
     const result = await issueModel.compareAuthor(userId, issueId);
 
     if(!result) {
