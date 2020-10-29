@@ -18,9 +18,7 @@ const findAllIssues = async (req, res, next) => {
       labels,
       milestones,
     };
-    return res
-      .status(200)
-      .json({ message: successMessages.issue.successToRead, data: AllIssueInfo });
+    return res.status(200).json({ message: successMessages.issue.read, data: AllIssueInfo });
   } catch (error) {
     console.log(error);
     next(error);

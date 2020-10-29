@@ -1,15 +1,15 @@
 const successMessages = {
   user: {
-    successToRead: 'Success to find user!',
+    read: 'Success to find user!',
   },
   issue: {
-    successToRead: 'Success to find issue!',
+    read: 'Success to find issue!',
   },
   label: {
-    successToRead: 'Success to find label!',
+    read: 'Success to find label!',
   },
   milestone: {
-    successToRead: 'Success to find milestone!',
+    read: 'Success to find milestone!',
   },
 };
 
