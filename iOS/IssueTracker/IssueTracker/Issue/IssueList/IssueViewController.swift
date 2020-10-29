@@ -18,7 +18,6 @@ class IssueViewController: UIViewController {
 	}
 	
 	@IBOutlet weak var IssueCollectionView: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
 	@IBAction func editButtonTouched(_ sender: UIBarButtonItem) {
 		setEditing(!isEditing, animated: true)		
 		updateUserInterface()
@@ -32,10 +31,21 @@ class IssueViewController: UIViewController {
 		IssueCollectionView.delegate = self
 		IssueCollectionView.collectionViewLayout = createLayout()
 		configureDataSource()
-		performQuery(with: "")
-		
+        performQuery(issues: issueManager.issues, filter: nil)
+        setupSearchController()
 		makeToolBar()
     }
+
+    private func setupSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search issues"
+        searchController.searchResultsUpdater = self
+        self.navigationItem.searchController = searchController
+        self.navigationItem.searchController?.hidesNavigationBarDuringPresentation = true
+        self.definesPresentationContext = true
+    }
+    
 	
 	func makeToolBar() {
 		let close = UIBarButtonItem(title: "선택 이슈 닫기", style: .done , target: self, action: #selector(closeTapped))
@@ -96,7 +106,7 @@ class IssueViewController: UIViewController {
 		let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
 		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-											   heightDimension: .fractionalHeight(0.15))
+											   heightDimension: .fractionalHeight(0.13))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 		let spacing = CGFloat(0)
 		group.interItemSpacing = .fixed(spacing)
@@ -109,6 +119,7 @@ class IssueViewController: UIViewController {
 		return layout
 	}
 }
+
 
 extension IssueViewController {
 	func configureDataSource() {
@@ -124,10 +135,14 @@ extension IssueViewController {
 		dataSource = UICollectionViewDiffableDataSource<Section, Issue>(collectionView: IssueCollectionView, cellProvider: cellProvider)
 	}
 	
-	func performQuery(with filter: String?) {
-		let issues = issueManager.opened()
-		updateDataSource(issues: issues)
-	}
+    func performQuery(issues: [Issue], filter: IssueCriteria?) {
+        
+        var data = issues
+        if let filter = filter {
+            data = filter.apply(issues: issues)
+        }
+        updateDataSource(issues: data)
+    }
 }
 
 extension IssueViewController: UICollectionViewDelegate {
@@ -153,4 +168,11 @@ extension IssueViewController: UICollectionViewDelegate {
 		let cell = collectionView.cellForItem(at: indexPath)
 		cell?.backgroundColor = nil
 	}
+}
+
+extension IssueViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        performQuery(issues: issueManager.issues, filter: TitleCriteria(input: text))
+    }
 }
