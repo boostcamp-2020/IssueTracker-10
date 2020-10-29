@@ -7,8 +7,10 @@ const router = express.Router();
 router.get('/github/login', passport.authenticate('github'));
 
 router.get('/github', passport.authenticate('github', { session: false }), (req, res) => {
-  const { user } = req;
-  const token = generateToken(user.id, user.username);
+  const {
+    user: { id, username },
+  } = req;
+  const token = generateToken(id, username);
   res.status(200).json({ message: 'success', token });
 });
 

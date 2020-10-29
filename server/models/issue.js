@@ -83,7 +83,7 @@ const findIssueAll = async () => {
 
 const countAllClosedIssues = async () => {
   try {
-    const closedCount = await issue.count({ where: { state: issueType.close } });
+    const closedCount = await issue.count({ where: { state: issueType.closed } });
 
     return closedCount;
   } catch (err) {
