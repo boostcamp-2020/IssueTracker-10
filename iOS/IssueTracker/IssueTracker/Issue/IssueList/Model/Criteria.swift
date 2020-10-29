@@ -70,7 +70,6 @@ class OrCriteria: IssueCriteria {
     func apply(issues: [Issue]) -> [Issue] {
         let leftResult = left.apply(issues: issues)
         let rightResult = right.apply(issues: issues)
- 
         return Array(Set(leftResult + rightResult))
     }
 }
