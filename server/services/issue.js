@@ -50,11 +50,11 @@ const deleteIssue = async (req, res) => {
     if (isSuccess) return res.status(200).json({ message: successMessages.issue.delete });
     return res.status(404).json({ message: errorMessages.issue.notFoundError });
   } catch (err) {
-    return res.status(500).json({ message: '' });
+    return res.status(500).json({ message: errorMessages.server });
   }
 };
 
-const selectIssueById = async (req, res, next) => {
+const selectIssueById = async (req, res) => {
   try {
     const { issueId } = req.params;
     const {dataValues: issueInfo} = await issueModel.findIssueById(issueId);
@@ -69,11 +69,11 @@ const selectIssueById = async (req, res, next) => {
 
     return res.status(200).json({ message: successMessages.issue.read, data: issueInfo });
   } catch (err) {
-    next(err);
+    return res.status(500).json({ message: errorMessages.server });
   }
 };
 
-const updateIssueTitle = async (req, res, next) => {
+const updateIssueTitle = async (req, res) => {
   try {
     const issueData = req.body;
     const { issueId } = req.params;
@@ -99,7 +99,7 @@ const updateIssueTitle = async (req, res, next) => {
     if(updateResult) return res.status(200).json({message: successMessages.issue.update});
     return res.status(422).json({message: errorMessages.issue.updateFailed});
   } catch (err) {
-    next(err);
+    return res.status(500).json({ message: errorMessages.server });
   }
 };
 
