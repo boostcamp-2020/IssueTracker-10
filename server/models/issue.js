@@ -42,7 +42,6 @@ const findIssueById = async (id) => {
       include: [
         {
           model: user,
-          as: 'owner',
           attributes: ['id', 'username'],
           required: true,
         },
@@ -71,7 +70,7 @@ const findIssueById = async (id) => {
 
     return issueInfo;
   } catch (err) {
-    throw new Error('이슈 데이터 findOne 실패');
+    throw new Error(errorMessages.issue.notFoundError);
   }
 };
 

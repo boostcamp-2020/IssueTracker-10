@@ -57,7 +57,7 @@ const deleteIssue = async (req, res) => {
 const selectIssueById = async (req, res, next) => {
   try {
     const { issueId } = req.params;
-    const issueInfo = await issueModel.findIssueById(issueId);
+    const {dataValues: issueInfo} = await issueModel.findIssueById(issueId);
 
     if(!issueInfo) {
       return res.status(404).json({ message: errorMessages.issue.notFoundError });
@@ -65,12 +65,9 @@ const selectIssueById = async (req, res, next) => {
     
     const commentCount = await commentModel.commentCountById(issueId);
 
-    const data = {
-      issueInfo,
-      commentCount,
-    };
+    issueInfo.commentCount = commentCount;
 
-    return res.status(200).json({ message: successMessages.issue.read, data });
+    return res.status(200).json({ message: successMessages.issue.read, data: issueInfo });
   } catch (err) {
     next(err);
   }
