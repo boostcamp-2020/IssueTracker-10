@@ -21,7 +21,7 @@ const createIssue = async (issueData) => {
     ).get({ plain: true });
     return issueInfo;
   } catch (err) {
-    throw new Error('Error on creating an issue');
+    throw new Error(errorMessages.issue.createFailed);
   }
 };
 
@@ -31,7 +31,7 @@ const deleteIssueById = async (issueId) => {
     if (result) return true;
     return false;
   } catch (err) {
-    throw new Error(errorMessages.issue.notFoundError);
+    throw new Error(errorMessages.issue.deleteFailed);
   }
 };
 
@@ -42,7 +42,6 @@ const findIssueById = async (id) => {
       include: [
         {
           model: user,
-          as: 'owner',
           attributes: ['id', 'username'],
           required: true,
         },
@@ -71,7 +70,7 @@ const findIssueById = async (id) => {
 
     return issueInfo;
   } catch (err) {
-    throw new Error('이슈 데이터 findOne 실패');
+    throw new Error(errorMessages.issue.notFoundError);
   }
 };
 

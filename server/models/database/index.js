@@ -24,7 +24,6 @@ db.user.hasMany(db.issue, {
   foreignKey: 'author',
 });
 db.issue.belongsTo(db.user, {
-  as: 'owner',
   foreignKey: 'author',
   onDelete: 'CASCADE',
 });
