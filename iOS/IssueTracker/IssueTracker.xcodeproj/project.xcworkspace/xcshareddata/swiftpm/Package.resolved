@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "hvNetwork",
+        "repositoryURL": "https://github.com/hoonv/hvNetwork",
+        "state": {
+          "branch": "master",
+          "revision": "51692e64e443e9f5f1af9e47a1996c14886aa950",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
