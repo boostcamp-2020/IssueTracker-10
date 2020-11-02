@@ -5,7 +5,8 @@ const errorMessages = require('./errorMessages');
 
 const selectMilestoneList = async (req, res) => {
   try {
-    const milestones = await findMilestoneList();
+    const { state = 1 } = req.query;
+    const milestones = await findMilestoneList(state);
     const resData = await Promise.all(
       milestones.map(async (msData) => {
         const { id } = msData;
