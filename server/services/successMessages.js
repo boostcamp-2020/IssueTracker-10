@@ -21,6 +21,7 @@ const successMessages = {
     delete: 'Success to delete milestone!',
   },
   comment: {
+    read: 'SUCCESS : The request is successfully processed',
     create: 'SUCCESS : The comment is successfully created',
   },
 };

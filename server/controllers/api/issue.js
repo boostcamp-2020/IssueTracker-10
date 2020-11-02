@@ -10,6 +10,7 @@ router.put('/state', issueService.toggleState);
 router.put('/:issueId', issueService.updateIssueTitle);
 router.delete('/:issueId', issueService.deleteIssue);
 
-router.post('/:issueId/:comment', commentService.createComment);
+router.get('/:issueId/comment', commentService.selectAllComments);
+router.post('/:issueId/comment', commentService.createComment);
 
 module.exports = router;
