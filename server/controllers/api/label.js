@@ -5,6 +5,7 @@ const labelService = require('../../services/label');
 
 router.get('/', labelService.getAllLabels);
 router.post('/', labelService.createLabel);
+router.put('/:labelId', labelService.updateLabel);
 router.delete('/:labelId', labelService.deleteLabel);
 
 module.exports = router;

@@ -11,6 +11,7 @@ const successMessages = {
   label: {
     read: 'Success to find label!',
     create: 'SUCCESS : The label data is successfully created',
+    update: 'SUCCESS : The label data is successfully updated',
     delete: 'SUCCESS : The label data is successfully deleted',
   },
   milestone: {

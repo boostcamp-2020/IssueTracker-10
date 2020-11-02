@@ -28,6 +28,23 @@ const createLabel = async (labelData) => {
   }
 };
 
+const updateLabel = async (labelData) => {
+  try {
+    const { title, description, color, labelId } = labelData;
+    const [result] = await label.update({
+      title,
+      description,
+      color,
+    }, {
+      where: { id: labelId },
+    });
+    if (result) return true;
+    return false;
+  } catch (err) {
+    throw new Error(errorMessages.label.updateFailed);
+  }
+};
+
 const deleteLabel = async (labelId) => {
   try {
     const result = await label.destroy({ where: { id: labelId } });
@@ -40,5 +57,6 @@ const deleteLabel = async (labelId) => {
 module.exports = {
   findLabelAll,
   createLabel,
+  updateLabel,
   deleteLabel,
 };
