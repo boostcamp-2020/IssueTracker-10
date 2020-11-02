@@ -7,7 +7,7 @@ const checkValidation = {
     const { title, description, color } = labelData;
     if (!title || !color) return false;
     if (description && typeof description !== 'string') return false;
-    if (color && typeof color !== 'string') return false;
+    if (typeof color !== 'string') return false;
     return true;
   },
 };
