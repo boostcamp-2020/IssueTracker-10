@@ -38,6 +38,10 @@ const updateMilestone = async (req, res) => {
     if (!checkValidation.createOrUpdate(milestoneData)) {
       return res.status(400).json({ message: errorMessages.milestone.invalid });
     }
+    const milestoneInfo = await milestoneModel.findMilestoneById(milestoneId);
+    if(!milestoneInfo) {
+      return res.status(404).json({ message: errorMessages.milestone.notFoundError});
+    }
     const result = await milestoneModel.updateMilestone({ ...milestoneData, milestoneId });
     if (result) return res.status(200).json({ message: successMessages.milestone.update });
     return res.status(422).json({ message: errorMessages.milestone.updateFailed });

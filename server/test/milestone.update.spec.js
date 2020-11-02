@@ -65,7 +65,7 @@ describe('PUT /api/milestone/{milestoneId} API는', () => {
   });
   it('수정하려는 마일스톤이 없을 경우 404를 리턴한다.', (done) => {
     request(app)
-      .put('/api/milestone/1')
+      .put('/api/milestone/1000')
       .set({
         Authorization: process.env.TEST_TOKEN,
         'Content-Type': 'application/json',
