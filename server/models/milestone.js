@@ -13,11 +13,24 @@ const createMilestone = async (milestoneData) => {
       title,
       description,
       date,
-      state: milestoneType.open
+      state: milestoneType.open,
     });
-    return milestoneInfo.get({plain: true});
+    return milestoneInfo.get({ plain: true });
   } catch (err) {
     throw new Error(errorMessages.milestone.createFailed);
+  }
+};
+
+const findMilestoneById = async (milestoneId) => {
+  try {
+    const milestones = await milestone.findOne({
+      attributes: ['id', 'title', 'description', 'date', 'state'],
+      where: { id: milestoneId },
+      raw: true,
+    });
+    return milestones;
+  } catch (err) {
+    throw new Error(errorMessages.milestone.notFoundError);
   }
 };
 
@@ -29,7 +42,7 @@ const updateMilestone = async (milestoneData) => {
       description,
       date,
     }, {
-      where: {id: milestoneId},
+      where: { id: milestoneId },
     });
     if(result) return true;
     return false;
@@ -86,6 +99,7 @@ const updateStateOfMilestone = async (stateData) => {
 
 module.exports = {
   createMilestone,
+  findMilestoneById,
   updateMilestone,
   findMilestoneAll,
   findMilestoneListByState,
