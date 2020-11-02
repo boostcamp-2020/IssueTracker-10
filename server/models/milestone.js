@@ -23,7 +23,19 @@ const deleteMilestoneById = async (milestoneId) => {
   }
 };
 
+const updateStateOfMilestone = async (stateData) => {
+  try {
+    const { state, milestoneId } = stateData;
+    const [updatedResult] = await milestone.update({ state }, { where: { id: milestoneId } });
+    if (updatedResult) return true;
+    return false;
+  } catch (err) {
+    throw new Error(errorMessages.milestone.updateFailed);
+  }
+};
+
 module.exports = {
   findMilestoneAll,
   deleteMilestoneById,
+  updateStateOfMilestone,
 };
