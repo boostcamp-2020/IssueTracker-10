@@ -23,10 +23,31 @@ const findMilestoneListByState = async (state = 1) => {
     return milestones;
   } catch (err) {
     throw new Error(errorMessages.milestone.notFoundError);
+
+const deleteMilestoneById = async (milestoneId) => {
+  try {
+    const result = await milestone.destroy({ where: { id: milestoneId } });
+    if (result) return true;
+    return false;
+  } catch (err) {
+    throw new Error(errorMessages.milestone.deleteFailed);
+  }
+};
+
+const updateStateOfMilestone = async (stateData) => {
+  try {
+    const { state, milestoneId } = stateData;
+    const [updatedResult] = await milestone.update({ state }, { where: { id: milestoneId } });
+    if (updatedResult) return true;
+    return false;
+  } catch (err) {
+    throw new Error(errorMessages.milestone.updateFailed);
   }
 };
 
 module.exports = {
   findMilestoneAll,
   findMilestoneListByState,
+  deleteMilestoneById,
+  updateStateOfMilestone,
 };

@@ -6,8 +6,8 @@ const successMessages = require('./successMessages');
 
 const findAllIssues = async (req, res, next) => {
   try {
-    const openCount = await countAllClosedIssues();
-    const closedCount = await countAllOpenIssues();
+    const closedCount = await countAllClosedIssues();
+    const openCount = await countAllOpenIssues();
     const users = await findUserAll();
     const labels = await findLabelAll();
     const milestones = await findMilestoneAll();

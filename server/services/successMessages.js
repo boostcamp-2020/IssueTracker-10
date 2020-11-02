@@ -13,6 +13,8 @@ const successMessages = {
   },
   milestone: {
     read: 'SUCCESS : The request is successfully processed',
+    update: 'SUCCESS : The milestone data is successfully updated',
+    delete: 'Success to delete milestone!',
   },
 };
 
