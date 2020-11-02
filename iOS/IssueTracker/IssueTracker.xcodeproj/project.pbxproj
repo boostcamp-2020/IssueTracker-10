@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		C32C5FA3254FE854008BBDCE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */; };
+		C32C5FAE254FEB70008BBDCE /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */; };
+		C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */; };
+		C32C5FC225500276008BBDCE /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FC125500276008BBDCE /* KeychainItem.swift */; };
+		C32C5FCA25500430008BBDCE /* UIViewController+showLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FC925500430008BBDCE /* UIViewController+showLoginView.swift */; };
 		C3414FA525480104003C845A /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FA425480104003C845A /* LabelViewController.swift */; };
 		C3414FAD2548018D003C845A /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FAC2548018D003C845A /* Issue.swift */; };
 		C3414FB2254802A4003C845A /* IssueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FB1254802A4003C845A /* IssueCollectionViewCell.swift */; };
@@ -55,6 +59,11 @@
 
 /* Begin PBXFileReference section */
 		C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		C32C5FBA254FF1D7008BBDCE /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
+		C32C5FC125500276008BBDCE /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
+		C32C5FC925500430008BBDCE /* UIViewController+showLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+showLoginView.swift"; sourceTree = "<group>"; };
 		C3414FA425480104003C845A /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		C3414FAC2548018D003C845A /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		C3414FB1254802A4003C845A /* IssueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -120,6 +129,17 @@
 				C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		C32C5FAC254FEB33008BBDCE /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */,
+				C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */,
+				C32C5FC925500430008BBDCE /* UIViewController+showLoginView.swift */,
+				C32C5FC125500276008BBDCE /* KeychainItem.swift */,
+			);
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		C3414FB6254802AE003C845A /* View */ = {
@@ -195,6 +215,8 @@
 		E0B3D3C32546C8660040D5AF /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				C32C5FBA254FF1D7008BBDCE /* IssueTracker.entitlements */,
+				C32C5FAC254FEB33008BBDCE /* SignIn */,
 				C32C5FA7254FE962008BBDCE /* Profile */,
 				E09C1CA0254A995B00A1FADF /* Home */,
 				E0B3D3FA2547E8280040D5AF /* Issue */,
@@ -373,6 +395,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C32C5FAE254FEB70008BBDCE /* SignIn.storyboard in Resources */,
 				E0B3D3D12546C8680040D5AF /* LaunchScreen.storyboard in Resources */,
 				E0B3D3CE2546C8680040D5AF /* Assets.xcassets in Resources */,
 				E0B3D3CC2546C8660040D5AF /* Main.storyboard in Resources */,
@@ -400,6 +423,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C32C5FC225500276008BBDCE /* KeychainItem.swift in Sources */,
+				C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */,
 				E0B3D40F2547F9590040D5AF /* IssueCreateViewController.swift in Sources */,
 				E0B3D3FD2547E8490040D5AF /* IssueViewController.swift in Sources */,
 				C3414FC425481BF6003C845A /* IssueManager.swift in Sources */,
@@ -410,6 +435,7 @@
 				C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */,
 				E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */,
 				E09C1CB4254AA2C000A1FADF /* IssueFactory.swift in Sources */,
+				C32C5FCA25500430008BBDCE /* UIViewController+showLoginView.swift in Sources */,
 				C3414FA525480104003C845A /* LabelViewController.swift in Sources */,
 				E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */,
 				C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */,
@@ -596,6 +622,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IssueTracker/IssueTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = IssueTracker/Info.plist;
@@ -603,7 +630,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = team10.IssueTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = Group10.IssueTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -615,6 +642,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IssueTracker/IssueTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = IssueTracker/Info.plist;
@@ -622,7 +650,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = team10.IssueTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = Group10.IssueTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
