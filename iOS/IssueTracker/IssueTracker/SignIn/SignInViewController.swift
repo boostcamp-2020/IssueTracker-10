@@ -37,7 +37,31 @@ class SignInViewController: UIViewController {
 }
 
 extension SignInViewController: ASAuthorizationControllerDelegate {
-	
+	//애플 아이디로 성공시, 여기서 계정을 만들 수 있다.
+	func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+		if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+			let userId: String = appleIDCredential.user
+			let userFirstName: String = appleIDCredential.fullName?.givenName ?? ""
+			let userLastName: String = appleIDCredential.fullName?.familyName ?? ""
+			let userEmail: String = appleIDCredential.email ?? ""
+			let userName: String = userLastName + userFirstName
+			
+			let provider = ASAuthorizationAppleIDProvider()
+			provider.getCredentialState(forUserID: userId) { (credentialState, error) in
+				switch credentialState {
+				case .authorized:
+					print("Authorized")
+					print("\(userName)")
+					print("\(userEmail)")
+				case .notFound:
+					print("Not Found")
+				case .revoked:
+					print("Revoked")
+				default: break
+				}
+			}
+		}
+	}
 }
 
 extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
