@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C32C5FA3254FE854008BBDCE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */; };
 		C3414FA525480104003C845A /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FA425480104003C845A /* LabelViewController.swift */; };
 		C3414FAD2548018D003C845A /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FAC2548018D003C845A /* Issue.swift */; };
 		C3414FB2254802A4003C845A /* IssueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FB1254802A4003C845A /* IssueCollectionViewCell.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C3414FA425480104003C845A /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		C3414FAC2548018D003C845A /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		C3414FB1254802A4003C845A /* IssueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -112,6 +114,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C32C5FA7254FE962008BBDCE /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		C3414FB6254802AE003C845A /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +195,7 @@
 		E0B3D3C32546C8660040D5AF /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				C32C5FA7254FE962008BBDCE /* Profile */,
 				E09C1CA0254A995B00A1FADF /* Home */,
 				E0B3D3FA2547E8280040D5AF /* Issue */,
 				E0B3D3FB2547E8320040D5AF /* Label */,
@@ -407,6 +418,7 @@
 				E0B3D4052547E9F20040D5AF /* IssueNavigationViewController.swift in Sources */,
 				E0B3D40A2547EBC20040D5AF /* IssueDetailViewController.swift in Sources */,
 				C3598827254AB728001F311D /* CreateIssueNavigationViewController.swift in Sources */,
+				C32C5FA3254FE854008BBDCE /* ProfileViewController.swift in Sources */,
 				E09C1CAA254A99C400A1FADF /* HomeTableViewCell.swift in Sources */,
 				C3414FAD2548018D003C845A /* Issue.swift in Sources */,
 			);

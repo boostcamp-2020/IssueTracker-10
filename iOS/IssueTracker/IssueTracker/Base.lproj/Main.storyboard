@@ -119,6 +119,38 @@
             </objects>
             <point key="canvasLocation" x="1655" y="135"/>
         </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="29Z-Zm-sTJ">
+            <objects>
+                <viewController id="w9Q-P1-RX6" customClass="ProfileViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dxe-My-85x">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpO-uJ-rbn">
+                                <rect key="frame" x="8" y="148" width="398" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8Ol-CJ-SUv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dpO-uJ-rbn" firstAttribute="top" secondItem="8Ol-CJ-SUv" secondAttribute="top" constant="8" id="a1C-L2-XgV"/>
+                            <constraint firstItem="8Ol-CJ-SUv" firstAttribute="trailing" secondItem="dpO-uJ-rbn" secondAttribute="trailing" constant="8" id="dVG-pp-omK"/>
+                            <constraint firstItem="dpO-uJ-rbn" firstAttribute="leading" secondItem="8Ol-CJ-SUv" secondAttribute="leading" constant="8" id="gdw-ul-w06"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="wGp-YR-wn1"/>
+                    <connections>
+                        <outlet property="name" destination="dpO-uJ-rbn" id="con-tX-zdh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fqC-OU-plN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="867" y="-514"/>
+        </scene>
         <!--Home-->
         <scene sceneID="HNk-V8-QZa">
             <objects>
@@ -165,7 +197,14 @@
                         <viewLayoutGuide key="safeArea" id="wlR-0i-DdZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" largeTitleDisplayMode="always" id="WeJ-qV-ev3"/>
+                    <navigationItem key="navigationItem" title="Home" largeTitleDisplayMode="always" id="WeJ-qV-ev3">
+                        <barButtonItem key="leftBarButtonItem" image="person.fill" catalog="system" id="zHZ-4Q-YdI">
+                            <color key="tintColor" name="GithubMainColor"/>
+                            <connections>
+                                <segue destination="w9Q-P1-RX6" kind="show" id="tcj-kl-eNO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSR-Cw-OVw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -302,6 +341,7 @@
     </scenes>
     <resources>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <namedColor name="GithubMainColor">
             <color red="0.14509803921568629" green="0.16470588235294117" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
