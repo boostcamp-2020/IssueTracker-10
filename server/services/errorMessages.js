@@ -21,6 +21,8 @@ const errorMessages = {
     notFoundError: 'Can\'t find milestone',
     createFailed: 'Error on creating an milestone',
     deleteFailed: 'Error on deleting a milestone',
+    updateFailed: 'Error on updating a milestone',
+    invalid: 'INVALID ERROR : the received data is invalid',
   },
   server: 'INTERNAL ERROR : Unexpected error occurred',
   unauthorized: 'AUTH ERROR : The request is not authorized',

@@ -15,7 +15,7 @@ const checkValidation = {
   },
   updateTitle: (issueData) => {
     const { title } = issueData;
-    if(title) return false;
+    if (title) return false;
     return true;
   },
   toggle: (stateData) => {
@@ -57,12 +57,12 @@ const deleteIssue = async (req, res) => {
 const selectIssueById = async (req, res) => {
   try {
     const { issueId } = req.params;
-    const {dataValues: issueInfo} = await issueModel.findIssueById(issueId);
+    const { dataValues: issueInfo } = await issueModel.findIssueById(issueId);
 
-    if(!issueInfo) {
+    if (!issueInfo) {
       return res.status(404).json({ message: errorMessages.issue.notFoundError });
     }
-    
+
     const commentCount = await commentModel.commentCountById(issueId);
 
     issueInfo.commentCount = commentCount;
@@ -84,20 +84,20 @@ const updateIssueTitle = async (req, res) => {
     }
 
     const issueInfo = await issueModel.findIssueById(issueId);
-    if(!issueInfo) {
+    if (!issueInfo) {
       return res.status(404).json({ message: errorMessages.issue.notFoundError });
     }
 
     const result = await issueModel.compareAuthor(userId, issueId);
-    if(!result) {
-      return res.status(403).json({message: errorMessages.issue.notAuthor});
+    if (!result) {
+      return res.status(403).json({ message: errorMessages.issue.notAuthor });
     }
 
     const { title } = issueData;
     const [updateResult] = await issueModel.updateIssueTitle(issueId, title);
 
-    if(updateResult) return res.status(200).json({message: successMessages.issue.update});
-    return res.status(422).json({message: errorMessages.issue.updateFailed});
+    if (updateResult) return res.status(200).json({ message: successMessages.issue.update });
+    return res.status(422).json({ message: errorMessages.issue.updateFailed });
   } catch (err) {
     return res.status(500).json({ message: errorMessages.server });
   }
