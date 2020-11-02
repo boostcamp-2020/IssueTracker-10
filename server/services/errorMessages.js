@@ -33,6 +33,7 @@ const errorMessages = {
     notFoundError: 'NOT FOUND : The data is not found',
     createFailed: 'Error on creating a comment',
     deleteFailed: 'Error on deleting a comment',
+    updateFailed: 'Error on updating a comment',
   },
   server: 'INTERNAL ERROR : Unexpected error occurred',
   unauthorized: 'AUTH ERROR : The request is not authorized',

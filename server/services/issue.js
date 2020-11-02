@@ -57,7 +57,7 @@ const deleteIssue = async (req, res) => {
 const selectIssueById = async (req, res) => {
   try {
     const { issueId } = req.params;
-    const { dataValues: issueInfo } = await issueModel.findIssueById(issueId);
+    const issueInfo = await issueModel.findIssueById(issueId);
 
     if (!issueInfo) {
       return res.status(404).json({ message: errorMessages.issue.notFoundError });

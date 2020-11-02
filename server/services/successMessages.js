@@ -24,6 +24,7 @@ const successMessages = {
     read: 'SUCCESS : The request is successfully processed',
     create: 'SUCCESS : The comment is successfully created',
     delete: 'Success to delete comment!',
+    update: 'SUCCESS : The comment is successfully updated',
   },
 };
 
