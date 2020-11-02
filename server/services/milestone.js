@@ -16,7 +16,7 @@ const createMilestone = async (req, res) => {
   try {
     const milestoneData = req.body;
     if (!checkValidation.create(milestoneData)) {
-      return res.status(400).json({ message: errorMessages.issue.invalid });
+      return res.status(400).json({ message: errorMessages.milestone.invalid });
     }
     await milestoneModel.createMilestone(milestoneData);
     return res.status(200).json({ message: successMessages.milestone.create });
