@@ -15,7 +15,9 @@ const errorMessages = {
     unprocessable: 'UNPROCESSABLE : The request data is unprocessable',
   },
   label: {
+    invalid: 'INVALID ERROR : the received data is invalid',
     notFoundError: "Can't find label",
+    alreadyExist: 'This label title is already exist!',
   },
   milestone: {
     notFoundError: "Can't find milestone",
