@@ -5,11 +5,31 @@ const successMessages = require('./successMessages');
 const errorMessages = require('./errorMessages');
 
 const checkValidation = {
+  create: (milestoneData) => {
+    const { title, description, date } = milestoneData;
+    if (!title) return false;
+    if (description && typeof description !== 'string') return false;
+    if (date && isNaN(Date.parse(date))) return false;
+    return true;
+  },
   toggle: (stateData) => {
     const { state } = stateData;
     if (state !== 0 && state !== 1) return false;
     return true;
   },
+};
+
+const createMilestone = async (req, res) => {
+  try {
+    const milestoneData = req.body;
+    if (!checkValidation.create(milestoneData)) {
+      return res.status(400).json({ message: errorMessages.milestone.invalid });
+    }
+    await milestoneModel.createMilestone(milestoneData);
+    return res.status(200).json({ message: successMessages.milestone.create });
+  } catch (err) {
+    return res.status(500).json({ message: errorMessages.server });
+  }
 };
 
 const selectMilestoneList = async (req, res) => {
@@ -28,7 +48,7 @@ const selectMilestoneList = async (req, res) => {
     return res.status(500).json({ message: errorMessages.server });
   }
 };
-  
+
 const deleteMilestone = async (req, res) => {
   try {
     const { milestoneId } = req.params;
@@ -60,6 +80,7 @@ const toggleState = async (req, res) => {
 };
 
 module.exports = {
+  createMilestone,
   selectMilestoneList,
   deleteMilestone,
   toggleState,
