@@ -114,14 +114,30 @@ const countAllOpenIssues = async () => {
   }
 };
 
+const countClosedIssuesByMilestone = async (milestoneId) => {
+  try {
+    const closedCount = await issue.count({ where: { state: issueType.closed, milestoneId } });
+
+    return closedCount;
+  } catch (err) {
+    throw new Error(errorMessages.issue.notFoundError);
+  }
+};
+
+const countOpenIssuesByMilestone = async (milestoneId) => {
+  try {
+    const openCount = await issue.count({ where: { state: issueType.open, milestoneId } });
+
+    return openCount;
+  } catch (err) {
+    throw new Error(errorMessages.issue.notFoundError);
+  }
+};
+
 const countIssuesByMilestone = async (milestoneId) => {
   try {
-    const closedCount = await issue.count({
-      where: { state: issueType.closed, milestoneId },
-    });
-    const openCount = await issue.count({
-      where: { state: issueType.open, milestoneId },
-    });
+    const closedCount = await countClosedIssuesByMilestone(milestoneId);
+    const openCount = await countOpenIssuesByMilestone(milestoneId);
     return { closed: closedCount, open: openCount };
   } catch (err) {
     throw new Error(errorMessages.issue.notFoundError);

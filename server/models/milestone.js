@@ -1,5 +1,4 @@
 const { milestone } = require('./database');
-const { countIssuesByMilestone } = require('./issue');
 const errorMessages = require('../services/errorMessages');
 
 const findMilestoneAll = async () => {
@@ -14,10 +13,11 @@ const findMilestoneAll = async () => {
   }
 };
 
-const findMilestoneList = async () => {
+const findMilestoneListByState = async (state = 1) => {
   try {
     const milestones = await milestone.findAll({
       attributes: ['id', 'title', 'description', 'date', 'state'],
+      where: { state },
       raw: true,
     });
     return milestones;
@@ -28,5 +28,5 @@ const findMilestoneList = async () => {
 
 module.exports = {
   findMilestoneAll,
-  findMilestoneList,
+  findMilestoneListByState,
 };
