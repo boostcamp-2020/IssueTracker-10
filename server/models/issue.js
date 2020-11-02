@@ -37,7 +37,7 @@ const deleteIssueById = async (issueId) => {
 
 const findIssueById = async (id) => {
   try {
-    const issueInfo = issue.findOne({
+    const issueInfo = await issue.findOne({
       attributes: ['id', 'title', 'state', 'createdAt'],
       include: [
         {
@@ -68,7 +68,8 @@ const findIssueById = async (id) => {
       where: { id },
     });
 
-    return issueInfo;
+    if(issueInfo) return issueInfo.get({ plain: true });;
+    return false;
   } catch (err) {
     throw new Error(errorMessages.issue.notFoundError);
   }
