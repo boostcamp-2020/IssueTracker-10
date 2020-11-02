@@ -34,6 +34,23 @@ const findMilestoneById = async (milestoneId) => {
   }
 };
 
+const updateMilestone = async (milestoneData) => {
+  try {
+    const { title, description, date, milestoneId } = milestoneData;
+    const [result] = await milestone.update({
+      title,
+      description,
+      date,
+    }, {
+      where: { id: milestoneId },
+    });
+    if(result) return true;
+    return false;
+  } catch (err) {
+    throw new Error(errorMessages.milestone.updateFailed);
+  }
+};
+
 const findMilestoneAll = async () => {
   try {
     const milestones = await milestone.findAll({
@@ -83,6 +100,7 @@ const updateStateOfMilestone = async (stateData) => {
 module.exports = {
   createMilestone,
   findMilestoneById,
+  updateMilestone,
   findMilestoneAll,
   findMilestoneListByState,
   deleteMilestoneById,
