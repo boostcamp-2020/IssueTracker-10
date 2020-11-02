@@ -1,8 +1,14 @@
-const { comment } = require('./database');
+const { comment, issue } = require('./database');
+const errorMessages = require('../services/errorMessages');
 
 const createComment = async (commentData) => {
   try {
     const { userId, issueId, content } = commentData;
+    const issueInfo = issue.findOne({
+      where: { id: issueId },
+      raw: true,
+    });
+    if (!issueInfo) return false;
     const commentInfo = (
       await comment.create({
         userId,
@@ -12,7 +18,7 @@ const createComment = async (commentData) => {
     ).get({ plain: true });
     return commentInfo;
   } catch (err) {
-    throw new Error('Error on creating an issue');
+    throw new Error(errorMessages.comment.createFailed);
   }
 };
 
@@ -24,7 +30,7 @@ const commentCountById = async (id) => {
 
     return commentCount;
   } catch (err) {
-    throw new Error('커맨드 개수 count 실패');
+    throw new Error(errorMessages.comment.notFoundError);
   }
 };
 

@@ -19,6 +19,9 @@ const successMessages = {
     update: 'SUCCESS : The milestone data is successfully updated',
     delete: 'Success to delete milestone!',
   },
+  comment: {
+    create: 'SUCCESS : The comment is successfully created',
+  },
 };
 
 module.exports = successMessages;

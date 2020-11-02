@@ -26,6 +26,11 @@ const errorMessages = {
     deleteFailed: 'Error on deleting a milestone',
     updateFailed: 'Error on updating a milestone',
   },
+  comment: {
+    invalid: 'INVALID ERROR : the received data is invalid',
+    notFoundError: 'NOT FOUND : The data is not found',
+    createFailed: 'Error on creating a comment',
+  },
   server: 'INTERNAL ERROR : Unexpected error occurred',
   unauthorized: 'AUTH ERROR : The request is not authorized',
 };
