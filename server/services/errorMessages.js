@@ -17,6 +17,7 @@ const errorMessages = {
     invalid: 'INVALID ERROR : the received data is invalid',
     alreadyExist: 'This label title is already exist!',
     notFoundError: 'NOT FOUND : The data is not found',
+    deleteFailed: 'DELETE ERROR : The error is occurred on deleting',
   },
   milestone: {
     invalid: 'INVALID ERROR : the received data is invalid',
