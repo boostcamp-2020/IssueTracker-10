@@ -10,6 +10,17 @@ const checkValidation = {
   },
 };
 
+const selectAllComments = async (req, res) => {
+  try {
+    const { issueId } = req.params;
+    const commentInfo = await commentModel.findAllCommentByIssueId(issueId);
+    if (!commentInfo) return res.status(404).json({ message: errorMessages.issue.notFoundError });
+    return res.status(200).json({ message: successMessages.comment.read, data: commentInfo });
+  } catch (err) {
+    return res.status(500).json({ message: errorMessages.server });
+  }
+};
+
 const createComment = async (req, res) => {
   try {
     const commentData = req.body;
@@ -28,5 +39,6 @@ const createComment = async (req, res) => {
 };
 
 module.exports = {
+  selectAllComments,
   createComment,
 };
