@@ -13,4 +13,17 @@ const findMilestoneAll = async () => {
   }
 };
 
-module.exports = findMilestoneAll;
+const deleteMilestoneById = async (milestoneId) => {
+  try {
+    const result = await milestone.destroy({ where: { id: milestoneId } });
+    if (result) return true;
+    return false;
+  } catch (err) {
+    throw new Error(errorMessages.milestone.deleteFailed);
+  }
+};
+
+module.exports = {
+  findMilestoneAll,
+  deleteMilestoneById,
+};
