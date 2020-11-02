@@ -12,12 +12,16 @@ const successMessages = {
     read: 'Success to find label!',
     create: 'SUCCESS : The label data is successfully created',
     update: 'SUCCESS : The label data is successfully updated',
+    delete: 'SUCCESS : The label data is successfully deleted',
   },
   milestone: {
     create: 'SUCCESS : The milestone is successfully created',
     read: 'SUCCESS : The request is successfully processed',
     update: 'SUCCESS : The milestone data is successfully updated',
     delete: 'Success to delete milestone!',
+  },
+  comment: {
+    create: 'SUCCESS : The comment is successfully created',
   },
 };
 
