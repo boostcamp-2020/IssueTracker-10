@@ -19,7 +19,20 @@ class SignInViewController: UIViewController {
 	//버튼 만들기
 	func setupProviderLoginView() {
 		let authorizationButton = ASAuthorizationAppleIDButton()
+		authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
 		self.loginProviderStackView.addArrangedSubview(authorizationButton)
+	}
+	
+	// 버튼이 눌리면, apple ID로 인증요청
+	@objc func handleAuthorizationAppleIDButtonPress() {
+		let appleIDProvider = ASAuthorizationAppleIDProvider()
+		let request = appleIDProvider.createRequest()
+		request.requestedScopes = [.fullName, .email]
+		
+		let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+		authorizationController.delegate = self
+		authorizationController.presentationContextProvider = self
+		authorizationController.performRequests()
 	}
 }
 
