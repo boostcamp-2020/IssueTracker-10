@@ -28,8 +28,7 @@ describe('PUT /api/issue/{issudId} API는', () => {
         Authorization: process.env.TEST_TOKEN,
         'Content-Type': 'application/json',
       })
-      .send({
-      })
+      .send({})
       .expect('Content-Type', /json/)
       .expect(400)
       .end((err, result) => {
@@ -73,7 +72,7 @@ describe('PUT /api/issue/{issudId} API는', () => {
         title: 'no issue data',
       })
       .expect('Content-Type', /json/)
-      .expect(403)
+      .expect(404)
       .end((err, result) => {
         if (err) {
           done(err);
