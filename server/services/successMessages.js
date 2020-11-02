@@ -13,6 +13,7 @@ const successMessages = {
   },
   milestone: {
     read: 'Success to find milestone!',
+    delete: 'Success to delete milestone!',
   },
 };
 
