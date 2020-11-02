@@ -5,7 +5,7 @@ const errorMessages = require('./errorMessages');
 const checkValidation = {
   create: (labelData) => {
     const { title, description, color } = labelData;
-    if (!title) return false;
+    if (!title && !color) return false;
     if (description && typeof description !== 'string') return false;
     if (color && typeof color !== 'string') return false;
     return true;
