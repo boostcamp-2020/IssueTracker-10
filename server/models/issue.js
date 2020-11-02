@@ -11,12 +11,13 @@ const issueType = {
 
 const createIssue = async (issueData) => {
   try {
-    const { userId, title } = issueData;
+    const { userId, title, milestoneId } = issueData;
     const issueInfo = (
       await issue.create({
         author: userId,
         title,
         state: issueType.open,
+        milestoneId,
       })
     ).get({ plain: true });
     return issueInfo;
@@ -77,14 +78,25 @@ const findIssueById = async (id) => {
 const findIssueAll = async () => {
   try {
     const issues = await issue.findAll({
-      attributes: ['id', 'title', 'state', 'createdAt', 'updatedAt'],
+      attributes: ['id', 'author', 'title', 'state', 'createdAt', 'updatedAt', 'milestoneId'],
       include: [
         {
           model: user,
           attributes: ['id', 'username', 'avatar'],
           require: true,
         },
+        {
+          model: milestone,
+          attributes: ['id', 'title'],
+          require: true,
+        },
+        {
+          model: milestone,
+          attributes: ['id', 'title'],
+          require: true,
+        },
       ],
+      raw: true,
     });
 
     return issues;
