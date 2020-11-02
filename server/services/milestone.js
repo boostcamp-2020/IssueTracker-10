@@ -1,6 +1,8 @@
+
 const milestoneModel = require('../models/milestone');
-const errorMessages = require('./errorMessages');
+const { countIssuesByMilestone } = require('../models/issue');
 const successMessages = require('./successMessages');
+const errorMessages = require('./errorMessages');
 
 const checkValidation = {
   toggle: (stateData) => {
@@ -10,6 +12,23 @@ const checkValidation = {
   },
 };
 
+const selectMilestoneList = async (req, res) => {
+  try {
+    const { state = 1 } = req.query;
+    const milestones = await milestoneModel.findMilestoneList(state);
+    const resData = await Promise.all(
+      milestones.map(async (msData) => {
+        const { id } = msData;
+        const issueCount = await countIssuesByMilestone(id);
+        return { ...msData, ...issueCount };
+      }),
+    );
+    return res.status(200).json({ message: successMessages.milestone.read, data: resData });
+  } catch (err) {
+    return res.status(500).json({ message: errorMessages.server });
+  }
+};
+  
 const deleteMilestone = async (req, res) => {
   try {
     const { milestoneId } = req.params;
@@ -41,6 +60,7 @@ const toggleState = async (req, res) => {
 };
 
 module.exports = {
+  selectMilestoneList,
   deleteMilestone,
   toggleState,
 };

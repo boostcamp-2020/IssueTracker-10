@@ -13,6 +13,17 @@ const findMilestoneAll = async () => {
   }
 };
 
+const findMilestoneListByState = async (state = 1) => {
+  try {
+    const milestones = await milestone.findAll({
+      attributes: ['id', 'title', 'description', 'date', 'state'],
+      where: { state },
+      raw: true,
+    });
+    return milestones;
+  } catch (err) {
+    throw new Error(errorMessages.milestone.notFoundError);
+
 const deleteMilestoneById = async (milestoneId) => {
   try {
     const result = await milestone.destroy({ where: { id: milestoneId } });
@@ -36,6 +47,7 @@ const updateStateOfMilestone = async (stateData) => {
 
 module.exports = {
   findMilestoneAll,
+  findMilestoneListByState,
   deleteMilestoneById,
   updateStateOfMilestone,
 };

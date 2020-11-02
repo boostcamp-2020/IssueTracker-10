@@ -1,6 +1,6 @@
 const { countAllClosedIssues, countAllOpenIssues } = require('../models/issue');
 const findLabelAll = require('../models/label');
-const findMilestoneAll = require('../models/milestone');
+const { findMilestoneAll } = require('../models/milestone');
 const { findUserAll } = require('../models/user');
 const successMessages = require('./successMessages');
 
