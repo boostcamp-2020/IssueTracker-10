@@ -8,7 +8,7 @@ const milestoneType = {
 
 const createMilestone = async (milestoneData) => {
   try {
-    const {title, description, date} = milestoneData;
+    const { title, description, date } = milestoneData;
     const milestoneInfo = await milestone.create({
       title,
       description,
