@@ -1,4 +1,3 @@
-
 const milestoneModel = require('../models/milestone');
 const { countIssuesByMilestone } = require('../models/issue');
 const successMessages = require('./successMessages');

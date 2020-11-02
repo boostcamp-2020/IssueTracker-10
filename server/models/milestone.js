@@ -43,6 +43,8 @@ const findMilestoneListByState = async (state = 1) => {
     return milestones;
   } catch (err) {
     throw new Error(errorMessages.milestone.notFoundError);
+  }
+};
 
 const deleteMilestoneById = async (milestoneId) => {
   try {
