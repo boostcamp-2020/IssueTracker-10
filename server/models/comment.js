@@ -56,7 +56,7 @@ const commentCountById = async (id) => {
 
 const deleteCommentById = async (commentId) => {
   try {
-    const result = await issue.destroy({ where: { id: commentId } });
+    const result = await comment.destroy({ where: { id: commentId } });
     if (result) return true;
     return false;
   } catch (err) {
