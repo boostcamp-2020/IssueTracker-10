@@ -23,6 +23,7 @@ const successMessages = {
   comment: {
     read: 'SUCCESS : The request is successfully processed',
     create: 'SUCCESS : The comment is successfully created',
+    update: 'SUCCESS : The comment is successfully updated',
   },
 };
 

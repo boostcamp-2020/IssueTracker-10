@@ -54,8 +54,25 @@ const commentCountById = async (id) => {
   }
 };
 
+const updateComment = async (commentData) => {
+  try {
+    const { commentId, content } = commentData;
+    const [result] = await comment.update({
+      content,
+    },
+    { where: {id: commentId },
+  });
+
+  if(result) return true;
+  return false;
+  } catch (err) {
+    throw new Error(errorMessages.comment.updateFailed);
+  }
+};
+
 module.exports = {
   createComment,
   commentCountById,
   findAllCommentByIssueId,
+  updateComment,
 };
