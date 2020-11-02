@@ -144,7 +144,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="wGp-YR-wn1"/>
                     <connections>
-                        <outlet property="name" destination="dpO-uJ-rbn" id="con-tX-zdh"/>
+                        <outlet property="nameLabel" destination="dpO-uJ-rbn" id="con-tX-zdh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqC-OU-plN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

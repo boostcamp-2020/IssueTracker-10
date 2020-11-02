@@ -43,7 +43,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 			let userId: String = appleIDCredential.user
 			let userFirstName: String = appleIDCredential.fullName?.givenName ?? ""
 			let userLastName: String = appleIDCredential.fullName?.familyName ?? ""
-			let userEmail: String = appleIDCredential.email ?? ""
 			let userName: String = userLastName + userFirstName
 			
 			// userId로 이전에 로그인을 한적이 있는지 체크가능
@@ -54,8 +53,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 				switch credentialState {
 				case .authorized:
 					print("Authorized")
-					print("\(userName)")
-					print("\(userEmail)")
+					NotificationCenter.default.post(name: .loginSuccess, object: nil, userInfo: ["name": userName])
 					self.finishSignIn()
 				case .notFound:
 					print("Not Found")
@@ -86,4 +84,8 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
 	func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
 		return self.view.window ?? ASPresentationAnchor()
 	}
+}
+
+extension Notification.Name {
+	static let loginSuccess = Notification.Name("loginSuccess")
 }

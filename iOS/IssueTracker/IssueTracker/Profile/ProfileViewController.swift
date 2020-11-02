@@ -9,9 +9,15 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 	
-	@IBOutlet weak var name: UILabel!
-	
+	@IBOutlet weak var nameLabel: UILabel!
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
+	}
+
+	func configureProfile(user: User) {
+		DispatchQueue.main.async { [self] in
+			nameLabel.text = user.name
+		}
 	}
 }
