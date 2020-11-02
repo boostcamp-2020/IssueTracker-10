@@ -6,7 +6,6 @@ const errorMessages = {
   issue: {
     invalid: 'INVALID ERROR : the received data is invalid',
     notFoundError: "Can't find issue!",
-    noRequestData: "Can't find request data",
     notAuthor: 'not issue auther',
     compareAuthorFailed: 'Error on comparing issue author',
     createFailed: 'Error on creating an issue',
@@ -18,7 +17,9 @@ const errorMessages = {
     notFoundError: "Can't find label",
   },
   milestone: {
+    invalid: 'INVALID ERROR : the received data is invalid',
     notFoundError: "Can't find milestone",
+    createFailed: 'Error on creating an milestone',
     deleteFailed: 'Error on deleting a milestone',
   },
   server: 'INTERNAL ERROR : Unexpected error occurred',

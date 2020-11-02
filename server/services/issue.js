@@ -80,7 +80,7 @@ const updateIssueTitle = async (req, res) => {
     const { id: userId } = req.user;
 
     if (checkValidation.updateTitle(issueData)) {
-      return res.status(400).json({ message: errorMessages.issue.noRequestData });
+      return res.status(400).json({ message: errorMessages.issue.invalid });
     }
 
     const issueInfo = await issueModel.findIssueById(issueId);
