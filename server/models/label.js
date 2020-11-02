@@ -13,4 +13,22 @@ const findLabelAll = async () => {
   }
 };
 
-module.exports = findLabelAll;
+const createLabel = async (labelData) => {
+  try {
+    const { title, description, color } = labelData;
+    const isExistLabel = await label.findOne({
+      where: { title },
+      raw: true,
+    });
+    if (isExistLabel) return false;
+    await label.create({ title, description, color });
+    return true;
+  } catch (err) {
+    throw new Error(errorMessages.label.createFailed);
+  }
+};
+
+module.exports = {
+  findLabelAll,
+  createLabel,
+};

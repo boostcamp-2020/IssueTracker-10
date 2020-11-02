@@ -10,6 +10,7 @@ const successMessages = {
   },
   label: {
     read: 'Success to find label!',
+    create: 'SUCCESS : The label data is successfully created',
   },
   milestone: {
     create: 'SUCCESS : The milestone is successfully created',
