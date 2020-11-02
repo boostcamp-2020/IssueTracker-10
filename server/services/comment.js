@@ -38,6 +38,17 @@ const createComment = async (req, res) => {
   }
 };
 
+const deleteComment = async (req, res) => {
+  try {
+    const { commentId } = req.params;
+    const isSuccess = await commentModel.deleteCommentById(commentId);
+    if (isSuccess) return res.status(200).json({ message: successMessages.comment.delete });
+    return res.status(404).json({ message: errorMessages.comment.notFoundError });
+  } catch (err) {
+    return res.status(500).json({ message: errorMessages.server });
+  }
+};
+
 const updateComment = async (req, res) => {
   try {
     const commentData = req.body;
@@ -56,5 +67,6 @@ const updateComment = async (req, res) => {
 module.exports = {
   selectAllComments,
   createComment,
+  deleteComment,
   updateComment,
 };
