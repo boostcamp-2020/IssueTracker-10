@@ -28,7 +28,17 @@ const createLabel = async (labelData) => {
   }
 };
 
+const deleteLabel = async (labelId) => {
+  try {
+    const result = await label.destroy({ where: { id: labelId } });
+    return result;
+  } catch (err) {
+    throw new Error(errorMessages.label.deleteFailed);
+  }
+};
+
 module.exports = {
   findLabelAll,
   createLabel,
+  deleteLabel,
 };
