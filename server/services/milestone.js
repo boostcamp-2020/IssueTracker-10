@@ -53,7 +53,7 @@ const updateMilestone = async (req, res) => {
 const selectMilestoneList = async (req, res) => {
   try {
     const { state = 1 } = req.query;
-    const milestones = await milestoneModel.findMilestoneList(state);
+    const milestones = await milestoneModel.findMilestoneListByState(state);
     const resData = await Promise.all(
       milestones.map(async (msData) => {
         const { id } = msData;
