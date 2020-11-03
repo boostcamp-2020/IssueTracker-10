@@ -12,7 +12,7 @@ class IssueCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var milestone: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let columnLayout = FlowLayout(
+    let columnLayout = LeftAlignFlowLayout(
         minimumInteritemSpacing: 10,
         minimumLineSpacing: 10,
         sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -36,7 +36,7 @@ class IssueCollectionViewCell: UICollectionViewCell {
     
 	func configure(issue: Issue) {
 		setTitle(with: issue.title)
-		setMilestone(with: "\(issue.milestoneId)")
+        setMilestone(with: "\(issue.milestone?.title ?? "TEST" )")
 	}
 	
 	private func setTitle(with name: String) {
