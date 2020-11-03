@@ -9,24 +9,33 @@ import UIKit
 
 class IssueCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var title: UILabel!
-	@IBOutlet weak var firstComment: UILabel!
 	@IBOutlet weak var milestone: UILabel!
-	@IBOutlet weak var issueLabel: UILabel!
-	
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    let columnLayout = FlowLayout(
+        minimumInteritemSpacing: 10,
+        minimumLineSpacing: 10,
+        sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    )
+    var labels: [String] = []
+    
 	override func prepareForReuse() {
 		super.prepareForReuse()
 		title.text = nil
-		firstComment.text = nil
-		issueLabel.text = nil
 		milestone.text = nil
-		issueLabel.removeExternalBorders()
 		milestone.removeExternalBorders()
 	}
 	
+    override func awakeFromNib() {
+        collectionView.register(LabelCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.collectionViewLayout = columnLayout
+        collectionView.contentInsetAdjustmentBehavior = .always
+        collectionView.dataSource = self
+        labels = ["web","ios","document","hehehehelwowo"]
+    }
+    
 	func configure(issue: Issue) {
 		setTitle(with: issue.title)
-		setDescription(with: issue.description)
-        setLabels(issue: issue)
 		setMilestone(with: "\(issue.milestoneId)")
 	}
 	
@@ -34,24 +43,23 @@ class IssueCollectionViewCell: UICollectionViewCell {
 		title.text = name
 	}
 	
-	private func setDescription(with description: String) {
-		firstComment.text = description
-	}
-	
-    private func setLabels(issue: Issue) {
-        issue.labels.forEach { setLabel(with: $0, backgroundColor: .systemOrange) }
-    }
-    
-	private func setLabel(with name: String, backgroundColor: UIColor) {
-		issueLabel.text = name
-		layoutIfNeeded() // layer는 자동으로 안바뀌는 듯 하다
-		issueLabel.backgroundColor = backgroundColor
-		issueLabel.addExternalBorder(content: name, borderWidth: 4, borderColor: backgroundColor)
-	}
-	
 	private func setMilestone(with name: String) {
 		milestone.text = name
 		layoutIfNeeded() // layer는 자동으로 안바뀌는 듯 하다		
 		milestone.addExternalBorder(content: name, borderWidth: 2, whiteSpace: 2, borderColor: UIColor.systemGray2)
 	}
+}
+
+extension IssueCollectionViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return labels.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LabelCollectionViewCell
+        cell.label.text = labels[indexPath.row]
+        cell.layer.cornerRadius = cell.frame.height / 4
+        cell.clipsToBounds = true
+        return cell
+    }
 }

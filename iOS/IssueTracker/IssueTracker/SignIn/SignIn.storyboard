@@ -17,7 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dWm-Sc-9M7">
-                                <rect key="frame" x="40" y="424" width="334" height="58"/>
+                                <rect key="frame" x="40" y="418" width="334" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="4is-z0-FvI"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rfI-oL-GnQ"/>
@@ -26,7 +29,6 @@
                             <constraint firstItem="rfI-oL-GnQ" firstAttribute="bottom" secondItem="dWm-Sc-9M7" secondAttribute="bottom" constant="380" id="7gc-A0-Q66"/>
                             <constraint firstItem="rfI-oL-GnQ" firstAttribute="trailing" secondItem="dWm-Sc-9M7" secondAttribute="trailing" constant="40" id="kta-RA-xCG"/>
                             <constraint firstItem="dWm-Sc-9M7" firstAttribute="leading" secondItem="rfI-oL-GnQ" secondAttribute="leading" constant="40" id="r5v-Cf-0Fn"/>
-                            <constraint firstItem="dWm-Sc-9M7" firstAttribute="top" secondItem="rfI-oL-GnQ" secondAttribute="top" constant="380" id="zdL-dS-sS9"/>
                         </constraints>
                     </view>
                     <connections>
