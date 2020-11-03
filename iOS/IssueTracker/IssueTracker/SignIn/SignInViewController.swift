@@ -11,6 +11,8 @@ import AuthenticationServices
 class SignInViewController: UIViewController {
 	@IBOutlet weak var loginProviderStackView: UIStackView!
 	
+	let coderator = Coderator()
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupProviderLoginView()
@@ -52,8 +54,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 			provider.getCredentialState(forUserID: userId) { (credentialState, error) in
 				switch credentialState {
 				case .authorized:
-					print("Authorized")
-					NotificationCenter.default.post(name: .loginSuccess, object: nil, userInfo: ["name": userName])
+					self.coderator.save(with: User(name: userName), key: .user)
 					self.finishSignIn()
 				case .notFound:
 					print("Not Found")
@@ -84,8 +85,4 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
 	func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
 		return self.view.window ?? ASPresentationAnchor()
 	}
-}
-
-extension Notification.Name {
-	static let loginSuccess = Notification.Name("loginSuccess")
 }

@@ -7,6 +7,9 @@
 
 import Foundation
 
-struct User {
+struct User: Codable {
+	
+	static let basic = User(name: "user")
+	
 	let name: String
 }
