@@ -1,7 +1,7 @@
 const { countAllClosedIssues, countAllOpenIssues } = require('../models/issue');
-const findLabelAll = require('../models/label');
 const { findMilestoneAll } = require('../models/milestone');
 const { findUserAll } = require('../models/user');
+const { findLabelAll } = require('../models/label');
 const successMessages = require('./successMessages');
 
 const findAllIssues = async (req, res, next) => {
