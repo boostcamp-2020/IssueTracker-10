@@ -11,8 +11,6 @@ import AuthenticationServices
 class SignInViewController: UIViewController {
 	@IBOutlet weak var loginProviderStackView: UIStackView!
 	
-	let coderator = Coderator()
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupProviderLoginView()
@@ -54,7 +52,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 			provider.getCredentialState(forUserID: userId) { (credentialState, error) in
 				switch credentialState {
 				case .authorized:
-					self.coderator.save(with: User(name: userName), key: .user)
+					AppData.user = User(name: userName)
 					self.finishSignIn()
 				case .notFound:
 					print("Not Found")

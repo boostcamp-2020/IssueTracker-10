@@ -9,13 +9,11 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 	
-	let coderator = Coderator()
-	
 	@IBOutlet weak var nameLabel: UILabel!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		configureProfile(user: coderator.load(key: .user) ?? User.basic)
+		configureProfile(user: AppData.user)
 	}
 
 	func configureProfile(user: User) {
