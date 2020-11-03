@@ -1,6 +1,8 @@
 const sequelize = require('sequelize');
 const { issue, user, milestone, label } = require('./database');
-const errorMessages = require('../services/errorMessages');
+const { countLabelByIds } = require('./label');
+const { countUserByIds } = require('./user');
+const ERROR_MSG = require('../services/errorMessages');
 
 const { Op } = sequelize;
 
@@ -9,35 +11,71 @@ const issueType = {
   open: 1,
 };
 
-const createIssue = async (issueData) => {
+const createIssueLabel = async (params) => {
   try {
-    const { userId, title } = issueData;
-    const issueInfo = (
-      await issue.create({
-        author: userId,
-        title,
-        state: issueType.open,
-      })
-    ).get({ plain: true });
-    return issueInfo;
+    const { issueInfo, labels } = params;
+    const result = await Promise.all(
+      labels.map(async (labelId) => {
+        await issueInfo.addLabel(labelId);
+      }),
+    );
+    return result;
   } catch (err) {
-    throw new Error(errorMessages.issue.createFailed);
+    throw new Error(ERROR_MSG.invalid);
   }
 };
 
-const deleteIssueById = async (issueId) => {
+const createIssueAssignee = async (params) => {
+  try {
+    const { issueInfo, assignees } = params;
+    const result = await Promise.all(
+      assignees.map(async (userId) => {
+        await issueInfo.addAssignee(userId);
+      }),
+    );
+    return result;
+  } catch (err) {
+    throw new Error(ERROR_MSG.invalid);
+  }
+};
+
+const createIssue = async (issueData) => {
+  try {
+    const { userId, title, milestoneId, assignees = [], labels = [] } = issueData;
+    if (labels.length > 0) {
+      const labelCount = await countLabelByIds(labels);
+      if (labelCount !== labels.length) return false;
+    }
+    if (assignees.length > 0) {
+      const assigneeCount = await countUserByIds(assignees);
+      if (assigneeCount !== assignees.length) return false;
+    }
+    const issueInfo = await issue.create({
+      author: userId,
+      title,
+      state: issueType.open,
+      milestoneId,
+    });
+    if (labels.length > 0) await createIssueLabel({ issueInfo, labels });
+    if (assignees.length > 0) await createIssueAssignee({ issueInfo, assignees });
+    return issueInfo;
+  } catch (err) {
+    throw new Error(ERROR_MSG.create);
+  }
+};
+
+const deleteIssue = async (issueId) => {
   try {
     const result = await issue.destroy({ where: { id: issueId } });
-    if (result) return true;
-    return false;
+    return !!result;
   } catch (err) {
-    throw new Error(errorMessages.issue.deleteFailed);
+    throw new Error(ERROR_MSG.delete);
   }
 };
 
 const findIssueById = async (id) => {
   try {
-    const issueInfo = issue.findOne({
+    const issueInfo = await issue.findOne({
       attributes: ['id', 'title', 'state', 'createdAt'],
       include: [
         {
@@ -68,9 +106,10 @@ const findIssueById = async (id) => {
       where: { id },
     });
 
-    return issueInfo;
+    if (issueInfo) return issueInfo.get({ plain: true });
+    return false;
   } catch (err) {
-    throw new Error(errorMessages.issue.notFoundError);
+    throw new Error(ERROR_MSG.notFound);
   }
 };
 
@@ -84,12 +123,31 @@ const findIssueAll = async () => {
           attributes: ['id', 'username', 'avatar'],
           require: true,
         },
+        {
+          model: milestone,
+          as: 'milestone',
+          attributes: ['id', 'title'],
+        },
+        {
+          model: label,
+          attributes: ['id', 'title', 'color'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: user,
+          as: 'assignees',
+          attributes: ['id', 'username', 'avatar'],
+          through: {
+            attributes: [],
+          },
+        },
       ],
     });
-
     return issues;
   } catch (err) {
-    throw new Error(errorMessages.issue.notFoundError);
+    throw new Error(ERROR_MSG.notFound);
   }
 };
 
@@ -99,7 +157,7 @@ const countAllClosedIssues = async () => {
 
     return closedCount;
   } catch (err) {
-    throw new Error(errorMessages.issue.notFoundError);
+    throw new Error(ERROR_MSG.notFound);
   }
 };
 
@@ -109,7 +167,37 @@ const countAllOpenIssues = async () => {
 
     return openCount;
   } catch (err) {
-    throw new Error(errorMessages.issue.notFoundError);
+    throw new Error(ERROR_MSG.notFound);
+  }
+};
+
+const countClosedIssuesByMilestone = async (milestoneId) => {
+  try {
+    const closedCount = await issue.count({ where: { state: issueType.closed, milestoneId } });
+
+    return closedCount;
+  } catch (err) {
+    throw new Error(ERROR_MSG.notFound);
+  }
+};
+
+const countOpenIssuesByMilestone = async (milestoneId) => {
+  try {
+    const openCount = await issue.count({ where: { state: issueType.open, milestoneId } });
+
+    return openCount;
+  } catch (err) {
+    throw new Error(ERROR_MSG.notFound);
+  }
+};
+
+const countIssuesByMilestone = async (milestoneId) => {
+  try {
+    const closedCount = await countClosedIssuesByMilestone(milestoneId);
+    const openCount = await countOpenIssuesByMilestone(milestoneId);
+    return { closed: closedCount, open: openCount };
+  } catch (err) {
+    throw new Error(ERROR_MSG.notFound);
   }
 };
 
@@ -121,55 +209,39 @@ const compareAuthor = async (userId, issueId) => {
         author: userId,
       },
     });
-
     return result;
   } catch (err) {
-    throw new Error(errorMessages.issue.compareAuthorFailed);
+    throw new Error(ERROR_MSG.issue.compareAuthorFailed);
   }
 };
 
 const updateIssueTitle = async (id, title) => {
   try {
-    const result = issue.update(
-      {
-        title,
-      },
-      {
-        where: { id },
-      },
-    );
+    const result = issue.update({ title }, { where: { id } });
     return result;
   } catch (err) {
-    throw new Error(errorMessages.issue.updateFailed);
+    throw new Error(ERROR_MSG.update);
   }
 };
 
 const updateStateOfIssues = async (stateData) => {
   try {
     const { state, issueIds } = stateData;
-    const [updatedResult] = await issue.update(
-      { state },
-      {
-        where: {
-          id: {
-            [Op.in]: issueIds,
-          },
-        },
-      },
-    );
+    const [updatedResult] = await issue.update({ state }, { where: { id: { [Op.in]: issueIds } } });
     return updatedResult === issueIds.length;
   } catch (err) {
-    throw new Error(err);
+    throw new Error(ERROR_MSG.update);
   }
 };
 
 module.exports = {
   createIssue,
-  deleteIssueById,
+  deleteIssue,
   findIssueById,
   findIssueAll,
   countAllClosedIssues,
   countAllOpenIssues,
+  countIssuesByMilestone,
   compareAuthor,
   updateIssueTitle,
   updateStateOfIssues,

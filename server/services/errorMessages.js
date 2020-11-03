@@ -1,27 +1,22 @@
-const errorMessages = {
-  user: {
-    notFoundError: "Can't find user!",
-    invalidUsername: 'This username is already exist!',
-  },
+const ERROR_MSG = {
+  user: {},
   issue: {
-    invalid: 'INVALID ERROR : the received data is invalid',
-    notFoundError: "Can't find issue!",
-    noRequestData: "Can't find request data",
-    notAuthor: 'not issue auther',
+    notAuthor: 'not issue author',
     compareAuthorFailed: 'Error on comparing issue author',
-    createFailed: 'Error on creating an issue',
-    updateFailed: 'Error on updating an issue',
-    deleteFailed: 'Error on deleting an issue',
-    unprocessable: 'UNPROCESSABLE : The request data is unprocessable',
   },
-  label: {
-    notFoundError: "Can't find label",
-  },
-  milestone: {
-    notFoundError: "Can't find milestone",
-  },
+  label: {},
+  milestone: {},
+  comment: {},
+  create: 'CREATE ERROR',
+  read: 'READ ERROR',
+  update: 'UPDATE ERROR',
+  delete: 'DELETE ERROR',
+  invalid: 'INVALID ERROR : the received data is invalid',
   server: 'INTERNAL ERROR : Unexpected error occurred',
   unauthorized: 'AUTH ERROR : The request is not authorized',
+  notFound: 'NOT FOUND : The data is not found',
+  unprocessable: 'UNPROCESSABLE : The request data is unprocessable',
+  already: 'CREATE ERROR : The data is already registered',
 };
 
-module.exports = errorMessages;
+module.exports = ERROR_MSG;
