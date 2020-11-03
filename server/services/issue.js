@@ -46,8 +46,8 @@ const createIssue = async (req, res) => {
 const selectAllIssue = async (req, res) => {
   try {
     const { state, author, label, milestone, assignee, search } = req.query;
-    const data = await issueModel.findIssueAll();
-    return res.status(200).json({ message: successMessages.issue.read, data });
+    const issueList = await issueModel.findIssueAll();
+    return res.status(200).json({ message: successMessages.issue.read, issueList });
   } catch (err) {
     return res.status(500).json({ message: errorMessages.server });
   }

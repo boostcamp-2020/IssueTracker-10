@@ -104,7 +104,7 @@ const findIssueById = async (id) => {
 const findIssueAll = async () => {
   try {
     const issues = await issue.findAll({
-      attributes: ['id', 'author', 'title', 'state', 'createdAt', 'updatedAt', 'milestoneId'],
+      attributes: ['id', 'title', 'state', 'createdAt', 'updatedAt'],
       include: [
         {
           model: user,
@@ -119,19 +119,21 @@ const findIssueAll = async () => {
         {
           model: label,
           attributes: ['id', 'title', 'color'],
+          through: {
+            attributes: [],
+          },
         },
         {
           model: user,
           as: 'assignees',
           attributes: ['id', 'username', 'avatar'],
+          through: {
+            attributes: [],
+          },
         },
       ],
     });
-    return issues.map((row) => {
-      const { dataValues } = row;
-      const { user: userData, ...rest } = dataValues;
-      return { ...rest, author: { ...userData.dataValues } };
-    });
+    return issues;
   } catch (err) {
     throw new Error(errorMessages.issue.notFoundError);
   }
