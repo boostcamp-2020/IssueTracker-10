@@ -363,10 +363,10 @@
             </objects>
             <point key="canvasLocation" x="3516" y="-514"/>
         </scene>
-        <!--Issue Navigation View Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="G1c-wU-2mT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IsW-Wp-QnB" customClass="IssueNavigationViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IsW-Wp-QnB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="k4w-nN-ePc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Lhs-VV-xXX">
