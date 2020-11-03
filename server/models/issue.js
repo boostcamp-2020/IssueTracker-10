@@ -9,16 +9,43 @@ const issueType = {
   open: 1,
 };
 
+const createIssueLabel = async ({ issueInfo, labels }) => {
+  try {
+    const result = await Promise.all(
+      labels.map(async (labelId) => {
+        await issueInfo.addLabel(labelId);
+      }),
+    );
+    return result;
+  } catch (err) {
+    throw new Error(errorMessages.issue.createFailed);
+  }
+};
+
+const createIssueAssignee = async ({ issueInfo, assignees }) => {
+  try {
+    const result = await Promise.all(
+      assignees.map(async (userId) => {
+        await issueInfo.addAssignee(userId);
+      }),
+    );
+    return result;
+  } catch (err) {
+    throw new Error(errorMessages.issue.createFailed);
+  }
+};
+
 const createIssue = async (issueData) => {
   try {
-    const { userId, title } = issueData;
-    const issueInfo = (
-      await issue.create({
-        author: userId,
-        title,
-        state: issueType.open,
-      })
-    ).get({ plain: true });
+    const { userId, title, milestoneId, assignees = [], labels = [] } = issueData;
+    const issueInfo = await issue.create({
+      author: userId,
+      title,
+      state: issueType.open,
+      milestoneId,
+    });
+    if (labels.length > 0) await createIssueLabel({ issueInfo, labels });
+    if (assignees.length > 0) await createIssueAssignee({ issueInfo, assignees });
     return issueInfo;
   } catch (err) {
     throw new Error(errorMessages.issue.createFailed);
@@ -85,9 +112,28 @@ const findIssueAll = async () => {
           attributes: ['id', 'username', 'avatar'],
           require: true,
         },
+        {
+          model: milestone,
+          as: 'milestone',
+          attributes: ['id', 'title'],
+        },
+        {
+          model: label,
+          attributes: ['id', 'title', 'color'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: user,
+          as: 'assignees',
+          attributes: ['id', 'username', 'avatar'],
+          through: {
+            attributes: [],
+          },
+        },
       ],
     });
-
     return issues;
   } catch (err) {
     throw new Error(errorMessages.issue.notFoundError);

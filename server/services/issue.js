@@ -43,6 +43,16 @@ const createIssue = async (req, res) => {
   }
 };
 
+const selectAllIssue = async (req, res) => {
+  try {
+    const { state, author, label, milestone, assignee, search } = req.query;
+    const issueList = await issueModel.findIssueAll();
+    return res.status(200).json({ message: successMessages.issue.read, data: issueList });
+  } catch (err) {
+    return res.status(500).json({ message: errorMessages.server });
+  }
+};
+
 const deleteIssue = async (req, res) => {
   try {
     const { issueId } = req.params;
@@ -64,7 +74,6 @@ const selectIssueById = async (req, res) => {
     }
 
     const commentCount = await commentModel.commentCountById(issueId);
-
     issueInfo.commentCount = commentCount;
 
     return res.status(200).json({ message: successMessages.issue.read, data: issueInfo });
@@ -119,6 +128,7 @@ const toggleState = async (req, res) => {
 
 module.exports = {
   createIssue,
+  selectAllIssue,
   selectIssueById,
   updateIssueTitle,
   toggleState,

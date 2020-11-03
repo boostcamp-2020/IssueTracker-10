@@ -44,13 +44,11 @@ db.label.belongsToMany(db.issue, { through: 'issueLabel', timestamps: false });
 db.user.belongsToMany(db.issue, {
   through: 'issueAssignee',
   timestamps: false,
-  onDelete: 'CASCADE',
 });
 db.issue.belongsToMany(db.user, {
   through: 'issueAssignee',
   as: 'assignees',
   timestamps: false,
-  onDelete: 'CASCADE',
 });
 
 // user-comment 1:N 관계
