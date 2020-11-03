@@ -1,5 +1,8 @@
+const sequelize = require('sequelize');
 const { label } = require('./database');
 const errorMessages = require('../services/errorMessages');
+
+const { Op } = sequelize;
 
 const findLabelAll = async () => {
   try {
@@ -31,13 +34,16 @@ const createLabel = async (labelData) => {
 const updateLabel = async (labelData) => {
   try {
     const { title, description, color, labelId } = labelData;
-    const [result] = await label.update({
-      title,
-      description,
-      color,
-    }, {
-      where: { id: labelId },
-    });
+    const [result] = await label.update(
+      {
+        title,
+        description,
+        color,
+      },
+      {
+        where: { id: labelId },
+      },
+    );
     if (result) return true;
     return false;
   } catch (err) {
@@ -54,9 +60,19 @@ const deleteLabel = async (labelId) => {
   }
 };
 
+const countLabelByIds = async (labelIds) => {
+  try {
+    const result = await label.count({ where: { id: { [Op.in]: labelIds } } });
+    return result;
+  } catch (err) {
+    throw new Error(errorMessages.label.deleteFailed);
+  }
+};
+
 module.exports = {
   findLabelAll,
   createLabel,
   updateLabel,
   deleteLabel,
+  countLabelByIds,
 };
