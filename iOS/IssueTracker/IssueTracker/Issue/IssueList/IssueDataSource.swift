@@ -30,7 +30,7 @@ class IssueDiffableDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.issueCell, for: indexPath)
             if let issueCell = cell as? IssueCollectionViewCell {
                 issueCell.configure(issue: issue)
-                return cell
+                return issueCell
             }
             return nil
         }

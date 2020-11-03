@@ -138,7 +138,7 @@ class IssueViewController: UIViewController {
 											 heightDimension: .fractionalHeight(1.0))
 		let item = NSCollectionLayoutItem(layoutSize: itemSize)
 		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-											   heightDimension: .fractionalHeight(0.13))
+											   heightDimension: .fractionalHeight(0.2))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 		let spacing = CGFloat(5)
 		group.interItemSpacing = .fixed(spacing)
