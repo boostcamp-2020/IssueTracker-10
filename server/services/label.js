@@ -1,6 +1,6 @@
 const labelModel = require('../models/label');
-const successMessages = require('./successMessages');
-const errorMessages = require('./errorMessages');
+const SUCCESS_MSG = require('./successMessages');
+const ERROR_MSG = require('./errorMessages');
 
 const checkValidation = {
   createOrUpdate: (labelData) => {
@@ -12,12 +12,12 @@ const checkValidation = {
   },
 };
 
-const getAllLabels = async (req, res) => {
+const readLabelAll = async (req, res) => {
   try {
     const labelData = await labelModel.findLabelAll();
-    return res.status(200).json({ message: successMessages.label.read, data: labelData });
+    return res.status(200).json({ message: SUCCESS_MSG.read, data: labelData });
   } catch (err) {
-    return res.status(500).json({ message: errorMessages.server });
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
@@ -25,13 +25,13 @@ const createLabel = async (req, res) => {
   try {
     const labelData = req.body;
     if (!checkValidation.createOrUpdate(labelData)) {
-      return res.status(400).json({ message: errorMessages.label.invalid });
+      return res.status(400).json({ message: ERROR_MSG.invalid });
     }
     const isSuccess = await labelModel.createLabel(labelData);
-    if (isSuccess) return res.status(200).json({ message: successMessages.label.create });
-    return res.status(409).json({ message: errorMessages.label.alreadyExist });
+    if (isSuccess) return res.status(200).json({ message: SUCCESS_MSG.create });
+    return res.status(409).json({ message: ERROR_MSG.already });
   } catch (err) {
-    return res.status(500).json({ message: errorMessages.server });
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
@@ -40,13 +40,13 @@ const updateLabel = async (req, res) => {
     const labelData = req.body;
     const { labelId } = req.params;
     if (!checkValidation.createOrUpdate(labelData)) {
-      return res.status(400).json({ message: errorMessages.label.invalid });
+      return res.status(400).json({ message: ERROR_MSG.invalid });
     }
     const result = await labelModel.updateLabel({ ...labelData, labelId });
-    if (result) return res.status(200).json({ message: successMessages.label.update });
-    return res.status(404).json({ message: errorMessages.label.notFoundError });
+    if (result) return res.status(200).json({ message: SUCCESS_MSG.update });
+    return res.status(404).json({ message: ERROR_MSG.notFound });
   } catch (err) {
-    return res.status(500).json({ message: errorMessages.server });
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
@@ -54,10 +54,10 @@ const deleteLabel = async (req, res) => {
   try {
     const { labelId } = req.params;
     const isDeleted = await labelModel.deleteLabel(labelId);
-    if (isDeleted) return res.status(200).json({ message: successMessages.label.delete });
-    return res.status(404).json({ message: errorMessages.label.notFoundError });
+    if (isDeleted) return res.status(200).json({ message: SUCCESS_MSG.delete });
+    return res.status(404).json({ message: ERROR_MSG.notFound });
   } catch (err) {
-    return res.status(500).json({ message: errorMessages.server });
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
@@ -65,5 +65,5 @@ module.exports = {
   createLabel,
   updateLabel,
   deleteLabel,
-  getAllLabels,
+  readLabelAll,
 };

@@ -1,5 +1,5 @@
 const { comment, issue, user } = require('./database');
-const errorMessages = require('../services/errorMessages');
+const ERROR_MSG = require('../services/errorMessages');
 
 const findAllCommentByIssueId = async (issueId) => {
   try {
@@ -17,7 +17,7 @@ const findAllCommentByIssueId = async (issueId) => {
     if (!commentInfo.length) return false;
     return commentInfo;
   } catch (err) {
-    throw new Error(errorMessages.comment.notFoundError);
+    throw new Error(ERROR_MSG.notFound);
   }
 };
 
@@ -38,7 +38,7 @@ const createComment = async (commentData) => {
     ).get({ plain: true });
     return commentInfo;
   } catch (err) {
-    throw new Error(errorMessages.comment.createFailed);
+    throw new Error(ERROR_MSG.create);
   }
 };
 
@@ -50,10 +50,9 @@ const commentCountById = async (id) => {
 
     return commentCount;
   } catch (err) {
-    throw new Error(errorMessages.comment.notFoundError);
+    throw new Error(ERROR_MSG.notFound);
   }
 };
-
 
 const deleteCommentById = async (commentId) => {
   try {
@@ -61,23 +60,24 @@ const deleteCommentById = async (commentId) => {
     if (result) return true;
     return false;
   } catch (err) {
-    throw new Error(errorMessages.comment.deleteFailed);
+    throw new Error(ERROR_MSG.delete);
   }
 };
 
 const updateComment = async (commentData) => {
   try {
     const { commentId, content } = commentData;
-    const [result] = await comment.update({
-      content,
-    },
-    { where: {id: commentId },
-  });
+    const [result] = await comment.update(
+      {
+        content,
+      },
+      { where: { id: commentId } },
+    );
 
-  if(result) return true;
-  return false;
+    if (result) return true;
+    return false;
   } catch (err) {
-    throw new Error(errorMessages.comment.updateFailed);
+    throw new Error(ERROR_MSG.update);
   }
 };
 

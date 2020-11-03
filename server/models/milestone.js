@@ -1,5 +1,5 @@
 const { milestone } = require('./database');
-const errorMessages = require('../services/errorMessages');
+const ERROR_MSG = require('../services/errorMessages');
 
 const milestoneType = {
   closed: 0,
@@ -17,7 +17,7 @@ const createMilestone = async (milestoneData) => {
     });
     return milestoneInfo.get({ plain: true });
   } catch (err) {
-    throw new Error(errorMessages.milestone.createFailed);
+    throw new Error(ERROR_MSG.create);
   }
 };
 
@@ -30,24 +30,27 @@ const findMilestoneById = async (milestoneId) => {
     });
     return milestones;
   } catch (err) {
-    throw new Error(errorMessages.milestone.notFoundError);
+    throw new Error(ERROR_MSG.notFound);
   }
 };
 
 const updateMilestone = async (milestoneData) => {
   try {
     const { title, description, date, milestoneId } = milestoneData;
-    const [result] = await milestone.update({
-      title,
-      description,
-      date,
-    }, {
-      where: { id: milestoneId },
-    });
-    if(result) return true;
+    const [result] = await milestone.update(
+      {
+        title,
+        description,
+        date,
+      },
+      {
+        where: { id: milestoneId },
+      },
+    );
+    if (result) return true;
     return false;
   } catch (err) {
-    throw new Error(errorMessages.milestone.updateFailed);
+    throw new Error(ERROR_MSG.update);
   }
 };
 
@@ -59,7 +62,7 @@ const findMilestoneAll = async () => {
 
     return milestones;
   } catch (err) {
-    throw new Error(errorMessages.milestone.notFoundError);
+    throw new Error(ERROR_MSG.notFound);
   }
 };
 
@@ -72,7 +75,7 @@ const findMilestoneListByState = async (state = 1) => {
     });
     return milestones;
   } catch (err) {
-    throw new Error(errorMessages.milestone.notFoundError);
+    throw new Error(ERROR_MSG.notFound);
   }
 };
 
@@ -82,7 +85,7 @@ const deleteMilestoneById = async (milestoneId) => {
     if (result) return true;
     return false;
   } catch (err) {
-    throw new Error(errorMessages.milestone.deleteFailed);
+    throw new Error(ERROR_MSG.delete);
   }
 };
 
@@ -93,7 +96,7 @@ const updateStateOfMilestone = async (stateData) => {
     if (updatedResult) return true;
     return false;
   } catch (err) {
-    throw new Error(errorMessages.milestone.updateFailed);
+    throw new Error(ERROR_MSG.update);
   }
 };
 

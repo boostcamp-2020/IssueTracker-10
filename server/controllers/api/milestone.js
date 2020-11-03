@@ -3,8 +3,8 @@ const express = require('express');
 const router = express.Router();
 const milestoneService = require('../../services/milestone');
 
-router.get('/', milestoneService.selectMilestoneList);
-router.get('/:milestoneId', milestoneService.selectMilestone);
+router.get('/', milestoneService.readMilestoneByState);
+router.get('/:milestoneId', milestoneService.readMilestoneById);
 router.post('/', milestoneService.createMilestone);
 router.put('/:milestoneId', milestoneService.updateMilestone);
 router.put('/:milestoneId/state', milestoneService.toggleState);

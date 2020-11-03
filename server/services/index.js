@@ -1,16 +1,17 @@
-const { countAllClosedIssues, countAllOpenIssues } = require('../models/issue');
-const { findMilestoneAll } = require('../models/milestone');
-const { findUserAll } = require('../models/user');
-const { findLabelAll } = require('../models/label');
-const successMessages = require('./successMessages');
+const issueModel = require('../models/issue');
+const milestoneModel = require('../models/milestone');
+const userModel = require('../models/user');
+const labelModel = require('../models/label');
+const SUCCESS_MSG = require('./successMessages');
+const ERROR_MSG = require('./errorMessages');
 
-const findAllIssues = async (req, res, next) => {
+const readInformation = async (req, res) => {
   try {
-    const closedCount = await countAllClosedIssues();
-    const openCount = await countAllOpenIssues();
-    const users = await findUserAll();
-    const labels = await findLabelAll();
-    const milestones = await findMilestoneAll();
+    const closedCount = await issueModel.countAllClosedIssues();
+    const openCount = await issueModel.countAllOpenIssues();
+    const users = await userModel.findUserAll();
+    const labels = await labelModel.findLabelAll();
+    const milestones = await milestoneModel.findMilestoneAll();
     const AllIssueInfo = {
       openCount,
       closedCount,
@@ -18,11 +19,10 @@ const findAllIssues = async (req, res, next) => {
       labels,
       milestones,
     };
-    return res.status(200).json({ message: successMessages.issue.read, data: AllIssueInfo });
-  } catch (error) {
-    console.log(error);
-    next(error);
+    return res.status(200).json({ message: SUCCESS_MSG.read, data: AllIssueInfo });
+  } catch (err) {
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
-module.exports = findAllIssues;
+module.exports = readInformation;
