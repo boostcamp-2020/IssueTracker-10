@@ -27,6 +27,7 @@ class IssueFilterViewController: UIViewController {
 		filterTableView.delegate = self
 		dataSource = FilterDiffableDataSource(with: filterTableView)
 		filterTableView?.allowsMultipleSelection = true
+		filterTableView.isScrollEnabled = false
 	}
 }
 
@@ -54,5 +55,13 @@ extension IssueFilterViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		guard let cell = tableView.cellForRow(at: indexPath) else { return }
 		cell.isSelected = true
+		
+		if indexPath.section == 0 {
+			let totalRows = tableView.numberOfRows(inSection: 0)
+			for row in 0..<totalRows {
+				if indexPath.row == row { continue }
+				tableView.deselectRow(at: IndexPath(row: row, section: 0) , animated: false)
+			}
+		}
 	}
 }

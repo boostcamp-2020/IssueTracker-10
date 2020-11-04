@@ -30,7 +30,7 @@ class FilterDiffableDataSource {
 			case .state:
 				return "state를 선택해주세요"
 			case .option:
-				return "조건을 선택해주세요"
+				return "조건을 선택해주세요 (다중 선택 가능)"
 			}
 		}
 	}
