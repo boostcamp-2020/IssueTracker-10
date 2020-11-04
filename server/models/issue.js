@@ -1,8 +1,9 @@
 const sequelize = require('sequelize');
-const { issue, user, milestone, label } = require('./database');
+const { issue, user, milestone: milestoneDB, label: labelDB } = require('./database');
 const { countLabelByIds } = require('./label');
 const { countUserByIds } = require('./user');
 const ERROR_MSG = require('../services/errorMessages');
+const { milestone } = require('../services/errorMessages');
 
 const { Op } = sequelize;
 
@@ -84,11 +85,11 @@ const findIssueById = async (id) => {
           required: true,
         },
         {
-          model: milestone,
+          model: milestoneDB,
           attributes: ['id', 'title'],
         },
         {
-          model: label,
+          model: labelDB,
           attributes: ['id', 'title', 'color'],
           through: {
             attributes: [],
@@ -113,10 +114,35 @@ const findIssueById = async (id) => {
   }
 };
 
-const findIssueAll = async () => {
+const setFilter = (query) => {
+  const filter = [...Object.keys(query)].reduce((prev, key) => {
+    const value = query[key];
+    switch (key) {
+      case 'state': {
+        const type = issueType[value];
+        return type !== undefined ? { ...prev, state: issueType[value] } : prev;
+      }
+      case 'milestone': {
+        return { ...prev, milestoneId: value };
+      }
+      case 'author': {
+        return { ...prev, author: value };
+      }
+      default: {
+        return prev;
+      }
+    }
+  }, {});
+  return filter;
+};
+
+const findIssueAll = async (query) => {
   try {
+    const filter = setFilter(query);
+    console.log(filter);
     const issues = await issue.findAll({
       attributes: ['id', 'title', 'state', 'createdAt', 'updatedAt'],
+      where: { ...filter },
       include: [
         {
           model: user,
@@ -124,12 +150,12 @@ const findIssueAll = async () => {
           require: true,
         },
         {
-          model: milestone,
+          model: milestoneDB,
           as: 'milestone',
           attributes: ['id', 'title'],
         },
         {
-          model: label,
+          model: labelDB,
           attributes: ['id', 'title', 'color'],
           through: {
             attributes: [],
@@ -147,6 +173,7 @@ const findIssueAll = async () => {
     });
     return issues;
   } catch (err) {
+    console.log(err);
     throw new Error(ERROR_MSG.notFound);
   }
 };
