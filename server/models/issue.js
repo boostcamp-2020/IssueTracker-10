@@ -77,6 +77,7 @@ const findIssueById = async (id) => {
   try {
     const issueInfo = await issue.findOne({
       attributes: ['id', 'title', 'state', 'createdAt'],
+      order: [['id', 'DESC']],
       include: [
         {
           model: user,
@@ -117,6 +118,7 @@ const findIssueAll = async () => {
   try {
     const issues = await issue.findAll({
       attributes: ['id', 'title', 'state', 'createdAt', 'updatedAt'],
+      order: [['id', 'DESC']],
       include: [
         {
           model: user,
