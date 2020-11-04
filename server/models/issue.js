@@ -127,6 +127,9 @@ const setFilter = (query) => {
       case 'author': {
         return { ...prev, author: value };
       }
+      case 'search': {
+        return { ...prev, title: { [Op.substring]: value } };
+      }
       default: {
         return prev;
       }
