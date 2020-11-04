@@ -8,10 +8,6 @@
 import Foundation
 import hvNetwork
 
-extension Notification.Name {
-    static let issueDidChanged = Notification.Name.init("issueDidChanged")
-}
-
 class IssueManager {
     
     init() {
