@@ -91,6 +91,19 @@ class AndCriteria: IssueCriteria {
     }
 }
 
+class CombineCriteria: IssueCriteria {
+	
+	let criterias: [IssueCriteria]
+	
+	init(criterias: [IssueCriteria]) {
+		self.criterias = criterias
+	}
+	
+	func apply(issues: [Issue]) -> [Issue] {
+		criterias.reduce(issues) { $1.apply(issues: $0) }
+	}
+}
+
 class OrCriteria: IssueCriteria {
     
     let left: IssueCriteria
