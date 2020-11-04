@@ -107,7 +107,7 @@ const findIssueById = async (id) => {
       where: { id },
     });
 
-    if (issueInfo) return issueInfo.get({ plain: true });
+    if (issueInfo) return issueInfo;
     return false;
   } catch (err) {
     throw new Error(ERROR_MSG.notFound);
@@ -269,6 +269,50 @@ const updateStateOfIssues = async (stateData) => {
   }
 };
 
+const addMilestoneOfIssue = async (idData) => {
+  try {
+    const { issueId, milestoneId } = idData;
+    const result = await issue.update({ milestoneId }, { where: { id: issueId } });
+    if (result) return true;
+    return false;
+  } catch (err) {
+    throw new Error(ERROR_MSG.update);
+  }
+};
+
+const deleteMilestoneOfIssue = async (issueId) => {
+  try {
+    const result = await issue.update({ milestoneId: null }, { where: { id: issueId } });
+    if (result) return true;
+    return false;
+  } catch (err) {
+    throw new Error(ERROR_MSG.update);
+  }
+};
+
+const updateDetailOfIssue = async (detailData) => {
+  try {
+    const { type, method, data, issueId } = detailData;
+    const issueInfo = await findIssueById(issueId);
+    if (!issueInfo) return false;
+    switch (type) {
+      case 'assignee':
+        if (method) return await issueInfo.addAssignee(data);
+        return await issueInfo.removeAssignee(data);
+      case 'label':
+        if (method) return await issueInfo.addLabel(data);
+        return await issueInfo.removeLabel(data);
+      case 'milestone':
+        if (method) return await addMilestoneOfIssue({ issueId, milestoneId: data });
+        return await deleteMilestoneOfIssue(issueId);
+      default:
+        return false;
+    }
+  } catch (err) {
+    throw new Error(ERROR_MSG.update);
+  }
+};
+
 module.exports = {
   createIssue,
   deleteIssue,
@@ -280,4 +324,5 @@ module.exports = {
   compareAuthor,
   updateIssueTitle,
   updateStateOfIssues,
+  updateDetailOfIssue,
 };

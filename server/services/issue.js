@@ -18,6 +18,13 @@ const checkValidation = {
     if (title) return false;
     return true;
   },
+  updateDetail: (detailData) => {
+    const { type, method, data } = detailData;
+    if (!type || !data) return false;
+    if (method !== 0 && method !== 1) return false;
+    if (typeof data !== 'number') return false;
+    return true;
+  },
   toggle: (stateData) => {
     const { state, issueIds } = stateData;
     if (state !== 0 && state !== 1) return false;
@@ -65,7 +72,7 @@ const readIssueById = async (req, res) => {
     }
 
     const commentCount = await commentModel.commentCountById(issueId);
-    issueInfo.commentCount = commentCount;
+    issueInfo.dataValues.commentCount = commentCount;
     return res.status(200).json({ message: SUCCESS_MSG.read, data: issueInfo });
   } catch (err) {
     return res.status(500).json({ message: ERROR_MSG.server });
@@ -127,6 +134,21 @@ const toggleState = async (req, res) => {
   }
 };
 
+const updateIssueDetail = async (req, res) => {
+  try {
+    const detailData = req.body;
+    const { issueId } = req.params;
+    if (!checkValidation.updateDetail(detailData)) {
+      return res.status(400).json({ message: ERROR_MSG.invalid });
+    }
+    const result = await issueModel.updateDetailOfIssue({ ...detailData, issueId });
+    if (result) return res.status(200).json({ message: SUCCESS_MSG.update });
+    return res.status(404).json({ message: ERROR_MSG.notFound });
+  } catch (err) {
+    return res.status(500).json({ message: ERROR_MSG.server });
+  }
+};
+
 module.exports = {
   createIssue,
   readIssueAll,
@@ -134,4 +156,5 @@ module.exports = {
   updateIssueTitle,
   toggleState,
   deleteIssue,
+  updateIssueDetail,
 };
