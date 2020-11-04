@@ -10,6 +10,11 @@ import UIKit
 class IssueFilterViewController: UIViewController {
 	
 	@IBAction func doneButtonTouched(_ sender: Any) {
+		let paths = filterTableView.indexPathsForSelectedRows
+		guard let indexPaths = paths else { return }
+		let filters = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0)?.criteria }
+		NotificationCenter.default.post(name: .filterDidchanged, object: self, userInfo: ["filters":filters])
+		
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -72,4 +77,8 @@ extension IssueFilterViewController: UITableViewDelegate {
 			}
 		}
 	}
+}
+
+extension Notification.Name {
+	static let filterDidchanged = Notification.Name("filterDidchanged")
 }
