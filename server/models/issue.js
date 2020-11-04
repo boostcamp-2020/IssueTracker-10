@@ -180,7 +180,6 @@ const findIssueAll = async (query) => {
     });
     return issues;
   } catch (err) {
-    console.log(err);
     throw new Error(ERROR_MSG.notFound);
   }
 };
