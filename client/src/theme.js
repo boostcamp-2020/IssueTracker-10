@@ -1,0 +1,43 @@
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
+
+const colors = {
+  blue: '#0f4c81',
+  white: '#f5f5f5',
+  black: '#2f3435',
+  green: '#81cc45',
+  skyblue: '#a0b8d0',
+};
+
+const radius = '10px';
+const radiusSmall = '5px';
+
+export const theme = {
+  ...colors,
+  radius,
+  radiusSmall,
+};
+
+export const GlobalStyle = createGlobalStyle`
+  ${reset};
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+  * {
+      box-sizing: border-box;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  a {
+      color: colors.black;
+      text-decoration: none;
+  }
+  button {
+      border: none;
+  }
+  p {
+      margin: 0;
+  }
+  input:focus {
+      outline: none;
+  }
+`;

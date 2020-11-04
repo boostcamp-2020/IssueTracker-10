@@ -1,9 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -14,10 +16,11 @@ module.exports = {
   },
   devtool: 'eval-cheap-source-map',
   devServer: {
-    port: 5500,
+    contentBase: path.join(__dirname, 'public/'),
+    port: 8080,
     overlay: true,
-    hot: true,
-    writeToDisk: true,
+    hotOnly: true,
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -28,6 +31,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        // use: ['style-loader', 'css-loader'],
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
@@ -40,6 +44,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
