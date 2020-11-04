@@ -277,13 +277,60 @@
                     <view key="view" contentMode="scaleToFill" id="vcY-Op-g4k">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bX8-7d-5te">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="dlP-xD-COm">
+                                    <rect key="frame" x="0.0" y="99.5" width="414" height="717"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="filterCell" textLabel="XTQ-gm-6Ro" style="IBUITableViewCellStyleDefault" id="4sB-lZ-tWP" customClass="FilterTableViewCell" customModule="IssueTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4sB-lZ-tWP" id="QNP-zw-DqH">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XTQ-gm-6Ro">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="oQa-Zg-MnH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bX8-7d-5te" firstAttribute="top" secondItem="oQa-Zg-MnH" secondAttribute="top" id="0Wx-JJ-wm4"/>
+                            <constraint firstItem="bX8-7d-5te" firstAttribute="leading" secondItem="oQa-Zg-MnH" secondAttribute="leading" id="IKx-kQ-JaW"/>
+                            <constraint firstItem="oQa-Zg-MnH" firstAttribute="trailing" secondItem="bX8-7d-5te" secondAttribute="trailing" id="P2n-Iw-drO"/>
+                            <constraint firstItem="oQa-Zg-MnH" firstAttribute="bottom" secondItem="bX8-7d-5te" secondAttribute="bottom" id="Sk2-Nn-DdH"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="필터 선택" largeTitleDisplayMode="always" id="gkh-YM-zBZ">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="lOg-m4-JCm"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="QHd-uf-swG"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="lOg-m4-JCm">
+                            <connections>
+                                <action selector="cancelButtonTouched:" destination="T1Q-nG-0Tr" id="O8f-dL-x1a"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="QHd-uf-swG">
+                            <connections>
+                                <action selector="doneButtonTouched:" destination="T1Q-nG-0Tr" id="HZ8-bD-3bN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="filterTableView" destination="bX8-7d-5te" id="HJ7-yu-WID"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12f-qp-Lq8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -419,6 +466,9 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
