@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { AuthStateContext, AuthDispatchContext } from '../Context/AuthContext';
-import request from '../Api';
-import Home from './Home';
+import { AuthStateContext } from '../Context/AuthContext';
 
-export default (props) => {
+export default () => {
   const state = useContext(AuthStateContext);
   return <>{!state.token && <Redirect from="*" to="/login" />}</>;
 };

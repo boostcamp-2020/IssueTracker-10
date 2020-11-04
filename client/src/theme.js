@@ -2,11 +2,13 @@ import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 const colors = {
-  blue: '#0f4c81',
-  white: '#f5f5f5',
-  black: '#2f3435',
-  green: '#81cc45',
-  skyblue: '#a0b8d0',
+  redColor: '#f26b5b',
+  blueColor: '#0f4c81',
+  whiteColor: '#f5f5f5',
+  blackColor: '#2f3435',
+  greenColor: '#81cc45',
+  skyblueColor: '#a0b8d0',
+  grayColor: '#908e8e',
 };
 
 const radius = '10px';
