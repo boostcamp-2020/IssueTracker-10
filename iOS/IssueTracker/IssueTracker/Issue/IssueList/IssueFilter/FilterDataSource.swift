@@ -28,7 +28,7 @@ class FilterDiffableDataSource {
 		var header: String {
 			switch self {
 			case .state:
-				return "state를 선택해주세요"
+				return "이슈 상태를 선택해주세요"
 			case .option:
 				return "조건을 선택해주세요 (다중 선택 가능)"
 			}
