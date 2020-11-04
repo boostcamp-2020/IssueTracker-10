@@ -33,14 +33,22 @@ class IssueFilterViewController: UIViewController {
 
 extension IssueFilterViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		let sectionKind = FilterDiffableDataSource.Section(rawValue: section)
+		let headerView = UIView()
+		headerView.backgroundColor = .systemGray6
+		
 		let label = UILabel()
-		label.textColor = .systemGray
-		label.backgroundColor = .systemGray6
-		label.textAlignment = .center
-		label.baselineAdjustment = .alignBaselines
+		let sectionKind = FilterDiffableDataSource.Section(rawValue: section)
 		label.text = sectionKind?.header
-		return label
+		label.textColor = .systemGray
+		label.font = label.font.withSize(13)
+		
+		headerView.addSubview(label)
+		label.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			headerView.leadingAnchor.constraint(equalTo: label.leadingAnchor, constant: -20),
+			headerView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 4)
+		])
+		return headerView
 	}
 
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
