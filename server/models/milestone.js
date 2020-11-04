@@ -25,6 +25,7 @@ const findMilestoneById = async (milestoneId) => {
   try {
     const milestones = await milestone.findOne({
       attributes: ['id', 'title', 'description', 'date', 'state'],
+      order: [['id', 'DESC']],
       where: { id: milestoneId },
       raw: true,
     });
@@ -58,6 +59,7 @@ const findMilestoneAll = async () => {
   try {
     const milestones = await milestone.findAll({
       attributes: ['id', 'title'],
+      order: [['id', 'DESC']],
     });
 
     return milestones;
@@ -70,6 +72,7 @@ const findMilestoneListByState = async (state = 1) => {
   try {
     const milestones = await milestone.findAll({
       attributes: ['id', 'title', 'description', 'date', 'state'],
+      order: [['id', 'DESC']],
       where: { state },
       raw: true,
     });

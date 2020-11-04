@@ -8,6 +8,7 @@ const findLabelAll = async () => {
   try {
     const labels = await label.findAll({
       attributes: ['id', 'title', 'description', 'color'],
+      order: [['id', 'DESC']],
     });
 
     return labels;
