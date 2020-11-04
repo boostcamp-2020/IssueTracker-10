@@ -25,6 +25,7 @@ class IssueViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        issueCollectionView.register(UINib(nibName: "IssueListViewCell", bundle: nil), forCellWithReuseIdentifier: "IssueCell")
         dataSource = IssueDiffableDataSource(collectionView: issueCollectionView)
         dataSource.performQuery(issues: viewModel.issues, filter: nil)
         setupUI()
