@@ -14,19 +14,33 @@ class LabelCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        contentView.backgroundColor = .orange
+        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.preferredMaxLayoutWidth = 120
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
 
         contentView.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        contentView.layoutMarginsGuide.topAnchor.constraint(equalTo: label.topAnchor).isActive = true
-        contentView.layoutMarginsGuide.leadingAnchor.constraint(equalTo: label.leadingAnchor).isActive = true
-        contentView.layoutMarginsGuide.trailingAnchor.constraint(equalTo: label.trailingAnchor).isActive = true
-        contentView.layoutMarginsGuide.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
+        
+        NSLayoutConstraint.activate([
+            contentView.layoutMarginsGuide.topAnchor.constraint(equalTo: label.topAnchor),
+            contentView.layoutMarginsGuide.leadingAnchor.constraint(equalTo: label.leadingAnchor),
+            contentView.layoutMarginsGuide.trailingAnchor.constraint(equalTo: label.trailingAnchor),
+            contentView.layoutMarginsGuide.bottomAnchor.constraint(equalTo: label.bottomAnchor),
+            label.widthAnchor.constraint(lessThanOrEqualToConstant: 190)
+        ])
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(item: Label) {
+        let color = item.color.hexStringToUIColor()
+        label.text = item.title
+        backgroundColor = color
+        layer.cornerRadius = 12
+        label.textColor = color.isDark ? .white : .black
+        clipsToBounds = true
     }
 }
