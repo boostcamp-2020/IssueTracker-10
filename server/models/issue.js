@@ -3,7 +3,6 @@ const { issue, user, milestone: milestoneDB, label: labelDB } = require('./datab
 const { countLabelByIds } = require('./label');
 const { countUserByIds } = require('./user');
 const ERROR_MSG = require('../services/errorMessages');
-const { milestone } = require('../services/errorMessages');
 
 const { Op } = sequelize;
 
@@ -138,8 +137,11 @@ const setFilter = (query) => {
 
 const findIssueAll = async (query) => {
   try {
+    const { label, assignee } = query;
     const filter = setFilter(query);
-    console.log(filter);
+    const labelFilter = label ? { where: { id: label } } : {};
+    const assigneeFilter = assignee ? { where: { id: assignee } } : {};
+
     const issues = await issue.findAll({
       attributes: ['id', 'title', 'state', 'createdAt', 'updatedAt'],
       where: { ...filter },
@@ -160,6 +162,7 @@ const findIssueAll = async (query) => {
           through: {
             attributes: [],
           },
+          ...labelFilter,
         },
         {
           model: user,
@@ -168,6 +171,7 @@ const findIssueAll = async (query) => {
           through: {
             attributes: [],
           },
+          ...assigneeFilter,
         },
       ],
     });
