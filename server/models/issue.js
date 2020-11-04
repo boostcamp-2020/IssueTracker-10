@@ -1,5 +1,5 @@
 const sequelize = require('sequelize');
-const { issue, user, milestone, label } = require('./database');
+const { issue, user, milestone: milestoneDB, label: labelDB } = require('./database');
 const { countLabelByIds } = require('./label');
 const { countUserByIds } = require('./user');
 const ERROR_MSG = require('../services/errorMessages');
@@ -85,11 +85,11 @@ const findIssueById = async (id) => {
           required: true,
         },
         {
-          model: milestone,
+          model: milestoneDB,
           attributes: ['id', 'title'],
         },
         {
-          model: label,
+          model: labelDB,
           attributes: ['id', 'title', 'color'],
           through: {
             attributes: [],
@@ -114,10 +114,41 @@ const findIssueById = async (id) => {
   }
 };
 
-const findIssueAll = async () => {
+const setFilter = (query) => {
+  const filter = [...Object.keys(query)].reduce((prev, key) => {
+    const value = query[key];
+    switch (key) {
+      case 'state': {
+        const type = issueType[value];
+        return type !== undefined ? { ...prev, state: issueType[value] } : prev;
+      }
+      case 'milestone': {
+        return { ...prev, milestoneId: value };
+      }
+      case 'author': {
+        return { ...prev, author: value };
+      }
+      case 'search': {
+        return { ...prev, title: { [Op.substring]: value } };
+      }
+      default: {
+        return prev;
+      }
+    }
+  }, {});
+  return filter;
+};
+
+const findIssueAll = async (query) => {
   try {
+    const { label, assignee } = query;
+    const filter = setFilter(query);
+    const labelFilter = label ? { where: { id: label } } : {};
+    const assigneeFilter = assignee ? { where: { id: assignee } } : {};
+
     const issues = await issue.findAll({
       attributes: ['id', 'title', 'state', 'createdAt', 'updatedAt'],
+      where: { ...filter },
       order: [['id', 'DESC']],
       include: [
         {
@@ -126,16 +157,17 @@ const findIssueAll = async () => {
           require: true,
         },
         {
-          model: milestone,
+          model: milestoneDB,
           as: 'milestone',
           attributes: ['id', 'title'],
         },
         {
-          model: label,
+          model: labelDB,
           attributes: ['id', 'title', 'color'],
           through: {
             attributes: [],
           },
+          ...labelFilter,
         },
         {
           model: user,
@@ -144,6 +176,7 @@ const findIssueAll = async () => {
           through: {
             attributes: [],
           },
+          ...assigneeFilter,
         },
       ],
     });
