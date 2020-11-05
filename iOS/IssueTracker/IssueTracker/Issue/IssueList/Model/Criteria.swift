@@ -73,3 +73,37 @@ class OrCriteria: IssueCriteria {
         return Array(Set(leftResult + rightResult))
     }
 }
+
+class LabelNameCriteria: IssueCriteria {
+    
+    let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+    func apply(issues: [Issue]) -> [Issue] {
+        return issues.filter { $0.labels.filter{ $0.title == name }.count > 0  }
+    }
+}
+
+class MultiCriteria: IssueCriteria {
+
+    var criterias: [IssueCriteria]
+    
+    init() {
+        self.criterias = []
+    }
+    
+    func append(_ new: IssueCriteria) {
+        criterias.append(new)
+    }
+    
+    func apply(issues: [Issue]) -> [Issue] {
+        var result = issues
+        for criteria in criterias {
+            result = criteria.apply(issues: result)
+        }
+        return result
+    }
+}
