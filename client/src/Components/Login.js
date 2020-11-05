@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// ${props => props.theme.black}
 const Wrapper = styled.div`
   height: 100vh;
   background-color: ${(props) => props.theme.blueColor};
