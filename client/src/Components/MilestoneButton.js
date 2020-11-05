@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MilestoneIcon } from './icons';
+import { MilestoneIcon } from './Icons';
 
 const MilestoneButton = styled.button`
   display: flex;

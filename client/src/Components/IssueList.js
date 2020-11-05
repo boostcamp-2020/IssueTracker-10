@@ -36,9 +36,7 @@ const IssueList = () => {
   return (
     <IssueListWrapper>
       <IssueListHeader {...issueHeader} />
-      {issues.map((issue) => (
-        <IssueListRow key={issue.id} {...issue} />
-      ))}
+      {issues && issues.map((issue) => <IssueListRow key={issue.id} {...issue} />)}
     </IssueListWrapper>
   );
 };

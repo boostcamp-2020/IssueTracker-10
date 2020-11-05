@@ -4,6 +4,7 @@ const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
+const cors = require('cors');
 
 const app = express();
 const dotenv = require('dotenv');
@@ -20,6 +21,7 @@ sequelize
 
 const router = require('./controllers');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
