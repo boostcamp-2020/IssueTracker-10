@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import FilterInput from './FilterInput';
+import IssueList from './IssueList';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ const Issue = () => {
     <Wrapper>
       <Header />
       <FilterInput />
+      <IssueList />
     </Wrapper>
   );
 };
