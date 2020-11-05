@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-		checkAppleID()
+//		checkAppleID()
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
@@ -56,14 +56,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let headers = ["Accept": "application/json"]
         
-        hvNet.request(url, method: .post, parameter: parameter, headers: headers).response { result in
-            
+        hvNet.request(url, method: .post, parameter: parameter, headers: headers).response { (result: HVDataResponse<JSON>) in
             switch result {
-            case .success(let data):
-                guard let data = data else { return }
-                let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
+            case .success(let json):
                 self.getUserInfo(token: json["access_token"] as! String)
-                
             case .failure(let error):
                 print(error)
             }
@@ -75,17 +71,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let url = Constant.Github.userAPIURL
         let headers = ["Accept":"application/json","Authorization": "token \(token)"]
         
-        hvNet.request(url, headers: headers).response { result in
-            
+        hvNet.request(url, headers: headers).response { (result: HVDataResponse<JSON>) in
             switch result {
-            case .success(let data):
-                guard let data = data else { return }
-                
-                guard let object = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] else { return }
-                
-                guard let userName = object["login"] as? String,
-                      let avatorURL = object["avatar_url"] as? String else { return }
-                AppData.user = User(name: userName, avatorURL: avatorURL)
+            case .success(let json):
+                guard let userName = json["login"] as? String,
+                      let avatarURL = json["avatar_url"] as? String else { return }
+                AppData.user = User(name: userName, avatorURL: avatarURL)
+                print(userName, avatarURL)
                 //서버에 요청해서 어세스토큰 받아와서 유저 디포트에 받아오기
             case .failure(let error):
                 print(error)
