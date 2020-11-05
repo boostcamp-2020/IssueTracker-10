@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { GitHubLogo } from './Icons';
 
 // ${props => props.theme.black}
 const Wrapper = styled.div`
@@ -63,9 +64,13 @@ const Button = styled.button`
   border-radius: ${(props) => props.theme.radiusSmall};
   background-color: ${(props) => props.theme.blueColor};
   color: ${(props) => props.theme.whiteColor};
-  font-size: 18px;
-  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  svg {
+    fill: white;
+  }
 `;
 
 const LoginButton = styled(Button)`
@@ -75,6 +80,12 @@ const LoginButton = styled(Button)`
 const LinkToSignUp = styled.span`
   margin-top: 30px;
   color: ${(props) => props.theme.grayColor};
+`;
+
+const Text = styled.span`
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 15px;
 `;
 
 const Login = () => {
@@ -88,8 +99,13 @@ const Login = () => {
           <TextLabel>비밀번호</TextLabel>
           <TextInput placeholder="비밀번호 입력" />
         </InputWrapper>
-        <LoginButton>로그인</LoginButton>
-        <Button>GitHub로 로그인하기</Button>
+        <LoginButton>
+          <Text>로그인하기</Text>
+        </LoginButton>
+        <Button>
+          <Text>GitHub로 로그인하기</Text>
+          <GitHubLogo />
+        </Button>
         <LinkToSignUp>회원이 아니신가요?</LinkToSignUp>
       </FormWrapper>
     </Wrapper>

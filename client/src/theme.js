@@ -9,6 +9,7 @@ const colors = {
   greenColor: '#81cc45',
   skyblueColor: '#a0b8d0',
   grayColor: '#908e8e',
+  lightGrayColor: '#c7c7c7',
 };
 
 const radius = '10px';
@@ -30,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   a {
-      color: colors.black;
+      color: black;
       text-decoration: none;
   }
   button {
