@@ -8,6 +8,8 @@
 import UIKit
 import AuthenticationServices
 
+import Foundation
+
 class SignInViewController: UIViewController {
 	@IBOutlet weak var loginProviderStackView: UIStackView!
 	
@@ -19,10 +21,26 @@ class SignInViewController: UIViewController {
 	//버튼 만들기
 	func setupProviderLoginView() {
 		let authorizationButton = ASAuthorizationAppleIDButton()
-		authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+        let githubLoginButton = UIButton()
+        githubLoginButton.setTitle("Sign in with Gihhub", for: .normal)
+        githubLoginButton.setTitleColor(.white, for: .normal)
+        githubLoginButton.backgroundColor = .black
+        githubLoginButton.layer.cornerRadius = 10
 		self.loginProviderStackView.addArrangedSubview(authorizationButton)
+        self.loginProviderStackView.addArrangedSubview(githubLoginButton)
+        authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+        githubLoginButton.addTarget(self, action: #selector(handleAuthorizationGithubButtonPress), for: .touchUpInside)
+
 	}
-	
+    
+    @objc func handleAuthorizationGithubButtonPress() {
+        let clientID = Environment.clientId
+        let url = URL(string: Constant.Github.authorizeURL(id: clientID))
+        if let url = url, UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, completionHandler: nil)
+        }
+    }
+    
 	// 버튼이 눌리면, apple ID로 인증요청
 	@objc func handleAuthorizationAppleIDButtonPress() {
 		let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -52,7 +70,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 			provider.getCredentialState(forUserID: userId) { (credentialState, error) in
 				switch credentialState {
 				case .authorized:
-					AppData.user = User(name: userName)
+					AppData.user = User(name: userName, avatorURL: nil)
 					self.finishSignIn()
 				case .notFound:
 					print("Not Found")
