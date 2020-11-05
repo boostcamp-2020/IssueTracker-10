@@ -44,6 +44,7 @@ const FilterBox = styled.div`
   &:hover {
     background-color: ${(props) => props.theme.grayColor};
   }
+  cursor: pointer;
 `;
 
 const InputBox = styled.div`
