@@ -24,6 +24,19 @@ class IssueManager {
             }
         }
     }
+    
+    func create(title: String, content: String?) {
+        let headers = ["Authorization": Constant.token]
+        let parameters = ["title": title, "content": content ?? ""] as Parameters
+        hvNet.request("http://49.50.163.58:3000/api/issue/", method: .post, parameter: parameters, headers: headers).response { (result: HVDataResponse<Data?>) in
+            switch result {
+            case .success:
+                NotificationCenter.default.post(name: .issueDidChanged, object: nil)
+            case.failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 	
 	func delete(with issue: Issue) {
         let id = issue.id
