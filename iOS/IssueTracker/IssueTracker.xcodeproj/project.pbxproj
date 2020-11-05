@@ -21,6 +21,10 @@
 		C35F6B192550281D008A116B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35F6B182550281D008A116B /* User.swift */; };
 		C3DB04E42551089C00F0910E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E32551089C00F0910E /* Storage.swift */; };
 		C3DB04E92551099F00F0910E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E82551099F00F0910E /* AppData.swift */; };
+		C3DB050E25526E2A00F0910E /* FilterIssueNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB050D25526E2A00F0910E /* FilterIssueNavigationViewController.swift */; };
+		C3DB0513255277D200F0910E /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB0512255277D200F0910E /* FilterTableViewCell.swift */; };
+		C3DB051825527B5500F0910E /* FilterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB051725527B5500F0910E /* FilterDataSource.swift */; };
+		C3DB051D25527EDD00F0910E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB051C25527EDD00F0910E /* Filter.swift */; };
 		E09C1C91254A917200A1FADF /* hvNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = E09C1C90254A917200A1FADF /* hvNetwork */; };
 		E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1C9B254A939500A1FADF /* IssueDataSource.swift */; };
 		E09C1CA2254A996A00A1FADF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1CA1254A996A00A1FADF /* HomeViewController.swift */; };
@@ -85,6 +89,10 @@
 		C35F6B182550281D008A116B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C3DB04E32551089C00F0910E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C3DB04E82551099F00F0910E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		C3DB050D25526E2A00F0910E /* FilterIssueNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterIssueNavigationViewController.swift; sourceTree = "<group>"; };
+		C3DB0512255277D200F0910E /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		C3DB051725527B5500F0910E /* FilterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataSource.swift; sourceTree = "<group>"; };
+		C3DB051C25527EDD00F0910E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		E09C1C9B254A939500A1FADF /* IssueDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataSource.swift; sourceTree = "<group>"; };
 		E09C1CA1254A996A00A1FADF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E09C1CA9254A99C400A1FADF /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -203,6 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				C359882B254AC346001F311D /* IssueFilterViewController.swift */,
+				C3DB051725527B5500F0910E /* FilterDataSource.swift */,
+				C3DB051C25527EDD00F0910E /* Filter.swift */,
+				C3DB0512255277D200F0910E /* FilterTableViewCell.swift */,
 			);
 			name = IssueFilter;
 			path = IssueList/IssueFilter;
@@ -326,6 +337,7 @@
 				E0B3D4132547FB9F0040D5AF /* IssueDetail */,
 				E0B3D4142547FBA70040D5AF /* IssueCreate */,
 				E09C1EF4255158E100A1FADF /* CreateIssueNavigationViewController.swift */,
+				C3DB050D25526E2A00F0910E /* FilterIssueNavigationViewController.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -503,7 +515,9 @@
 				C3414FC425481BF6003C845A /* IssueManager.swift in Sources */,
 				C3414FB2254802A4003C845A /* IssueCollectionViewCell.swift in Sources */,
 				E09C1CB9254AA7AD00A1FADF /* IssueViewModel.swift in Sources */,
+				C3DB0513255277D200F0910E /* FilterTableViewCell.swift in Sources */,
 				E09C1EBF25514E4D00A1FADF /* IssueViewController+FlowLayout.swift in Sources */,
+				C3DB050E25526E2A00F0910E /* FilterIssueNavigationViewController.swift in Sources */,
 				E0B3D3C92546C8660040D5AF /* ViewController.swift in Sources */,
 				E09C1CA2254A996A00A1FADF /* HomeViewController.swift in Sources */,
 				C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */,
@@ -517,9 +531,11 @@
 				C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */,
 				E0B3D3C52546C8660040D5AF /* AppDelegate.swift in Sources */,
 				E0B3D3C72546C8660040D5AF /* SceneDelegate.swift in Sources */,
+				C3DB051D25527EDD00F0910E /* Filter.swift in Sources */,
 				E09C1EF5255158E100A1FADF /* CreateIssueNavigationViewController.swift in Sources */,
 				E0B3D40A2547EBC20040D5AF /* IssueDetailViewController.swift in Sources */,
 				E09C1E5B25506BF800A1FADF /* IssueDetailCell.swift in Sources */,
+				C3DB051825527B5500F0910E /* FilterDataSource.swift in Sources */,
 				E09C1E5225505EAB00A1FADF /* LeftAlignLayout.swift in Sources */,
 				E09C1E672550C59500A1FADF /* CollectionHeaderView.swift in Sources */,
 				C32C5FA3254FE854008BBDCE /* ProfileViewController.swift in Sources */,
