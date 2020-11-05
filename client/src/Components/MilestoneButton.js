@@ -29,20 +29,11 @@ const Count = styled.span`
 `;
 
 const LabelMilestoneButton = ({ hasCount }) => {
-  if (hasCount) {
-    return (
-      <MilestoneButton>
-        <MilestoneIcon />
-        <ButtonTitle>Milestones</ButtonTitle>
-        <Count>10</Count>
-      </MilestoneButton>
-    );
-  }
-
   return (
     <MilestoneButton>
       <MilestoneIcon />
       <ButtonTitle>Milestones</ButtonTitle>
+      {hasCount && <Count>10</Count>}
     </MilestoneButton>
   );
 };
