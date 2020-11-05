@@ -58,14 +58,14 @@ const InputBox = styled.div`
 
 export default () => {
   const [display, setDisplay] = useState(0);
-  const onClick = () => {
-    const toggleDisplay = display === 1 ? 0 : 1;
-    setDisplay(toggleDisplay);
+  const toggleDisplay = () => {
+    const displayValue = display === 1 ? 0 : 1;
+    setDisplay(displayValue);
   };
   return (
     <Wrapper>
       <FilterWrapper>
-        <SelectBox onClick={onClick}>
+        <SelectBox onClick={toggleDisplay}>
           <FilterBox>
             <FilterText text="Filters" />
             <TriArrow size={10} />
