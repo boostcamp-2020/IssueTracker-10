@@ -26,10 +26,12 @@ extension IssueViewController: UICollectionViewDelegate {
         if cell?.isSelected == true {
             cell?.backgroundColor = UIColor.systemGray6
         }
+		else {
+			cell?.backgroundColor = nil
+		}
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard isEditing == true else { return }
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = nil
     }
