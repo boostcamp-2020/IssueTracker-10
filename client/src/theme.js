@@ -10,6 +10,7 @@ const colors = {
   skyblueColor: '#a0b8d0',
   grayColor: '#908e8e',
   darkgrayColor: '#586069',
+  brightColor: '#fafafa',
 };
 
 const border = '1px solid #e1e4e8';

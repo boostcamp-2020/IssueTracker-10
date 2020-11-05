@@ -8,7 +8,7 @@ const RowWraaper = styled.div`
   align-items: top;
   padding: 14px 15px;
   border-top: ${(props) => props.theme.border};
-  background-color: #fafafa;
+  background-color: ${(props) => props.theme.brightColor};
   &:hover {
     background-color: ${(props) => props.theme.whiteColor};
   }
