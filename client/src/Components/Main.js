@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
+import { AuthStateContext } from '../Context/AuthContext';
 
-export default (props) => {
-  console.log(props);
-  return <h1>하이</h1>;
+export default () => {
+  const state = useContext(AuthStateContext);
+  return <>{!state.token && <Redirect from="*" to="/login" />}</>;
 };

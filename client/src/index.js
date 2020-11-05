@@ -6,8 +6,8 @@ import { theme, GlobalStyle } from './theme';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <App />
     <GlobalStyle />
+    <App />
   </ThemeProvider>,
   document.getElementById('root'),
 );
