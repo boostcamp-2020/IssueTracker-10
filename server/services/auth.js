@@ -51,7 +51,19 @@ const handleGithubCallback = async (req, res) => {
   }
 };
 
+const createOrReadUser = async (req, res) => {
+  try {
+    const { username, avatar, state } = req.body;
+    const { id } = await userModel.findOrCreateUserById({ username, avatar, state });
+    const token = generateToken(id, username);
+    res.status(200).json({ token });
+  } catch (err) {
+    return res.status(500);
+  }
+};
+
 module.exports = {
   loginByGitHub,
   handleGithubCallback,
+  createOrReadUser,
 };

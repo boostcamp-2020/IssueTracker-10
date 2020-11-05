@@ -4,10 +4,10 @@ const ERROR_MSG = require('../services/errorMessages');
 
 const { Op } = sequelize;
 
-const userType = {
-  local: 0,
-  github: 1,
-};
+// const userType = {
+//   local: 0,
+//   github: 1,
+// };
 
 const findUserById = async (id) => {
   try {
@@ -22,12 +22,12 @@ const findUserById = async (id) => {
   }
 };
 
-const findOrCreateUserById = async ({ username, avatar }) => {
+const findOrCreateUserById = async ({ username, avatar, state = 1 }) => {
   try {
     const [userInfo] = await user.findOrCreate({
       attributes: ['id', 'username'],
-      where: { username },
-      defaults: { username, state: userType.github, avatar },
+      where: { username, state },
+      defaults: { username, state, avatar },
       raw: true,
     });
 
