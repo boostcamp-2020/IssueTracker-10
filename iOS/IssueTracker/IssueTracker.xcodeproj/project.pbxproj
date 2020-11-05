@@ -310,20 +310,20 @@
 		E0B3D3C32546C8660040D5AF /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				E049B8AC25529FB1004DD162 /* Extensions */,
-				C3DB04DD2550F94000F0910E /* Util */,
-				C32C5FBA254FF1D7008BBDCE /* IssueTracker.entitlements */,
 				C32C5FAC254FEB33008BBDCE /* SignIn */,
 				C32C5FA7254FE962008BBDCE /* Profile */,
 				E09C1CA0254A995B00A1FADF /* Home */,
 				E0B3D3FA2547E8280040D5AF /* Issue */,
 				E0B3D3FB2547E8320040D5AF /* Label */,
+				E049B8AC25529FB1004DD162 /* Extensions */,
+				C3DB04DD2550F94000F0910E /* Util */,
 				E0B3D3C42546C8660040D5AF /* AppDelegate.swift */,
 				E0B3D3C62546C8660040D5AF /* SceneDelegate.swift */,
 				E0B3D3C82546C8660040D5AF /* ViewController.swift */,
 				E0B3D3CA2546C8660040D5AF /* Main.storyboard */,
 				E0B3D3CD2546C8680040D5AF /* Assets.xcassets */,
 				E0B3D3CF2546C8680040D5AF /* LaunchScreen.storyboard */,
+				C32C5FBA254FF1D7008BBDCE /* IssueTracker.entitlements */,
 				E0B3D3D22546C8680040D5AF /* Info.plist */,
 			);
 			path = IssueTracker;
