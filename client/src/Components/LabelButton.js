@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LabelIcon } from './icons';
+import { LabelIcon } from './Icons';
 
 const LabelButton = styled.button`
   display: flex;
