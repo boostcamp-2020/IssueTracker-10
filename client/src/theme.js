@@ -9,6 +9,7 @@ const colors = {
   greenColor: '#81cc45',
   skyblueColor: '#a0b8d0',
   grayColor: '#908e8e',
+  lightGrayColor: '#c7c7c7',
 };
 
 const radius = '10px';
