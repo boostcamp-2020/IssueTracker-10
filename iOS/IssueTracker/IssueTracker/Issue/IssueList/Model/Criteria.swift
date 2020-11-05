@@ -26,6 +26,40 @@ class OpenCriteria: IssueCriteria {
     }
 }
 
+class AuthorCriteria: IssueCriteria {
+	
+	let author: Author
+	
+	init(author: Author) {
+		self.author = author
+	}
+	
+	func apply(issues: [Issue]) -> [Issue] {
+		return issues.filter { $0.user == author }
+	}
+}
+
+class AssignedCriteria: IssueCriteria {
+	
+	let assignee: Assignee
+	
+	init(assignee: Assignee) {
+		self.assignee = assignee
+	}
+	
+	func apply(issues: [Issue]) -> [Issue] {
+		return issues.filter { $0.assignees.contains(assignee) }
+	}
+}
+
+class CommentCriteria: IssueCriteria {
+	
+	func apply(issues: [Issue]) -> [Issue] {
+		//로직 추가하기
+		return issues
+	}
+}
+
 class TitleCriteria: IssueCriteria {
     
     let inputText: String
@@ -57,6 +91,19 @@ class AndCriteria: IssueCriteria {
     }
 }
 
+class CombineCriteria: IssueCriteria {
+	
+	let criterias: [IssueCriteria]
+	
+	init(criterias: [IssueCriteria]) {
+		self.criterias = criterias
+	}
+	
+	func apply(issues: [Issue]) -> [Issue] {
+		criterias.reduce(issues) { $1.apply(issues: $0) }
+	}
+}
+
 class OrCriteria: IssueCriteria {
     
     let left: IssueCriteria
@@ -68,9 +115,10 @@ class OrCriteria: IssueCriteria {
     }
     
     func apply(issues: [Issue]) -> [Issue] {
+        
         let leftResult = left.apply(issues: issues)
         let rightResult = right.apply(issues: issues)
-        return Array(Set(leftResult + rightResult))
+        return Array(Set(leftResult + rightResult)).sorted(by: >)
     }
 }
 

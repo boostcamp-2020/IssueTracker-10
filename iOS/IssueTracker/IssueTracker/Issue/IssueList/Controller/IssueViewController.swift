@@ -64,7 +64,7 @@ class IssueViewController: UIViewController {
 	}
 	
 	@objc func filterTapped() {
-		presentViewController(identifier: "IssueFilterViewController", type: IssueFilterViewController(), option: .present)
+		presentViewController(identifier: "IssueFilterViewController", type: FilterIssueNavigationViewController(), option: .present)
 	}
 	
 	@objc func deleteTapped() {

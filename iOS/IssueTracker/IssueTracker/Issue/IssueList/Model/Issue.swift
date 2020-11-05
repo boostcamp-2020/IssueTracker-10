@@ -21,6 +21,10 @@ struct Issue: Codable, Hashable {
         return lhs.id == rhs.id
     }
     
+    static func > (lhs: Issue, rhs: Issue) -> Bool {
+        return lhs.id > rhs.id
+    }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

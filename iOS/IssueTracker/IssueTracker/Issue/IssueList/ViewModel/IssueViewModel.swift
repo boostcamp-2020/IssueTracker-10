@@ -21,48 +21,53 @@ class IssueViewModel {
     var issueApplyToDatasource: (([Issue], IssueCriteria? ) -> Void)?
     var issues: [Issue] = [Issue.empty]
     var selectedLabels = SelectedLabels.shared
-    
+	var filter: IssueCriteria = OrCriteria(left: OpenCriteria(), right: CloseCriteria())
+    var combineFilter: IssueCriteria {
+        get {
+            let filter1 = self.filter
+            let filter2 = TitleCriteria(input: inputText)
+            let filter3 = selectedLabels.labelsTitle
+                .map { LabelNameCriteria(name: $0) }
+                .reduce( MultiCriteria() , { result, new in
+                    result.append(new)
+                    return result
+                })
+            return CombineCriteria(criterias: [filter1, filter2, filter3])
+        }
+    }
     var inputText = "" {
         didSet {
-            issueApplyToDatasource?(issues, TitleCriteria(input: inputText))
+            updateIssues()
         }
     }
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(issueDidChanged), name: .issueDidChanged, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(filterDidchanged), name: .filterDidchanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(selectedLabelChanged), name: .selectedLabelChanged, object: nil)
         updateIssues()
     }
     
+	@objc func filterDidchanged(_ notification: Notification) {
+		guard let filters = notification.userInfo?["filters"] as? [IssueCriteria] else { return }
+		let combineCriterias = CombineCriteria(criterias: filters)
+		filter = combineCriterias
+		updateIssues()
+	}
+	
     @objc func selectedLabelChanged() {
-        let filter = selectedLabels.labelsTitle
-            .map { LabelNameCriteria(name: $0) }
-            .reduce( MultiCriteria() , { result, new in
-                result.append(new)
-                return result
-            })
-        issueApplyToDatasource?(issues, filter)
+        updateIssues()
     }
     
     @objc func issueDidChanged() {
         updateIssues()
     }
     
-    func updateIssues() {
+	func updateIssues() {
         issueManager.get { [weak self] issues in
-            var temp = issues
-     
-            for i in 0..<temp.count {
-                var left = Int.random(in: 0..<tempLabels.count)
-                var right = Int.random(in: 0..<tempLabels.count)
-                if left > right {
-                    swap(&left, &right)
-                }
-                temp[i].labels += Array(tempLabels[left..<right])
-            }
-            
-            self?.issues = temp
+            guard let self = self else { return }
+            self.issues = issues
             DispatchQueue.main.async {
-                self?.issueApplyToDatasource?(temp, nil)
+                self.issueApplyToDatasource?(self.issues, self.combineFilter)
             }
         }
     }
