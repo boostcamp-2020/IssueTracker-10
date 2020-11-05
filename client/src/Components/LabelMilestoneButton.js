@@ -7,11 +7,11 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const LabelMilestoneButton = ({ isCount }) => {
+const LabelMilestoneButton = ({ hasCount }) => {
   return (
     <Wrapper>
-      <LabelButton isCount={isCount} />
-      <MilestoneButton isCount={isCount} />
+      <LabelButton hasCount={hasCount} />
+      <MilestoneButton hasCount={hasCount} />
     </Wrapper>
   );
 };

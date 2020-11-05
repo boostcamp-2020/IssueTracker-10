@@ -28,8 +28,8 @@ const Count = styled.span`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-const LabelMilestoneButton = ({ isCount }) => {
-  if (isCount) {
+const LabelMilestoneButton = ({ hasCount }) => {
+  if (hasCount) {
     return (
       <MilestoneButton>
         <MilestoneIcon />

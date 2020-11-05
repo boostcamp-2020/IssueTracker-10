@@ -11,7 +11,7 @@ const ButtonWrapper = styled.div`
 const IssueButtons = () => {
   return (
     <ButtonWrapper>
-      <LabelMilestoneButton isCount />
+      <LabelMilestoneButton hasCount />
       <GreenButton title="New Issue" />
     </ButtonWrapper>
   );
