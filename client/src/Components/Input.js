@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.input`
-  border: 0;
   border: none;
   height: 35px;
   width: 100%;
