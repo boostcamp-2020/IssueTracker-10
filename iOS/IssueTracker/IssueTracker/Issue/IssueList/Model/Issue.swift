@@ -32,11 +32,12 @@ struct Issue: Codable, Hashable {
     let updatedAt: String
     let user: Author
     let milestone: Milestone?
-    let labels: [Label]
+    var labels: [Label]
     let assignees: [Assignee]
     
-    
-
+    mutating func setlabel(labels: [Label]) {
+        self.labels = labels
+    }
 }
 
 struct Author: Codable, Hashable {
