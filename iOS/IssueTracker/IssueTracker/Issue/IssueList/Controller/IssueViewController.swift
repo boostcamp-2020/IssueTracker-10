@@ -83,6 +83,22 @@ class IssueViewController: UIViewController {
 		guard let editButton = navigationItem.rightBarButtonItem else { return }
 		editButton.title = isEditing ? "Cancel" : "Edit"
 		isEditing ? editModeToolBar() : setDefaultToolBar()
+		if isEditing == false {
+			deselctAll()
+		}
+	}
+	
+	func getAllIndexPathsInSection(section : Int) -> [IndexPath] {
+		let count = issueCollectionView.numberOfItems(inSection: section)
+		return (0..<count).map { IndexPath(row: $0, section: section) }
+	}
+	
+	func deselctAll() {
+		let paths = getAllIndexPathsInSection(section: 0)
+		paths.forEach {
+			issueCollectionView.deselectItem(at: $0, animated: true)
+			collectionView(issueCollectionView, didDeselectItemAt: $0)
+		}
 	}
 	
 	func deleteIssues() {
