@@ -322,18 +322,21 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wJS-CB-xKg">
-                                <rect key="frame" x="20" y="243" width="374" height="400"/>
+                                <rect key="frame" x="20" y="244" width="374" height="588"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="kUb-OZ-Ugy"/>
-                                </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="u0F-xc-XS7" id="9bc-IE-7We"/>
+                                </connections>
                             </textView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2gE-hj-pOY">
-                                <rect key="frame" x="121" y="182" width="173" height="32"/>
+                                <rect key="frame" x="107" y="182" width="200" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Z8M-QB-hcb"/>
+                                    <constraint firstAttribute="height" constant="32" id="wec-7h-gVv"/>
+                                </constraints>
                                 <segments>
                                     <segment title="MarkDown"/>
                                     <segment title="Preview"/>
@@ -343,10 +346,10 @@
                         <viewLayoutGuide key="safeArea" id="jdx-Y4-bSF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="jdx-Y4-bSF" firstAttribute="trailing" secondItem="2gE-hj-pOY" secondAttribute="trailing" constant="120" id="L0M-DY-gpw"/>
+                            <constraint firstItem="jdx-Y4-bSF" firstAttribute="bottom" secondItem="wJS-CB-xKg" secondAttribute="bottom" constant="30" id="C2W-Ra-nga"/>
                             <constraint firstItem="xso-JB-2al" firstAttribute="leading" secondItem="jdx-Y4-bSF" secondAttribute="leading" constant="20" id="P1C-gE-VOO"/>
+                            <constraint firstItem="2gE-hj-pOY" firstAttribute="centerX" secondItem="jdx-Y4-bSF" secondAttribute="centerX" id="WqY-jx-Cp5"/>
                             <constraint firstItem="2gE-hj-pOY" firstAttribute="top" secondItem="xso-JB-2al" secondAttribute="bottom" constant="40" id="ZoC-ih-z6O"/>
-                            <constraint firstItem="2gE-hj-pOY" firstAttribute="leading" secondItem="jdx-Y4-bSF" secondAttribute="leading" constant="121" id="brN-tb-TeD"/>
                             <constraint firstItem="xso-JB-2al" firstAttribute="top" secondItem="jdx-Y4-bSF" secondAttribute="top" constant="20" id="epJ-pu-1oJ"/>
                             <constraint firstItem="jdx-Y4-bSF" firstAttribute="trailing" secondItem="xso-JB-2al" secondAttribute="trailing" constant="20" id="hNg-Xs-1hN"/>
                             <constraint firstItem="wJS-CB-xKg" firstAttribute="top" secondItem="2gE-hj-pOY" secondAttribute="bottom" constant="30" id="k8w-J7-S7k"/>
@@ -355,9 +358,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="새 이슈" largeTitleDisplayMode="always" id="COn-An-XeR">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="F0W-b3-6ZQ"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="c1w-uK-loq"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="F0W-b3-6ZQ">
+                            <connections>
+                                <action selector="closeButtonTouched:" destination="u0F-xc-XS7" id="jVU-Si-JVH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="c1w-uK-loq">
+                            <connections>
+                                <action selector="doneButtonTouched:" destination="u0F-xc-XS7" id="Dcp-ue-jyM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="wJS-CB-xKg" id="vNh-vW-Hqx"/>
+                        <outlet property="titleTextFeild" destination="xso-JB-2al" id="6mg-Nf-e5b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YhL-SD-NrG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
