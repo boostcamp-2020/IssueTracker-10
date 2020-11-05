@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { LabelIcon, MilestoneIcon } from './icons';
 
 const commonButton = styled.button`
   outline: none;
@@ -15,18 +16,29 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+`;
 
 const LabelButton = styled(commonButton)`
+  display: flex;
+  align-items: center;
   height: 60px;
   padding: 10px 20px;
   border: 1px solid ${(props) => props.theme.grayColor};
   border-radius: ${(props) => props.theme.radius} 0 0 ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.skyblueColor};
+  svg {
+    fill: ${(props) => props.theme.whiteColor};
+  }
 `;
 
 const MilestoneButton = styled(LabelButton)`
   border-radius: 0 ${(props) => props.theme.radius} ${(props) => props.theme.radius} 0;
+`;
+
+const ButtonTitle = styled.span`
+  margin-left: 5px;
 `;
 
 const Count = styled.span`
@@ -49,10 +61,14 @@ const IssueButtons = () => {
     <ButtonWrapper>
       <Wrapper>
         <LabelButton>
-          Labels<Count>8</Count>
+          <LabelIcon />
+          <ButtonTitle>Labels</ButtonTitle>
+          <Count>3</Count>
         </LabelButton>
         <MilestoneButton>
-          Milestones<Count>10</Count>
+          <MilestoneIcon />
+          <ButtonTitle>Milestones</ButtonTitle>
+          <Count>10</Count>
         </MilestoneButton>
       </Wrapper>
       <IssueButton>New issue</IssueButton>
