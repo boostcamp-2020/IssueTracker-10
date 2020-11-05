@@ -29,7 +29,7 @@ class IssueManager {
         let id = issue.id
         let headers = ["Authorization": Constant.token]
         
-        hvNet.request("http://49.50.163.58:3000/api/issue/\(id)", method: .delete, headers: headers).response { result in
+        hvNet.request("http://49.50.163.58:3000/api/issue/\(id)", method: .delete, headers: headers).response { (result: HVDataResponse<Data?>) in
             switch result {
             case .success:
                 NotificationCenter.default.post(name: .issueDidChanged, object: nil)
@@ -44,7 +44,7 @@ class IssueManager {
         let parameters = ["state" : 0, "issueIds" : ids] as [String : Any]
         let headers = ["Authorization": Constant.token]
 
-        hvNet.request("http://49.50.163.58:3000/api/issue/state", method: .put, parameter: parameters, headers: headers).response { result in
+        hvNet.request("http://49.50.163.58:3000/api/issue/state", method: .put, parameter: parameters, headers: headers).response { (result: HVDataResponse<Data?>) in
             switch result {
             case .success:
                 NotificationCenter.default.post(name: .issueDidChanged, object: nil)
