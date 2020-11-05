@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext } from 'react';
 
 export const initialAuthState = {
   token: '',
@@ -8,9 +8,11 @@ export const initialAuthState = {
 export const authReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN': {
+      const { token } = action;
+      localStorage.setItem('token', token);
       return {
         ...state,
-        token: action.token,
+        token,
         isLoggedIn: true,
       };
     }

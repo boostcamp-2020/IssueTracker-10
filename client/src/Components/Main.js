@@ -1,9 +1,15 @@
 import React, { useContext } from 'react';
-import { Redirect } from 'react-router-dom';
-import { AuthStateContext } from '../Context/AuthContext';
+import { AuthStateContext, AuthDispatchContext } from '../Context/AuthContext';
 import Issue from './Issue';
+import { parseCookies } from '../utils/parse';
 
-export default () => {
+export default (props) => {
   const state = useContext(AuthStateContext);
-  return <>{2 - 1 === 1 ? <Issue /> : <Redirect from="*" to="/login" />}</>;
+  const dispatch = useContext(AuthDispatchContext);
+  if (!state.token) {
+    const { auth } = parseCookies(document.cookie);
+    if (!auth) props.history.push('/login');
+    dispatch({ type: 'LOGIN', token: auth });
+  }
+  return <Issue />;
 };
