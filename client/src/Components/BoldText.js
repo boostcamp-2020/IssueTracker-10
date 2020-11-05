@@ -5,6 +5,6 @@ const Text = styled.span`
   font-weight: 600;
 `;
 
-const FatText = ({ text, className }) => <Text className={className}>{text}</Text>;
+const BoldText = ({ text, className }) => <Text className={className}>{text}</Text>;
 
-export default FatText;
+export default BoldText;

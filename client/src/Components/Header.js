@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FatText from './FatText';
+import BoldText from './BoldText';
 
 const Header = styled.header`
   width: 100%;
@@ -12,7 +12,7 @@ const Header = styled.header`
   z-index: 2;
 `;
 
-const HeaderText = styled(FatText)`
+const HeaderText = styled(BoldText)`
   font-size: 40px;
   color: ${(props) => props.theme.whiteColor};
 `;

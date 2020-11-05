@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import FatText from './FatText';
+import BoldText from './BoldText';
 import { Search, TriArrow } from './Icons';
 import Input from './Input';
 import FilterModal from './FilterModal';
@@ -32,7 +32,7 @@ const SelectBox = styled.div`
   border-right: 1px solid ${(props) => props.theme.lightGrayColor};
 `;
 
-const FilterText = styled(FatText)`
+const FilterText = styled(BoldText)`
   font-size: 15px;
 `;
 

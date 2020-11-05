@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FatText from './FatText';
+import BoldText from './BoldText';
 
 const Modal = styled.div`
   position: absolute;
@@ -29,7 +29,7 @@ const ModalHeader = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.lightGrayColor};
 `;
 
-const HeaderText = styled(FatText)`
+const HeaderText = styled(BoldText)`
   font-size: 12px;
 `;
 
