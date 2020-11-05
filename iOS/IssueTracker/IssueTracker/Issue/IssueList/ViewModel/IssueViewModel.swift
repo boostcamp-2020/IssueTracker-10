@@ -21,18 +21,13 @@ class IssueViewModel {
     var issueApplyToDatasource: (([Issue], IssueCriteria? ) -> Void)?
     var issues: [Issue] = [Issue.empty]
     var selectedLabels = SelectedLabels.shared
-	var filter: IssueCriteria = OrCriteria(left: OpenCriteria(), right: CloseCriteria())
+	var criteriaFromFilterView: IssueCriteria = EmptyCriteria()
     var combineFilter: IssueCriteria {
         get {
-            let filter1 = self.filter
-            let filter2 = TitleCriteria(input: inputText)
-            let filter3 = selectedLabels.labelsTitle
-                .map { LabelNameCriteria(name: $0) }
-                .reduce( MultiCriteria() , { result, new in
-                    result.append(new)
-                    return result
-                })
-            return CombineCriteria(criterias: [filter1, filter2, filter3])
+            let selected = self.criteriaFromFilterView
+            let title = TitleCriteria(input: inputText)
+            let labels = selectedLabels.labelsTitle.map { LabelNameCriteria(name: $0) }
+            return AndCriteria(criterias: [selected, title, AndCriteria(criterias: labels)])
         }
     }
     var inputText = "" {
@@ -40,6 +35,7 @@ class IssueViewModel {
             updateIssues()
         }
     }
+    
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(issueDidChanged), name: .issueDidChanged, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(filterDidchanged), name: .filterDidchanged, object: nil)
@@ -49,8 +45,8 @@ class IssueViewModel {
     
 	@objc func filterDidchanged(_ notification: Notification) {
 		guard let filters = notification.userInfo?["filters"] as? [IssueCriteria] else { return }
-		let combineCriterias = CombineCriteria(criterias: filters)
-		filter = combineCriterias
+		let combineCriterias = AndCriteria(criterias: filters)
+		criteriaFromFilterView = combineCriterias
 		updateIssues()
 	}
 	
