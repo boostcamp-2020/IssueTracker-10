@@ -9,15 +9,20 @@ const colors = {
   greenColor: '#81cc45',
   skyblueColor: '#a0b8d0',
   grayColor: '#908e8e',
+  darkgrayColor: '#586069',
 };
 
+const border = '1px solid #e1e4e8';
 const radius = '10px';
 const radiusSmall = '5px';
+const cardShadow = '3px 3px 9px #e1e4e8';
 
 export const theme = {
   ...colors,
+  border,
   radius,
   radiusSmall,
+  cardShadow,
 };
 
 export const GlobalStyle = createGlobalStyle`
