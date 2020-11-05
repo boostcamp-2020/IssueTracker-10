@@ -159,7 +159,7 @@
             </objects>
             <point key="canvasLocation" x="866.66666666666674" y="134.59821428571428"/>
         </scene>
-        <!--Issue Detail View Controller-->
+        <!--Detail-->
         <scene sceneID="k90-1z-KIw">
             <objects>
                 <viewController storyboardIdentifier="IssueDetailViewController" modalPresentationStyle="fullScreen" id="Cda-2a-Dr8" customClass="IssueDetailViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -205,7 +205,7 @@
                             <constraint firstItem="GDE-y8-czs" firstAttribute="leading" secondItem="nGu-E6-Wdo" secondAttribute="leading" id="w5y-2u-keG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="2d3-UB-UxC"/>
+                    <navigationItem key="navigationItem" title="Detail" largeTitleDisplayMode="never" id="2d3-UB-UxC"/>
                     <connections>
                         <outlet property="collectionView" destination="GDE-y8-czs" id="lQs-Qc-Ood"/>
                     </connections>
