@@ -76,22 +76,6 @@ class TitleCriteria: IssueCriteria {
 }
 
 class AndCriteria: IssueCriteria {
-    
-    let left: IssueCriteria
-    let right: IssueCriteria
-    
-    init(left: IssueCriteria, right: IssueCriteria) {
-        self.left = left
-        self.right = right
-    }
-    
-    func apply(issues: [Issue]) -> [Issue] {
-        let leftResult = left.apply(issues: issues)
-        return right.apply(issues: leftResult)
-    }
-}
-
-class CombineCriteria: IssueCriteria {
 	
 	let criterias: [IssueCriteria]
 	
@@ -135,23 +119,9 @@ class LabelNameCriteria: IssueCriteria {
     }
 }
 
-class MultiCriteria: IssueCriteria {
-
-    var criterias: [IssueCriteria]
-    
-    init() {
-        self.criterias = []
-    }
-    
-    func append(_ new: IssueCriteria) {
-        criterias.append(new)
-    }
+class EmptyCriteria: IssueCriteria {
     
     func apply(issues: [Issue]) -> [Issue] {
-        var result = issues
-        for criteria in criterias {
-            result = criteria.apply(issues: result)
-        }
-        return result
+        return issues
     }
 }
