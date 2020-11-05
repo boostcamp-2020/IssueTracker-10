@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GitHubLogo } from './Icons';
+import { GitHubLogo } from './static/svgIcons';
 
 const Wrapper = styled.div`
   height: 100vh;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import BoldText from './BoldText';
-import { Search, TriArrow } from './Icons';
+import { Search, TriArrow } from './static/svgIcons';
 import Input from './Input';
 import FilterModal from './FilterModal';
 
