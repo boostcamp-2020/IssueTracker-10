@@ -13,7 +13,8 @@ struct User: Codable {
 		case user = "user"
 	}
 	
-	static let basic = User(name: "user")
+	static let basic = User(name: "user", avatorURL: nil)
 	
 	let name: String
+    let avatorURL: String?
 }
