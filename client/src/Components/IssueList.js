@@ -15,18 +15,27 @@ const IssueListWrapper = styled.div`
 `;
 
 const IssueList = () => {
+  const [issueHeader, setIssueHeader] = useState({});
   const [issues, setIssues] = useState([]);
+
   useEffect(() => {
-    const fetch = async () => {
+    const fetchHeader = async () => {
+      const config = { url: '/api/all', method: 'GET' };
+      const { data } = await request(config);
+      setIssueHeader(data);
+    };
+    const fetchIssues = async () => {
       const config = { url: '/api/issue', method: 'GET' };
       const { data } = await request(config);
       setIssues(data);
     };
-    fetch();
+
+    fetchHeader();
+    fetchIssues();
   }, []);
   return (
     <IssueListWrapper>
-      <IssueListHeader />
+      <IssueListHeader {...issueHeader} />
       {issues.map((issue) => (
         <IssueListRow key={issue.id} {...issue} />
       ))}

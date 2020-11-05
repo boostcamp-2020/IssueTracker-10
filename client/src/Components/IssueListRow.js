@@ -1,12 +1,12 @@
-import { check } from 'prettier';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { IssueCheckbox } from './IssueListHeader';
 import { convertTime } from '../utils/convert';
 
 const RowWraaper = styled.div`
   display: flex;
-  align-items: center;
-  padding: 12px;
+  align-items: top;
+  padding: 14px 15px;
   border-top: ${(props) => props.theme.border};
   background-color: #fafafa;
   &:hover {
@@ -14,17 +14,17 @@ const RowWraaper = styled.div`
   }
 `;
 
-const IssueCheckbox = styled.input`
-  margin-right: 15px;
-`;
-
 const IssueTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
+const IssueState = styled.span`
+  margin-right: 10px;
+`;
+
 const IssueTitle = styled.span`
-  margin: 5px 0;
+  margin-bottom: 4px;
   font-size: 16px;
   font-weight: 600;
 `;
@@ -36,14 +36,16 @@ const IssueInformation = styled.div`
 const IssueSubText = styled.span`
   margin-right: 5px;
   font-size: 13px;
+  color: ${(props) => props.theme.darkgrayColor};
 `;
 
 const IssueListRow = (props) => {
-  const { id, user, title, createdAt, milestone } = props;
+  const { id, user, title, state, createdAt, milestone } = props;
   const { username } = user;
   return (
     <RowWraaper>
       <IssueCheckbox type="checkbox" />
+      <IssueState>{state}</IssueState>
       <IssueTextWrapper>
         <IssueTitle>{title}</IssueTitle>
         <IssueInformation>
