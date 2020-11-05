@@ -1,7 +1,7 @@
 import React, { createContext } from 'react';
 
 export const initialAuthState = {
-  token: '',
+  token: localStorage.getItem('token') || '',
   isLoggedIn: false,
 };
 
