@@ -11,6 +11,7 @@ const colors = {
   grayColor: '#908e8e',
   darkgrayColor: '#586069',
   brightColor: '#fafafa',
+  lightGrayColor: '#c7c7c7',
 };
 
 const border = '1px solid #e1e4e8';
@@ -36,11 +37,17 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   a {
-      color: colors.black;
+      color: black;
       text-decoration: none;
   }
   button {
       border: none;
+      outline: none;
+      border-radius: ${(props) => props.theme.radius};
+      color: ${(props) => props.theme.whiteColor};
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
   }
   p {
       margin: 0;
