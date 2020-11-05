@@ -20,8 +20,13 @@ class IssueListViewCell: UICollectionViewCell {
     }
     
     func configure(issue: Issue) {
-        dropShadow()
+
         self.layer.cornerRadius = 10
+        containerView.layer.borderWidth = 2
+        containerView.layer.borderColor =
+            UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.4).cgColor
+        containerView.layer.cornerRadius = 10
+
         title.text = issue.title
         desc.text = "#\(issue.id) 2 days ago opened by \(issue.user.username)"
         labelListView.labels = issue.labels
@@ -29,15 +34,6 @@ class IssueListViewCell: UICollectionViewCell {
             infoImage.image = UIImage(systemName: "checkmark.circle")
             infoImage.tintColor = .systemRed
         }
-    }
-    
-    private func dropShadow() {
-        containerView.layer.cornerRadius = 10
-        containerView.layer.shadowColor = UIColor.systemGray.cgColor
-        containerView.layer.shadowOpacity = 1
-        containerView.layer.shadowOffset = .zero
-        containerView.layer.shadowRadius = 1
-        containerView.layer.shouldRasterize = true
     }
 
     override func prepareForReuse() {
