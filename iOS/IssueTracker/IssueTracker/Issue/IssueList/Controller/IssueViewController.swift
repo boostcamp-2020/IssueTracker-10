@@ -25,23 +25,30 @@ class IssueViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        issueCollectionView.register(UINib(nibName: "IssueListViewCell", bundle: nil), forCellWithReuseIdentifier: "IssueCell")
         dataSource = IssueDiffableDataSource(collectionView: issueCollectionView)
         dataSource.performQuery(issues: viewModel.issues, filter: nil)
         setupUI()
-		showToolBar()
         binding()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setToolbarHidden(false, animated: false)
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setToolbarHidden(true, animated: false)
+    }
+    
     func binding() {
-        viewModel.issueDataSource = { [weak self] issues, filter in
+        viewModel.issueApplyToDatasource = { [weak self] issues, filter in
             guard let self = self else { return }
             self.dataSource.performQuery(issues: issues, filter: filter)
         }
     }
-	
-	func showToolBar() {
-		navigationController?.setToolbarHidden(false, animated: false)
-	}
 	
 	func editModeToolBar() {
 		let close = UIBarButtonItem(title: "Close", style: .done , target: self, action: #selector(closeTapped))

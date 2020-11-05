@@ -8,10 +8,6 @@
 import Foundation
 import hvNetwork
 
-extension Notification.Name {
-    static let issueDidChanged = Notification.Name.init("issueDidChanged")
-}
-
 class IssueManager {
     
     init() {
@@ -19,7 +15,7 @@ class IssueManager {
     
     func get(completion: @escaping (([Issue]) -> Void)) {
         let headers = ["Authorization": Constant.token]
-        hvNet.request("http://49.50.163.58:3000/api/issue/", method: .get, headers: headers).response { (result: HVDataResponse<IssueResponse>) in
+        hvNet.request("http://49.50.163.58:3000/api/issue/?state=all", method: .get, headers: headers).response { (result: HVDataResponse<IssueResponse>) in
             switch result {
             case .success(let issues):
                 completion(issues.data)

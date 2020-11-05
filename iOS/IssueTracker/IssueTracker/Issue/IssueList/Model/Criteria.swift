@@ -76,22 +76,6 @@ class TitleCriteria: IssueCriteria {
 }
 
 class AndCriteria: IssueCriteria {
-    
-    let left: IssueCriteria
-    let right: IssueCriteria
-    
-    init(left: IssueCriteria, right: IssueCriteria) {
-        self.left = left
-        self.right = right
-    }
-    
-    func apply(issues: [Issue]) -> [Issue] {
-        let leftResult = left.apply(issues: issues)
-        return right.apply(issues: leftResult)
-    }
-}
-
-class CombineCriteria: IssueCriteria {
 	
 	let criterias: [IssueCriteria]
 	
@@ -115,8 +99,29 @@ class OrCriteria: IssueCriteria {
     }
     
     func apply(issues: [Issue]) -> [Issue] {
+        
         let leftResult = left.apply(issues: issues)
         let rightResult = right.apply(issues: issues)
-        return Array(Set(leftResult + rightResult))
+        return Array(Set(leftResult + rightResult)).sorted(by: >)
+    }
+}
+
+class LabelNameCriteria: IssueCriteria {
+    
+    let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+    func apply(issues: [Issue]) -> [Issue] {
+        return issues.filter { $0.labels.filter{ $0.title == name }.count > 0  }
+    }
+}
+
+class EmptyCriteria: IssueCriteria {
+    
+    func apply(issues: [Issue]) -> [Issue] {
+        return issues
     }
 }

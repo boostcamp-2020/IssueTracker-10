@@ -22,13 +22,13 @@ class IssueDiffableDataSource {
     }
     
     struct Identifier {
-        static let issueCell = "issueCell"
+        static let issueCell = "IssueCell"
     }
     
     func configureDataSource() {
         let cellProvider = { (collectionView: UICollectionView, indexPath: IndexPath, issue: Issue) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.issueCell, for: indexPath)
-            if let issueCell = cell as? IssueCollectionViewCell {
+            if let issueCell = cell as? IssueListViewCell {
                 issueCell.configure(issue: issue)
                 return issueCell
             }
