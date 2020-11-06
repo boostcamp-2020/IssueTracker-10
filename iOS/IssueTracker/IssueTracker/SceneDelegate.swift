@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AuthenticationServices
+import hvNetwork
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -13,40 +15,73 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+//		checkAppleID()
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            guard url.absoluteString.starts(with: "issuetracker://") else { return }
+            if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
+                requestAccessToken(code: code)
+            }
+        }
     }
 
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+	private func checkAppleID() {
+		let provider = ASAuthorizationAppleIDProvider()
+		provider.getCredentialState(forUserID: KeychainItem.currentUserIdentifier) { (credentialState, error) in
+			switch credentialState {
+			case .authorized:
+				break
+			case .notFound, .revoked:
+				self.configureSignIn()
+			default: break
+			}
+		}
+	}
+	
+	private func configureSignIn() {
+		DispatchQueue.main.async {
+			self.window?.rootViewController?.showSignInView()
+		}
+	}
+    
+    //github login
+    func requestAccessToken(code: String) {
+        let url = Constant.Github.accessTokenURL
+        let clientId = Environment.clientId
+        let client_secret = Environment.clientSecret
+        let parameter = ["client_id": clientId, "client_secret": client_secret, "code":code]
+        
+        let headers = ["Accept": "application/json"]
+        
+        hvNet.request(url, method: .post, parameter: parameter, headers: headers).response { (result: HVDataResponse<JSON>) in
+            switch result {
+            case .success(let json):
+                self.getUserInfo(token: json["access_token"] as! String)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
+    
+    func getUserInfo(token: String) {
+        
+        let url = Constant.Github.userAPIURL
+        let headers = ["Accept":"application/json","Authorization": "token \(token)"]
+        
+        hvNet.request(url, headers: headers).response { (result: HVDataResponse<JSON>) in
+            switch result {
+            case .success(let json):
+                guard let userName = json["login"] as? String,
+                      let avatarURL = json["avatar_url"] as? String else { return }
+                AppData.user = User(name: userName, avatorURL: avatarURL)
+                print(userName, avatarURL)
+                //서버에 요청해서 어세스토큰 받아와서 유저 디포트에 받아오기
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-    }
-
-
 }
-
