@@ -41,9 +41,9 @@ const handleGithubCallback = async (req, res) => {
       },
     };
     const userData = await axios.get('https://api.github.com/user', config);
-    const { login: username, id, avatar_url } = userData.data;
-    await userModel.findOrCreateUserById({ username, avatar: avatar_url });
-    const token = generateToken(id, username);
+    const { login: username, avatar_url } = userData.data;
+    const userinfo = await userModel.findOrCreateUserById({ username, avatar: avatar_url });
+    const token = generateToken(userinfo.id, userinfo.username);
     res.cookie('auth', token, { maxAge: TEN_MINUTES });
     return res.redirect(process.env.REDIRECT_CLIENT);
   } catch (error) {
