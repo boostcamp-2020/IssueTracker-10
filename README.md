@@ -119,4 +119,6 @@
 
 ### 로그인 페이지
 
-![image](https://user-images.githubusercontent.com/43198553/98318574-37148280-2022-11eb-8bba-717280c85677.png)
+![로그인](https://user-images.githubusercontent.com/60081031/98319388-fc134e80-2023-11eb-8f95-9d3390d3caa1.png)
+![깃허브 연결](https://user-images.githubusercontent.com/60081031/98319436-19481d00-2024-11eb-8f4b-4e6b6068d57d.png)
+![메인페이지](https://user-images.githubusercontent.com/43198553/98320780-f8cd9200-2026-11eb-87b5-fc64d04c7a52.png)
