@@ -6,15 +6,15 @@ const Modal = styled.div`
   position: absolute;
   left: -5%;
   top: 110%;
-  width: 300px;
-  min-height: 100px;
-  border: 1px solid ${(props) => props.theme.whiteColor};
-  border-radius: ${(props) => props.theme.radius};
-  background-color: ${(props) => props.theme.whiteColor};
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 300px;
+  min-height: 100px;
+  border: ${(props) => props.theme.border};
+  border-radius: ${(props) => props.theme.radius};
+  background-color: ${(props) => props.theme.whiteColor};
+  box-shadow: ${(props) => props.theme.cardShadow};
   opacity: ${(props) => props.display};
   transition: opacity 0.2s linear;
 `;
@@ -24,9 +24,13 @@ const ModalBody = styled.div``;
 const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 10px;
   align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid ${(props) => props.theme.lightGrayColor};
+  background-color: ${(props) => props.theme.blueColor};
+  border-top-left-radius: ${(props) => props.theme.radius};
+  border-top-right-radius: ${(props) => props.theme.radius};
+  border-bottom: ${(props) => props.theme.border};
+  color: ${(props) => props.theme.whiteColor};
 `;
 
 const HeaderText = styled(BoldText)`
@@ -34,33 +38,37 @@ const HeaderText = styled(BoldText)`
 `;
 
 const Text = styled.div`
-  font-size: 12px;
   padding: 15px;
+  font-size: 12px;
+  cursor: pointer;
   &:hover {
-    background-color: ${(props) => props.theme.lightGrayColor};
+    background-color: ${(props) => props.theme.skyblueColor};
   }
   &:not(:last-child) {
     border-bottom: 1px solid ${(props) => props.theme.lightGrayColor};
   }
-  cursor: pointer;
 `;
 
 const CloseButton = styled.button`
+  background: ${(props) => props.theme.blueColor};
   font-size: 20px;
-  color: ${(props) => props.theme.lightGrayColor};
-  background: ${(props) => props.theme.whiteColor};
-  &:hover {
-    color: ${(props) => props.theme.blackColor};
-  }
+  color: ${(props) => props.theme.skyblueColor};
   cursor: pointer;
+  &:hover {
+    color: ${(props) => props.theme.whiteColor};
+  }
 `;
 
-const FilterModal = ({ display }) => {
+const FilterModal = ({ display, setDisplay }) => {
+  const toggleDisplay = () => {
+    const displayValue = display === 1 ? 0 : 1;
+    setDisplay(displayValue);
+  };
   return (
     <Modal display={display}>
       <ModalHeader>
         <HeaderText text="Filter Issues" />
-        <CloseButton>&times;</CloseButton>
+        <CloseButton onClick={toggleDisplay}>&times;</CloseButton>
       </ModalHeader>
       <ModalBody>
         <Text>Open Issues and pull requests</Text>

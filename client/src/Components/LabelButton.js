@@ -5,7 +5,7 @@ import { LabelIcon } from './static/svgIcons';
 const LabelButton = styled.button`
   display: flex;
   align-items: center;
-  height: 60px;
+  height: 40px;
   padding: 10px 20px;
   border: 1px solid ${(props) => props.theme.grayColor};
   border-radius: ${(props) => props.theme.radius} 0 0 ${(props) => props.theme.radius};
@@ -17,6 +17,7 @@ const LabelButton = styled.button`
 
 const ButtonTitle = styled.span`
   margin-left: 5px;
+  font-size: 14px;
 `;
 
 const Count = styled.span`
@@ -28,12 +29,12 @@ const Count = styled.span`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-const LabelMilestoneButton = ({ hasCount }) => {
+const LabelMilestoneButton = ({ hasCount, count }) => {
   return (
     <LabelButton>
       <LabelIcon />
       <ButtonTitle>Labels</ButtonTitle>
-      {hasCount && <Count>3</Count>}
+      {hasCount && <Count>{count}</Count>}
     </LabelButton>
   );
 };

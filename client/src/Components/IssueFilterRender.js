@@ -7,6 +7,10 @@ const ModalRow = styled.div`
   padding: 10px 15px;
   font-size: 13px;
   color: ${(props) => props.theme.darkgrayColor};
+  cursor: pointer;
+  &:hover {
+    background-color: ${(props) => props.theme.skyblueColor};
+  }
 `;
 
 const UserAvater = styled.img`

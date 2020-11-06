@@ -14,25 +14,8 @@ const IssueListWrapper = styled.div`
   background-color: ${(props) => props.theme.whiteColor};
 `;
 
-const IssueList = () => {
-  const [issueHeader, setIssueHeader] = useState({});
-  const [issues, setIssues] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchHeader = async () => {
-  //     const config = { url: '/api/all', method: 'GET' };
-  //     const { data } = await request(config);
-  //     setIssueHeader(data);
-  //   };
-  //   const fetchIssues = async () => {
-  //     const config = { url: '/api/issue', method: 'GET' };
-  //     const { data } = await request(config);
-  //     setIssues(data);
-  //   };
-
-  //   fetchHeader();
-  //   fetchIssues();
-  // }, []);
+const IssueList = (props) => {
+  const { issueHeader = {}, issues = [] } = props;
   return (
     <IssueListWrapper>
       <IssueListHeader {...issueHeader} />

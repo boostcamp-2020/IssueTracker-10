@@ -43,10 +43,8 @@ export const GlobalStyle = createGlobalStyle`
   button {
       border: none;
       outline: none;
-      border-radius: ${(props) => props.theme.radius};
+      border-radius: ${(props) => props.theme.radiusSmall};
       color: ${(props) => props.theme.whiteColor};
-      font-size: 18px;
-      font-weight: 700;
       cursor: pointer;
   }
   p {

@@ -7,11 +7,13 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const LabelMilestoneButton = ({ hasCount }) => {
+const LabelMilestoneButton = (props) => {
+  const { hasCount, issueHeader } = props;
+  const { labels = [], milestones = [] } = issueHeader;
   return (
     <Wrapper>
-      <LabelButton hasCount={hasCount} />
-      <MilestoneButton hasCount={hasCount} />
+      <LabelButton hasCount={hasCount} count={labels.length} />
+      <MilestoneButton hasCount={hasCount} count={milestones.length} />
     </Wrapper>
   );
 };

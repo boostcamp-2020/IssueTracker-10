@@ -32,7 +32,7 @@ export const request = async (config) => {
         'Content-Type': 'application/json',
       },
       ...config,
-      url: config.url,
+      url: process.env.BASE_URL + config.url,
     });
     return res.data;
   } catch ({ response }) {
