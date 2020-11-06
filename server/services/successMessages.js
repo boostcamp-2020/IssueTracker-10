@@ -1,19 +1,8 @@
-const successMessages = {
-  user: {
-    read: 'Success to find user!',
-  },
-  issue: {
-    create: 'SUCCESS : The issue data is successfully created',
-    read: 'Success to find issue!',
-    update: 'SUCCESS : The issue data is successfully updated',
-    delete: 'Success to delete issue!',
-  },
-  label: {
-    read: 'Success to find label!',
-  },
-  milestone: {
-    read: 'Success to find milestone!',
-  },
+const SUCCESS_MSG = {
+  create: 'SUCCESS : The data is successfully created',
+  read: 'SUCCESS : The request is successfully processed',
+  update: 'SUCCESS : The data is successfully updated',
+  delete: 'SUCCESS : The data is successfully deleted',
 };
 
-module.exports = successMessages;
+module.exports = SUCCESS_MSG;

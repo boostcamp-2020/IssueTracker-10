@@ -1,21 +1,28 @@
 const issueModel = require('../models/issue');
 const commentModel = require('../models/comment');
-const successMessages = require('./successMessages');
-const errorMessages = require('./errorMessages');
+const SUCCESS_MSG = require('./successMessages');
+const ERROR_MSG = require('./errorMessages');
 
 const checkValidation = {
   create: (issueData) => {
-    const { title, content, labels, assignees, milestone } = issueData;
+    const { title, content, labels, assignees, milestoneId } = issueData;
     if (!title) return false;
     if (content && typeof content !== 'string') return false;
     if (labels && !Array.isArray(labels)) return false;
     if (assignees && !Array.isArray(assignees)) return false;
-    if (milestone && !Array.isArray(milestone)) return false;
+    if (milestoneId && typeof milestoneId !== 'number') return false;
     return true;
   },
   updateTitle: (issueData) => {
     const { title } = issueData;
-    if(title) return false;
+    if (title) return false;
+    return true;
+  },
+  updateDetail: (detailData) => {
+    const { type, method, data } = detailData;
+    if (!type || !data) return false;
+    if (method !== 0 && method !== 1) return false;
+    if (typeof data !== 'number') return false;
     return true;
   },
   toggle: (stateData) => {
@@ -31,45 +38,55 @@ const createIssue = async (req, res) => {
     const issueData = req.body;
     const { id } = req.user;
     if (!checkValidation.create(issueData)) {
-      return res.status(400).json({ message: errorMessages.issue.invalid });
+      return res.status(400).json({ message: ERROR_MSG.invalid });
     }
 
     const { content } = issueData;
-    const { id: issueId } = await issueModel.createIssue({ ...issueData, userId: id });
+    const createdData = await issueModel.createIssue({ ...issueData, userId: id });
+    if (!createdData) return res.status(400).json({ message: ERROR_MSG.delete });
+    const { id: issueId } = createdData;
     await commentModel.createComment({ userId: id, issueId, content });
-    return res.status(200).json({ message: successMessages.issue.create });
+    return res.status(200).json({ message: SUCCESS_MSG.create });
   } catch (err) {
-    return res.status(500).json({ message: errorMessages.server });
+    return res.status(500).json({ message: ERROR_MSG.server });
+  }
+};
+
+const readIssueAll = async (req, res) => {
+  try {
+    // const { state, author, label, milestone, assignee, search } = req.query;
+    const issueList = await issueModel.findIssueAll({ state: 'open', ...req.query });
+    return res.status(200).json({ message: SUCCESS_MSG.read, data: issueList });
+  } catch (err) {
+    return res.status(500).json({ message: ERROR_MSG.server });
+  }
+};
+
+const readIssueById = async (req, res) => {
+  try {
+    const { issueId } = req.params;
+    const issueInfo = await issueModel.findIssueById(issueId);
+
+    if (!issueInfo) {
+      return res.status(404).json({ message: ERROR_MSG.notFound });
+    }
+
+    const commentCount = await commentModel.commentCountById(issueId);
+    issueInfo.dataValues.commentCount = commentCount;
+    return res.status(200).json({ message: SUCCESS_MSG.read, data: issueInfo });
+  } catch (err) {
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
 const deleteIssue = async (req, res) => {
   try {
     const { issueId } = req.params;
-    const isSuccess = await issueModel.deleteIssueById(issueId);
-    if (isSuccess) return res.status(200).json({ message: successMessages.issue.delete });
-    return res.status(404).json({ message: errorMessages.issue.notFoundError });
+    const isSuccess = await issueModel.deleteIssue(issueId);
+    if (isSuccess) return res.status(200).json({ message: SUCCESS_MSG.delete });
+    return res.status(404).json({ message: ERROR_MSG.notFound });
   } catch (err) {
-    return res.status(500).json({ message: errorMessages.server });
-  }
-};
-
-const selectIssueById = async (req, res) => {
-  try {
-    const { issueId } = req.params;
-    const {dataValues: issueInfo} = await issueModel.findIssueById(issueId);
-
-    if(!issueInfo) {
-      return res.status(404).json({ message: errorMessages.issue.notFoundError });
-    }
-    
-    const commentCount = await commentModel.commentCountById(issueId);
-
-    issueInfo.commentCount = commentCount;
-
-    return res.status(200).json({ message: successMessages.issue.read, data: issueInfo });
-  } catch (err) {
-    return res.status(500).json({ message: errorMessages.server });
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
@@ -80,26 +97,26 @@ const updateIssueTitle = async (req, res) => {
     const { id: userId } = req.user;
 
     if (checkValidation.updateTitle(issueData)) {
-      return res.status(400).json({ message: errorMessages.issue.noRequestData });
+      return res.status(400).json({ message: ERROR_MSG.invalid });
     }
 
     const issueInfo = await issueModel.findIssueById(issueId);
-    if(!issueInfo) {
-      return res.status(404).json({ message: errorMessages.issue.notFoundError });
+    if (!issueInfo) {
+      return res.status(404).json({ message: ERROR_MSG.notFound });
     }
 
     const result = await issueModel.compareAuthor(userId, issueId);
-    if(!result) {
-      return res.status(403).json({message: errorMessages.issue.notAuthor});
+    if (!result) {
+      return res.status(403).json({ message: ERROR_MSG.issue.notAuthor });
     }
 
     const { title } = issueData;
     const [updateResult] = await issueModel.updateIssueTitle(issueId, title);
 
-    if(updateResult) return res.status(200).json({message: successMessages.issue.update});
-    return res.status(422).json({message: errorMessages.issue.updateFailed});
+    if (updateResult) return res.status(200).json({ message: SUCCESS_MSG.update });
+    return res.status(422).json({ message: ERROR_MSG.update });
   } catch (err) {
-    return res.status(500).json({ message: errorMessages.server });
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
@@ -107,20 +124,37 @@ const toggleState = async (req, res) => {
   try {
     const stateData = req.body;
     if (!checkValidation.toggle(stateData)) {
-      return res.status(400).json({ message: errorMessages.issue.invalid });
+      return res.status(400).json({ message: ERROR_MSG.invalid });
     }
     const result = await issueModel.updateStateOfIssues(stateData);
-    if (result) return res.status(200).json({ message: successMessages.issue.update });
-    return res.status(422).json({ message: errorMessages.issue.update });
+    if (result) return res.status(200).json({ message: SUCCESS_MSG.update });
+    return res.status(422).json({ message: ERROR_MSG.update });
   } catch (err) {
-    return res.status(500).json({ message: errorMessages.server });
+    return res.status(500).json({ message: ERROR_MSG.server });
+  }
+};
+
+const updateIssueDetail = async (req, res) => {
+  try {
+    const detailData = req.body;
+    const { issueId } = req.params;
+    if (!checkValidation.updateDetail(detailData)) {
+      return res.status(400).json({ message: ERROR_MSG.invalid });
+    }
+    const result = await issueModel.updateDetailOfIssue({ ...detailData, issueId });
+    if (result) return res.status(200).json({ message: SUCCESS_MSG.update });
+    return res.status(404).json({ message: ERROR_MSG.notFound });
+  } catch (err) {
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
 module.exports = {
   createIssue,
-  selectIssueById,
+  readIssueAll,
+  readIssueById,
   updateIssueTitle,
   toggleState,
   deleteIssue,
+  updateIssueDetail,
 };
