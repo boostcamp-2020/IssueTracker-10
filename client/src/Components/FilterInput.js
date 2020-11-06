@@ -7,9 +7,8 @@ import FilterModal from './FilterModal';
 
 const Wrapper = styled.div`
   width: 60%;
-  height: 50px;
+  height: 40px;
   display: flex;
-  justify-content: center;
   align-items: center;
 `;
 
@@ -27,13 +26,14 @@ const FilterWrapper = styled.div`
 
 const SelectBox = styled.div`
   position: relative;
-  width: 10%;
+  width: 15%;
   height: 100%;
-  border-right: 1px solid ${(props) => props.theme.lightGrayColor};
+  border-right: 1px solid ${(props) => props.theme.skyblueColor};
 `;
 
 const FilterText = styled(BoldText)`
-  font-size: 15px;
+  color: ${(props) => props.theme.blueColor};
+  font-size: 13px;
 `;
 
 const FilterBox = styled.div`
@@ -41,8 +41,18 @@ const FilterBox = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 10px;
+  svg {
+    fill: ${(props) => props.theme.blueColor};
+  }
   &:hover {
-    background-color: ${(props) => props.theme.grayColor};
+    background-color: ${(props) => props.theme.blueColor};
+    span {
+      color: ${(props) => props.theme.whiteColor};
+    }
+    svg {
+      fill: ${(props) => props.theme.whiteColor};
+    }
   }
   cursor: pointer;
 `;
@@ -52,7 +62,7 @@ const InputBox = styled.div`
   align-items: center;
   padding: 0 10px;
   svg {
-    fill: ${(props) => props.theme.lightGrayColor};
+    fill: ${(props) => props.theme.skyblueColor};
   }
 `;
 
@@ -65,12 +75,12 @@ export default () => {
   return (
     <Wrapper>
       <FilterWrapper>
-        <SelectBox onClick={toggleDisplay}>
-          <FilterBox>
+        <SelectBox>
+          <FilterBox onClick={toggleDisplay}>
             <FilterText text="Filters" />
             <TriArrow size={10} />
           </FilterBox>
-          <FilterModal display={display} />
+          <FilterModal display={display} setDisplay={setDisplay} />
         </SelectBox>
         <InputBox>
           <Search size={12} />

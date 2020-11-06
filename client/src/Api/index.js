@@ -7,7 +7,23 @@ import axios from 'axios';
  * @param {object} data (method === 'POST' or 'PUT')
  */
 
-const request = async (config) => {
+export const authRequest = async () => {
+  try {
+    const res = await axios({
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        withCredentials: true,
+      },
+      url: process.env.AUTH_URL,
+    });
+    return res.data;
+  } catch ({ response }) {
+    return null;
+  }
+};
+
+export const request = async (config) => {
   try {
     const res = await axios({
       headers: {
@@ -20,9 +36,6 @@ const request = async (config) => {
     });
     return res.data;
   } catch ({ response }) {
-    console.log(response);
     return {};
   }
 };
-
-export default request;

@@ -5,7 +5,7 @@ import { MilestoneIcon } from './static/svgIcons';
 const MilestoneButton = styled.button`
   display: flex;
   align-items: center;
-  height: 60px;
+  height: 40px;
   padding: 10px 20px;
   border: 1px solid ${(props) => props.theme.grayColor};
   border-radius: 0 ${(props) => props.theme.radius} ${(props) => props.theme.radius} 0;
@@ -28,12 +28,12 @@ const Count = styled.span`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-const LabelMilestoneButton = ({ hasCount }) => {
+const LabelMilestoneButton = ({ hasCount, count }) => {
   return (
     <MilestoneButton>
       <MilestoneIcon />
       <ButtonTitle>Milestones</ButtonTitle>
-      {hasCount && <Count>10</Count>}
+      {hasCount && <Count>{count}</Count>}
     </MilestoneButton>
   );
 };

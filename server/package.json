@@ -8,6 +8,7 @@
     "test": "mocha ./test/*.spec.js"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -18,9 +19,9 @@
     "morgan": "~1.9.1",
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",
-    "passport-github": "^1.1.0",
     "passport-jwt": "^4.0.0",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",

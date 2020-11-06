@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { authRequest } from '../Api';
 import { GitHubLogo } from './static/svgIcons';
 
 const Wrapper = styled.div`
@@ -88,6 +89,11 @@ const Text = styled.span`
 `;
 
 const Login = () => {
+  const onClickGitHub = async () => {
+    const redirectUrl = await authRequest();
+    if (redirectUrl) window.location.href = redirectUrl;
+  };
+
   return (
     <Wrapper>
       <Title>Issue Tracker</Title>
@@ -101,7 +107,7 @@ const Login = () => {
         <LoginButton>
           <Text>로그인하기</Text>
         </LoginButton>
-        <Button>
+        <Button type="button" onClick={onClickGitHub}>
           <Text>GitHub로 로그인하기</Text>
           <GitHubLogo />
         </Button>

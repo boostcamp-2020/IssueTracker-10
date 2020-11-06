@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssueCheckbox } from './IssueListHeader';
 import { convertTime } from '../utils/convert';
+import { MilestoneIcon } from './static/svgIcons';
 
 const RowWraaper = styled.div`
   display: flex;
@@ -31,12 +32,19 @@ const IssueTitle = styled.span`
 
 const IssueInformation = styled.div`
   display: flex;
+  svg {
+    fill: ${(props) => props.theme.darkgrayColor};
+  }
 `;
 
 const IssueSubText = styled.span`
   margin-right: 5px;
   font-size: 13px;
   color: ${(props) => props.theme.darkgrayColor};
+`;
+
+const MilestoneText = styled(IssueSubText)`
+  margin-left: 5px;
 `;
 
 const IssueListRow = (props) => {
@@ -53,7 +61,12 @@ const IssueListRow = (props) => {
           <IssueSubText>
             opened {convertTime(createdAt)} by {username}
           </IssueSubText>
-          {milestone && <IssueSubText>{milestone.title}</IssueSubText>}
+          {milestone && (
+            <>
+              <MilestoneIcon size={13} />
+              <MilestoneText>{milestone.title}</MilestoneText>
+            </>
+          )}
         </IssueInformation>
       </IssueTextWrapper>
     </RowWraaper>
