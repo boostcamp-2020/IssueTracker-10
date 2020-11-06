@@ -6,44 +6,72 @@
 //
 
 import Foundation
-
-extension Notification.Name {
-    static let issueDidChanged = Notification.Name.init("issueDidChanged")
-}
+import hvNetwork
 
 class IssueManager {
-	
-    var issues: [Issue]
     
-    init(issues: [Issue]) {
-        self.issues = issues
+    init() {
     }
     
-	func closed() -> [Issue] {
-		return issues.filter { $0.state == 0 }
-	}
-	
-	func opened() -> [Issue] {
-		return issues.filter{ $0.state == 1 }
-	}
+    func get(completion: @escaping (([Issue]) -> Void)) {
+        let headers = ["Authorization": Constant.token]
+        hvNet.request("http://49.50.163.58:3000/api/issue/?state=all", method: .get, headers: headers).response { (result: HVDataResponse<IssueResponse>) in
+            switch result {
+            case .success(let issues):
+                completion(issues.data)
+            case .failure:
+                completion([])
+            }
+        }
+    }
+    
+    func create(title: String, content: String?) {
+        let headers = ["Authorization": Constant.token]
+        let parameters = ["title": title, "content": content ?? ""] as Parameters
+        hvNet.request("http://49.50.163.58:3000/api/issue/", method: .post, parameter: parameters, headers: headers).response { (result: HVDataResponse<Data?>) in
+            switch result {
+            case .success:
+                NotificationCenter.default.post(name: .issueDidChanged, object: nil)
+            case.failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 	
 	func delete(with issue: Issue) {
-		guard let index = issues.firstIndex(of: issue) else { return }
-		issues.remove(at: index)
-		NotificationCenter.default.post(name: .issueDidChanged, object: nil)	
+        let id = issue.id
+        let headers = ["Authorization": Constant.token]
+        
+        hvNet.request("http://49.50.163.58:3000/api/issue/\(id)", method: .delete, headers: headers).response { (result: HVDataResponse<Data?>) in
+            switch result {
+            case .success:
+                NotificationCenter.default.post(name: .issueDidChanged, object: nil)
+            case.failure(let error):
+                print(error.localizedDescription)
+            }
+        }
 	}
 	
-	func close(with id: Int) {
-		guard let issue = find(with: id) else { return }
-		close(with: issue)
+	func close(with issue: [Issue]) {
+        let ids = issue.map { $0.id }
+        let parameters = ["state" : 0, "issueIds" : ids] as [String : Any]
+        let headers = ["Authorization": Constant.token]
+
+        hvNet.request("http://49.50.163.58:3000/api/issue/state", method: .put, parameter: parameters, headers: headers).response { (result: HVDataResponse<Data?>) in
+            switch result {
+            case .success:
+                NotificationCenter.default.post(name: .issueDidChanged, object: nil)
+            case.failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
 	}
-	
-	func close(with issue: Issue) {
-		issue.state = 0
-        NotificationCenter.default.post(name: .issueDidChanged, object: nil)
-	}
-	
-	func find(with id: Int) -> Issue? {
-		return issues.first(where: { $0.id == id })
-	}
+
+}
+
+extension IssueManager {
+    enum Constant {
+        static let token = ""
+    }
 }
