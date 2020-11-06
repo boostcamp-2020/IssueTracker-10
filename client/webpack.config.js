@@ -3,10 +3,11 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
@@ -50,5 +51,6 @@ module.exports = {
       template: './public/index.html',
     }),
     new MiniCssExtractPlugin({ filename: 'app.css' }),
+    new Dotenv(),
   ],
 };
