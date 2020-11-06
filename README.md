@@ -7,11 +7,11 @@
 
 👨‍👩‍👦‍👦왕10리
 
-> 🐳**공태경** [J012]  [@Taeg92](https://github.com/Taeg92) <br/>
- 🐈**박수연** [J079]  [@Park-SooYeon](https://github.com/Park-SooYeon) <br/>
-🐘**안샛별** [J109] [@sbyeol3 ](https://github.com/sbyeol3) <br/>
-🐧**강민석** [S001]  [@kati-kms](https://github.com/kati-kms) <br/>
-🐥**채훈기** [S058] [@hoonv](https://github.com/hoonv) <br/>
+> 🐳 **공태경** [J012]  [@Taeg92](https://github.com/Taeg92) <br/>
+ 🐈 **박수연** [J079]  [@Park-SooYeon](https://github.com/Park-SooYeon) <br/>
+🐘 **안샛별** [J109] [@sbyeol3 ](https://github.com/sbyeol3) <br/>
+🐧 **강민석** [S001]  [@kati-kms](https://github.com/kati-kms) <br/>
+🐥 **채훈기** [S058] [@hoonv](https://github.com/hoonv) <br/>
 
 
 ## WIKI 🗒
@@ -25,12 +25,10 @@
 - [Commit Template](https://github.com/boostcamp-2020/IssueTracker-10/wiki/03.-Commit-Template)
 - [Git Flows & Branch Naming Convention](https://github.com/boostcamp-2020/IssueTracker-10/wiki/04.-Git-Flows-&-Branch-Naming-Convention)
   
-
-  
 ## Project
 - [project backlogs](https://docs.google.com/spreadsheets/d/1EuBIlPTZk7xBFAkUquUIizwFApHUo1B9y8EUyKeIBO4/edit?usp=sharing)
 - ERD
-![issueTracker_ERD](https://user-images.githubusercontent.com/60081031/97281184-8b7c6d00-1880-11eb-920a-329290c62935.PNG)
+![issueTracker_ERD](https://user-images.githubusercontent.com/60081031/97946876-f7099180-1dce-11eb-8e95-198a975ba1a9.PNG)
 ​
 ​
 ### Git flow
@@ -46,10 +44,8 @@
 
 ---
 
-​
 ## 1️⃣ Server
 > Server에 관한 설명입니다.
-
 
 ### 1. root/pacakage.json
 
@@ -75,12 +71,13 @@
 
 ```json
 "dependencies": {
+    "axios": "^0.21.0",
     "jsonwebtoken": "^8.5.1",
     "helmet": "^4.1.1",
     "sequelize": "^6.3.5",
     "passport": "^0.4.1",
-    "passport-github": "^1.1.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "uuid": "^8.3.1"
 },
 "devDependencies": {
     "cors": "^2.8.5",
@@ -93,6 +90,7 @@
 - server의 앱의 취약성을 보완하기 위해 `helmet` 모듈을 사용.
 - cors issue 해결을 위해 `cors` 모듈 사용
 - TDD 개발에 필요한 모듈 : `mocha`, `supertest`, `should`
+- OAuth 때 필요한 http request 요청 -> `uuid`, `axios` 설치
 ​
 ### 3. deploy
 
@@ -112,12 +110,15 @@
 
 #####  Edit
 
-![edit 시나리오](https://user-images.githubusercontent.com/46335714/97559219-7cccbc00-1a20-11eb-8d4b-406ad6e92f0d.gif)
-
-
+<img width="400" src="https://user-images.githubusercontent.com/46335714/97559219-7cccbc00-1a20-11eb-8d4b-406ad6e92f0d.gif">
+<img width="400" src="https://user-images.githubusercontent.com/46335714/97560497-12b51680-1a22-11eb-8b60-544c8a10750b.gif">
 
 ##### search
 
-![search 시나리오](https://user-images.githubusercontent.com/46335714/97560497-12b51680-1a22-11eb-8b60-544c8a10750b.gif)
-
 ## 3️⃣ Client
+
+### 로그인 페이지
+
+![로그인](https://user-images.githubusercontent.com/60081031/98319388-fc134e80-2023-11eb-8f95-9d3390d3caa1.png)
+![깃허브 연결](https://user-images.githubusercontent.com/60081031/98319436-19481d00-2024-11eb-8f4b-4e6b6068d57d.png)
+![메인페이지](https://user-images.githubusercontent.com/43198553/98320780-f8cd9200-2026-11eb-87b5-fc64d04c7a52.png)
