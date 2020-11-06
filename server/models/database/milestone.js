@@ -12,5 +12,9 @@ module.exports = ({ sequelize, DataTypes }) => {
       type: DataTypes.DATE,
       allowNull: true,
     },
+    state: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
   });
 };

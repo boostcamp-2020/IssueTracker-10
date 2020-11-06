@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import FilterInput from './FilterInput';
@@ -6,6 +6,7 @@ import IssueList from './IssueList';
 import LabelMilestoneButton from './LabelMilestoneButton';
 import GreenButton from './GreenButton';
 import { request } from '../Api';
+import { AuthStateContext } from '../Context/AuthContext';
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,17 +24,18 @@ const IssueHeader = styled.div`
 `;
 
 const Issue = () => {
+  const { token } = useContext(AuthStateContext);
   const [issueHeader, setIssueHeader] = useState({});
   const [issues, setIssues] = useState([]);
 
   useEffect(() => {
     const fetchHeader = async () => {
-      const config = { url: '/api/all', method: 'GET' };
+      const config = { url: '/api/all', method: 'GET', token };
       const { data } = await request(config);
       setIssueHeader(data);
     };
     const fetchIssues = async () => {
-      const config = { url: '/api/issue', method: 'GET' };
+      const config = { url: '/api/issue', method: 'GET', token };
       const { data } = await request(config);
       setIssues(data);
     };
