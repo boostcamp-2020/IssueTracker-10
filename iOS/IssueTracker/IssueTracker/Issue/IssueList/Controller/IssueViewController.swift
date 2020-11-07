@@ -22,6 +22,7 @@ class IssueViewController: UIViewController {
 	}
     var viewModel = IssueViewModel()
     var dataSource: IssueDiffableDataSource!
+	let issueCounter = IssueCounter()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

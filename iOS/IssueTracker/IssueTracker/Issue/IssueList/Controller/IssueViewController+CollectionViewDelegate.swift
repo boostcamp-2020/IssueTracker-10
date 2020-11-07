@@ -29,10 +29,16 @@ extension IssueViewController: UICollectionViewDelegate {
 		else {
 			cell?.backgroundColor = nil
 		}
+		
+		issueCounter.increase()
+		self.navigationController?.navigationBar.topItem?.title = issueCounter.description
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = nil
+		
+		issueCounter.decrease()
+		self.navigationController?.navigationBar.topItem?.title = issueCounter.description
     }
 }
