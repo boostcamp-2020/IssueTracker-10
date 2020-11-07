@@ -12,7 +12,16 @@ class IssueFilterViewController: UIViewController {
 	@IBAction func doneButtonTouched(_ sender: Any) {
 		let paths = filterTableView.indexPathsForSelectedRows
 		guard let indexPaths = paths else { return }
-		let filters = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0)?.criteria }
+		
+		var filters = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0)?.criteria }
+		if filters.contains(where: { $0 is OpenCriteria }) && filters.contains(where: { $0 is CloseCriteria }) {
+			filters = filters.filter {
+				if ($0 is OpenCriteria || $0 is CloseCriteria) {
+					return false
+				}
+				return true
+			}
+		}
 		NotificationCenter.default.post(name: .filterDidchanged, object: self, userInfo: ["filters":filters])
 		
 		self.dismiss(animated: true, completion: nil)
@@ -68,14 +77,6 @@ extension IssueFilterViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		guard let cell = tableView.cellForRow(at: indexPath) else { return }
 		cell.isSelected = true
-		
-		if indexPath.section == 0 {
-			let totalRows = tableView.numberOfRows(inSection: 0)
-			for row in 0..<totalRows {
-				if indexPath.row == row { continue }
-				tableView.deselectRow(at: IndexPath(row: row, section: 0) , animated: false)
-			}
-		}
 	}
 }
 
