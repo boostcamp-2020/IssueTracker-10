@@ -84,9 +84,24 @@ class IssueViewController: UIViewController {
 		guard let editButton = navigationItem.rightBarButtonItem else { return }
 		editButton.title = isEditing ? "Cancel" : "Edit"
 		isEditing ? editModeToolBar() : setDefaultToolBar()
-		if isEditing == false {
-			deselctAll()
+		
+		if isEditing {
+			makeSelectButton()
 		}
+		else {
+			deselectAll()
+			self.navigationItem.leftBarButtonItem = nil
+		}
+	}
+	
+	@objc func selectAllButtonTouched() {
+		selectAll()
+		makeDeselectButton()
+	}
+	
+	@objc func deselectAllButtonTouched() {
+		deselectAll()
+		makeSelectButton()
 	}
 	
 	func getAllIndexPathsInSection(section : Int) -> [IndexPath] {
@@ -94,7 +109,27 @@ class IssueViewController: UIViewController {
 		return (0..<count).map { IndexPath(row: $0, section: section) }
 	}
 	
-	func deselctAll() {
+	func makeSelectButton() {
+		let selectAllButton = UIBarButtonItem(title: "Select All", style: .plain , target: self, action: #selector(selectAllButtonTouched))
+		selectAllButton.tintColor = UIColor(named: "GithubMainColor")
+		self.navigationItem.setLeftBarButton(selectAllButton, animated: false)
+	}
+	
+	func makeDeselectButton() {
+		let deselectAllButton = UIBarButtonItem(title: "Deselect All", style: .plain, target: self, action: #selector(deselectAllButtonTouched))
+		deselectAllButton.tintColor = UIColor(named: "GithubMainColor")
+		self.navigationItem.setLeftBarButton(deselectAllButton, animated: false)
+	}
+	
+	func selectAll() {
+		let paths = getAllIndexPathsInSection(section: 0)
+		paths.forEach {
+			issueCollectionView.selectItem(at: $0, animated: false, scrollPosition: [])
+			collectionView(issueCollectionView, didSelectItemAt: $0)
+		}
+	}
+	
+	func deselectAll() {
 		let paths = getAllIndexPathsInSection(section: 0)
 		paths.forEach {
 			issueCollectionView.deselectItem(at: $0, animated: true)

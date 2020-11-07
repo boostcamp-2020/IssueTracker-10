@@ -30,6 +30,12 @@ class IssueDiffableDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.issueCell, for: indexPath)
             if let issueCell = cell as? IssueListViewCell {
                 issueCell.configure(issue: issue)
+				if issueCell.isSelected == true {
+					issueCell.backgroundColor = UIColor.systemGray6
+				}
+				else {
+					issueCell.backgroundColor = nil
+				}
                 return issueCell
             }
             return nil
