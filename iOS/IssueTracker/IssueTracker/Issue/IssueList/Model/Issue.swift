@@ -18,7 +18,8 @@ struct Issue: Codable, Hashable {
     static let empty = Issue(id: 0, title: "     ", state: 0, createdAt: "", updatedAt: "", user: Author(id: 0, username: "", avatar: ""), milestone: nil, labels: [], assignees: [])
     
     static func == (lhs: Issue, rhs: Issue) -> Bool {
-        return lhs.id == rhs.id
+		return lhs.id == rhs.id &&
+			lhs.state == rhs.state
     }
     
     static func > (lhs: Issue, rhs: Issue) -> Bool {
