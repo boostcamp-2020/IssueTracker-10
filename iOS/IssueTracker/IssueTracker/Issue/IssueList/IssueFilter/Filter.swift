@@ -18,16 +18,23 @@ struct Filter: Hashable {
 	
 	let criteria: IssueCriteria
 	let description: String
+	var isApply: Bool
 }
 
-struct Filters {
+class Filters {
+	static var defaultApplies = [true,true,false,false,false]
 	
-	let contents: [Filter] = [
-		Filter(criteria: OpenCriteria(), description: "열린 이슈들"),
-		Filter(criteria: CloseCriteria(), description: "닫힌 이슈들"),
-		Filter(criteria: AuthorCriteria(author: Author(id: 1, username: "me", avatar: "noAavtar")), description: "내가 작성한 이슈들"),
-		Filter(criteria: AssignedCriteria(assignee: Assignee(id: 1, avatar: "me", username: "noAvatar")), description: "나한테 할당된 이슈들"),
-		Filter(criteria: CommentCriteria(), description: "내가 댓글을 남긴 이슈들")
+	var contents: [Filter] = [
+		Filter(criteria: OpenCriteria(), description: "열린 이슈들", isApply: false),
+		Filter(criteria: CloseCriteria(), description: "닫힌 이슈들", isApply: false),
+		Filter(criteria: AuthorCriteria(author: Author(id: 1, username: "me", avatar: "noAavtar")), description: "내가 작성한 이슈들", isApply: false),
+		Filter(criteria: AssignedCriteria(assignee: Assignee(id: 1, avatar: "me", username: "noAvatar")), description: "나한테 할당된 이슈들", isApply: false),
+		Filter(criteria: CommentCriteria(), description: "내가 댓글을 남긴 이슈들", isApply: false)
 	]
 	
+	func changeApplies() {
+		for index in 0..<contents.count {
+			contents[index].isApply = AppData.applies[index]
+		}
+	}
 }

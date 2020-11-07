@@ -9,10 +9,6 @@ import Foundation
 
 struct User: Codable {
 	
-	enum Key: String {
-		case user = "user"
-	}
-	
 	static let basic = User(name: "user", avatorURL: nil)
 	
 	let name: String

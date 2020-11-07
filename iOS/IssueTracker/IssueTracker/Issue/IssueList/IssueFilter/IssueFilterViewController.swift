@@ -12,6 +12,9 @@ class IssueFilterViewController: UIViewController {
 	@IBAction func doneButtonTouched(_ sender: Any) {
 		let paths = filterTableView.indexPathsForSelectedRows
 		guard let indexPaths = paths else { return }
+		var newApplies: [Bool] = Array(repeating: false, count: Filters.defaultApplies.count)
+		indexPaths.forEach { newApplies[$0.section * 2 + $0.row] = true }
+		AppData.applies = newApplies
 		
 		var filters = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0)?.criteria }
 		if filters.contains(where: { $0 is OpenCriteria }) && filters.contains(where: { $0 is CloseCriteria }) {

@@ -41,6 +41,7 @@ class IssueViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setToolbarHidden(true, animated: false)
+		AppData.applies = Filters.defaultApplies
     }
     
     func binding() {
