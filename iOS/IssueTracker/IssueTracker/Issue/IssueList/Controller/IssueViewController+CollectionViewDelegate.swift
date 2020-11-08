@@ -30,7 +30,7 @@ extension IssueViewController: UICollectionViewDelegate {
 			cell?.backgroundColor = nil
 		}
 		
-		issueCounter.increase()
+		issueCounter.count(collectionView.indexPathsForSelectedItems?.count ?? 0)
 		self.navigationController?.navigationBar.topItem?.title = issueCounter.description
     }
     
@@ -38,7 +38,7 @@ extension IssueViewController: UICollectionViewDelegate {
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = nil
 		
-		issueCounter.decrease()
+		issueCounter.count(collectionView.indexPathsForSelectedItems?.count ?? 0)
 		self.navigationController?.navigationBar.topItem?.title = issueCounter.description
     }
 }

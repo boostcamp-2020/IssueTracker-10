@@ -23,6 +23,10 @@ class IssueCounter: CustomStringConvertible {
 		count = 0
 	}
 	
+	func count(_ input: Int) {
+		self.count = input
+	}
+	
 	func increase() {
 		count += 1
 	}
