@@ -59,27 +59,23 @@ const CloseButton = styled.button`
 
 const FilterModal = ({ display, setDisplay }) => {
   const toggleDisplay = () => {
-    const displayValue = display !== true;
+    const displayValue = !display;
     setDisplay(displayValue);
   };
   return (
-    <>
-      {display && (
-        <Modal>
-          <ModalHeader>
-            <HeaderText text="Filter Issues" />
-            <CloseButton onClick={toggleDisplay}>&times;</CloseButton>
-          </ModalHeader>
-          <ModalBody>
-            <Text>Open Issues and pull requests</Text>
-            <Text>Your Issues</Text>
-            <Text>Your pull requests</Text>
-            <Text>Everything assigned to you</Text>
-            <Text>Everything mentioning to you</Text>
-          </ModalBody>
-        </Modal>
-      )}
-    </>
+    <Modal>
+      <ModalHeader>
+        <HeaderText text="Filter Issues" />
+        <CloseButton onClick={toggleDisplay}>&times;</CloseButton>
+      </ModalHeader>
+      <ModalBody>
+        <Text>Open Issues and pull requests</Text>
+        <Text>Your Issues</Text>
+        <Text>Your pull requests</Text>
+        <Text>Everything assigned to you</Text>
+        <Text>Everything mentioning to you</Text>
+      </ModalBody>
+    </Modal>
   );
 };
 

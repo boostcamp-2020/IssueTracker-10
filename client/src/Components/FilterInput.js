@@ -71,7 +71,7 @@ const InputBox = styled.div`
 export default () => {
   const [display, setDisplay] = useState(false);
   const toggleDisplay = () => {
-    const displayValue = display !== true;
+    const displayValue = !display;
     setDisplay(displayValue);
   };
   return (
@@ -82,7 +82,7 @@ export default () => {
             <FilterText text="Filters" />
             <TriArrow size={10} />
           </FilterBox>
-          <FilterModal display={display} setDisplay={setDisplay} />
+          {display && <FilterModal display={display} setDisplay={setDisplay} />}
         </SelectBox>
         <InputBox>
           <Search size={12} />
