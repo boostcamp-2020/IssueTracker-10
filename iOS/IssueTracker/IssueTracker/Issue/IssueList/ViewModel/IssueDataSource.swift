@@ -54,10 +54,12 @@ class IssueDiffableDataSource {
     }
     
     func updateDataSource(issues: [Issue]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Issue>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(issues)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        DispatchQueue.main.async {
+            var snapshot = NSDiffableDataSourceSnapshot<Section, Issue>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(issues)
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
     }
     
     func itemIdentifier(for indexPath: IndexPath) -> Issue? {

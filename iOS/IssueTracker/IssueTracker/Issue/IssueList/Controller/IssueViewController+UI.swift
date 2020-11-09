@@ -8,7 +8,6 @@
 import UIKit
 
 extension IssueViewController {
-    
     func setupUI() {
         setupSearchController()
         setDefaultToolBar()
