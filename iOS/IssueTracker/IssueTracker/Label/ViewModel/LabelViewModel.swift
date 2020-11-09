@@ -8,5 +8,21 @@
 import Foundation
 
 class LabelViewModel {
+	let reactor: LabelReactor
+	var state: LabelState
+	var updateClosure: ((LabelState) -> Void)?
 	
+	init(reactor: LabelReactor, state: LabelState) {
+		self.reactor = reactor
+		self.state = state
+		reactor.sideEffect = { state in
+			self.state = state
+			self.updateClosure?(state)
+		}
+	}
+	
+	func requestGetLabelList() {
+		state = reactor.execute(action: .requestGetLabelList, currentState: state)
+		updateClosure?(state)
+	}
 }

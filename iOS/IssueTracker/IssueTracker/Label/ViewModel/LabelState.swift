@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class LabelState {
+	var labels: [Label]
+	
+	init() {
+		labels = []
+	}
+}
