@@ -69,9 +69,9 @@ const InputBox = styled.div`
 `;
 
 export default () => {
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(false);
   const toggleDisplay = () => {
-    const displayValue = display === 1 ? 0 : 1;
+    const displayValue = display !== true;
     setDisplay(displayValue);
   };
   return (

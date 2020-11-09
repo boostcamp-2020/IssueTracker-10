@@ -59,12 +59,12 @@ const CloseButton = styled.button`
 
 const FilterModal = ({ display, setDisplay }) => {
   const toggleDisplay = () => {
-    const displayValue = display === 1 ? 0 : 1;
+    const displayValue = display !== true;
     setDisplay(displayValue);
   };
   return (
     <>
-      {display ? (
+      {display && (
         <Modal>
           <ModalHeader>
             <HeaderText text="Filter Issues" />
@@ -78,7 +78,7 @@ const FilterModal = ({ display, setDisplay }) => {
             <Text>Everything mentioning to you</Text>
           </ModalBody>
         </Modal>
-      ) : null}
+      )}
     </>
   );
 };
