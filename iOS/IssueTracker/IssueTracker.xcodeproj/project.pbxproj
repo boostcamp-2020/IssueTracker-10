@@ -843,6 +843,7 @@
 		};
 		E0B3D3EA2546C8680040D5AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E049B8F72553E2FD004DD162 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -919,6 +920,7 @@
 		};
 		E0B3D3ED2546C8680040D5AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E049B8F72553E2FD004DD162 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

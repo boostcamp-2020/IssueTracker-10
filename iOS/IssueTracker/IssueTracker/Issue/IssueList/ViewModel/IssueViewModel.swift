@@ -47,6 +47,16 @@ class IssueListViewModel {
         state = reactor.execute(action: .toggleIsEditMode, currentState: state)
         updateClosure?(state)
     }
+	
+	func updateIssueCount(count: Int) {
+		state = reactor.execute(action: .changeIssueCount(count), currentState: state)
+		updateClosure?(state)
+	}
+	
+	func updateSelectedAllMode() {
+		state = reactor.execute(action: .updateShowSelectedAll, currentState: state)
+		updateClosure?(state)
+	}
     
     private func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedLabel), name: .labelDidToggled, object: nil)

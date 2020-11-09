@@ -9,7 +9,7 @@ import UIKit
 import hvNetwork
 
 class IssueViewController: UIViewController {
-
+	
     var dataSource: IssueDiffableDataSource!
 	var viewModel = IssueListViewModel(reactor: IssueListReactor(),
                                         state: IssueListState())
@@ -17,7 +17,7 @@ class IssueViewController: UIViewController {
     @IBAction func editButtonTouched(_ sender: UIBarButtonItem) {
         viewModel.updateIsEditModeToggle()
     }
-    
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
         issueCollectionView.register(UINib(nibName: "IssueListViewCell", bundle: nil), forCellWithReuseIdentifier: "IssueCell")
@@ -34,6 +34,7 @@ class IssueViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setToolbarHidden(true, animated: false)
+		AppData.applies = Filters.defaultApplies
     }
     
     func binding() {
@@ -41,25 +42,29 @@ class IssueViewController: UIViewController {
             let issues = state.issues
             let filter = state.filter
             self.dataSource.performQuery(issues: issues, filter: filter)
-            self.updateIsEdit(flag: state.isEditting)
+			self.updateIsEdit(flag: state.isEditting, count: state.issueCount, isShowSelectedAll: state.isShowSelectedAll)
         }
         viewModel.updateClosure?(viewModel.state)
         viewModel.requestGetIssueList()
     }
     
-    func updateIsEdit(flag: Bool) {
+	func updateIsEdit(flag: Bool, count: Int, isShowSelectedAll: Bool) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self,
                   let editButton = self.navigationItem.rightBarButtonItem else { return }
             if flag {
                 self.issueCollectionView.allowsMultipleSelection = flag
                 editButton.title = "Cancel"
-                self.editModeToolBar()
+				self.navigationController?.navigationBar.topItem?.title = "\(count)개 선택중"
+				isShowSelectedAll ? self.makeSelectButton() : self.makeDeselectButton()
+				self.editModeToolBar()
             } else {
-                self.issueCollectionView.allowsMultipleSelection = flag
                 editButton.title = "Edit"
-                self.setDefaultToolBar()
-                self.deselctAll()
+				self.navigationItem.leftBarButtonItem = nil
+				self.setDefaultToolBar()
+                self.deselectAll()
+				self.navigationController?.navigationBar.topItem?.title = "Issue"
+				self.issueCollectionView.allowsMultipleSelection = flag
             }
         }
     }
@@ -70,25 +75,43 @@ class IssueViewController: UIViewController {
 	}
 	
 	@objc func closeTapped() {
-        viewModel.requestClose(issues: selectedIssues())
-        viewModel.updateIsEditModeToggle()
+		viewModel.requestClose(issues: selectedIssues())
+		viewModel.updateIsEditModeToggle()
 	}
 
-    func selectedIssues() -> [Issue] {
-        let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
-        guard let indexPaths = paths else { return [] }
-        let issues = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
-        return issues
-    }
-    
-    func deselctAll() {
-        let paths = getAllIndexPathsInSection(section: 0)
-        paths.forEach {
-            issueCollectionView.deselectItem(at: $0, animated: true)
-            collectionView(issueCollectionView, didDeselectItemAt: $0)
-        }
-    }
-    
+	func selectedIssues() -> [Issue] {
+		let paths = issueCollectionView.indexPathsForSelectedItems?.sorted(by: >)
+		guard let indexPaths = paths else { return [] }
+		let issues = indexPaths.compactMap{ dataSource.itemIdentifier(for: $0) }
+		return issues
+	}
+	
+	func selectAll() {
+		let paths = getAllIndexPathsInSection(section: 0)
+		paths.forEach {
+			issueCollectionView.selectItem(at: $0, animated: false, scrollPosition: [])
+			collectionView(issueCollectionView, didSelectItemAt: $0)
+		}
+	}
+	
+	func deselectAll() {
+		guard let paths = issueCollectionView.indexPathsForSelectedItems else { return }
+		paths.forEach {
+			issueCollectionView.deselectItem(at: $0, animated: true)
+			collectionView(issueCollectionView, didDeselectItemAt: $0)
+		}
+	}
+	
+	@objc func selectAllButtonTouched() {
+		selectAll()
+		viewModel.updateSelectedAllMode()
+	}
+	
+	@objc func deselectAllButtonTouched() {
+		deselectAll()
+		viewModel.updateSelectedAllMode()
+	}
+
 	func getAllIndexPathsInSection(section : Int) -> [IndexPath] {
 		let count = issueCollectionView.numberOfItems(inSection: section)
 		return (0..<count).map { IndexPath(row: $0, section: section) }
