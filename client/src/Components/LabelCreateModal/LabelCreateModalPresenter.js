@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import BoldText from '../BoldText';
 import Button from '../Button';
 import Input from '../Input';
-import LabelBadge from '../LabelBaege';
+import LabelBadge from '../LabelBadge';
 import { CycleIcon } from '../static/svgIcons';
 
 const Wrapper = styled.div`
