@@ -11,7 +11,7 @@ class LabelReactor {
 	var sideEffect: ((LabelState)-> Void)?
 	
 	enum Action {
-		case requestGetLabelList		
+		case requestGetLabelList
 	}
 	
 	func execute(action: Action, currentState: LabelState) -> LabelState {

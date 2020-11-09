@@ -19,6 +19,15 @@ class LabelViewModel {
 			self.state = state
 			self.updateClosure?(state)
 		}
+		setNotification()
+	}
+	
+	private func setNotification() {
+		NotificationCenter.default.addObserver(self, selector: #selector(updateLabelCreated), name: .labelDidCreated, object: nil)
+	}
+	
+	@objc private func updateLabelCreated(_ notification: Notification) {
+		requestGetLabelList()
 	}
 	
 	func requestGetLabelList() {
