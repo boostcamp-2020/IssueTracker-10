@@ -46,6 +46,8 @@ const FilterBox = styled.div`
     fill: ${(props) => props.theme.blueColor};
   }
   &:hover {
+    border-bottom-left-radius: ${(props) => props.theme.radiusSmall};
+    border-top-left-radius: ${(props) => props.theme.radiusSmall};
     background-color: ${(props) => props.theme.blueColor};
     span {
       color: ${(props) => props.theme.whiteColor};
