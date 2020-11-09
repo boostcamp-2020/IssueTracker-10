@@ -45,7 +45,11 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Button = styled.button`
+const LinkToMain = styled.a`
+  display: inline-block;
+  margin-left: 5px;
+  line-height: 40px;
+  vertical-align: middle;
   color: ${(props) => props.theme.blackColor};
   background: none;
 `;
@@ -58,7 +62,7 @@ const NewIssue = () => {
         <InputTitle type="text" placeholder="Title" required />
         <InputContent placeholder="Leave a comment" rows="10" />
         <ButtonWrapper>
-          <Button>Cancel</Button>
+          <LinkToMain href="/">Cancel</LinkToMain>
           <GreenButton title="Submit new issue" />
         </ButtonWrapper>
       </InputWrapper>
