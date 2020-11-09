@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssueOpenIcon, CheckIcon } from './static/svgIcons';
+import { AuthStateContext } from '../Context/AuthContext';
+import { IssueStateContext, IssueDispatchContext } from '../Context/IssueContext';
+import { request } from '../Api';
 
 const HeaderTextWrapper = styled.span`
   display: inline-flex;
@@ -13,8 +16,28 @@ const CountSpanText = styled.span`
   cursor: pointer;
 `;
 
-const CountText = (props) => {
-  const { openCount, closedCount } = props;
+const CountText = () => {
+  const authState = useContext(AuthStateContext);
+  const state = useContext(IssueStateContext);
+  const dispatch = useContext(IssueDispatchContext);
+  const { openCount, closedCount } = state;
+
+  const fetchByState = async (type) => {
+    const config = {
+      url: '/api/issue',
+      method: 'get',
+      params: {
+        state: type,
+      },
+      token: authState.token,
+    };
+    const { data } = await request(config);
+    if (data) dispatch({ type: 'CLOSE', payload: data });
+  };
+
+  const onClickClosed = async () => {
+    await fetchByState('closed');
+  };
   return (
     <>
       <HeaderTextWrapper>
@@ -23,7 +46,7 @@ const CountText = (props) => {
       </HeaderTextWrapper>
       <HeaderTextWrapper>
         <CheckIcon size={14} />
-        <CountSpanText>{closedCount} closed</CountSpanText>
+        <CountSpanText onClick={onClickClosed}>{closedCount} closed</CountSpanText>
       </HeaderTextWrapper>
     </>
   );
@@ -35,15 +58,10 @@ const SelectedText = (props) => {
 };
 
 const HeaderText = (props) => {
-  const { checkedLength, openCount, closedCount } = props;
+  const { checkedLength } = props;
+
   return (
-    <>
-      {checkedLength === 0 ? (
-        <CountText openCount={openCount} closedCount={closedCount} />
-      ) : (
-        <SelectedText checkedLength={checkedLength} />
-      )}
-    </>
+    <>{checkedLength === 0 ? <CountText /> : <SelectedText checkedLength={checkedLength} />}</>
   );
 };
 
