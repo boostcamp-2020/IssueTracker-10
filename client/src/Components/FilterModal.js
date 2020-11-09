@@ -64,7 +64,7 @@ const FilterModal = ({ display, setDisplay }) => {
   };
   return (
     <>
-      {display ? (
+      {display && (
         <Modal>
           <ModalHeader>
             <HeaderText text="Filter Issues" />
@@ -78,7 +78,7 @@ const FilterModal = ({ display, setDisplay }) => {
             <Text>Everything mentioning to you</Text>
           </ModalBody>
         </Modal>
-      ) : null}
+      )}
     </>
   );
 };
