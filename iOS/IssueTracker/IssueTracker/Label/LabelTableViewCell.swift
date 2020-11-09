@@ -20,14 +20,14 @@ class LabelTableViewCell: UITableViewCell {
 		super.setSelected(selected, animated: animated)
 	}
 	
-	func configure(title: String, detail: String, color: String) {
-		let labelColor = color.hexStringToUIColor()
+	func configure(label: Label) {
+		let labelColor = label.color.hexStringToUIColor()
 		titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-		titleLabel.text = title
+		titleLabel.text = label.title
 		layoutIfNeeded()
 		titleLabel.textColor = labelColor
-		titleLabel.addExternalBorder(content: title, borderWidth: 1, whiteSpace: 3, borderColor: labelColor)
-		detailLabel.text = detail
+		titleLabel.addExternalBorder(content: label.title, borderWidth: 1, whiteSpace: 3, borderColor: labelColor)
+		detailLabel.text = (label.description ?? "").isEmpty ? "No description" : label.description
 	}
 	
 	override func prepareForReuse() {

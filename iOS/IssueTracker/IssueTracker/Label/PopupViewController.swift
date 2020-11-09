@@ -12,10 +12,17 @@ class PopupViewController: UIViewController {
 	let labelManager = LabelManager()
 	var label: Label?
 	
+	@IBOutlet weak var colorView: UIView!
 	@IBOutlet weak var popUpView: UIView!
 	@IBOutlet weak var titleTextField: UITextField!
 	@IBOutlet weak var descriptionTextField: UITextField!
 	@IBOutlet weak var colorTextField: UITextField!
+	
+	@IBAction func randomColorButtonTouched(_ sender: Any) {
+		let randomHexString = generateRandomHexString()
+		colorTextField.text = randomHexString
+		colorView.backgroundColor = randomHexString.hexStringToUIColor()
+	}
 	
 	@IBAction func saveButtonTouched(_ sender: Any) {
 		guard let title = titleTextField.text, title.isEmpty == false, let color = colorTextField.text, color.isEmpty == false else { return }
@@ -40,9 +47,19 @@ class PopupViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.view.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+		colorView.layer.cornerRadius = 5
+		colorView.backgroundColor = label?.color.hexStringToUIColor()
 		titleTextField.text = label?.title
 		descriptionTextField.text = label?.description
 		colorTextField.text = label?.color
+	}
+	
+	private func generateRandomHexString() -> String {
+		let randomRed:CGFloat = CGFloat(drand48())
+		let randomGreen:CGFloat = CGFloat(drand48())
+		let randomBlue:CGFloat = CGFloat(drand48())
+		let rgb: Int = (Int)(randomRed * 255) << 16 | (Int)(randomGreen * 255) << 8 | (Int)(randomBlue * 255) << 0
+		return String(format: "#%06x", rgb)
 	}
 	
 }
