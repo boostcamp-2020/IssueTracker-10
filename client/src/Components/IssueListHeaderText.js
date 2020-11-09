@@ -28,6 +28,7 @@ const CountText = () => {
       url: '/api/issue',
       method: 'get',
       params: {
+        ...state.filter,
         state: type,
       },
       token: authState.token,

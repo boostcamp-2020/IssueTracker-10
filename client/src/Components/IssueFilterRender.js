@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { AuthStateContext } from '../Context/AuthContext';
+import { IssueStateContext, IssueDispatchContext } from '../Context/IssueContext';
+import { request } from '../Api';
 
 const ModalRow = styled.div`
   display: flex;
@@ -8,6 +11,8 @@ const ModalRow = styled.div`
   font-size: 13px;
   color: ${(props) => props.theme.darkgrayColor};
   cursor: pointer;
+  background-color: ${(props) =>
+    props.selected ? props.theme.skyblueColor : props.theme.whiteColor};
   &:hover {
     background-color: ${(props) => props.theme.skyblueColor};
   }
@@ -33,11 +38,44 @@ const LabelTextWrapper = styled.span`
   margin-left: 5px;
 `;
 
-export const renderUsers = (users) => {
+export const renderUsers = ({ users, type }) => {
+  const authState = useContext(AuthStateContext);
+  const state = useContext(IssueStateContext);
+  const dispatch = useContext(IssueDispatchContext);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const fetchIssues = async ({ id }) => {
+    const config = {
+      url: '/api/issue',
+      method: 'get',
+      params: {
+        ...state.filter,
+        [type]: id,
+      },
+      token: authState.token,
+    };
+    const { data = null } = await request(config);
+    return data;
+  };
+
+  const onClickUser = async (id) => {
+    const actionSetType = type === 'author' ? 'SET_AUTHOR' : 'SET_ASSIGNEE';
+    const actionRemoveType = type === 'author' ? 'REMOVE_AUTHOR' : 'REMOVE_ASSIGNEE';
+    const passedId = selectedUser === id ? null : id;
+
+    const data = await fetchIssues({ id: passedId });
+    if (data) {
+      if (selectedUser === id) {
+        dispatch({ type: actionRemoveType, payload: data });
+      } else dispatch({ type: actionSetType, id, payload: data });
+      setSelectedUser(passedId);
+    }
+  };
+
   return users.map((user) => {
     const { id, username, avatar } = user;
     return (
-      <ModalRow key={id}>
+      <ModalRow key={id} onClick={() => onClickUser(id)} selected={selectedUser === id}>
         <UserAvater src={avatar} alt={`${username} profile`} />
         {username}
       </ModalRow>

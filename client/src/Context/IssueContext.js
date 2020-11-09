@@ -59,6 +59,46 @@ export const issueReducer = (state, action) => {
         issues: [...action.payload],
       };
     }
+    case 'SET_AUTHOR': {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          author: action.id,
+        },
+        issues: [...action.payload],
+      };
+    }
+    case 'REMOVE_AUTHOR': {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          author: null,
+        },
+        issues: [...action.payload],
+      };
+    }
+    case 'SET_ASSIGNEE': {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          assignee: action.id,
+        },
+        issues: [...action.payload],
+      };
+    }
+    case 'REMOVE_ASSIGNEE': {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          assignee: null,
+        },
+        issues: [...action.payload],
+      };
+    }
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
