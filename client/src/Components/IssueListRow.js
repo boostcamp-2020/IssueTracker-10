@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { IssueCheckbox } from './IssueListHeader';
 import { convertTime } from '../utils/convert';

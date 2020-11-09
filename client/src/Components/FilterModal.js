@@ -15,6 +15,8 @@ const Modal = styled.div`
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.whiteColor};
   box-shadow: ${(props) => props.theme.cardShadow};
+  opacity: ${(props) => props.display};
+  transition: opacity 0.2s linear;
 `;
 
 const ModalBody = styled.div``;
@@ -22,7 +24,7 @@ const ModalBody = styled.div``;
 const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px 15px;
+  padding: 10px;
   align-items: center;
   background-color: ${(props) => props.theme.blueColor};
   border-top-left-radius: ${(props) => props.theme.radius};

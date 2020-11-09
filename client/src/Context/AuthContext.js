@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 export const initialAuthState = {
   token:
-    localStorage.getItem('token') && localStorage.getItem('token') !== 'undefined'
+    localStorage.getItem('token') && localStorage.getItem('token') !== 'null'
       ? localStorage.getItem('token')
       : '',
   isLoggedIn: false,

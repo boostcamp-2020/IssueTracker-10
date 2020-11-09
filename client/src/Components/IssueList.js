@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import IssueListHeader from './IssueListHeader';
 import IssueListRow from './IssueListRow';
-import { request } from '../Api';
 
 const IssueListWrapper = styled.div`
   display: flex;
