@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import FilterInput from './FilterInput';
 import IssueList from './IssueList';
@@ -69,7 +70,9 @@ const Issue = ({ token }) => {
       <IssueHeader>
         <FilterInput />
         <LabelMilestoneButton issueHeader={issueHeader} hasCount />
-        <GreenButton title="New Issue" />
+        <Link to="/new">
+          <GreenButton title="New Issue" />
+        </Link>
       </IssueHeader>
       <IssueList issues={issues} issueHeader={issueHeader} />
     </Wrapper>
