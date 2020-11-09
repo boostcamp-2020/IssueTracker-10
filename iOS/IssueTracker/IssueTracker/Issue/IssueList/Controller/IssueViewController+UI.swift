@@ -32,4 +32,25 @@ extension IssueViewController {
         filter.tintColor = UIColor(named: "GithubMainColor")
         toolbarItems = [filter, spacer, add]
     }
+	
+	func editModeToolBar() {
+		let close = UIBarButtonItem(title: "Close", style: .done , target: self, action: #selector(closeTapped))
+		close.tintColor = UIColor(named: "GithubMainColor")
+		let delete = UIBarButtonItem(title: "Delete", style: .done , target: self, action: #selector(deleteTapped))
+		delete.tintColor = UIColor.systemRed
+		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+		toolbarItems = [delete, spacer, close]
+	}
+	
+	func makeSelectButton() {
+		let selectAllButton = UIBarButtonItem(title: "Select All", style: .plain , target: self, action: #selector(selectAllButtonTouched))
+		selectAllButton.tintColor = UIColor(named: "GithubMainColor")
+		self.navigationItem.setLeftBarButton(selectAllButton, animated: false)
+	}
+	
+	func makeDeselectButton() {
+		let deselectAllButton = UIBarButtonItem(title: "Deselect All", style: .plain, target: self, action: #selector(deselectAllButtonTouched))
+		deselectAllButton.tintColor = UIColor(named: "GithubMainColor")
+		self.navigationItem.setLeftBarButton(deselectAllButton, animated: false)
+	}
 }

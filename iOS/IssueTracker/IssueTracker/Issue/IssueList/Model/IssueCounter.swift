@@ -9,12 +9,7 @@ import Foundation
 
 class IssueCounter: CustomStringConvertible {
 	var description: String {
-		if count == 0 {
-			return "Issue"
-		}
-		else {
-			return "\(count)개 선택중"
-		}
+		"\(count)개 선택중"
 	}
 	
 	private var count: Int

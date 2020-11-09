@@ -17,7 +17,7 @@ class IssueViewController: UIViewController {
 	
 	@IBOutlet weak var issueCollectionView: UICollectionView!
 	@IBAction func editButtonTouched(_ sender: UIBarButtonItem) {
-		setEditing(!isEditing, animated: true)		
+		setEditing(!isEditing, animated: true)
 		updateUserInterface()
 	}
     var viewModel = IssueViewModel()
@@ -52,15 +52,6 @@ class IssueViewController: UIViewController {
         }
     }
 	
-	func editModeToolBar() {
-		let close = UIBarButtonItem(title: "Close", style: .done , target: self, action: #selector(closeTapped))
-		close.tintColor = UIColor(named: "GithubMainColor")
-		let delete = UIBarButtonItem(title: "Delete", style: .done , target: self, action: #selector(deleteTapped))
-		delete.tintColor = UIColor.systemRed
-		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-		toolbarItems = [delete, spacer, close]
-	}
-	
 	@objc func addTapped() {
 		presentViewController(identifier: "IssueCreateViewController", type: CreateIssueNavigationViewController(), option: .present)
 	}
@@ -83,15 +74,19 @@ class IssueViewController: UIViewController {
 	
 	func updateUserInterface() {
 		guard let editButton = navigationItem.rightBarButtonItem else { return }
-		editButton.title = isEditing ? "Cancel" : "Edit"
-		isEditing ? editModeToolBar() : setDefaultToolBar()
 		
 		if isEditing {
+			editButton.title = "Cancel"
 			makeSelectButton()
+			editModeToolBar()
+			self.navigationController?.navigationBar.topItem?.title = issueCounter.description
 		}
 		else {
-			deselectAll()
+			editButton.title = "Edit"
 			self.navigationItem.leftBarButtonItem = nil
+			setDefaultToolBar()
+			deselectAll()
+			self.navigationController?.navigationBar.topItem?.title = "Issue"
 		}
 	}
 	
@@ -108,18 +103,6 @@ class IssueViewController: UIViewController {
 	func getAllIndexPathsInSection(section : Int) -> [IndexPath] {
 		let count = issueCollectionView.numberOfItems(inSection: section)
 		return (0..<count).map { IndexPath(row: $0, section: section) }
-	}
-	
-	func makeSelectButton() {
-		let selectAllButton = UIBarButtonItem(title: "Select All", style: .plain , target: self, action: #selector(selectAllButtonTouched))
-		selectAllButton.tintColor = UIColor(named: "GithubMainColor")
-		self.navigationItem.setLeftBarButton(selectAllButton, animated: false)
-	}
-	
-	func makeDeselectButton() {
-		let deselectAllButton = UIBarButtonItem(title: "Deselect All", style: .plain, target: self, action: #selector(deselectAllButtonTouched))
-		deselectAllButton.tintColor = UIColor(named: "GithubMainColor")
-		self.navigationItem.setLeftBarButton(deselectAllButton, animated: false)
 	}
 	
 	func selectAll() {
