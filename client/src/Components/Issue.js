@@ -6,7 +6,7 @@ import IssueList from './IssueList';
 import LabelMilestoneButton from './LabelMilestoneButton';
 import GreenButton from './GreenButton';
 import { request } from '../Api';
-import { AuthStateContext } from '../Context/AuthContext';
+import { AuthStateContext, AuthDispatchContext } from '../Context/AuthContext';
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,26 +23,36 @@ const IssueHeader = styled.div`
   margin: 30px auto;
 `;
 
-const Issue = () => {
-  const { token } = useContext(AuthStateContext);
+const Issue = ({ token }) => {
+  const state = useContext(AuthStateContext);
+  const dispatch = useContext(AuthDispatchContext);
   const [issueHeader, setIssueHeader] = useState({});
   const [issues, setIssues] = useState([]);
 
   useEffect(() => {
-    const fetchHeader = async () => {
-      const config = { url: '/api/all', method: 'GET', token };
-      const { data } = await request(config);
-      setIssueHeader(data);
-    };
-    const fetchIssues = async () => {
-      const config = { url: '/api/issue', method: 'GET', token };
-      const { data } = await request(config);
-      setIssues(data);
-    };
-
-    fetchHeader();
-    fetchIssues();
+    if (!state.token) dispatch({ type: 'LOGIN', token });
   }, []);
+
+  useEffect(() => {
+    if (state.token) {
+      const fetchHeader = async () => {
+        const config = { url: '/api/all', method: 'GET', token: state.token };
+        const { data } = await request(config);
+        if (data) setIssueHeader(data);
+      };
+      const fetchIssues = async () => {
+        const config = { url: '/api/issue', method: 'GET', token: state.token };
+        const { data } = await request(config);
+        if (data) setIssues(data);
+      };
+      fetchHeader();
+      fetchIssues();
+    }
+    return () => {
+      setIssueHeader([]);
+      setIssues([]);
+    };
+  }, [state.token]);
 
   return (
     <Wrapper>
