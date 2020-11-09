@@ -20,7 +20,6 @@ class IssueListViewCell: UICollectionViewCell {
     }
     
     func configure(issue: Issue) {
-
         self.layer.cornerRadius = 10
         containerView.layer.borderWidth = 2
         containerView.layer.borderColor =

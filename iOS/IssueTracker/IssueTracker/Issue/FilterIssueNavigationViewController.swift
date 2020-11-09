@@ -12,5 +12,4 @@ class FilterIssueNavigationViewController: UINavigationController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
-	
 }
