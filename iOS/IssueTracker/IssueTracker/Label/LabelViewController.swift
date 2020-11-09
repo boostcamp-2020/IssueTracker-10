@@ -31,11 +31,30 @@ class LabelViewController: UIViewController {
 		viewModel.updateClosure?(viewModel.state)
 		viewModel.requestGetLabelList()
 	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		navigationController?.setToolbarHidden(true, animated: false)
+	}
+	
+	func viewController<T:UIViewController> (identifier: String, type: T) -> T? {
+		let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+		if let viewController: T = mainStoryboard.instantiateViewController(withIdentifier: identifier) as? T {
+			return viewController
+		}
+		return nil
+	}
 }
 
 
 extension LabelViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 80
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let label = dataSource.itemIdentifier(for: indexPath)
+		guard let viewController = viewController(identifier: "PopupViewController", type: PopupViewController()) else { return }
+		viewController.label = label
+		self.present(viewController, animated: false, completion: nil)
 	}
 }

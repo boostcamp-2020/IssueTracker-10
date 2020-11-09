@@ -12,6 +12,7 @@ class LabelReactor {
 	
 	enum Action {
 		case requestGetLabelList
+		case requestUpdateLabel(Label)
 	}
 	
 	func execute(action: Action, currentState: LabelState) -> LabelState {
@@ -21,6 +22,11 @@ class LabelReactor {
 				var state = currentState
 				state.labels = labels
 				self.sideEffect?(state)
+			}
+			return currentState
+		case .requestUpdateLabel(let label):
+			LabelManager().update(with: label) {
+				let _ = self.execute(action: .requestGetLabelList, currentState: currentState)
 			}
 			return currentState
 		}

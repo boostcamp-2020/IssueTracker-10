@@ -14,9 +14,9 @@ struct LabelResponse: Codable {
 
 struct Label: Codable, Hashable {
 	let id: Int
-	let title: String
-	let description: String?
-	let color: String
+	var title: String
+	var description: String?
+	var color: String
 	var state = false
 	
 	enum CodingKeys : String, CodingKey{
