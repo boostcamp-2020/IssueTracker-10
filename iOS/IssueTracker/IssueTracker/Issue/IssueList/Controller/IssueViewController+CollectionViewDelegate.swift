@@ -17,7 +17,7 @@ extension IssueViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard isEditing == true else {
+        guard viewModel.state.isEditting else {
             presentViewController(identifier: "IssueDetailViewController", type: IssueDetailViewController(), option: .push)
             return
         }
