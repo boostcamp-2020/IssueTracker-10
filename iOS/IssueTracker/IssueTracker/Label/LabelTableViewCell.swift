@@ -20,8 +20,17 @@ class LabelTableViewCell: UITableViewCell {
 		super.setSelected(selected, animated: animated)
 	}
 	
-	func configure(title: String, detail: String) {
+	func configure(title: String, detail: String, color: String) {
+		let labelColor = color.hexStringToUIColor()
+		titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
 		titleLabel.text = title
+		layoutIfNeeded()
+		titleLabel.textColor = labelColor
+		titleLabel.addExternalBorder(content: title, borderWidth: 1, whiteSpace: 3, borderColor: labelColor)
 		detailLabel.text = detail
+	}
+	
+	override func prepareForReuse() {
+		titleLabel.removeExternalBorders()
 	}
 }

@@ -28,7 +28,7 @@ class LabelDiffableDataSource {
 		let cellProvider = { (tableView: UITableView, indexPath: IndexPath, label: Label) -> UITableViewCell? in
 			let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.labelCell, for: indexPath)
 			if let labelCell = cell as? LabelTableViewCell {
-				labelCell.configure(title: label.title, detail: label.description ?? "No description")
+				labelCell.configure(title: label.title, detail: label.description ?? "No description", color: label.color)
 				return labelCell
 			}
 			return cell
