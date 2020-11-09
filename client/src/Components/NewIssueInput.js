@@ -61,11 +61,13 @@ const NewIssue = () => {
   const { token } = state;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [disabled, setDisabled] = useState(true);
 
   const titleChange = (event) => {
     const text = event.target.value;
-    // TODO: title이 ""이면 submit new issue 버튼 비활성화
     setTitle(text);
+    if (text.length === 0) return setDisabled(true);
+    return setDisabled(false);
   };
 
   const contentChange = (event) => {
@@ -101,7 +103,11 @@ const NewIssue = () => {
         <InputContent placeholder="Leave a comment" rows="10" onChange={contentChange} />
         <ButtonWrapper>
           <LinkToMain href="/">Cancel</LinkToMain>
-          <GreenButton title="Submit new issue" onClickHandler={submitNewIssue} />
+          <GreenButton
+            title="Submit new issue"
+            onClickHandler={submitNewIssue}
+            disabled={disabled}
+          />
         </ButtonWrapper>
       </InputWrapper>
     </Wrapper>
