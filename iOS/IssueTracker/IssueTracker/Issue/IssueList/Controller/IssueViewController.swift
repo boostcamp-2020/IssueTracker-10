@@ -11,7 +11,6 @@ import hvNetwork
 class IssueViewController: UIViewController {
 	
     var dataSource: IssueDiffableDataSource!
-	let issueCounter = IssueCounter()
 	var viewModel = IssueListViewModel(reactor: IssueListReactor(),
                                         state: IssueListState())
     @IBOutlet weak var issueCollectionView: UICollectionView!
@@ -43,22 +42,22 @@ class IssueViewController: UIViewController {
             let issues = state.issues
             let filter = state.filter
             self.dataSource.performQuery(issues: issues, filter: filter)
-            self.updateIsEdit(flag: state.isEditting)
+			self.updateIsEdit(flag: state.isEditting, count: state.issueCount, isShowSelectedAll: state.isShowSelectedAll)
         }
         viewModel.updateClosure?(viewModel.state)
         viewModel.requestGetIssueList()
     }
     
-    func updateIsEdit(flag: Bool) {
+	func updateIsEdit(flag: Bool, count: Int, isShowSelectedAll: Bool) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self,
                   let editButton = self.navigationItem.rightBarButtonItem else { return }
             if flag {
                 self.issueCollectionView.allowsMultipleSelection = flag
                 editButton.title = "Cancel"
-				self.navigationController?.navigationBar.topItem?.title = self.issueCounter.description
-				self.makeSelectButton()
-                self.editModeToolBar()
+				self.navigationController?.navigationBar.topItem?.title = "\(count)개 선택중"
+				isShowSelectedAll ? self.makeSelectButton() : self.makeDeselectButton()
+				self.editModeToolBar()
             } else {
                 editButton.title = "Edit"
 				self.navigationItem.leftBarButtonItem = nil
@@ -105,12 +104,12 @@ class IssueViewController: UIViewController {
 	
 	@objc func selectAllButtonTouched() {
 		selectAll()
-		makeDeselectButton()
+		viewModel.updateSelectedAllMode()
 	}
 	
 	@objc func deselectAllButtonTouched() {
 		deselectAll()
-		makeSelectButton()
+		viewModel.updateSelectedAllMode()
 	}
 
 	func getAllIndexPathsInSection(section : Int) -> [IndexPath] {

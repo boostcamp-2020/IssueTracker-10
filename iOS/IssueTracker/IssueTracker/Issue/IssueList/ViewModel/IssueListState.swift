@@ -10,6 +10,8 @@ import Foundation
 struct IssueListState {
     
     var isEditting: Bool
+	var issueCount: Int
+	var isShowSelectedAll: Bool
     var issues: [Issue]
     var selectedLabelTitle: SelectedLabelTitle
     var inputText: String
@@ -27,5 +29,7 @@ struct IssueListState {
         selectedLabelTitle = SelectedLabelTitle()
         checkedFilter = EmptyCriteria()
         inputText = ""
+		issueCount = 0
+		isShowSelectedAll = true
     }
 }

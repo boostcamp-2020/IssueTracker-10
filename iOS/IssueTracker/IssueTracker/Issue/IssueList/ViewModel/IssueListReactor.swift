@@ -19,6 +19,8 @@ class IssueListReactor {
         case requestIssueDelete([Issue])
         case requestIssueClose([Issue])
         case checkedFilter(IssueCriteria)
+		case changeIssueCount(Int)
+		case updateShowSelectedAll
     }
     
     func execute(action: Action, currentState: IssueListState) -> IssueListState {
@@ -65,6 +67,14 @@ class IssueListReactor {
                 let _ = self.execute(action: .requestGetIssueList, currentState: state)
             }
             return state
+		case .changeIssueCount(let count):
+			var state = currentState
+			state.issueCount = count
+			return state
+		case .updateShowSelectedAll:
+			var state = currentState
+			state.isShowSelectedAll.toggle()
+			return state
         }
     }
 }

@@ -30,15 +30,13 @@ extension IssueViewController: UICollectionViewDelegate {
 			cell?.backgroundColor = nil
 		}
 		
-		issueCounter.count(collectionView.indexPathsForSelectedItems?.count ?? 0)
-		self.navigationController?.navigationBar.topItem?.title = issueCounter.description
+		viewModel.updateIssueCount(count: collectionView.indexPathsForSelectedItems?.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = nil
 		
-		issueCounter.count(collectionView.indexPathsForSelectedItems?.count ?? 0)
-		self.navigationController?.navigationBar.topItem?.title = issueCounter.description
+		viewModel.updateIssueCount(count: collectionView.indexPathsForSelectedItems?.count ?? 0)
     }
 }

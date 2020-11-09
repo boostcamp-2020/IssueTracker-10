@@ -12,7 +12,6 @@
 		C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */; };
 		C32C5FC225500276008BBDCE /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FC125500276008BBDCE /* KeychainItem.swift */; };
 		C32C5FCA25500430008BBDCE /* UIViewController+showLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FC925500430008BBDCE /* UIViewController+showLoginView.swift */; };
-		C337F50A2556CC9A00A6049D /* IssueCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C337F5092556CC9A00A6049D /* IssueCounter.swift */; };
 		C3414FA525480104003C845A /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FA425480104003C845A /* LabelViewController.swift */; };
 		C3414FAD2548018D003C845A /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FAC2548018D003C845A /* Issue.swift */; };
 		C3414FC425481BF6003C845A /* IssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FC325481BF6003C845A /* IssueManager.swift */; };
@@ -93,7 +92,6 @@
 		C32C5FBA254FF1D7008BBDCE /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		C32C5FC125500276008BBDCE /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
 		C32C5FC925500430008BBDCE /* UIViewController+showLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+showLoginView.swift"; sourceTree = "<group>"; };
-		C337F5092556CC9A00A6049D /* IssueCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCounter.swift; sourceTree = "<group>"; };
 		C3414FA425480104003C845A /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		C3414FAC2548018D003C845A /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		C3414FC325481BF6003C845A /* IssueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueManager.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 				C3414FC325481BF6003C845A /* IssueManager.swift */,
 				E0B3D43B2549AFC90040D5AF /* Criteria.swift */,
 				E049B8D0255316B2004DD162 /* SelectedLabels.swift */,
-				C337F5092556CC9A00A6049D /* IssueCounter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -564,7 +561,6 @@
 				E0B3D40F2547F9590040D5AF /* IssueCreateViewController.swift in Sources */,
 				E09C1EEC2551584800A1FADF /* LabelCollectionViewCell.swift in Sources */,
 				C35F6B192550281D008A116B /* User.swift in Sources */,
-				C337F50A2556CC9A00A6049D /* IssueCounter.swift in Sources */,
 				E0B3D3FD2547E8490040D5AF /* IssueViewController.swift in Sources */,
 				C3414FC425481BF6003C845A /* IssueManager.swift in Sources */,
 				E049B949255627D0004DD162 /* IssueListReactor.swift in Sources */,
