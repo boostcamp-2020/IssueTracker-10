@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Router from './Routes';
 import AuthProvider from './Components/Provider/Auth';
+import IssueProvider from './Components/Provider/Issue';
 
 const App = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
+      <IssueProvider>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </IssueProvider>
     </AuthProvider>
   );
 };
