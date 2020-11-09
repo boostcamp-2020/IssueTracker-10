@@ -7,8 +7,12 @@ const Button = styled.button`
   background-color: ${(props) => props.theme.greenColor};
 `;
 
-const GreenButton = ({ title }) => {
-  return <Button>{title}</Button>;
+const GreenButton = ({ type = 'button', title, onClickHandler }) => {
+  return (
+    <Button type={type} onClick={onClickHandler}>
+      {title}
+    </Button>
+  );
 };
 
 export default GreenButton;

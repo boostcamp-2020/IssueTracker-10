@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Input from './Input';
 import GreenButton from './GreenButton';
+import { request } from '../Api';
+import { AuthStateContext } from '../Context/AuthContext';
 
 const Wrapper = styled.div`
   display: flex;
@@ -55,15 +57,51 @@ const LinkToMain = styled.a`
 `;
 
 const NewIssue = () => {
+  const state = useContext(AuthStateContext);
+  const { token } = state;
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const titleChange = (event) => {
+    const text = event.target.value;
+    // TODO: title이 ""이면 submit new issue 버튼 비활성화
+    setTitle(text);
+  };
+
+  const contentChange = (event) => {
+    const text = event.target.value;
+    setContent(text);
+  };
+
+  const submitNewIssue = async () => {
+    const data = {
+      title,
+      content,
+      // TODO: Assignees, labels, milestone 정보도 추가할 것
+    };
+
+    const config = { url: '/api/issue', method: 'POST', data, token };
+    const result = await request(config);
+
+    if (result.message) {
+      // TODO: 이슈 페이지 or 이슈 상세페이지로 이동
+      alert('생성 성공!');
+      return;
+    }
+
+    alert('생성 실패!');
+  };
+
   return (
     <Wrapper>
       <UserAvater src="https://user-images.githubusercontent.com/49746644/98506257-6c2d0900-229e-11eb-8e94-d5dac331df82.jpg" />
       <InputWrapper>
-        <InputTitle type="text" placeholder="Title" required />
-        <InputContent placeholder="Leave a comment" rows="10" />
+        {/* onChange 이벤트가 발생할 때마다 현재 컴포넌트가 재렌더링 되므로 InputTitle과 InputContent를 컴포넌트 분할시키는 것도 괜찮을 것 같다..? */}
+        <InputTitle type="text" placeholder="Title" required onChange={titleChange} />
+        <InputContent placeholder="Leave a comment" rows="10" onChange={contentChange} />
         <ButtonWrapper>
           <LinkToMain href="/">Cancel</LinkToMain>
-          <GreenButton title="Submit new issue" />
+          <GreenButton title="Submit new issue" onClickHandler={submitNewIssue} />
         </ButtonWrapper>
       </InputWrapper>
     </Wrapper>
