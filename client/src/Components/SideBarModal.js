@@ -1,21 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { renderUsers, renderMilestones, renderLabels } from './SideBarList';
-
-const modalType = {
-  Assignees: {
-    title: `Assign up to people to this issue`,
-    render: renderUsers,
-  },
-  Labels: {
-    title: 'Apply Labels to this issue',
-    render: renderLabels,
-  },
-  Milestone: {
-    title: 'Set milestone',
-    render: renderMilestones,
-  },
-};
 
 const ModalWrapper = styled.div`
   position: absolute;
@@ -45,9 +29,7 @@ const ModalContent = styled.ul`
   cursor: pointer;
 `;
 
-const IssueFilterModal = ({ type }) => {
-  const [modalInfo] = useState(modalType[type]);
-
+const IssueFilterModal = ({ title, render }) => {
   useEffect(() => {
     return () => {
       // TODO: 선택된 요소를 SideBarElement 컴포넌트의 content 컴포넌트에 추가
@@ -56,8 +38,8 @@ const IssueFilterModal = ({ type }) => {
 
   return (
     <ModalWrapper>
-      <ModalTitle>{modalInfo.title}</ModalTitle>
-      <ModalContent>{modalInfo.render()}</ModalContent>
+      <ModalTitle>{title}</ModalTitle>
+      <ModalContent>{render()}</ModalContent>
     </ModalWrapper>
   );
 };

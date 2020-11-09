@@ -2,6 +2,26 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { GearIcon } from './static/svgIcons';
 import SideBarModal from './SideBarModal';
+import { renderUsers, renderMilestones, renderLabels } from './SideBarList';
+import { checkedUsers, checkedLabels, checkedMilestone } from './CheckedList';
+
+const modalType = {
+  Assignees: {
+    title: `Assign up to people to this issue`,
+    render: renderUsers,
+    content: checkedUsers,
+  },
+  Labels: {
+    title: 'Apply Labels to this issue',
+    render: renderLabels,
+    content: checkedLabels,
+  },
+  Milestone: {
+    title: 'Set milestone',
+    render: renderMilestones,
+    content: checkedMilestone,
+  },
+};
 
 const Container = styled.div`
   position: relative;
@@ -38,8 +58,9 @@ const Content = styled.div`
   color: ${(props) => props.theme.darkgrayColor};
 `;
 
-const SideBarElement = ({ title, content }) => {
+const SideBarElement = ({ title }) => {
   const [modalDisplay, setModalDisplay] = useState(false);
+  const [modalInfo] = useState(modalType[title]);
   const toggleModal = () => {
     // TODO: 전체 화면 클릭시, 모달이 띄워져 있으면 닫히도록 이벤트 수정
     setModalDisplay(!modalDisplay);
@@ -51,8 +72,8 @@ const SideBarElement = ({ title, content }) => {
         <Title>{title}</Title>
         <GearIcon size="20" />
       </HeaderWrapper>
-      {modalDisplay && <SideBarModal type={title} />}
-      <Content>{content}</Content>
+      {modalDisplay && <SideBarModal title={modalInfo.title} render={modalInfo.render} />}
+      <Content>{modalInfo.content()}</Content>
     </Container>
   );
 };
