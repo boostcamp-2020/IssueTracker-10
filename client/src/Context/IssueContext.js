@@ -36,6 +36,7 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           state: 'open',
         },
+        issues: [...action.payload],
       };
     }
     case 'CLOSE': {
@@ -55,6 +56,7 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           state: 'all',
         },
+        issues: [...action.payload],
       };
     }
     default:

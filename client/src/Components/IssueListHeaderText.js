@@ -14,13 +14,14 @@ const HeaderTextWrapper = styled.span`
 const CountSpanText = styled.span`
   margin: 0 13px 0 8px;
   cursor: pointer;
+  font-weight: ${(props) => (props.bold ? 600 : 400)};
 `;
 
 const CountText = () => {
   const authState = useContext(AuthStateContext);
   const state = useContext(IssueStateContext);
   const dispatch = useContext(IssueDispatchContext);
-  const { openCount, closedCount } = state;
+  const { openCount, closedCount, filter } = state;
 
   const fetchByState = async (type) => {
     const config = {
@@ -31,22 +32,33 @@ const CountText = () => {
       },
       token: authState.token,
     };
-    const { data } = await request(config);
-    if (data) dispatch({ type: 'CLOSE', payload: data });
+    const { data = null } = await request(config);
+    return data;
   };
 
   const onClickClosed = async () => {
-    await fetchByState('closed');
+    const data = await fetchByState('closed');
+    if (data) dispatch({ type: 'CLOSE', payload: data });
   };
+
+  const onClickOpen = async () => {
+    const data = await fetchByState('open');
+    if (data) dispatch({ type: 'OPEN', payload: data });
+  };
+
   return (
     <>
       <HeaderTextWrapper>
         <IssueOpenIcon size={14} />
-        <CountSpanText>{openCount} open</CountSpanText>
+        <CountSpanText onClick={onClickOpen} bold={filter.state === 'open'}>
+          {openCount} open
+        </CountSpanText>
       </HeaderTextWrapper>
       <HeaderTextWrapper>
         <CheckIcon size={14} />
-        <CountSpanText onClick={onClickClosed}>{closedCount} closed</CountSpanText>
+        <CountSpanText onClick={onClickClosed} bold={filter.state === 'closed'}>
+          {closedCount} closed
+        </CountSpanText>
       </HeaderTextWrapper>
     </>
   );
