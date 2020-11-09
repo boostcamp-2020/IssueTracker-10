@@ -76,6 +76,7 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           author: null,
         },
+        issues: [...action.payload],
       };
     }
     case 'SET_ASSIGNEE': {
@@ -95,6 +96,7 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           assignee: null,
         },
+        issues: [...action.payload],
       };
     }
     default:

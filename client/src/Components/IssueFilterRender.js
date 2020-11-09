@@ -61,16 +61,14 @@ export const renderUsers = ({ users, type }) => {
   const onClickUser = async (id) => {
     const actionSetType = type === 'author' ? 'SET_AUTHOR' : 'SET_ASSIGNEE';
     const actionRemoveType = type === 'author' ? 'REMOVE_AUTHOR' : 'REMOVE_ASSIGNEE';
+    const passedId = selectedUser === id ? null : id;
 
-    if (selectedUser === id) {
-      setSelectedUser(null);
-      dispatch({ type: actionRemoveType });
-    } else {
-      const data = await fetchIssues({ id });
-      if (data) {
-        dispatch({ type: actionSetType, id, payload: data });
-        setSelectedUser(id);
-      }
+    const data = await fetchIssues({ id: passedId });
+    if (data) {
+      if (selectedUser === id) {
+        dispatch({ type: actionRemoveType, payload: data });
+      } else dispatch({ type: actionSetType, id, payload: data });
+      setSelectedUser(passedId);
     }
   };
 
