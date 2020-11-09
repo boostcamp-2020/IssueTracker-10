@@ -54,13 +54,17 @@ const Issue = ({ token }) => {
     };
   }, [state.token]);
 
+  const goToNewIssue = () => {
+    document.location.href = '/new';
+  };
+
   return (
     <Wrapper>
       <Header />
       <IssueHeader>
         <FilterInput />
         <LabelMilestoneButton issueHeader={issueHeader} hasCount />
-        <GreenButton title="New Issue" />
+        <GreenButton title="New Issue" onClickHandler={goToNewIssue} />
       </IssueHeader>
       <IssueList issues={issues} issueHeader={issueHeader} />
     </Wrapper>
