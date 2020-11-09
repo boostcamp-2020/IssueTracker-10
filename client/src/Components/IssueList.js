@@ -18,6 +18,10 @@ const IssueList = (props) => {
   const [checkedIssues, setCheckedIssues] = useState([]);
   const [allChecked, setAllChecked] = useState(false);
 
+  useEffect(() => {
+    if (issues.length > 0 && issues.length === checkedIssues.length) setAllChecked(true);
+  }, [checkedIssues]);
+
   const checkOneIssue = (issueId) => {
     if (checkedIssues.includes(issueId)) {
       const deletedIssues = checkedIssues.filter((id) => id !== issueId);
@@ -27,11 +31,16 @@ const IssueList = (props) => {
   };
 
   const checkAllIssue = () => {
-    const ids = issues.reduce((prev, issue) => {
-      return [...prev, issue.id];
-    }, []);
-    setCheckedIssues(ids);
-    setAllChecked(true);
+    if (allChecked) {
+      setCheckedIssues([]);
+      setAllChecked(false);
+    } else {
+      const ids = issues.reduce((prev, issue) => {
+        return [...prev, issue.id];
+      }, []);
+      setCheckedIssues(ids);
+      setAllChecked(true);
+    }
   };
 
   return (
