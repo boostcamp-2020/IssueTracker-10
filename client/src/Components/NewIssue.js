@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import NewIssueInput from './NewIssueInput';
+import IssueSideBar from './IssueSideBar';
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,11 +10,20 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
+const NewIssueWrapper = styled.div`
+  display: flex;
+  width: 1100px;
+  margin: 0 auto;
+`;
+
 const NewIssue = () => {
   return (
     <Wrapper>
       <Header />
-      <NewIssueInput />
+      <NewIssueWrapper>
+        <NewIssueInput />
+        <IssueSideBar />
+      </NewIssueWrapper>
     </Wrapper>
   );
 };

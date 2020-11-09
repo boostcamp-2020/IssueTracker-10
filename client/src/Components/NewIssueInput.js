@@ -6,6 +6,7 @@ import GreenButton from './GreenButton';
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
   margin-top: 30px;
 `;
 
@@ -17,7 +18,7 @@ const UserAvater = styled.img`
 `;
 
 const InputWrapper = styled.form`
-  width: 500px;
+  width: 100%;
   padding: 10px;
   border-radius: ${(props) => props.theme.radiusSmall};
   border: ${(props) => props.theme.border};
