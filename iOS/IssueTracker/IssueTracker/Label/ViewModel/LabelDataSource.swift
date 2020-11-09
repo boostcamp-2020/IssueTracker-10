@@ -28,7 +28,7 @@ class LabelDiffableDataSource {
 		let cellProvider = { (tableView: UITableView, indexPath: IndexPath, label: Label) -> UITableViewCell? in
 			let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.labelCell, for: indexPath)
 			if let labelCell = cell as? LabelTableViewCell {
-				labelCell.configure(title: label.title, detail: label.description)
+				labelCell.configure(title: label.title, detail: label.description ?? "No description")
 				return labelCell
 			}
 			return cell
@@ -38,10 +38,12 @@ class LabelDiffableDataSource {
 	}
 	
 	func updateDataSource(labels: [Label]) {
-		var snapshot = NSDiffableDataSourceSnapshot<Section, Label>()
-		snapshot.appendSections([.main])
-		snapshot.appendItems(labels)
-		dataSource.apply(snapshot, animatingDifferences: true)
+		DispatchQueue.main.async {
+			var snapshot = NSDiffableDataSourceSnapshot<Section, Label>()
+			snapshot.appendSections([.main])
+			snapshot.appendItems(labels)
+			self.dataSource.apply(snapshot, animatingDifferences: false)
+		}
 	}
 	
 	func itemIdentifier(for indexPath: IndexPath) -> Label? {
