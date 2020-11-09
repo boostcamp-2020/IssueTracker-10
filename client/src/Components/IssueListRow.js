@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { IssueCheckbox } from './IssueListHeader';
 import { convertTime } from '../utils/convert';
-import { MilestoneIcon } from './static/svgIcons';
+import { MilestoneIcon, IssueOpenIcon, IssueClosedIcon } from './static/svgIcons';
 
 const RowWraaper = styled.div`
   display: flex;
@@ -22,6 +22,9 @@ const IssueTextWrapper = styled.div`
 
 const IssueState = styled.span`
   margin-right: 10px;
+  svg {
+    fill: ${(props) => (props.state ? props.theme.blueColor : props.theme.redColor)};
+  }
 `;
 
 const IssueTitle = styled.span`
@@ -48,12 +51,13 @@ const MilestoneText = styled(IssueSubText)`
 `;
 
 const IssueListRow = (props) => {
-  const { id, user, title, state, createdAt, milestone } = props;
+  const { id, user, title, state, createdAt, milestone, checkOneIssue, checked } = props;
   const { username } = user;
+
   return (
     <RowWraaper>
-      <IssueCheckbox type="checkbox" />
-      <IssueState>{state}</IssueState>
+      <IssueCheckbox onChange={() => checkOneIssue(id)} type="checkbox" checked={checked} />
+      <IssueState state={state}>{state ? <IssueOpenIcon /> : <IssueClosedIcon />}</IssueState>
       <IssueTextWrapper>
         <IssueTitle>{title}</IssueTitle>
         <IssueInformation>
