@@ -8,7 +8,6 @@
 import UIKit
 
 extension IssueViewController {
-    
     func setupUI() {
         setupSearchController()
         setDefaultToolBar()
@@ -31,5 +30,14 @@ extension IssueViewController {
         let filter = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .done, target: self, action: #selector(filterTapped))
         filter.tintColor = UIColor(named: "GithubMainColor")
         toolbarItems = [filter, spacer, add]
+    }
+    
+    func editModeToolBar() {
+        let close = UIBarButtonItem(title: "Close", style: .done , target: self, action: #selector(closeTapped))
+        close.tintColor = UIColor(named: "GithubMainColor")
+        let delete = UIBarButtonItem(title: "Delete", style: .done , target: self, action: #selector(deleteTapped))
+        delete.tintColor = UIColor.systemRed
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        toolbarItems = [delete, spacer, close]
     }
 }
