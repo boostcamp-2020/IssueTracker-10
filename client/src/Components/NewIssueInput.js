@@ -63,14 +63,13 @@ const NewIssue = () => {
   const [content, setContent] = useState('');
   const [disabled, setDisabled] = useState(true);
 
-  const titleChange = (event) => {
+  const onChangeTitle = (event) => {
     const text = event.target.value;
     setTitle(text);
-    if (text.length === 0) return setDisabled(true);
-    return setDisabled(false);
+    return text.length === 0 ? setDisabled(true) : setDisabled(false);
   };
 
-  const contentChange = (event) => {
+  const onChangeContent = (event) => {
     const text = event.target.value;
     setContent(text);
   };
@@ -99,8 +98,8 @@ const NewIssue = () => {
       <UserAvater src="https://user-images.githubusercontent.com/49746644/98506257-6c2d0900-229e-11eb-8e94-d5dac331df82.jpg" />
       <InputWrapper>
         {/* onChange 이벤트가 발생할 때마다 현재 컴포넌트가 재렌더링 되므로 InputTitle과 InputContent를 컴포넌트 분할시키는 것도 괜찮을 것 같다..? */}
-        <InputTitle type="text" placeholder="Title" required onChange={titleChange} />
-        <InputContent placeholder="Leave a comment" rows="10" onChange={contentChange} />
+        <InputTitle type="text" placeholder="Title" required onChange={onChangeTitle} />
+        <InputContent placeholder="Leave a comment" rows="10" onChange={onChangeContent} />
         <ButtonWrapper>
           <LinkToMain href="/">Cancel</LinkToMain>
           <GreenButton
