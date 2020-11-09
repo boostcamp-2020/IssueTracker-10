@@ -61,11 +61,11 @@ const CloseButton = styled.button`
 
 const FilterModal = ({ display, setDisplay }) => {
   const toggleDisplay = () => {
-    const displayValue = display === 1 ? 0 : 1;
+    const displayValue = !display;
     setDisplay(displayValue);
   };
   return (
-    <Modal display={display}>
+    <Modal>
       <ModalHeader>
         <HeaderText text="Filter Issues" />
         <CloseButton onClick={toggleDisplay}>&times;</CloseButton>
