@@ -70,7 +70,6 @@ export const issueReducer = (state, action) => {
       };
     }
     case 'REMOVE_AUTHOR': {
-      console.log(action);
       return {
         ...state,
         filter: {

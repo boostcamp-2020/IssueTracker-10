@@ -5,7 +5,7 @@ import { renderUsers, renderMilestones, renderLabels } from './IssueFilterRender
 const modalType = {
   author: {
     title: 'Filter by author',
-    getRows: renderUsers,
+    getRows: (users) => renderUsers({ users, type: 'author' }),
   },
   label: {
     title: 'Filter by label',
@@ -17,7 +17,7 @@ const modalType = {
   },
   assignee: {
     title: `Filter by who's assigned`,
-    getRows: renderUsers,
+    getRows: (users) => renderUsers({ users, type: 'assignee' }),
   },
 };
 
