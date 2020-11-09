@@ -37,22 +37,25 @@ class IssueManager {
             }
         }
     }
+    func delete(with issues: [Issue], completion: @escaping (() -> Void)) {
+        issues.forEach { delete(with: $0, completion: completion)}
+    }
 	
-	func delete(with issue: Issue) {
+	func delete(with issue: Issue, completion: @escaping (() -> Void)) {
         let id = issue.id
         let headers = ["Authorization": Constant.token]
         
         hvNet.request("http://49.50.163.58:3000/api/issue/\(id)", method: .delete, headers: headers).response { (result: HVDataResponse<Data?>) in
             switch result {
             case .success:
-                NotificationCenter.default.post(name: .issueDidChanged, object: nil)
+                completion()
             case.failure(let error):
                 print(error.localizedDescription)
             }
         }
 	}
 	
-	func close(with issue: [Issue]) {
+	func close(with issue: [Issue], completion: @escaping (() -> Void)) {
         let ids = issue.map { $0.id }
         let parameters = ["state" : 0, "issueIds" : ids] as [String : Any]
         let headers = ["Authorization": Constant.token]
@@ -60,7 +63,7 @@ class IssueManager {
         hvNet.request("http://49.50.163.58:3000/api/issue/state", method: .put, parameter: parameters, headers: headers).response { (result: HVDataResponse<Data?>) in
             switch result {
             case .success:
-                NotificationCenter.default.post(name: .issueDidChanged, object: nil)
+                completion()
             case.failure(let error):
                 print(error.localizedDescription)
             }
