@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct LabelResponse: Codable {
+	let message: String
+	let data: [Label]
+}
+
 struct Label: Codable, Hashable {
 	let id: Int
 	let title: String

@@ -50,19 +50,6 @@ struct Milestone: Codable, Hashable {
     let title: String
 }
 
-struct Label: Codable, Hashable {
-    let id: Int
-    let title: String
-    let color: String
-    var state = false
-    
-    enum CodingKeys : String, CodingKey{
-        case id
-        case title
-        case color
-    }
-}
-
 struct Assignee: Codable, Hashable {
     let id: Int
     let avatar: String
