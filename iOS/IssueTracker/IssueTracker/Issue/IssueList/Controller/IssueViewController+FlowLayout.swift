@@ -8,7 +8,6 @@
 import UIKit
 
 extension IssueViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxLine: CGFloat = 2
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return CGSize.zero }
