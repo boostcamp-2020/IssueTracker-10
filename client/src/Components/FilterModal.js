@@ -15,8 +15,6 @@ const Modal = styled.div`
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.whiteColor};
   box-shadow: ${(props) => props.theme.cardShadow};
-  opacity: ${(props) => props.display};
-  transition: opacity 0.2s linear;
 `;
 
 const ModalBody = styled.div``;
@@ -24,7 +22,7 @@ const ModalBody = styled.div``;
 const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 15px;
   align-items: center;
   background-color: ${(props) => props.theme.blueColor};
   border-top-left-radius: ${(props) => props.theme.radius};
@@ -65,19 +63,23 @@ const FilterModal = ({ display, setDisplay }) => {
     setDisplay(displayValue);
   };
   return (
-    <Modal display={display}>
-      <ModalHeader>
-        <HeaderText text="Filter Issues" />
-        <CloseButton onClick={toggleDisplay}>&times;</CloseButton>
-      </ModalHeader>
-      <ModalBody>
-        <Text>Open Issues and pull requests</Text>
-        <Text>Your Issues</Text>
-        <Text>Your pull requests</Text>
-        <Text>Everything assigned to you</Text>
-        <Text>Everything mentioning to you</Text>
-      </ModalBody>
-    </Modal>
+    <>
+      {display ? (
+        <Modal>
+          <ModalHeader>
+            <HeaderText text="Filter Issues" />
+            <CloseButton onClick={toggleDisplay}>&times;</CloseButton>
+          </ModalHeader>
+          <ModalBody>
+            <Text>Open Issues and pull requests</Text>
+            <Text>Your Issues</Text>
+            <Text>Your pull requests</Text>
+            <Text>Everything assigned to you</Text>
+            <Text>Everything mentioning to you</Text>
+          </ModalBody>
+        </Modal>
+      ) : null}
+    </>
   );
 };
 
