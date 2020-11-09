@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import IssueFilterModal from './IssueFilterModal';
+import HeaderText from './IssueListHeaderText';
 
 const ListHeaderWraaper = styled.div`
   display: flex;
@@ -13,10 +14,6 @@ const ListHeaderWraaper = styled.div`
 
 export const IssueCheckbox = styled.input`
   margin-right: 15px;
-`;
-
-const SelectedText = styled.span`
-  font-size: 14px;
 `;
 
 const FilterWrapper = styled.span`
@@ -36,7 +33,7 @@ const FillterButton = styled.button`
 const IssueListHeader = (props) => {
   const [modal, setModal] = useState(0);
   const { header, checkAllIssue, checked, checkedLength = 0 } = props;
-  const { labels, milestones, users, openCount, closedCount } = header;
+  const { labels, milestones, users } = header;
   const handleModal = (num) => {
     if (modal === num) setModal(0);
     else setModal(num);
@@ -44,11 +41,7 @@ const IssueListHeader = (props) => {
   return (
     <ListHeaderWraaper>
       <IssueCheckbox type="checkbox" onChange={checkAllIssue} checked={checked} />
-      <SelectedText>
-        {checkedLength === 0
-          ? `${openCount} open ${closedCount} closed`
-          : `${checkedLength} selected`}
-      </SelectedText>
+      <HeaderText {...header} checkedLength={checkedLength} />
       <FilterWrapperLeft>
         <FillterButton onClick={() => handleModal(1)}>Author ▾</FillterButton>
         {modal === 1 && <IssueFilterModal id="author" data={users} />}
