@@ -8,16 +8,20 @@
 import UIKit
 
 class LabelTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+	
+	@IBOutlet weak var detailLabel: UILabel!
+	@IBOutlet weak var titleLabel: UILabel!
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+	}
+	
+	override func setSelected(_ selected: Bool, animated: Bool) {
+		super.setSelected(selected, animated: animated)
+	}
+	
+	func configure(title: String, detail: String) {
+		titleLabel.text = title
+		detailLabel.text = detail
+	}
 }
