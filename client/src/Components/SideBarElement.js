@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { GearIcon } from './static/svgIcons';
+import SideBarModal from './SideBarModal';
 
 const Container = styled.div`
+  position: relative;
   padding: 20px 0;
   border-bottom: ${(props) => props.theme.border};
 `;
@@ -36,14 +38,23 @@ const Content = styled.div`
   color: ${(props) => props.theme.darkgrayColor};
 `;
 
-const SideBarElement = ({ title, content }) => (
-  <Container>
-    <HeaderWrapper>
-      <Title>{title}</Title>
-      <GearIcon size="20" />
-    </HeaderWrapper>
-    <Content>{content}</Content>
-  </Container>
-);
+const SideBarElement = ({ title, content }) => {
+  const [modalDisplay, setModalDisplay] = useState(false);
+  const toggleModal = () => {
+    // TODO: 전체 화면 클릭시, 모달이 띄워져 있으면 닫히도록 이벤트 수정
+    setModalDisplay(!modalDisplay);
+  };
+
+  return (
+    <Container>
+      <HeaderWrapper onClick={toggleModal}>
+        <Title>{title}</Title>
+        <GearIcon size="20" />
+      </HeaderWrapper>
+      {modalDisplay && <SideBarModal type={title} />}
+      <Content>{content}</Content>
+    </Container>
+  );
+};
 
 export default SideBarElement;
