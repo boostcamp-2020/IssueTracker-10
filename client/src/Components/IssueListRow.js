@@ -48,11 +48,12 @@ const MilestoneText = styled(IssueSubText)`
 `;
 
 const IssueListRow = (props) => {
-  const { id, user, title, state, createdAt, milestone } = props;
+  const { id, user, title, state, createdAt, milestone, checkOneIssue, checked } = props;
   const { username } = user;
+
   return (
     <RowWraaper>
-      <IssueCheckbox type="checkbox" />
+      <IssueCheckbox onChange={() => checkOneIssue(id)} type="checkbox" checked={checked} />
       <IssueState>{state}</IssueState>
       <IssueTextWrapper>
         <IssueTitle>{title}</IssueTitle>

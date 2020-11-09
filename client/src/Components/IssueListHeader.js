@@ -35,14 +35,14 @@ const FillterButton = styled.button`
 
 const IssueListHeader = (props) => {
   const [modal, setModal] = useState(0);
-  const { labels, milestones, users, openCount, closedCount } = props;
+  const { labels, milestones, users, openCount, closedCount, checkAllIssue, checked } = props;
   const handleModal = (num) => {
     if (modal === num) setModal(0);
     else setModal(num);
   };
   return (
     <ListHeaderWraaper>
-      <IssueCheckbox type="checkbox" />
+      <IssueCheckbox type="checkbox" onChange={checkAllIssue} checked={checked} />
       <SelectedText>
         {openCount} open {closedCount} closed
       </SelectedText>

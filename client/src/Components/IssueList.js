@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import IssueListHeader from './IssueListHeader';
 import IssueListRow from './IssueListRow';
@@ -15,10 +15,37 @@ const IssueListWrapper = styled.div`
 
 const IssueList = (props) => {
   const { issueHeader = {}, issues = [] } = props;
+  const [checkedIssues, setCheckedIssues] = useState([]);
+  const [allChecked, setAllChecked] = useState(false);
+
+  const checkOneIssue = (issueId) => {
+    if (checkedIssues.includes(issueId)) {
+      const deletedIssues = checkedIssues.filter((id) => id !== issueId);
+      setCheckedIssues(deletedIssues);
+      setAllChecked(false);
+    } else setCheckedIssues([issueId, ...checkedIssues]);
+  };
+
+  const checkAllIssue = () => {
+    const ids = issues.reduce((prev, issue) => {
+      return [...prev, issue.id];
+    }, []);
+    setCheckedIssues(ids);
+    setAllChecked(true);
+  };
+
   return (
     <IssueListWrapper>
-      <IssueListHeader {...issueHeader} />
-      {issues && issues.map((issue) => <IssueListRow key={issue.id} {...issue} />)}
+      <IssueListHeader {...issueHeader} checked={allChecked} checkAllIssue={checkAllIssue} />
+      {issues &&
+        issues.map((issue) => (
+          <IssueListRow
+            key={issue.id}
+            {...issue}
+            checked={checkedIssues.includes(issue.id)}
+            checkOneIssue={checkOneIssue}
+          />
+        ))}
     </IssueListWrapper>
   );
 };
