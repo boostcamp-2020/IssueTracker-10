@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import IssueLabel from './IssueLabel';
 import { IssueCheckbox } from './IssueListHeader';
 import { convertTime } from '../../utils/convert';
 import { MilestoneIcon, IssueOpenIcon, IssueClosedIcon } from '../static/svgIcons';
@@ -18,6 +19,7 @@ const RowWraaper = styled.div`
 const IssueTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 80%;
 `;
 
 const IssueState = styled.span`
@@ -27,8 +29,15 @@ const IssueState = styled.span`
   }
 `;
 
-const IssueTitle = styled.span`
+const IssueTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 4px;
+`;
+
+const IssueTitle = styled.span`
+  margin-right: 7px;
   font-size: 16px;
   font-weight: 600;
 `;
@@ -51,7 +60,17 @@ const MilestoneText = styled(IssueSubText)`
 `;
 
 const IssueListRow = (props) => {
-  const { id, user, title, state, createdAt, milestone, checkOneIssue, checked } = props;
+  const {
+    id,
+    user,
+    title,
+    state,
+    createdAt,
+    milestone,
+    labels = [],
+    checkOneIssue,
+    checked,
+  } = props;
   const { username } = user;
 
   return (
@@ -59,7 +78,10 @@ const IssueListRow = (props) => {
       <IssueCheckbox onChange={() => checkOneIssue(id)} type="checkbox" checked={checked} />
       <IssueState state={state}>{state ? <IssueOpenIcon /> : <IssueClosedIcon />}</IssueState>
       <IssueTextWrapper>
-        <IssueTitle>{title}</IssueTitle>
+        <IssueTitleWrapper>
+          <IssueTitle>{title}</IssueTitle>
+          {labels.length > 0 && labels.map((label) => <IssueLabel {...label} />)}
+        </IssueTitleWrapper>
         <IssueInformation>
           <IssueSubText>#{id}</IssueSubText>
           <IssueSubText>
