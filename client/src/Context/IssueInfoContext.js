@@ -5,7 +5,7 @@ export const initIssueInfo = {
   content: undefined,
   labels: [],
   assignees: [],
-  milestoneId: undefined,
+  milestone: undefined,
   comments: [],
 };
 
@@ -40,10 +40,10 @@ export const issueInfoReducer = (state, action) => {
       };
     }
     case 'SELECT_MILESTONE': {
-      const milestoneId = action.data;
+      const milestone = action.data;
       return {
         ...state,
-        milestoneId,
+        milestone,
       };
     }
     default:

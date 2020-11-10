@@ -5,6 +5,7 @@ import NewIssueInput from './NewIssueInput';
 import IssueSideBar from './IssueSideBar';
 import { AuthStateContext } from '../Context/AuthContext';
 import { IssueDispatchContext } from '../Context/IssueContext';
+import IssueInfoProvider from './Provider/IssueInfo';
 import { request } from '../Api';
 
 const Wrapper = styled.div`
@@ -37,8 +38,10 @@ const NewIssue = () => {
     <Wrapper>
       <Header />
       <NewIssueWrapper>
-        <NewIssueInput />
-        <IssueSideBar />
+        <IssueInfoProvider>
+          <NewIssueInput />
+          <IssueSideBar />
+        </IssueInfoProvider>
       </NewIssueWrapper>
     </Wrapper>
   );
