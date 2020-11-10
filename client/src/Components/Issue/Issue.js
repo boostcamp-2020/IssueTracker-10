@@ -6,13 +6,20 @@ import IssueList from './IssueList';
 import LabelMilestoneButton from '../Common/LabelMilestoneButton';
 import GreenButton from '../Common/GreenButton';
 import { request } from '../../Api';
+import { ClearIcon } from '../static/svgIcons';
 import { AuthStateContext, AuthDispatchContext } from '../../Context/AuthContext';
-import { IssueDispatchContext, IssueStateContext } from '../../Context/IssueContext';
+import {
+  IssueDispatchContext,
+  IssueStateContext,
+  initialIssueState,
+} from '../../Context/IssueContext';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
 `;
 
 const IssueHeader = styled.div`
@@ -20,8 +27,29 @@ const IssueHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1100px;
-  margin: 30px auto;
+  margin: 10px auto;
+`;
+
+const ResetFilter = styled.span`
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  color: ${(props) => props.theme.darkgrayColor};
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  svg {
+    margin-right: 5px;
+    fill: ${(props) => props.theme.whiteColor};
+    background-color: ${(props) => props.theme.darkgrayColor};
+    border-radius: ${(props) => props.theme.radiusSmall};
+  }
+  &:hover {
+    color: ${(props) => props.theme.blueColor};
+    svg {
+      background-color: ${(props) => props.theme.blueColor};
+    }
+  }
 `;
 
 const Issue = ({ token }) => {
@@ -52,6 +80,11 @@ const Issue = ({ token }) => {
     if (data) issueDispatch({ type: 'FETCH_ISSUES', payload: data });
   };
 
+  const isFilterEmpty = (currentFilter) => {
+    const { filter } = initialIssueState;
+    return JSON.stringify(currentFilter) === JSON.stringify(filter);
+  };
+
   useEffect(() => {
     if (!authState.token) authDispatch({ type: 'LOGIN', token });
   }, []);
@@ -77,6 +110,13 @@ const Issue = ({ token }) => {
           <GreenButton title="New Issue" />
         </Link>
       </IssueHeader>
+      {!isFilterEmpty(issueState.filter) && (
+        <ResetFilter onClick={() => issueDispatch({ type: 'RESET_FILTER' })}>
+          <ClearIcon />
+          Clear current search query, filters, and sorts
+        </ResetFilter>
+      )}
+
       <IssueList issueHeader={issueHeader} />
     </Wrapper>
   );
