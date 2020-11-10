@@ -38,10 +38,7 @@ const Issue = ({ token }) => {
       token: authState.token,
     };
     const { data } = await request(config);
-    if (data) {
-      setIssueHeader(data);
-      issueDispatch({ type: 'FETCH_HEADER', payload: data });
-    }
+    if (data) setIssueHeader(data);
   };
 
   const fetchIssues = async () => {
@@ -64,10 +61,12 @@ const Issue = ({ token }) => {
       fetchHeader();
       fetchIssues();
     }
-    return () => {
-      setIssueHeader([]);
-    };
-  }, [authState.token, issueState.filter]);
+    return () => setIssueHeader([]);
+  }, [authState.token]);
+
+  useEffect(() => {
+    if (authState.token) fetchIssues();
+  }, [issueState.filter]);
 
   return (
     <Wrapper>
