@@ -3,6 +3,8 @@ const { v4: uuidv4 } = require('uuid');
 const axios = require('axios');
 const { generateToken } = require('../utils/auth');
 const userModel = require('../models/user');
+const SUCCESS_MSG = require('./successMessages');
+const ERROR_MSG = require('./errorMessages');
 
 const TEN_MINUTES = 1000 * 60 * 10;
 
@@ -47,7 +49,7 @@ const handleGithubCallback = async (req, res) => {
     res.cookie('auth', token, { maxAge: TEN_MINUTES });
     return res.redirect(process.env.REDIRECT_CLIENT);
   } catch (error) {
-    return res.status(500);
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
@@ -56,9 +58,9 @@ const createOrReadUser = async (req, res) => {
     const { username, avatar, state } = req.body;
     const { id } = await userModel.findOrCreateUserById({ username, avatar, state });
     const token = generateToken(id, username);
-    res.status(200).json({ token });
+    res.status(200).json({ message: SUCCESS_MSG.read, token });
   } catch (err) {
-    return res.status(500);
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
@@ -66,10 +68,10 @@ const readUserInfo = async (req, res) => {
   try {
     const { id } = req.user;
     const userInfo = await userModel.findUserById(id);
-    if (userInfo) return res.status(200).json({ data: userInfo });
-    return res.status(404).json({});
+    if (userInfo) return res.status(200).json({ message: SUCCESS_MSG.read, data: userInfo });
+    return res.status(404).json({ message: ERROR_MSG.notFound });
   } catch (err) {
-    return res.status(500);
+    return res.status(500).json({ message: ERROR_MSG.server });
   }
 };
 
