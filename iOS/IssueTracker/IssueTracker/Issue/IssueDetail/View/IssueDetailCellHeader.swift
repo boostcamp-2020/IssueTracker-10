@@ -26,7 +26,7 @@ class IssueDetailCellHeader: UIView {
     func commonInit() {
         profileImage.layer.cornerRadius = 5
         profileImage.clipsToBounds = true
-        profileImage.image = UIImage(named: "DefaultProfile")
+        profileImage.image = UIImage(named: "Icon")
         author.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         time.font = UIFont.systemFont(ofSize: 15, weight: .light)
         time.textColor = .systemGray
@@ -39,7 +39,7 @@ class IssueDetailCellHeader: UIView {
         author.text = comment.user.username
         
         time.text = "\(PastTime().agoTime(from: comment.createdAt))"
-        guard let url = URL(string: comment.user.avatar),
+        guard let url = URL(string: comment.user.avatar ?? ""),
               let data = try? Data(contentsOf: url) else { return }
         profileImage.image = UIImage(data: data)
     }

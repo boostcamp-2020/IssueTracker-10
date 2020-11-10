@@ -9,8 +9,9 @@ import Foundation
 
 struct User: Codable {
 	
-	static let basic = User(name: "user", avatorURL: nil)
+	static let basic = User(name: "user", avatorURL: nil, state: 0)
 	
 	let name: String
     let avatorURL: String?
+	let state: Int
 }
