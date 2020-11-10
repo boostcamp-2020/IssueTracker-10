@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssueStateContext } from '../../Context/IssueContext';
+import { MilestoneStateContext } from '../../Context/MilestoneContext';
 import { CheckIcon } from '../static/svgIcons';
 
 const ModalRow = styled.li`
@@ -104,13 +105,15 @@ export const renderLabels = ({ selectedList, setSelecteList }) => {
 };
 
 export const renderMilestones = ({ selectedList, setSelecteList }) => {
-  const { milestones } = useContext(IssueStateContext);
+  const { openMilestone } = useContext(MilestoneStateContext);
   const selectedListId = selectedList && selectedList.id;
-  const onClickMilestone = ({ id, title }) => {
-    const data = { id, title };
+  const onClickMilestone = ({ id, title, open, closed }) => {
+    const total = open + closed;
+    const percent = total ? `${(open / total) * 100}%` : '0%';
+    const data = { id, title, open, closed, percent };
     return selectedListId === id ? setSelecteList(null) : setSelecteList(data);
   };
-  return milestones.map((milestone) => (
+  return openMilestone.map((milestone) => (
     <ModalRow key={milestone.id} onClick={() => onClickMilestone(milestone)}>
       <MilestoneTitle>
         {milestone.title}
