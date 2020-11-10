@@ -54,6 +54,13 @@ class PopupViewController: UIViewController {
 		colorTextField.text = label?.color
 	}
 	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		guard let touch = touches.first else { return }
+		if touch.view != popUpView {
+			self.dismiss(animated: false, completion: nil)
+		}
+	}
+	
 	private func generateRandomHexString() -> String {
 		let randomRed:CGFloat = CGFloat(drand48())
 		let randomGreen:CGFloat = CGFloat(drand48())

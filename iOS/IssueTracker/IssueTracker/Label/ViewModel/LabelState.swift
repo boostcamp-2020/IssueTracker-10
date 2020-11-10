@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LabelState {
+struct LabelState {
 	var labels: [Label]
 	
 	init() {
