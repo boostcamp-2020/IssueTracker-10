@@ -53,7 +53,7 @@ const Title = styled.div`
   color: ${(props) => props.theme.darkgrayColor};
 `;
 
-const Content = styled.div`
+const Content = styled.ul`
   font-size: 14px;
   color: ${(props) => props.theme.darkgrayColor};
 `;

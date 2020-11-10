@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { IssueInfoContext } from '../Context/IssueInfoContext';
+
+const Wrapper = styled.li`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+`;
 
 const UserAvater = styled.img`
   width: 20px;
@@ -8,10 +15,12 @@ const UserAvater = styled.img`
   border-radius: 100%;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+const AssignSelf = styled.button`
+  background: none;
+  color: ${(props) => props.theme.grayColor};
+  &:hover {
+    color: ${(props) => props.theme.blueColor};
+  }
 `;
 
 /* TODO: 라벨 색에 따라 font 색 변경 */
@@ -46,20 +55,31 @@ const MilestoneDone = styled(MilestoneTotal)`
 `;
 
 export const checkedUsers = () => {
-  // TODO: 선택된 Assignees가 없으면 'No one-assign yourself' 랜더링
-  return (
-    <Wrapper>
-      <UserAvater
-        src="https://user-images.githubusercontent.com/49746644/98506257-6c2d0900-229e-11eb-8e94-d5dac331df82.jpg"
-        alt="profile"
-      />
-      Test
-    </Wrapper>
-  );
+  const { assignees } = useContext(IssueInfoContext);
+  // TODO: assign yourself 클릭시, 로그인 된 유저가 assignee로 추가
+  if (assignees.length === 0) {
+    return (
+      <Wrapper>
+        No one -<AssignSelf>assign yourself</AssignSelf>
+      </Wrapper>
+    );
+  }
+  return assignees.map((user) => {
+    const { id, username, avatar } = user;
+    return (
+      <Wrapper key={id}>
+        <UserAvater src={avatar} alt={`${username} profile`} />
+        {username}
+      </Wrapper>
+    );
+  });
 };
 
 export const checkedLabels = () => {
-  // TODO: 선택된 labels가 없으면 'None yet' 랜더링
+  const { labels } = useContext(IssueInfoContext);
+  if (labels.length === 0) {
+    return <Wrapper>None yet</Wrapper>;
+  }
   return (
     <Wrapper>
       <Label>Label</Label>
@@ -68,7 +88,10 @@ export const checkedLabels = () => {
 };
 
 export const checkedMilestone = () => {
-  // TODO: 선택된 milestone이 없으면 'No milestone' 랜더링
+  const { milestone } = useContext(IssueInfoContext);
+  if (!milestone) {
+    return <Wrapper>No milestone</Wrapper>;
+  }
   // TODO: milestoneGraph를 마일스톤 open / total 개수 퍼센트로 계산하여 그리기
   return (
     <Wrapper>
