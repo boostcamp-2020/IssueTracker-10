@@ -40,7 +40,7 @@ const MilestoneTitle = styled.div`
 `;
 
 const MilestoneGraph = styled.svg`
-  width: 300px;
+  width: 100%;
   height: 20px;
 `;
 
@@ -100,7 +100,7 @@ export const checkedMilestone = () => {
   return (
     <Wrapper>
       <MilestoneGraph>
-        <MilestoneTotal d="M5 10 295 10" />
+        <MilestoneTotal d="M5 10 280 10" />
         <MilestoneDone d="M5 10 100 10" />
       </MilestoneGraph>
       <MilestoneTitle>{milestone.title}</MilestoneTitle>

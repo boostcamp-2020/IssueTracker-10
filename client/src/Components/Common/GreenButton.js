@@ -7,7 +7,7 @@ const Button = styled.button`
   background-color: ${(props) => props.theme.greenColor};
 
   &:disabled {
-    background-color: ${(props) => props.theme.redColor};
+    background-color: ${(props) => props.theme.lightGrayColor};
   }
 `;
 

@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssueStateContext } from '../../Context/IssueContext';
+import { CheckIcon } from '../static/svgIcons';
 
 const ModalRow = styled.li`
   display: flex;
@@ -55,9 +56,16 @@ const MilestoneDueDate = styled.div`
 
 export const renderUsers = ({ selectedList, setSelecteList }) => {
   const { assignees } = useContext(IssueStateContext);
+  const selectedListId = selectedList.map((user) => user.id);
   const onClickAssignee = ({ id, username, avatar }) => {
     const data = { id, username, avatar };
-    setSelecteList([...selectedList, data]);
+    if (selectedListId.includes(id)) {
+      const newList = selectedList.filter((user) => {
+        if (id !== user.id) return user;
+      });
+      return setSelecteList(newList);
+    }
+    return setSelecteList([...selectedList, data]);
   };
 
   return assignees.map((user) => {
@@ -67,6 +75,7 @@ export const renderUsers = ({ selectedList, setSelecteList }) => {
         <Wrapper>
           <UserAvater src={avatar} alt={`${username} profile`} />
           {username}
+          {selectedListId.includes(id) && <CheckIcon />}
         </Wrapper>
       </ModalRow>
     );
@@ -75,30 +84,42 @@ export const renderUsers = ({ selectedList, setSelecteList }) => {
 
 export const renderLabels = ({ selectedList, setSelecteList }) => {
   const { labels } = useContext(IssueStateContext);
+  const selectedListId = selectedList.map((label) => label.id);
   const onClickLabel = ({ id, color, title }) => {
     const data = { id, color, title };
-    setSelecteList([...selectedList, data]);
+    if (selectedListId.includes(id)) {
+      const newList = selectedList.filter((label) => {
+        if (id !== label.id) return label;
+      });
+      return setSelecteList(newList);
+    }
+    return setSelecteList([...selectedList, data]);
   };
   return labels.map((label) => (
     <ModalRow key={label.id} onClick={() => onClickLabel(label)}>
       <Wrapper>
         <LabelImage labelColor={label.color} />
         <LabelTitle>{label.title}</LabelTitle>
+        {selectedListId.includes(label.id) && <CheckIcon />}
       </Wrapper>
       <LabelDescription>{label.description}</LabelDescription>
     </ModalRow>
   ));
 };
 
-export const renderMilestones = ({ setSelecteList }) => {
+export const renderMilestones = ({ selectedList, setSelecteList }) => {
   const { milestones } = useContext(IssueStateContext);
+  const selectedListId = selectedList && selectedList.id;
   const onClickMilestone = ({ id, title }) => {
     const data = { id, title };
-    setSelecteList(data);
+    return selectedListId === id ? setSelecteList(null) : setSelecteList(data);
   };
   return milestones.map((milestone) => (
     <ModalRow key={milestone.id} onClick={() => onClickMilestone(milestone)}>
-      <MilestoneTitle>{milestone.title}</MilestoneTitle>
+      <MilestoneTitle>
+        {milestone.title}
+        {selectedListId === milestone.id && <CheckIcon />}
+      </MilestoneTitle>
       <MilestoneDueDate>{milestone.date || 'No due date'}</MilestoneDueDate>
     </ModalRow>
   ));
