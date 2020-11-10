@@ -100,6 +100,15 @@ export const issueReducer = (state, action) => {
         issues: [...action.payload],
       };
     }
+    case 'STORE_DETAIL_DATA': {
+      const { users, labels, milestones } = action.payload;
+      return {
+        ...state,
+        assignees: [...users],
+        labels: [...labels],
+        milestones: [...milestones],
+      };
+    }
     case 'CHECK_ISSUE': {
       return {
         ...state,

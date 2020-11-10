@@ -13,9 +13,9 @@ const Wrapper = styled.div`
 const NewIssue = () => {
   return (
     <Wrapper>
-      <SideBarElement title="Assignees" content="No one-assign yourself" />
-      <SideBarElement title="Labels" content="none yet" />
-      <SideBarElement title="Milestone" content="No milestone" />
+      <SideBarElement title="Assignees" />
+      <SideBarElement title="Labels" />
+      <SideBarElement title="Milestone" />
     </Wrapper>
   );
 };
