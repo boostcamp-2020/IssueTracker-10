@@ -6,7 +6,7 @@ export const initialIssueState = {
     author: null,
     label: [],
     milestones: null,
-    assignees: null,
+    assignee: null,
   },
   issues: [],
   openCount: 0,
@@ -105,7 +105,7 @@ export const issueReducer = (state, action) => {
           author: null,
           label: [],
           milestones: null,
-          assignees: null,
+          assignee: null,
         },
         checkedIds: [],
       };

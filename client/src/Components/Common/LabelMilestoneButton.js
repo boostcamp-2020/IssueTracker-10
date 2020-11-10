@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import LabelButton from './LabelButton';
 import MilestoneButton from './MilestoneButton';
 
@@ -12,7 +13,9 @@ const LabelMilestoneButton = (props) => {
   const { labels = [], milestones = [] } = issueHeader;
   return (
     <Wrapper>
-      <LabelButton hasCount={hasCount} count={labels.length} />
+      <Link to="/labels">
+        <LabelButton hasCount={hasCount} count={labels.length} />
+      </Link>
       <MilestoneButton hasCount={hasCount} count={milestones.length} />
     </Wrapper>
   );

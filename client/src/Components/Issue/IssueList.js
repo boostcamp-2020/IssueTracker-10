@@ -8,7 +8,7 @@ const IssueListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 1100px;
-  margin: 0 auto 30px auto;
+  margin: 10px auto 30px auto;
   border: ${(props) => props.theme.border};
   border-radius: ${(props) => props.theme.radiusSmall};
   background-color: ${(props) => props.theme.whiteColor};
