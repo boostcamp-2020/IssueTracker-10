@@ -38,18 +38,27 @@ const LabelTextWrapper = styled.span`
   margin-left: 5px;
 `;
 
+const userType = {
+  author: {
+    set: 'SET_AUTHOR',
+    remove: 'REMOVE_AUTHOR',
+  },
+  assignee: {
+    set: 'SET_ASSIGNEE',
+    remove: 'REMOVE_ASSIGNEE',
+  },
+};
+
 export const renderUsers = ({ users, type }) => {
   const state = useContext(IssueStateContext);
   const dispatch = useContext(IssueDispatchContext);
   const [selectedUser, setSelectedUser] = useState(state.filter[type]);
 
   const onClickUser = async (id) => {
-    const actionSetType = type === 'author' ? 'SET_AUTHOR' : 'SET_ASSIGNEE';
-    const actionRemoveType = type === 'author' ? 'REMOVE_AUTHOR' : 'REMOVE_ASSIGNEE';
     const passedId = selectedUser === id ? null : id;
     if (selectedUser === id) {
-      dispatch({ type: actionRemoveType, id: passedId });
-    } else dispatch({ type: actionSetType, id: passedId });
+      dispatch({ type: userType[type].remove });
+    } else dispatch({ type: userType[type].set, id: passedId });
     setSelectedUser(passedId);
   };
 

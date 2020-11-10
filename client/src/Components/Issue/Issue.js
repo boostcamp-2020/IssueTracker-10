@@ -80,9 +80,13 @@ const Issue = ({ token }) => {
     if (data) issueDispatch({ type: 'FETCH_ISSUES', payload: data });
   };
 
-  const isFilterEmpty = (currentFilter) => {
+  const isNonFilter = (currentFilter) => {
     const { filter } = initialIssueState;
-    return JSON.stringify(currentFilter) === JSON.stringify(filter);
+    return Object.keys(filter).every((key) => {
+      console.log(key, filter[key], currentFilter[key]);
+      return filter[key] === currentFilter[key];
+    });
+    // return JSON.stringify(currentFilter) === JSON.stringify(filter);
   };
 
   useEffect(() => {
@@ -110,7 +114,7 @@ const Issue = ({ token }) => {
           <GreenButton title="New Issue" />
         </Link>
       </IssueHeader>
-      {!isFilterEmpty(issueState.filter) && (
+      {!isNonFilter(issueState.filter) && (
         <ResetFilter onClick={() => issueDispatch({ type: 'RESET_FILTER' })}>
           <ClearIcon />
           Clear current search query, filters, and sorts
