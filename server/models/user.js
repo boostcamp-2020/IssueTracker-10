@@ -4,17 +4,11 @@ const ERROR_MSG = require('../services/errorMessages');
 
 const { Op } = sequelize;
 
-// const userType = {
-//   local: 0,
-//   github: 1,
-// };
-
 const findUserById = async (id) => {
   try {
     const userInfo = await user.findOne({
-      attributes: ['id', 'username'],
+      attributes: ['id', 'username', 'avatar'],
       where: { id },
-      raw: true,
     });
     return userInfo;
   } catch (err) {

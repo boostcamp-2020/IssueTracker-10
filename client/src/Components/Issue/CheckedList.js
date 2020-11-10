@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { IssueInfoContext } from '../../Context/IssueInfoContext';
+import { IssueInfoContext, IssueInfoDispatchContext } from '../../Context/IssueInfoContext';
+import { AuthStateContext } from '../../Context/AuthContext';
 
 const Wrapper = styled.li`
   display: flex;
@@ -56,11 +57,15 @@ const MilestoneDone = styled(MilestoneTotal)`
 
 export const checkedUsers = () => {
   const { assignees } = useContext(IssueInfoContext);
-  // TODO: assign yourself 클릭시, 로그인 된 유저가 assignee로 추가
+  const issueInfoDispatch = useContext(IssueInfoDispatchContext);
+  const { user: loginUser } = useContext(AuthStateContext);
+  const onClickSelf = () => {
+    issueInfoDispatch({ type: 'SELECT_ASSIGNEES', data: [loginUser] });
+  };
   if (assignees.length === 0) {
     return (
       <Wrapper>
-        No one -<AssignSelf>assign yourself</AssignSelf>
+        No one -<AssignSelf onClick={onClickSelf}>assign yourself</AssignSelf>
       </Wrapper>
     );
   }

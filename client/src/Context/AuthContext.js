@@ -6,6 +6,11 @@ export const initialAuthState = {
       ? localStorage.getItem('token')
       : '',
   isLoggedIn: false,
+  user: {
+    id: null,
+    username: '',
+    avatar: null,
+  },
 };
 
 export const authReducer = (state, action) => {
@@ -24,6 +29,13 @@ export const authReducer = (state, action) => {
         ...state,
         token: '',
         isLoggedIn: false,
+      };
+    }
+    case 'SET_USERINFO': {
+      const user = action.data;
+      return {
+        ...state,
+        user,
       };
     }
     default:
