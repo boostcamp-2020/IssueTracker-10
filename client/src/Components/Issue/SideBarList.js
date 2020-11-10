@@ -60,9 +60,7 @@ export const renderUsers = ({ selectedList, setSelecteList }) => {
   const onClickAssignee = ({ id, username, avatar }) => {
     const data = { id, username, avatar };
     if (selectedListId.includes(id)) {
-      const newList = selectedList.filter((user) => {
-        if (id !== user.id) return user;
-      });
+      const newList = selectedList.filter((user) => id !== user.id);
       return setSelecteList(newList);
     }
     return setSelecteList([...selectedList, data]);
@@ -88,9 +86,7 @@ export const renderLabels = ({ selectedList, setSelecteList }) => {
   const onClickLabel = ({ id, color, title }) => {
     const data = { id, color, title };
     if (selectedListId.includes(id)) {
-      const newList = selectedList.filter((label) => {
-        if (id !== label.id) return label;
-      });
+      const newList = selectedList.filter((label) => id !== label.id);
       return setSelecteList(newList);
     }
     return setSelecteList([...selectedList, data]);
