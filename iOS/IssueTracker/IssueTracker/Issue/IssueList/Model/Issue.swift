@@ -42,7 +42,7 @@ struct Issue: Codable, Hashable {
 struct Author: Codable, Hashable {
     let id: Int
     let username: String
-    let avatar: String
+    let avatar: String?
 }
 
 struct Milestone: Codable, Hashable {
@@ -52,6 +52,6 @@ struct Milestone: Codable, Hashable {
 
 struct Assignee: Codable, Hashable {
     let id: Int
-    let avatar: String
+    let avatar: String?
     let username: String
 }
