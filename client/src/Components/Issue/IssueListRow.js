@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import IssueLabel from './IssueLabel';
 import { IssueCheckbox } from './IssueListHeader';
@@ -80,8 +81,10 @@ const IssueListRow = (props) => {
       <IssueState state={state}>{state ? <IssueOpenIcon /> : <IssueClosedIcon />}</IssueState>
       <IssueTextWrapper>
         <IssueTitleWrapper>
-          <IssueTitle>{title}</IssueTitle>
-          {labels.length > 0 && labels.map((label) => <IssueLabel {...label} />)}
+          <IssueTitle>
+            <Link to={`/issue/${id}`}>{title}</Link>
+          </IssueTitle>
+          {labels.length > 0 && labels.map((label) => <IssueLabel key={label.id} {...label} />)}
         </IssueTitleWrapper>
         <IssueInformation>
           <IssueSubText>#{id}</IssueSubText>
