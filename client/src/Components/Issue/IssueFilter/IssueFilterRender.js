@@ -39,37 +39,18 @@ const LabelTextWrapper = styled.span`
 `;
 
 export const renderUsers = ({ users, type }) => {
-  const authState = useContext(AuthStateContext);
   const state = useContext(IssueStateContext);
   const dispatch = useContext(IssueDispatchContext);
   const [selectedUser, setSelectedUser] = useState(state.filter[type]);
-
-  const fetchIssues = async ({ id }) => {
-    const config = {
-      url: '/api/issue',
-      method: 'get',
-      params: {
-        ...state.filter,
-        [type]: id,
-      },
-      token: authState.token,
-    };
-    const { data = null } = await request(config);
-    return data;
-  };
 
   const onClickUser = async (id) => {
     const actionSetType = type === 'author' ? 'SET_AUTHOR' : 'SET_ASSIGNEE';
     const actionRemoveType = type === 'author' ? 'REMOVE_AUTHOR' : 'REMOVE_ASSIGNEE';
     const passedId = selectedUser === id ? null : id;
-
-    const data = await fetchIssues({ id: passedId });
-    if (data) {
-      if (selectedUser === id) {
-        dispatch({ type: actionRemoveType, payload: data });
-      } else dispatch({ type: actionSetType, id, payload: data });
-      setSelectedUser(passedId);
-    }
+    if (selectedUser === id) {
+      dispatch({ type: actionRemoveType, id: passedId });
+    } else dispatch({ type: actionSetType, id: passedId });
+    setSelectedUser(passedId);
   };
 
   return users.map((user) => {

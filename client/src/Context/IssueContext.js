@@ -16,18 +16,13 @@ export const initialIssueState = {
 
 export const issueReducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_HEADER': {
-      const { openCount, closedCount } = action.payload;
+    case 'FETCH_ISSUES': {
+      const { issues, openCount, closedCount } = action.payload;
       return {
         ...state,
+        issues,
         openCount,
         closedCount,
-      };
-    }
-    case 'FETCH_ISSUES': {
-      return {
-        ...state,
-        issues: [...action.payload],
       };
     }
     case 'OPEN': {
@@ -64,7 +59,6 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           author: action.id,
         },
-        issues: [...action.payload],
       };
     }
     case 'REMOVE_AUTHOR': {
@@ -74,7 +68,6 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           author: null,
         },
-        issues: [...action.payload],
       };
     }
     case 'SET_ONE_LABEL': {
@@ -93,7 +86,6 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           assignee: action.id,
         },
-        issues: [...action.payload],
       };
     }
     case 'REMOVE_ASSIGNEE': {
@@ -103,7 +95,6 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           assignee: null,
         },
-        issues: [...action.payload],
       };
     }
     case 'RESET_FILTER': {

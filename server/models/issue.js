@@ -9,6 +9,7 @@ const { Op } = sequelize;
 const issueType = {
   closed: 0,
   open: 1,
+  all: 2,
 };
 
 const createIssueLabel = async (params) => {
@@ -118,10 +119,6 @@ const setFilter = (query) => {
   const filter = [...Object.keys(query)].reduce((prev, key) => {
     const value = query[key];
     switch (key) {
-      case 'state': {
-        const type = issueType[value];
-        return type !== undefined ? { ...prev, state: issueType[value] } : prev;
-      }
       case 'milestone': {
         return { ...prev, milestoneId: value };
       }
@@ -180,7 +177,19 @@ const findIssueAll = async (query) => {
         },
       ],
     });
-    return issues;
+
+    const filterType = issueType[query.state];
+    const result = issues.reduce(
+      (prev, issueData) => {
+        const { state } = issueData;
+        if (!filterType || filterType === issueType.all || state === filterType) {
+          return { ...prev, [state]: prev[state] + 1, issues: [...prev.issues, issueData] };
+        }
+        return { ...prev, [state]: prev[state] + 1 };
+      },
+      { 0: 0, 1: 0, issues: [] },
+    );
+    return { closedCount: result[0], openCount: result[1], issues: result.issues };
   } catch (err) {
     throw new Error(ERROR_MSG.notFound);
   }
