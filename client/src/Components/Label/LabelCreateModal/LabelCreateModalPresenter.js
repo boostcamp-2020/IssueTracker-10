@@ -46,6 +46,9 @@ const ColorButton = styled.div`
   height: 30px;
   margin-right: 10px;
   cursor: pointer;
+  svg {
+    fill: ${(props) => props.fontColor};
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -77,6 +80,7 @@ const CancelButton = styled(Button)`
 export default ({
   color,
   title,
+  fontColor,
   cancelButtonColor,
   createLabelButtonColor,
   clickCreateLabelButton,
@@ -89,7 +93,7 @@ export default ({
   <Wrapper>
     <Container>
       <LabelRow>
-        <LabelBadge color={color} title={title || 'Label preview'} />
+        <LabelBadge color={color} title={title || 'Label preview'} fontColor={fontColor} />
       </LabelRow>
       <InputRow>
         <InputColumn>
@@ -107,7 +111,7 @@ export default ({
         <InputColumn>
           <InputBoldText text="Color" />
           <InnerWrapper>
-            <ColorButton onClick={changeColor} color={color}>
+            <ColorButton fontColor={fontColor} onClick={changeColor} color={color}>
               <CycleIcon size={20} />
             </ColorButton>
             <LabelInput

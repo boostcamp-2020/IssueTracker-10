@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { request } from '../../../Api';
 import { AuthStateContext } from '../../../Context/AuthContext';
 import { LabelDispatchContext } from '../../../Context/LabelContext';
@@ -12,8 +11,9 @@ export default ({ setDisplay, toggleDisplay }) => {
   const [color, setColor] = useState(null);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
+  const [fontColor, setFontColor] = useState(null);
   const [label, setLabel] = useState({
-    id: uuidv4(),
+    id: '',
     title: '',
     description: '',
     color,
@@ -24,15 +24,16 @@ export default ({ setDisplay, toggleDisplay }) => {
   const postLabel = async (inputData) => {
     const config = { url: '/api/label', method: 'POST', token: authState.token, data: inputData };
     try {
-      await request(config);
+      const data = await request(config);
+      setLabel({ ...label, id: data.id });
     } catch (err) {
       throw new Error(err.response);
     }
   };
 
   const clickCreateLabelButton = () => {
-    labelDispatch({ type: 'CREATE', label });
     postLabel(label);
+    labelDispatch({ type: 'CREATE', label });
     setColor('');
     setTitle('');
     setColor(getRandomColor());
@@ -40,17 +41,22 @@ export default ({ setDisplay, toggleDisplay }) => {
   };
 
   const changeColor = () => {
-    const randomColor = getRandomColor();
+    const { randomColor, randomFontColor } = getRandomColor();
     setColor(randomColor);
+    setFontColor(randomFontColor);
   };
 
   useEffect(() => {
-    const randomColor = getRandomColor();
+    const { randomColor, randomFontColor } = getRandomColor();
     setColor(randomColor);
+    setFontColor(randomFontColor);
     setLabel({
       ...label,
       color: randomColor,
     });
+    return () => {
+      setLabel({ id: '', title: '', description: '', color });
+    };
   }, []);
 
   useEffect(() => {
@@ -87,6 +93,7 @@ export default ({ setDisplay, toggleDisplay }) => {
     <LabelCreateModalPresenter
       color={color}
       title={title}
+      fontColor={fontColor}
       cancelButtonColor={cancelButtonColor}
       createLabelButtonColor={createLabelButtonColor}
       clickCreateLabelButton={clickCreateLabelButton}
