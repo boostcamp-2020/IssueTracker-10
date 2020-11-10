@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 
-const IssueDetail = (props) => {
-  console.log(props);
+const IssueDetail = ({ match }) => {
+  const { id } = match.params;
   return (
     <>
-      <div>ddd</div>
+      <div>{id}</div>
     </>
   );
 };
