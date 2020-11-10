@@ -3,41 +3,41 @@ import { request } from '../../../Api';
 import { AuthStateContext } from '../../../Context/AuthContext';
 import { LabelDispatchContext } from '../../../Context/LabelContext';
 import { getRandomColor } from '../../../utils/color';
-import LabelCreateModalPresenter from './LabelCreateModalPresenter';
+import LabelUpdateModalPresenter from './LabelUpdateModalPresenter';
 import { theme } from '../../../theme';
 
-export default ({ setDisplay, toggleDisplay }) => {
+export default ({ setDisplay, toggleDisplay, initLabel }) => {
   const authState = useContext(AuthStateContext);
   const labelDispatch = useContext(LabelDispatchContext);
-  const [color, setColor] = useState(null);
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
+  const [color, setColor] = useState(initLabel.color);
+  const [title, setTitle] = useState(initLabel.title);
+  const [description, setDescription] = useState(initLabel.description);
+  const [label, setLabel] = useState(initLabel);
   const [fontColor, setFontColor] = useState(null);
-  const [label, setLabel] = useState({
-    id: '',
-    title: '',
-    description: '',
-    color,
-  });
+
   const cancelButtonColor = theme.redColor;
   const createLabelButtonColor = theme.greenColor;
 
-  const postLabel = async (inputData) => {
-    const config = { url: '/api/label', method: 'POST', token: authState.token, data: inputData };
+  const editLabel = async (inputData) => {
+    const config = {
+      url: `/api/label/${inputData.id}`,
+      method: 'PUT',
+      token: authState.token,
+      data: inputData,
+    };
     try {
-      const data = await request(config);
-      setLabel({ ...label, id: data.id });
+      await request(config);
     } catch (err) {
       throw new Error(err.response);
     }
   };
 
-  const clickCreateLabelButton = () => {
-    postLabel(label);
-    labelDispatch({ type: 'CREATE', label });
-    setColor('');
-    setTitle('');
-    setColor(getRandomColor());
+  const clickUpdateLabelButton = () => {
+    labelDispatch({ type: 'UPDATE', label });
+    editLabel(label);
+    setColor(label.id);
+    setTitle(label.title);
+    setDescription(label.description);
     setDisplay(false);
   };
 
@@ -46,19 +46,6 @@ export default ({ setDisplay, toggleDisplay }) => {
     setColor(randomColor);
     setFontColor(randomFontColor);
   };
-
-  useEffect(() => {
-    const { randomColor, randomFontColor } = getRandomColor();
-    setColor(randomColor);
-    setFontColor(randomFontColor);
-    setLabel({
-      ...label,
-      color: randomColor,
-    });
-    return () => {
-      setLabel({ id: '', title: '', description: '', color });
-    };
-  }, []);
 
   useEffect(() => {
     setLabel({
@@ -91,13 +78,14 @@ export default ({ setDisplay, toggleDisplay }) => {
   };
 
   return (
-    <LabelCreateModalPresenter
+    <LabelUpdateModalPresenter
       color={color}
       title={title}
       fontColor={fontColor}
+      description={description}
       cancelButtonColor={cancelButtonColor}
       createLabelButtonColor={createLabelButtonColor}
-      clickCreateLabelButton={clickCreateLabelButton}
+      clickUpdateLabelButton={clickUpdateLabelButton}
       onChangeColor={onChangeColor}
       onChangeDescription={onChangeDescription}
       onChangeTitle={onChangeTitle}

@@ -15,11 +15,12 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   padding: 20px;
-  background-color: ${(props) => props.theme.skyblueColor};
+  background-color: ${(props) => props.theme.brightColor};
   border-radius: ${(props) => props.theme.radiusSmall};
 `;
 const LabelRow = styled.div`
   width: 100px;
+  margin-bottom: 10px;
 `;
 
 const InputRow = styled.div`
@@ -64,26 +65,30 @@ const LabelInput = styled(Input)`
   border-radius: ${(props) => props.theme.radiusSmall};
   height: 30px;
   width: 100%;
+  background: ${(props) => props.theme.skyblueColor};
 `;
 
-const CreateButton = styled(Button)`
+const EditButton = styled(Button)`
   margin-top: 25px;
   width: 100px;
+  font-size: 10px;
 `;
 
 const CancelButton = styled(Button)`
   margin-top: 25px;
   margin-right: 10px;
   width: 70px;
+  font-size: 10px;
 `;
 
 export default ({
   color,
   title,
   fontColor,
+  description,
   cancelButtonColor,
   createLabelButtonColor,
-  clickCreateLabelButton,
+  clickUpdateLabelButton,
   onChangeColor,
   onChangeDescription,
   onChangeTitle,
@@ -98,13 +103,20 @@ export default ({
       <InputRow>
         <InputColumn>
           <InputBoldText text="Label name" />
-          <LabelInput name="title" placeholder="Label name" required onChange={onChangeTitle} />
+          <LabelInput
+            name="title"
+            placeholder="Label name"
+            value={title || ''}
+            required
+            onChange={onChangeTitle}
+          />
         </InputColumn>
         <InputColumn>
           <InputBoldText text="Description" />
           <LabelInput
             name="description"
             placeholder="Description (optional)"
+            value={description || ''}
             onChange={onChangeDescription}
           />
         </InputColumn>
@@ -131,10 +143,10 @@ export default ({
               color={cancelButtonColor}
               onClick={toggleDisplay}
             />
-            <CreateButton
-              text="Create label"
+            <EditButton
+              text="Save Changes"
               color={createLabelButtonColor}
-              onClick={clickCreateLabelButton}
+              onClick={clickUpdateLabelButton}
             />
           </InnerWrapper>
         </InputColumn>

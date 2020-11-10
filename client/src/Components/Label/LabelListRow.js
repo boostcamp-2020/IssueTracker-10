@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { request } from '../../Api';
+import { AuthStateContext } from '../../Context/AuthContext';
+import { LabelDispatchContext } from '../../Context/LabelContext';
 import LabelBadge from './LabelBadge';
+import LabelUpdateModal from './LabelUpdateModal';
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: top;
   padding: 20px;
   border-top: ${(props) => props.theme.border};
@@ -11,6 +16,10 @@ const Wrapper = styled.div`
   &:hover {
     background-color: ${(props) => props.theme.whiteColor};
   }
+`;
+
+const RowWrapper = styled.div`
+  display: flex;
 `;
 
 const BadgeColumn = styled.div`
@@ -45,19 +54,50 @@ const DescriptText = styled.span`
 
 const LabelListRow = ({ label }) => {
   const { title, description, color } = label;
+  const [display, setDisplay] = useState(false);
+  const authState = useContext(AuthStateContext);
+  const labelDispatch = useContext(LabelDispatchContext);
+  const toggleDisplay = () => {
+    setDisplay(!display);
+  };
 
+  const deleteLabel = async (inputData) => {
+    const config = { url: `/api/label/${inputData.id}`, method: 'DELETE', token: authState.token };
+    try {
+      await request(config);
+    } catch (err) {
+      throw new Error(err.response);
+    }
+  };
+
+  const onClickDelete = () => {
+    labelDispatch({ type: 'DELETE', label });
+    deleteLabel(label);
+  };
   return (
     <Wrapper>
-      <BadgeColumn>
-        <LabelBadge title={title} color={color} />
-      </BadgeColumn>
-      <DescriptColumn>
-        <DescriptText>{description}</DescriptText>
-      </DescriptColumn>
-      <EditColumn>
-        <Button>Edit</Button>
-        <Button>Delete</Button>
-      </EditColumn>
+      <RowWrapper>
+        {display ? (
+          <LabelUpdateModal
+            initLabel={label}
+            setDisplay={setDisplay}
+            toggleDisplay={toggleDisplay}
+          />
+        ) : (
+          <>
+            <BadgeColumn>
+              <LabelBadge title={title} color={color} />
+            </BadgeColumn>
+            <DescriptColumn>
+              <DescriptText>{description}</DescriptText>
+            </DescriptColumn>
+            <EditColumn>
+              <Button onClick={toggleDisplay}>Edit</Button>
+              <Button onClick={onClickDelete}>Delete</Button>
+            </EditColumn>
+          </>
+        )}
+      </RowWrapper>
     </Wrapper>
   );
 };

@@ -18,6 +18,15 @@ export const labelReducer = (state, action) => {
         labels: [label, ...state.labels],
       };
     }
+    case 'UPDATE': {
+      const { label } = action;
+      const editLabel = state.labels.map((element) => {
+        return element.id === label.id ? label : element;
+      });
+      return {
+        labels: [...editLabel],
+      };
+    }
     case 'DELETE': {
       return {
         labels: state.labels.filter((label) => label.title !== action.label.title),
