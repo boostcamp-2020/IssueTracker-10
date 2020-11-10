@@ -57,7 +57,14 @@ export const renderUsers = ({ selectedList, setSelecteList }) => {
   const { assignees } = useContext(IssueStateContext);
   const onClickAssignee = ({ id, username, avatar }) => {
     const data = { id, username, avatar };
-    setSelecteList([...selectedList, data]);
+    const selectedListId = selectedList.map((ele) => ele.id);
+    if (selectedListId.includes(id)) {
+      const newList = selectedList.filter((ele) => {
+        if (id !== ele.id) return ele;
+      });
+      return setSelecteList(newList);
+    }
+    return setSelecteList([...selectedList, data]);
   };
 
   return assignees.map((user) => {
@@ -77,7 +84,14 @@ export const renderLabels = ({ selectedList, setSelecteList }) => {
   const { labels } = useContext(IssueStateContext);
   const onClickLabel = ({ id, color, title }) => {
     const data = { id, color, title };
-    setSelecteList([...selectedList, data]);
+    const selectedListId = selectedList.map((ele) => ele.id);
+    if (selectedListId.includes(id)) {
+      const newList = selectedList.filter((ele) => {
+        if (id !== ele.id) return ele;
+      });
+      return setSelecteList(newList);
+    }
+    return setSelecteList([...selectedList, data]);
   };
   return labels.map((label) => (
     <ModalRow key={label.id} onClick={() => onClickLabel(label)}>
@@ -90,11 +104,12 @@ export const renderLabels = ({ selectedList, setSelecteList }) => {
   ));
 };
 
-export const renderMilestones = ({ setSelecteList }) => {
+export const renderMilestones = ({ selectedList, setSelecteList }) => {
   const { milestones } = useContext(IssueStateContext);
   const onClickMilestone = ({ id, title }) => {
     const data = { id, title };
-    setSelecteList(data);
+    const selectedListId = selectedList && selectedList.id;
+    return selectedListId === id ? setSelecteList(null) : setSelecteList(data);
   };
   return milestones.map((milestone) => (
     <ModalRow key={milestone.id} onClick={() => onClickMilestone(milestone)}>
