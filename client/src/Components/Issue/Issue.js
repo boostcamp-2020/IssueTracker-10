@@ -29,7 +29,21 @@ const Issue = ({ token }) => {
   const dispatch = useContext(AuthDispatchContext);
   const issueDispatch = useContext(IssueDispatchContext);
   const [issueHeader, setIssueHeader] = useState({});
-  const [issues, setIssues] = useState([]);
+
+  const fetchHeader = async () => {
+    const config = { url: '/api/all', method: 'GET', token: state.token };
+    const { data } = await request(config);
+    if (data) {
+      setIssueHeader(data);
+      issueDispatch({ type: 'FETCH_HEADER', payload: data });
+    }
+  };
+
+  const fetchIssues = async () => {
+    const config = { url: '/api/issue', method: 'GET', token: state.token };
+    const { data } = await request(config);
+    if (data) issueDispatch({ type: 'FETCH_ISSUES', payload: data });
+  };
 
   useEffect(() => {
     if (!state.token) dispatch({ type: 'LOGIN', token });
@@ -37,28 +51,11 @@ const Issue = ({ token }) => {
 
   useEffect(() => {
     if (state.token) {
-      const fetchHeader = async () => {
-        const config = { url: '/api/all', method: 'GET', token: state.token };
-        const { data } = await request(config);
-        if (data) {
-          setIssueHeader(data);
-          issueDispatch({ type: 'FETCH_HEADER', payload: data });
-        }
-      };
-      const fetchIssues = async () => {
-        const config = { url: '/api/issue', method: 'GET', token: state.token };
-        const { data } = await request(config);
-        if (data) {
-          setIssues(data);
-          issueDispatch({ type: 'FETCH_ISSUES', payload: data });
-        }
-      };
       fetchHeader();
       fetchIssues();
     }
     return () => {
       setIssueHeader([]);
-      setIssues([]);
     };
   }, [state.token]);
 
@@ -71,7 +68,7 @@ const Issue = ({ token }) => {
           <GreenButton title="New Issue" />
         </Link>
       </IssueHeader>
-      <IssueList issues={issues} issueHeader={issueHeader} />
+      <IssueList issueHeader={issueHeader} />
     </Wrapper>
   );
 };
