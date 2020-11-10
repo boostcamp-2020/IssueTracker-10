@@ -19,6 +19,17 @@ class PopupViewController: UIViewController {
 	@IBOutlet weak var descriptionTextField: UITextField!
 	@IBOutlet weak var colorTextField: UITextField!
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		self.view.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+		colorView.layer.cornerRadius = 5
+		colorView.backgroundColor = label?.color.hexStringToUIColor()
+		titleTextField.text = label?.title
+		descriptionTextField.text = label?.description
+		colorTextField.text = label?.color
+		registerForKeyboardNotifications()
+	}
+	
 	@IBAction func randomColorButtonTouched(_ sender: Any) {
 		let randomHexString = generateRandomHexString()
 		colorTextField.text = randomHexString
@@ -43,17 +54,6 @@ class PopupViewController: UIViewController {
 	}
 	@IBAction func closeButtonTouched(_ sender: Any) {
 		self.dismiss(animated: false, completion: nil)
-	}
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		self.view.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
-		colorView.layer.cornerRadius = 5
-		colorView.backgroundColor = label?.color.hexStringToUIColor()
-		titleTextField.text = label?.title
-		descriptionTextField.text = label?.description
-		colorTextField.text = label?.color
-		registerForKeyboardNotifications()
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

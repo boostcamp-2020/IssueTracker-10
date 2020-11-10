@@ -8,6 +8,7 @@
 import Foundation
 
 class LabelViewModel {
+	
 	let reactor: LabelReactor
 	var state: LabelState
 	var updateClosure: ((LabelState) -> Void)?

@@ -8,6 +8,7 @@
 import Foundation
 
 class LabelReactor {
+	
 	var sideEffect: ((LabelState)-> Void)?
 	
 	enum Action {
