@@ -18,7 +18,7 @@ export default ({ setDisplay, toggleDisplay, initLabel }) => {
   const cancelButtonColor = theme.redColor;
   const createLabelButtonColor = theme.greenColor;
 
-  const eidtLabel = async (inputData) => {
+  const editLabel = async (inputData) => {
     const config = {
       url: `/api/label/${inputData.id}`,
       method: 'PUT',
@@ -34,7 +34,7 @@ export default ({ setDisplay, toggleDisplay, initLabel }) => {
 
   const clickUpdateLabelButton = () => {
     labelDispatch({ type: 'UPDATE', label });
-    eidtLabel(label);
+    editLabel(label);
     setColor(label.id);
     setTitle(label.title);
     setDescription(label.description);
