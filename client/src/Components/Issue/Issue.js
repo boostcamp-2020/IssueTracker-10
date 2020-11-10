@@ -25,42 +25,39 @@ const IssueHeader = styled.div`
 `;
 
 const Issue = ({ token }) => {
-  const state = useContext(AuthStateContext);
-  const dispatch = useContext(AuthDispatchContext);
+  const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const issueDispatch = useContext(IssueDispatchContext);
   const [issueHeader, setIssueHeader] = useState({});
-  const [issues, setIssues] = useState([]);
+
+  const fetchHeader = async () => {
+    const config = { url: '/api/all', method: 'GET', token: authState.token };
+    const { data } = await request(config);
+    if (data) {
+      setIssueHeader(data);
+      issueDispatch({ type: 'FETCH_HEADER', payload: data });
+    }
+  };
+
+  const fetchIssues = async () => {
+    const config = { url: '/api/issue', method: 'GET', token: authState.token };
+    const { data } = await request(config);
+    if (data) issueDispatch({ type: 'FETCH_ISSUES', payload: data });
+  };
 
   useEffect(() => {
-    if (!state.token) dispatch({ type: 'LOGIN', token });
+    if (!authState.token) authDispatch({ type: 'LOGIN', token });
   }, []);
 
   useEffect(() => {
-    if (state.token) {
-      const fetchHeader = async () => {
-        const config = { url: '/api/all', method: 'GET', token: state.token };
-        const { data } = await request(config);
-        if (data) {
-          setIssueHeader(data);
-          issueDispatch({ type: 'FETCH_HEADER', payload: data });
-        }
-      };
-      const fetchIssues = async () => {
-        const config = { url: '/api/issue', method: 'GET', token: state.token };
-        const { data } = await request(config);
-        if (data) {
-          setIssues(data);
-          issueDispatch({ type: 'FETCH_ISSUES', payload: data });
-        }
-      };
+    if (authState.token) {
       fetchHeader();
       fetchIssues();
     }
     return () => {
       setIssueHeader([]);
-      setIssues([]);
     };
-  }, [state.token]);
+  }, [authState.token]);
 
   return (
     <Wrapper>
@@ -71,7 +68,7 @@ const Issue = ({ token }) => {
           <GreenButton title="New Issue" />
         </Link>
       </IssueHeader>
-      <IssueList issues={issues} issueHeader={issueHeader} />
+      <IssueList issueHeader={issueHeader} />
     </Wrapper>
   );
 };

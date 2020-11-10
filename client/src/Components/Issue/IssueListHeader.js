@@ -34,7 +34,7 @@ const FillterButton = styled.button`
 const IssueListHeader = (props) => {
   const state = useContext(IssueStateContext);
   const [modal, setModal] = useState(0);
-  const { header, checkAllIssue, checked, checkedLength = 0 } = props;
+  const { header, checkAllIssue, checked } = props;
   const { labels, milestones, users } = header;
   const handleModal = (num) => {
     if (modal === num) setModal(0);
@@ -43,12 +43,12 @@ const IssueListHeader = (props) => {
   return (
     <ListHeaderWraaper>
       <IssueCheckbox type="checkbox" onChange={checkAllIssue} checked={checked} />
-      <HeaderText checkedLength={checkedLength} />
+      <HeaderText checkedLength={state.checkedIds.length} />
       <FilterWrapperLeft>
-        {checkedLength === 0 ? (
+        {state.checkedIds.length === 0 ? (
           <>
-            <FillterButton onClick={() => handleModal(1)}>Author ▾</FillterButton>
-            {modal === 1 && <IssueFilterModal id="author" data={users} />}
+            <FillterButton onClick={() => handleModal(5)}>Author ▾</FillterButton>
+            {modal === 5 && <IssueFilterModal id="author" data={users} />}
           </>
         ) : (
           <>
