@@ -82,11 +82,7 @@ const Issue = ({ token }) => {
 
   const isNonFilter = (currentFilter) => {
     const { filter } = initialIssueState;
-    return Object.keys(filter).every((key) => {
-      console.log(key, filter[key], currentFilter[key]);
-      return filter[key] === currentFilter[key];
-    });
-    // return JSON.stringify(currentFilter) === JSON.stringify(filter);
+    return Object.keys(filter).every((key) => filter[key] === currentFilter[key]);
   };
 
   useEffect(() => {
