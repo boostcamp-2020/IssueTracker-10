@@ -1,5 +1,5 @@
 export const getRandomColor = () => {
-  const standard = '888888';
+  const standard = '999999';
 
   const randomHexCode = Math.floor(Math.random() * 16777215).toString(16);
   const randomColor = `#${randomHexCode}`;
