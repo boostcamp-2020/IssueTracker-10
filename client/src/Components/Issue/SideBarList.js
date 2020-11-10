@@ -56,12 +56,12 @@ const MilestoneDueDate = styled.div`
 
 export const renderUsers = ({ selectedList, setSelecteList }) => {
   const { assignees } = useContext(IssueStateContext);
-  const selectedListId = selectedList.map((ele) => ele.id);
+  const selectedListId = selectedList.map((user) => user.id);
   const onClickAssignee = ({ id, username, avatar }) => {
     const data = { id, username, avatar };
     if (selectedListId.includes(id)) {
-      const newList = selectedList.filter((ele) => {
-        if (id !== ele.id) return ele;
+      const newList = selectedList.filter((user) => {
+        if (id !== user.id) return user;
       });
       return setSelecteList(newList);
     }
@@ -84,12 +84,12 @@ export const renderUsers = ({ selectedList, setSelecteList }) => {
 
 export const renderLabels = ({ selectedList, setSelecteList }) => {
   const { labels } = useContext(IssueStateContext);
-  const selectedListId = selectedList.map((ele) => ele.id);
+  const selectedListId = selectedList.map((label) => label.id);
   const onClickLabel = ({ id, color, title }) => {
     const data = { id, color, title };
     if (selectedListId.includes(id)) {
-      const newList = selectedList.filter((ele) => {
-        if (id !== ele.id) return ele;
+      const newList = selectedList.filter((label) => {
+        if (id !== label.id) return label;
       });
       return setSelecteList(newList);
     }
