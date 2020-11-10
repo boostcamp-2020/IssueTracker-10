@@ -54,9 +54,8 @@ const createIssue = async (req, res) => {
 
 const readIssueAll = async (req, res) => {
   try {
-    // const { state, author, label, milestone, assignee, search } = req.query;
-    const issueList = await issueModel.findIssueAll({ state: 'open', ...req.query });
-    return res.status(200).json({ message: SUCCESS_MSG.read, data: issueList });
+    const result = await issueModel.findIssueAll({ state: 'open', ...req.query });
+    return res.status(200).json({ message: SUCCESS_MSG.read, data: { ...result } });
   } catch (err) {
     return res.status(500).json({ message: ERROR_MSG.server });
   }
