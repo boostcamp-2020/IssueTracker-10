@@ -84,7 +84,7 @@ const IssueListRow = (props) => {
           <IssueTitle>
             <Link to={`/issue/${id}`}>{title}</Link>
           </IssueTitle>
-          {labels.length > 0 && labels.map((label) => <IssueLabel {...label} />)}
+          {labels.length > 0 && labels.map((label) => <IssueLabel key={label.id} {...label} />)}
         </IssueTitleWrapper>
         <IssueInformation>
           <IssueSubText>#{id}</IssueSubText>
