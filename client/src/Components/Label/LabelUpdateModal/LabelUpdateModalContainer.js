@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { request } from '../../../Api';
 import { AuthStateContext } from '../../../Context/AuthContext';
-import { LabelDispatchContext } from '../../../Context/LabelContext';
+import { LabelDispatchContext, LabelStateContext } from '../../../Context/LabelContext';
 import { getRandomColor } from '../../../utils/color';
 import LabelUpdateModalPresenter from './LabelUpdateModalPresenter';
 import { theme } from '../../../theme';
 
 export default ({ setDisplay, toggleDisplay, initLabel }) => {
   const authState = useContext(AuthStateContext);
+  const labelState = useContext(LabelStateContext);
   const labelDispatch = useContext(LabelDispatchContext);
   const [color, setColor] = useState(initLabel.color);
   const [title, setTitle] = useState(initLabel.title);
   const [description, setDescription] = useState(initLabel.description);
   const [label, setLabel] = useState(initLabel);
   const [fontColor, setFontColor] = useState(null);
+  const [isExist, setIsExist] = useState(false);
+  const defaultTitle = initLabel.title;
 
   const cancelButtonColor = theme.redColor;
   const createLabelButtonColor = theme.greenColor;
@@ -61,6 +64,19 @@ export default ({ setDisplay, toggleDisplay, initLabel }) => {
       target: { value },
     } = event;
     setTitle(value);
+    const { labels } = labelState;
+    const result = labels.filter(
+      (element) => element.title.toLowerCase().trim() === value.toLowerCase().trim(),
+    );
+    if (result.length) {
+      if (defaultTitle === value) {
+        setIsExist(false);
+      } else {
+        setIsExist(true);
+      }
+    } else {
+      setIsExist(false);
+    }
   };
 
   const onChangeDescription = (event) => {
@@ -81,6 +97,7 @@ export default ({ setDisplay, toggleDisplay, initLabel }) => {
     <LabelUpdateModalPresenter
       color={color}
       title={title}
+      isExist={isExist}
       fontColor={fontColor}
       description={description}
       cancelButtonColor={cancelButtonColor}
@@ -91,6 +108,7 @@ export default ({ setDisplay, toggleDisplay, initLabel }) => {
       onChangeTitle={onChangeTitle}
       changeColor={changeColor}
       toggleDisplay={toggleDisplay}
+      redColor={cancelButtonColor}
     />
   );
 };
