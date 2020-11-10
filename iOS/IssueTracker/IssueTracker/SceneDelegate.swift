@@ -28,19 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
     }
-
-//	private func checkAppleID() {
-//		let provider = ASAuthorizationAppleIDProvider()
-//		provider.getCredentialState(forUserID: KeychainItem.currentUserIdentifier) { (credentialState, error) in
-//			switch credentialState {
-//			case .authorized:
-//				break
-//			case .notFound, .revoked:
-//				self.configureSignIn()
-//			default: break
-//			}
-//		}
-//	}
 	
 	private func configureSignIn() {
 		DispatchQueue.main.async {
