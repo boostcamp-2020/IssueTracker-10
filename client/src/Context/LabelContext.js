@@ -21,10 +21,7 @@ export const labelReducer = (state, action) => {
     case 'UPDATE': {
       const { label } = action;
       const editLabel = state.labels.map((element) => {
-        if (element.id === label.id) {
-          return label;
-        }
-        return element;
+        return element.id === label.id ? label : element;
       });
       return {
         labels: [...editLabel],
