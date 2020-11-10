@@ -5,6 +5,7 @@ import Button from '../../Common/Button';
 import Input from '../../Common/Input';
 import LabelBadge from '../LabelBadge';
 import { CycleIcon } from '../../static/svgIcons';
+import Balloon from '../../Common/Balloon';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -31,6 +32,7 @@ const InputRow = styled.div`
 `;
 
 const InputColumn = styled.div`
+  position: relative;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
@@ -81,9 +83,15 @@ const CancelButton = styled(Button)`
   font-size: 10px;
 `;
 
+const InvalidText = styled(BoldText)`
+  margin-bottom: 10px;
+  color: red;
+`;
+
 export default ({
   color,
   title,
+  isExist,
   fontColor,
   description,
   cancelButtonColor,
@@ -94,6 +102,7 @@ export default ({
   onChangeTitle,
   changeColor,
   toggleDisplay,
+  redColor,
 }) => (
   <Wrapper>
     <Container>
@@ -102,14 +111,32 @@ export default ({
       </LabelRow>
       <InputRow>
         <InputColumn>
-          <InputBoldText text="Label name" />
-          <LabelInput
-            name="title"
-            placeholder="Label name"
-            value={title || ''}
-            required
-            onChange={onChangeTitle}
-          />
+          {isExist ? (
+            <>
+              <InvalidText text="Label name" />
+              <LabelInput
+                name="title"
+                placeholder="Label name"
+                value={title || ''}
+                required
+                onChange={onChangeTitle}
+                maxLength={25}
+              />
+              <Balloon text="Name has already been taken" color={redColor} fontColor="black" />
+            </>
+          ) : (
+            <>
+              <InputBoldText text="Label name" />
+              <LabelInput
+                name="title"
+                placeholder="Label name"
+                value={title || ''}
+                required
+                onChange={onChangeTitle}
+                maxLength={25}
+              />
+            </>
+          )}
         </InputColumn>
         <InputColumn>
           <InputBoldText text="Description" />
@@ -147,6 +174,7 @@ export default ({
               text="Save Changes"
               color={createLabelButtonColor}
               onClick={clickUpdateLabelButton}
+              disabled={isExist}
             />
           </InnerWrapper>
         </InputColumn>

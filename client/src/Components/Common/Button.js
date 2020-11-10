@@ -5,17 +5,25 @@ const Container = styled.button`
   width: 100%;
   border: 0;
   border-radius: ${(props) => props.theme.radius};
-  color: ${(props) => props.fontColor};
+  color: ${(props) => (props.disabled ? props.theme.redColor : props.fontColor)};
   font-weight: 600;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => (props.disabled ? props.theme.lightGreenColor : props.color)};
   text-align: center;
   padding: 7px 0px;
   font-size: 14px;
-  cursor: pointer;
+  &:hover {
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  }
 `;
 
-const Button = ({ text, onClick, color, fontColor = 'white', className }) => (
-  <Container className={className} color={color} onClick={onClick} fontColor={fontColor}>
+const Button = ({ text, onClick, color, fontColor = 'white', className, disabled }) => (
+  <Container
+    disabled={disabled}
+    className={className}
+    color={color}
+    onClick={onClick}
+    fontColor={fontColor}
+  >
     {text}
   </Container>
 );

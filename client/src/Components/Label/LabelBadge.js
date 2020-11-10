@@ -5,6 +5,7 @@ const Container = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: fit-content;
   height: 25px;
   border: 0;
   border-radius: ${(props) => props.theme.badgeRadius};

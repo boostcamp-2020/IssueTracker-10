@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { request } from '../../../Api';
 import { AuthStateContext } from '../../../Context/AuthContext';
-import { LabelDispatchContext } from '../../../Context/LabelContext';
+import { LabelDispatchContext, LabelStateContext } from '../../../Context/LabelContext';
 import { getRandomColor } from '../../../utils/color';
 import LabelCreateModalPresenter from './LabelCreateModalPresenter';
 import { theme } from '../../../theme';
 
 export default ({ setDisplay, toggleDisplay }) => {
   const authState = useContext(AuthStateContext);
+  const labelState = useContext(LabelStateContext);
   const labelDispatch = useContext(LabelDispatchContext);
   const [color, setColor] = useState(null);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [fontColor, setFontColor] = useState(null);
+  const [isExist, setIsExist] = useState(false);
   const [label, setLabel] = useState({
     id: '',
     title: '',
@@ -74,6 +76,15 @@ export default ({ setDisplay, toggleDisplay }) => {
       target: { value },
     } = event;
     setTitle(value);
+    const { labels } = labelState;
+    const result = labels.filter(
+      (element) => element.title.toLowerCase().trim() === value.toLowerCase().trim(),
+    );
+    if (result.length) {
+      setIsExist(true);
+    } else {
+      setIsExist(false);
+    }
   };
 
   const onChangeDescription = (event) => {
@@ -94,6 +105,7 @@ export default ({ setDisplay, toggleDisplay }) => {
     <LabelCreateModalPresenter
       color={color}
       title={title}
+      isExist={isExist}
       fontColor={fontColor}
       cancelButtonColor={cancelButtonColor}
       createLabelButtonColor={createLabelButtonColor}
@@ -103,6 +115,7 @@ export default ({ setDisplay, toggleDisplay }) => {
       onChangeTitle={onChangeTitle}
       changeColor={changeColor}
       toggleDisplay={toggleDisplay}
+      redColor={cancelButtonColor}
     />
   );
 };

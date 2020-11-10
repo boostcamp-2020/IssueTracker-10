@@ -12,6 +12,7 @@ const colors = {
   darkgrayColor: '#586069',
   brightColor: '#fafafa',
   lightGrayColor: '#c7c7c7',
+  lightGreenColor: '#cff7af',
 };
 
 const border = '1px solid #e1e4e8';
