@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthStateContext } from '../Context/AuthContext';
-import Issue from './Issue';
+import Issue from './Issue/Issue';
 import { parseCookies } from '../utils/parse';
 
 export default (props) => {
