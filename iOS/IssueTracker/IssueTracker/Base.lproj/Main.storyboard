@@ -77,8 +77,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpO-uJ-rbn">
-                                <rect key="frame" x="8" y="148" width="398" height="21"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zql-Mn-hEr">
+                                <rect key="frame" x="167" y="160" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="hBp-ET-Ja9"/>
+                                    <constraint firstAttribute="width" constant="80" id="joA-c9-WFh"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpO-uJ-rbn">
+                                <rect key="frame" x="8" y="252" width="398" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -87,13 +94,16 @@
                         <viewLayoutGuide key="safeArea" id="8Ol-CJ-SUv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dpO-uJ-rbn" firstAttribute="top" secondItem="8Ol-CJ-SUv" secondAttribute="top" constant="8" id="a1C-L2-XgV"/>
+                            <constraint firstItem="Zql-Mn-hEr" firstAttribute="centerX" secondItem="dxe-My-85x" secondAttribute="centerX" id="PH5-Gg-mpA"/>
+                            <constraint firstItem="dpO-uJ-rbn" firstAttribute="top" secondItem="Zql-Mn-hEr" secondAttribute="bottom" constant="12" id="Yyp-6F-u3H"/>
                             <constraint firstItem="8Ol-CJ-SUv" firstAttribute="trailing" secondItem="dpO-uJ-rbn" secondAttribute="trailing" constant="8" id="dVG-pp-omK"/>
+                            <constraint firstItem="Zql-Mn-hEr" firstAttribute="top" secondItem="8Ol-CJ-SUv" secondAttribute="top" constant="20" id="daj-w9-JkF"/>
                             <constraint firstItem="dpO-uJ-rbn" firstAttribute="leading" secondItem="8Ol-CJ-SUv" secondAttribute="leading" constant="8" id="gdw-ul-w06"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wGp-YR-wn1"/>
                     <connections>
+                        <outlet property="avatarImageView" destination="Zql-Mn-hEr" id="ysZ-oP-4K9"/>
                         <outlet property="nameLabel" destination="dpO-uJ-rbn" id="con-tX-zdh"/>
                     </connections>
                 </viewController>
