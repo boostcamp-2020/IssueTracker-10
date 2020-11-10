@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { IssueInfoDispatchContext } from '../../Context/IssueInfoContext';
 
 const ModalWrapper = styled.div`
   position: absolute;
@@ -29,17 +30,18 @@ const ModalContent = styled.ul`
   cursor: pointer;
 `;
 
-const IssueFilterModal = ({ title, render }) => {
+const IssueFilterModal = ({ title, render, type }) => {
+  const [selectedList, setSelecteList] = useState([]);
+  const dispatch = useContext(IssueInfoDispatchContext);
+  // TODO: 랜더링 관해서 좀 더 고민해보기
   useEffect(() => {
-    return () => {
-      // TODO: 선택된 요소를 SideBarElement 컴포넌트의 content 컴포넌트에 추가
-    };
-  }, []);
+    return () => dispatch({ type, data: selectedList });
+  }, [selectedList]);
 
   return (
     <ModalWrapper>
       <ModalTitle>{title}</ModalTitle>
-      <ModalContent>{render()}</ModalContent>
+      <ModalContent>{render({ selectedList, setSelecteList })}</ModalContent>
     </ModalWrapper>
   );
 };

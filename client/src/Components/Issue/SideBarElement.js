@@ -10,16 +10,19 @@ const modalType = {
     title: `Assign up to people to this issue`,
     render: renderUsers,
     content: checkedUsers,
+    type: 'SELECT_ASSIGNEES',
   },
   Labels: {
     title: 'Apply Labels to this issue',
     render: renderLabels,
     content: checkedLabels,
+    type: 'SELECT_LABELS',
   },
   Milestone: {
     title: 'Set milestone',
     render: renderMilestones,
     content: checkedMilestone,
+    type: 'SELECT_MILESTONE',
   },
 };
 
@@ -72,7 +75,9 @@ const SideBarElement = ({ title }) => {
         <Title>{title}</Title>
         <GearIcon size="20" />
       </HeaderWrapper>
-      {modalDisplay && <SideBarModal title={modalInfo.title} render={modalInfo.render} />}
+      {modalDisplay && (
+        <SideBarModal title={modalInfo.title} render={modalInfo.render} type={modalInfo.type} />
+      )}
       <Content>{modalInfo.content()}</Content>
     </Container>
   );

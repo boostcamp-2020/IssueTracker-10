@@ -28,7 +28,7 @@ const Label = styled.div`
   width: 100%;
   padding: 5px 10px;
   border-radius: ${(props) => props.theme.radiusSmall};
-  background-color: ${(props) => props.theme.redColor};
+  background-color: ${(props) => props.color};
   color: ${(props) => props.theme.whiteColor};
   font-weight: 600;
 `;
@@ -80,11 +80,15 @@ export const checkedLabels = () => {
   if (labels.length === 0) {
     return <Wrapper>None yet</Wrapper>;
   }
-  return (
-    <Wrapper>
-      <Label>Label</Label>
-    </Wrapper>
-  );
+  return labels.map((label) => {
+    const { id, title, color } = label;
+
+    return (
+      <Wrapper key={id}>
+        <Label color={color}>{title}</Label>
+      </Wrapper>
+    );
+  });
 };
 
 export const checkedMilestone = () => {
@@ -99,7 +103,7 @@ export const checkedMilestone = () => {
         <MilestoneTotal d="M5 10 295 10" />
         <MilestoneDone d="M5 10 100 10" />
       </MilestoneGraph>
-      <MilestoneTitle>Milestone</MilestoneTitle>
+      <MilestoneTitle>{milestone.title}</MilestoneTitle>
     </Wrapper>
   );
 };
