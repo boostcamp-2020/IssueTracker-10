@@ -23,6 +23,5 @@ class IssueDetailCell: UICollectionViewCell {
     func configure(comment: IssueComment) {
         content.text = comment.content
         header.configure(comment: comment)
-        
     }
 }

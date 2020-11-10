@@ -198,6 +198,16 @@
                                     <outlet property="delegate" destination="Cda-2a-Dr8" id="9cf-Xf-E2K"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2E9-Bi-Jy4" customClass="DetailPullUpView" customModule="IssueTracker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="776" width="414" height="120"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="jHA-J6-eWM"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="heightConstraint" destination="jHA-J6-eWM" id="I8z-nX-K8C"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nGu-E6-Wdo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -205,7 +215,10 @@
                             <constraint firstItem="GDE-y8-czs" firstAttribute="trailing" secondItem="nGu-E6-Wdo" secondAttribute="trailing" id="4WF-1K-SCy"/>
                             <constraint firstItem="GDE-y8-czs" firstAttribute="top" secondItem="zPC-Em-wma" secondAttribute="top" id="5oZ-sw-4II"/>
                             <constraint firstAttribute="bottom" secondItem="GDE-y8-czs" secondAttribute="bottom" id="CoD-XH-QJG"/>
+                            <constraint firstItem="2E9-Bi-Jy4" firstAttribute="leading" secondItem="nGu-E6-Wdo" secondAttribute="leading" id="b9X-lV-vJh"/>
+                            <constraint firstAttribute="bottom" secondItem="2E9-Bi-Jy4" secondAttribute="bottom" id="bhc-hL-L2e"/>
                             <constraint firstItem="GDE-y8-czs" firstAttribute="leading" secondItem="nGu-E6-Wdo" secondAttribute="leading" id="w5y-2u-keG"/>
+                            <constraint firstItem="nGu-E6-Wdo" firstAttribute="trailing" secondItem="2E9-Bi-Jy4" secondAttribute="trailing" id="z7d-eW-bUj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" largeTitleDisplayMode="never" id="2d3-UB-UxC"/>
