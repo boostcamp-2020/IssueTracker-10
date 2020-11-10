@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
+import { IssueStateContext } from '../Context/IssueContext';
 import IssueListHeader from './IssueListHeader';
 import IssueListRow from './IssueListRow';
 
@@ -14,12 +15,16 @@ const IssueListWrapper = styled.div`
 `;
 
 const IssueList = (props) => {
-  const { issueHeader = {}, issues = [] } = props;
+  const state = useContext(IssueStateContext);
+  const { issues } = state;
+  const { issueHeader = {} } = props;
   const [checkedIssues, setCheckedIssues] = useState([]);
+  const [checkedLength, setCheckedLength] = useState(0);
   const [allChecked, setAllChecked] = useState(false);
 
   useEffect(() => {
     if (issues.length > 0 && issues.length === checkedIssues.length) setAllChecked(true);
+    setCheckedLength(checkedIssues.length);
   }, [checkedIssues]);
 
   const checkOneIssue = (issueId) => {
@@ -45,7 +50,12 @@ const IssueList = (props) => {
 
   return (
     <IssueListWrapper>
-      <IssueListHeader {...issueHeader} checked={allChecked} checkAllIssue={checkAllIssue} />
+      <IssueListHeader
+        header={issueHeader}
+        checked={allChecked}
+        checkAllIssue={checkAllIssue}
+        checkedLength={checkedLength}
+      />
       {issues &&
         issues.map((issue) => (
           <IssueListRow

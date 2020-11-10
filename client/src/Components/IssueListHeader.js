@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import { IssueStateContext } from '../Context/IssueContext';
 import IssueFilterModal from './IssueFilterModal';
+import HeaderText from './IssueListHeaderText';
 
 const ListHeaderWraaper = styled.div`
   display: flex;
@@ -13,10 +15,6 @@ const ListHeaderWraaper = styled.div`
 
 export const IssueCheckbox = styled.input`
   margin-right: 15px;
-`;
-
-const SelectedText = styled.span`
-  font-size: 14px;
 `;
 
 const FilterWrapper = styled.span`
@@ -34,8 +32,10 @@ const FillterButton = styled.button`
 `;
 
 const IssueListHeader = (props) => {
+  const state = useContext(IssueStateContext);
   const [modal, setModal] = useState(0);
-  const { labels, milestones, users, openCount, closedCount, checkAllIssue, checked } = props;
+  const { header, checkAllIssue, checked, checkedLength = 0 } = props;
+  const { labels, milestones, users } = header;
   const handleModal = (num) => {
     if (modal === num) setModal(0);
     else setModal(num);
@@ -43,9 +43,7 @@ const IssueListHeader = (props) => {
   return (
     <ListHeaderWraaper>
       <IssueCheckbox type="checkbox" onChange={checkAllIssue} checked={checked} />
-      <SelectedText>
-        {openCount} open {closedCount} closed
-      </SelectedText>
+      <HeaderText checkedLength={checkedLength} />
       <FilterWrapperLeft>
         <FillterButton onClick={() => handleModal(1)}>Author ▾</FillterButton>
         {modal === 1 && <IssueFilterModal id="author" data={users} />}

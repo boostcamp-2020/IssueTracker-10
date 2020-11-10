@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import FilterInput from './FilterInput';
 import IssueList from './IssueList';
@@ -7,6 +8,8 @@ import LabelMilestoneButton from './LabelMilestoneButton';
 import GreenButton from './GreenButton';
 import { request } from '../Api';
 import { AuthStateContext, AuthDispatchContext } from '../Context/AuthContext';
+import { IssueDispatchContext } from '../Context/IssueContext';
+import IssueProvider from './Provider/Issue';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,6 +29,7 @@ const IssueHeader = styled.div`
 const Issue = ({ token }) => {
   const state = useContext(AuthStateContext);
   const dispatch = useContext(AuthDispatchContext);
+  const issueDispatch = useContext(IssueDispatchContext);
   const [issueHeader, setIssueHeader] = useState({});
   const [issues, setIssues] = useState([]);
 
@@ -38,12 +42,18 @@ const Issue = ({ token }) => {
       const fetchHeader = async () => {
         const config = { url: '/api/all', method: 'GET', token: state.token };
         const { data } = await request(config);
-        if (data) setIssueHeader(data);
+        if (data) {
+          setIssueHeader(data);
+          issueDispatch({ type: 'FETCH_HEADER', payload: data });
+        }
       };
       const fetchIssues = async () => {
         const config = { url: '/api/issue', method: 'GET', token: state.token };
         const { data } = await request(config);
-        if (data) setIssues(data);
+        if (data) {
+          setIssues(data);
+          issueDispatch({ type: 'FETCH_ISSUES', payload: data });
+        }
       };
       fetchHeader();
       fetchIssues();
@@ -60,7 +70,9 @@ const Issue = ({ token }) => {
       <IssueHeader>
         <FilterInput />
         <LabelMilestoneButton issueHeader={issueHeader} hasCount />
-        <GreenButton title="New Issue" />
+        <Link to="/new">
+          <GreenButton title="New Issue" />
+        </Link>
       </IssueHeader>
       <IssueList issues={issues} issueHeader={issueHeader} />
     </Wrapper>
