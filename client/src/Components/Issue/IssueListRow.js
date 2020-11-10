@@ -30,7 +30,7 @@ const IssueState = styled.span`
 `;
 
 const IssueTitleWrapper = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 4px;
@@ -40,6 +40,7 @@ const IssueTitle = styled.span`
   margin-right: 7px;
   font-size: 16px;
   font-weight: 600;
+  line-height: 18px;
 `;
 
 const IssueInformation = styled.div`
