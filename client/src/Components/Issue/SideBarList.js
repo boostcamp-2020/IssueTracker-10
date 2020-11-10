@@ -119,7 +119,9 @@ export const renderMilestones = ({ selectedList, setSelecteList }) => {
         {milestone.title}
         {selectedListId === milestone.id && <CheckIcon />}
       </MilestoneTitle>
-      <MilestoneDueDate>{milestone.date || 'No due date'}</MilestoneDueDate>
+      <MilestoneDueDate>
+        {milestone.date ? `Due by ${milestone.dateString}` : 'No due date'}
+      </MilestoneDueDate>
     </ModalRow>
   ));
 };
