@@ -32,6 +32,14 @@
 		C3DB0513255277D200F0910E /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB0512255277D200F0910E /* FilterTableViewCell.swift */; };
 		C3DB051825527B5500F0910E /* FilterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB051725527B5500F0910E /* FilterDataSource.swift */; };
 		C3DB051D25527EDD00F0910E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB051C25527EDD00F0910E /* Filter.swift */; };
+		E037F258255932AF00DAD98B /* IssueDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E037F257255932AF00DAD98B /* IssueDetailViewModel.swift */; };
+		E037F2602559331A00DAD98B /* IssueDetailReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E037F25F2559331A00DAD98B /* IssueDetailReactor.swift */; };
+		E037F2682559331F00DAD98B /* IssueDetailState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E037F2672559331F00DAD98B /* IssueDetailState.swift */; };
+		E037F27125593C3F00DAD98B /* IssueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E037F27025593C3F00DAD98B /* IssueDetail.swift */; };
+		E037F27B2559490400DAD98B /* IssueComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E037F27A2559490400DAD98B /* IssueComment.swift */; };
+		E037F2802559955100DAD98B /* PastTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = E037F27F2559955100DAD98B /* PastTime.swift */; };
+		E037F28525599D7A00DAD98B /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E037F28425599D7A00DAD98B /* StateView.swift */; };
+		E037F28A255A354300DAD98B /* IssueDetailViewController+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E037F289255A354300DAD98B /* IssueDetailViewController+Collection.swift */; };
 		E049B88C25526349004DD162 /* IssueListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049B88A25526349004DD162 /* IssueListViewCell.swift */; };
 		E049B88D25526349004DD162 /* IssueListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E049B88B25526349004DD162 /* IssueListViewCell.xib */; };
 		E049B8952552715F004DD162 /* LabelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049B8942552715F004DD162 /* LabelListView.swift */; };
@@ -120,6 +128,14 @@
 		C3DB0512255277D200F0910E /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		C3DB051725527B5500F0910E /* FilterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataSource.swift; sourceTree = "<group>"; };
 		C3DB051C25527EDD00F0910E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		E037F257255932AF00DAD98B /* IssueDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueDetailViewModel.swift; path = ../../../../../../../test/MyCalendar/MyCalendar/IssueDetailViewModel.swift; sourceTree = "<group>"; };
+		E037F25F2559331A00DAD98B /* IssueDetailReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueDetailReactor.swift; path = ../../../../../../../test/MyCalendar/MyCalendar/IssueDetailReactor.swift; sourceTree = "<group>"; };
+		E037F2672559331F00DAD98B /* IssueDetailState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueDetailState.swift; path = ../../../../../../../test/MyCalendar/MyCalendar/IssueDetailState.swift; sourceTree = "<group>"; };
+		E037F27025593C3F00DAD98B /* IssueDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueDetail.swift; path = ../../../../../../../test/MyCalendar/MyCalendar/IssueDetail.swift; sourceTree = "<group>"; };
+		E037F27A2559490400DAD98B /* IssueComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueComment.swift; path = ../../../../../../../test/MyCalendar/MyCalendar/IssueComment.swift; sourceTree = "<group>"; };
+		E037F27F2559955100DAD98B /* PastTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastTime.swift; sourceTree = "<group>"; };
+		E037F28425599D7A00DAD98B /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
+		E037F289255A354300DAD98B /* IssueDetailViewController+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IssueDetailViewController+Collection.swift"; sourceTree = "<group>"; };
 		E049B88A25526349004DD162 /* IssueListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewCell.swift; sourceTree = "<group>"; };
 		E049B88B25526349004DD162 /* IssueListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListViewCell.xib; sourceTree = "<group>"; };
 		E049B8942552715F004DD162 /* LabelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListView.swift; sourceTree = "<group>"; };
@@ -266,6 +282,7 @@
 				C3414FC325481BF6003C845A /* IssueManager.swift */,
 				E0B3D43B2549AFC90040D5AF /* Criteria.swift */,
 				E049B8D0255316B2004DD162 /* SelectedLabels.swift */,
+				E037F27F2559955100DAD98B /* PastTime.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,6 +308,34 @@
 				E049B90C2553EC9C004DD162 /* Constant.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		E037F2552559329900DAD98B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E037F257255932AF00DAD98B /* IssueDetailViewModel.swift */,
+				E037F25F2559331A00DAD98B /* IssueDetailReactor.swift */,
+				E037F2672559331F00DAD98B /* IssueDetailState.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E037F256255932A100DAD98B /* Contoroller */ = {
+			isa = PBXGroup;
+			children = (
+				E0B3D4092547EBC20040D5AF /* IssueDetailViewController.swift */,
+				E037F289255A354300DAD98B /* IssueDetailViewController+Collection.swift */,
+			);
+			path = Contoroller;
+			sourceTree = "<group>";
+		};
+		E037F26F25593C2A00DAD98B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E037F27025593C3F00DAD98B /* IssueDetail.swift */,
+				E037F27A2559490400DAD98B /* IssueComment.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E049B8AC25529FB1004DD162 /* Extensions */ = {
@@ -346,6 +391,7 @@
 				E09C1E5925506BF800A1FADF /* IssueDetailCell.swift */,
 				E09C1E5A25506BF800A1FADF /* IssueDetailCell.xib */,
 				E09C1E6025506C4000A1FADF /* IssueDetailCellHeader.swift */,
+				E037F28425599D7A00DAD98B /* StateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -439,8 +485,10 @@
 		E0B3D4132547FB9F0040D5AF /* IssueDetail */ = {
 			isa = PBXGroup;
 			children = (
+				E037F26F25593C2A00DAD98B /* Model */,
+				E037F256255932A100DAD98B /* Contoroller */,
 				E09C1EF02551586600A1FADF /* View */,
-				E0B3D4092547EBC20040D5AF /* IssueDetailViewController.swift */,
+				E037F2552559329900DAD98B /* ViewModel */,
 			);
 			path = IssueDetail;
 			sourceTree = "<group>";
@@ -598,6 +646,8 @@
 				C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */,
 				E049B8D1255316B2004DD162 /* SelectedLabels.swift in Sources */,
 				E049B9082553E6A8004DD162 /* Environment.swift in Sources */,
+				E037F2602559331A00DAD98B /* IssueDetailReactor.swift in Sources */,
+				E037F2682559331F00DAD98B /* IssueDetailState.swift in Sources */,
 				E0B3D40F2547F9590040D5AF /* IssueCreateViewController.swift in Sources */,
 				E09C1EEC2551584800A1FADF /* LabelCollectionViewCell.swift in Sources */,
 				C35F6B192550281D008A116B /* User.swift in Sources */,
@@ -612,8 +662,12 @@
 				E0B3D3C92546C8660040D5AF /* ViewController.swift in Sources */,
 				E09C1CA2254A996A00A1FADF /* HomeViewController.swift in Sources */,
 				C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */,
+				E037F28A255A354300DAD98B /* IssueDetailViewController+Collection.swift in Sources */,
+				E037F27125593C3F00DAD98B /* IssueDetail.swift in Sources */,
+				E037F258255932AF00DAD98B /* IssueDetailViewModel.swift in Sources */,
 				E09C1EC925514E9E00A1FADF /* IssueViewController+CollectionViewDelegate.swift in Sources */,
 				C300184C25596F9000FC7470 /* PopupViewController.swift in Sources */,
+				E037F2802559955100DAD98B /* PastTime.swift in Sources */,
 				E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */,
 				E049B9242554DE40004DD162 /* Date+globalLocal.swift in Sources */,
 				E049B9442556237B004DD162 /* IssueListState.swift in Sources */,
@@ -636,6 +690,7 @@
 				E049B90D2553EC9C004DD162 /* Constant.swift in Sources */,
 				C3001836255941B500FC7470 /* LabelReactor.swift in Sources */,
 				E09C1E5B25506BF800A1FADF /* IssueDetailCell.swift in Sources */,
+				E037F27B2559490400DAD98B /* IssueComment.swift in Sources */,
 				C3DB051825527B5500F0910E /* FilterDataSource.swift in Sources */,
 				E09C1E5225505EAB00A1FADF /* LeftAlignLayout.swift in Sources */,
 				E09C1E672550C59500A1FADF /* CollectionHeaderView.swift in Sources */,
@@ -647,6 +702,7 @@
 				C3DB04E92551099F00F0910E /* AppData.swift in Sources */,
 				C300181B25593AF100FC7470 /* LabelDataSource.swift in Sources */,
 				E049B8BE2552A077004DD162 /* String+estimateSize.swift in Sources */,
+				E037F28525599D7A00DAD98B /* StateView.swift in Sources */,
 				E09C1EC425514E7100A1FADF /* IssueViewController+SearchUpdate.swift in Sources */,
 				E049B88C25526349004DD162 /* IssueListViewCell.swift in Sources */,
 				C30018282559405800FC7470 /* LabelViewModel.swift in Sources */,

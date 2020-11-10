@@ -142,4 +142,11 @@ class IssueViewController: UIViewController {
             }
         }
     }
+    
+    func presentDetailViewController(issue: Issue) {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = mainStoryboard.instantiateViewController(withIdentifier: "IssueDetailViewController") as? IssueDetailViewController else { return }
+        vc.issue = issue
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
