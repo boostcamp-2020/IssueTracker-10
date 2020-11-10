@@ -15,6 +15,7 @@
 		C300183E255965AE00FC7470 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300183D255965AE00FC7470 /* Label.swift */; };
 		C30018472559660700FC7470 /* LabelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30018462559660700FC7470 /* LabelManager.swift */; };
 		C300184C25596F9000FC7470 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300184B25596F9000FC7470 /* PopupViewController.swift */; };
+		C3228A2C255A6BCD00FC8F8E /* SignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3228A2B255A6BCD00FC8F8E /* SignInHelper.swift */; };
 		C32C5FA3254FE854008BBDCE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */; };
 		C32C5FAE254FEB70008BBDCE /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */; };
 		C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */; };
@@ -110,6 +111,7 @@
 		C300183D255965AE00FC7470 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		C30018462559660700FC7470 /* LabelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelManager.swift; sourceTree = "<group>"; };
 		C300184B25596F9000FC7470 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		C3228A2B255A6BCD00FC8F8E /* SignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHelper.swift; sourceTree = "<group>"; };
 		C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			children = (
 				C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */,
 				C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */,
+				C3228A2B255A6BCD00FC8F8E /* SignInHelper.swift */,
 				C35F6B182550281D008A116B /* User.swift */,
 				C32C5FC925500430008BBDCE /* UIViewController+showLoginView.swift */,
 				C32C5FC125500276008BBDCE /* KeychainItem.swift */,
@@ -646,6 +649,7 @@
 				C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */,
 				E049B8D1255316B2004DD162 /* SelectedLabels.swift in Sources */,
 				E049B9082553E6A8004DD162 /* Environment.swift in Sources */,
+				C3228A2C255A6BCD00FC8F8E /* SignInHelper.swift in Sources */,
 				E0B3D40F2547F9590040D5AF /* IssueCreateViewController.swift in Sources */,
 				E09C1EEC2551584800A1FADF /* LabelCollectionViewCell.swift in Sources */,
 				C35F6B192550281D008A116B /* User.swift in Sources */,

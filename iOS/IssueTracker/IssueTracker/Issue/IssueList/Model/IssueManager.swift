@@ -100,6 +100,6 @@ class IssueManager {
 
 extension IssueManager {
     enum Constant {
-        static let token = ""
+		static let token = AppData.token
     }
 }

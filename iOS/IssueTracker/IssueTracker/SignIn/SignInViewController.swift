@@ -8,14 +8,16 @@
 import UIKit
 import AuthenticationServices
 
-import Foundation
-
 class SignInViewController: UIViewController {
+	
 	@IBOutlet weak var loginProviderStackView: UIStackView!
+	
+	let signInHelper = SignInHelper()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupProviderLoginView()
+		NotificationCenter.default.addObserver(self, selector: #selector(signInDidFinished) , name: .signInDidFinished, object: nil)
 	}
 	
 	//버튼 만들기
@@ -30,7 +32,16 @@ class SignInViewController: UIViewController {
         self.loginProviderStackView.addArrangedSubview(githubLoginButton)
         authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
         githubLoginButton.addTarget(self, action: #selector(handleAuthorizationGithubButtonPress), for: .touchUpInside)
-
+	}
+	
+	@objc func signInDidFinished() {
+		finishSignIn()
+	}
+	
+	private func finishSignIn() {
+		DispatchQueue.main.async {
+			self.dismiss(animated: true, completion: nil)
+		}
 	}
     
     @objc func handleAuthorizationGithubButtonPress() {
@@ -70,7 +81,8 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 			provider.getCredentialState(forUserID: userId) { (credentialState, error) in
 				switch credentialState {
 				case .authorized:
-					AppData.user = User(name: userName, avatorURL: nil)
+					AppData.user = User(name: userName, avatorURL: nil, state: 2)
+					self.signInHelper.registerUserInfo(user: AppData.user)
 					self.finishSignIn()
 				case .notFound:
 					print("Not Found")
@@ -87,12 +99,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 			try KeychainItem(account: "userIdentifier").saveItem(userIdentifier)
 		} catch {
 			print("Unable to save userIdentifier to keychain.")
-		}
-	}
-	
-	private func finishSignIn() {
-		DispatchQueue.main.async {
-			self.dismiss(animated: true, completion: nil)
 		}
 	}
 }
