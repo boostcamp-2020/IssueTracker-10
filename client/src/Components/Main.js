@@ -10,5 +10,5 @@ export default (props) => {
     if (!auth) props.history.push('/login');
     else return <Issue token={auth} />;
   }
-  return <Issue token />;
+  return <Issue token={state.token} />;
 };
