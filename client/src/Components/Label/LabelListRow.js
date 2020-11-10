@@ -5,6 +5,7 @@ import { AuthStateContext } from '../../Context/AuthContext';
 import { LabelDispatchContext } from '../../Context/LabelContext';
 import LabelBadge from './LabelBadge';
 import LabelUpdateModal from './LabelUpdateModal';
+import LabelDeleteModal from './LabelDeleteModal';
 
 const Wrapper = styled.div`
   display: flex;
@@ -52,13 +53,26 @@ const DescriptText = styled.span`
   color: ${(props) => props.theme.grayColor};
 `;
 
+const Overlay = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+`;
+
 const LabelListRow = ({ label }) => {
   const { title, description, color } = label;
   const [display, setDisplay] = useState(false);
+  const [displayModal, setDisplayModal] = useState(false);
   const authState = useContext(AuthStateContext);
   const labelDispatch = useContext(LabelDispatchContext);
   const toggleDisplay = () => {
     setDisplay(!display);
+  };
+  const toggleDisplayModal = () => {
+    setDisplayModal(!displayModal);
   };
 
   const deleteLabel = async (inputData) => {
@@ -76,6 +90,12 @@ const LabelListRow = ({ label }) => {
   };
   return (
     <Wrapper>
+      {displayModal && (
+        <>
+          <Overlay />
+          <LabelDeleteModal toggleDisplay={toggleDisplayModal} onClickDelete={onClickDelete} />
+        </>
+      )}
       <RowWrapper>
         {display ? (
           <LabelUpdateModal
@@ -93,7 +113,7 @@ const LabelListRow = ({ label }) => {
             </DescriptColumn>
             <EditColumn>
               <Button onClick={toggleDisplay}>Edit</Button>
-              <Button onClick={onClickDelete}>Delete</Button>
+              <Button onClick={toggleDisplayModal}>Delete</Button>
             </EditColumn>
           </>
         )}
