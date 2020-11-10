@@ -25,13 +25,13 @@ const IssueHeader = styled.div`
 `;
 
 const Issue = ({ token }) => {
-  const state = useContext(AuthStateContext);
-  const dispatch = useContext(AuthDispatchContext);
+  const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const issueDispatch = useContext(IssueDispatchContext);
   const [issueHeader, setIssueHeader] = useState({});
 
   const fetchHeader = async () => {
-    const config = { url: '/api/all', method: 'GET', token: state.token };
+    const config = { url: '/api/all', method: 'GET', token: authState.token };
     const { data } = await request(config);
     if (data) {
       setIssueHeader(data);
@@ -40,24 +40,24 @@ const Issue = ({ token }) => {
   };
 
   const fetchIssues = async () => {
-    const config = { url: '/api/issue', method: 'GET', token: state.token };
+    const config = { url: '/api/issue', method: 'GET', token: authState.token };
     const { data } = await request(config);
     if (data) issueDispatch({ type: 'FETCH_ISSUES', payload: data });
   };
 
   useEffect(() => {
-    if (!state.token) dispatch({ type: 'LOGIN', token });
+    if (!authState.token) authDispatch({ type: 'LOGIN', token });
   }, []);
 
   useEffect(() => {
-    if (state.token) {
+    if (authState.token) {
       fetchHeader();
       fetchIssues();
     }
     return () => {
       setIssueHeader([]);
     };
-  }, [state.token]);
+  }, [authState.token]);
 
   return (
     <Wrapper>
