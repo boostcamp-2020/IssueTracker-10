@@ -54,6 +54,6 @@ class LabelManager {
 
 extension LabelManager {
 	enum Constant {
-		static let token = ""
+		static let token = Environment.masterToken
 	}
 }
