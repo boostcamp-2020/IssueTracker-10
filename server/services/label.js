@@ -27,8 +27,8 @@ const createLabel = async (req, res) => {
     if (!checkValidation.createOrUpdate(labelData)) {
       return res.status(400).json({ message: ERROR_MSG.invalid });
     }
-    const isSuccess = await labelModel.createLabel(labelData);
-    if (isSuccess) return res.status(200).json({ message: SUCCESS_MSG.create });
+    const labelId = await labelModel.createLabel(labelData);
+    if (labelId) return res.status(200).json({ message: SUCCESS_MSG.create, id: labelId });
     return res.status(409).json({ message: ERROR_MSG.already });
   } catch (err) {
     return res.status(500).json({ message: ERROR_MSG.server });
