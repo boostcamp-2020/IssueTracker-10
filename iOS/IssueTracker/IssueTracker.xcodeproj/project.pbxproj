@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C300180D2559366600FC7470 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300180C2559366600FC7470 /* LabelTableViewCell.swift */; };
+		C300181B25593AF100FC7470 /* LabelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300181A25593AF100FC7470 /* LabelDataSource.swift */; };
+		C30018282559405800FC7470 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30018272559405800FC7470 /* LabelViewModel.swift */; };
+		C300182E255941AC00FC7470 /* LabelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300182D255941AC00FC7470 /* LabelState.swift */; };
+		C3001836255941B500FC7470 /* LabelReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3001835255941B500FC7470 /* LabelReactor.swift */; };
+		C300183E255965AE00FC7470 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300183D255965AE00FC7470 /* Label.swift */; };
+		C30018472559660700FC7470 /* LabelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30018462559660700FC7470 /* LabelManager.swift */; };
+		C300184C25596F9000FC7470 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300184B25596F9000FC7470 /* PopupViewController.swift */; };
 		C32C5FA3254FE854008BBDCE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */; };
 		C32C5FAE254FEB70008BBDCE /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */; };
 		C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */; };
@@ -94,6 +102,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C300180C2559366600FC7470 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		C300181A25593AF100FC7470 /* LabelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDataSource.swift; sourceTree = "<group>"; };
+		C30018272559405800FC7470 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
+		C300182D255941AC00FC7470 /* LabelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelState.swift; sourceTree = "<group>"; };
+		C3001835255941B500FC7470 /* LabelReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelReactor.swift; sourceTree = "<group>"; };
+		C300183D255965AE00FC7470 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		C30018462559660700FC7470 /* LabelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelManager.swift; sourceTree = "<group>"; };
+		C300184B25596F9000FC7470 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +212,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C300182C2559419E00FC7470 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C300181A25593AF100FC7470 /* LabelDataSource.swift */,
+				C30018272559405800FC7470 /* LabelViewModel.swift */,
+				C300182D255941AC00FC7470 /* LabelState.swift */,
+				C3001835255941B500FC7470 /* LabelReactor.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C3001842255965B400FC7470 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C300183D255965AE00FC7470 /* Label.swift */,
+				C30018462559660700FC7470 /* LabelManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C32C5FA7254FE962008BBDCE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,7 +473,11 @@
 		E0B3D3FB2547E8320040D5AF /* Label */ = {
 			isa = PBXGroup;
 			children = (
+				C3001842255965B400FC7470 /* Model */,
+				C300182C2559419E00FC7470 /* ViewModel */,
 				C3414FA425480104003C845A /* LabelViewController.swift */,
+				C300180C2559366600FC7470 /* LabelTableViewCell.swift */,
+				C300184B25596F9000FC7470 /* PopupViewController.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -626,11 +666,13 @@
 				E037F27125593C3F00DAD98B /* IssueDetail.swift in Sources */,
 				E037F258255932AF00DAD98B /* IssueDetailViewModel.swift in Sources */,
 				E09C1EC925514E9E00A1FADF /* IssueViewController+CollectionViewDelegate.swift in Sources */,
+				C300184C25596F9000FC7470 /* PopupViewController.swift in Sources */,
 				E037F2802559955100DAD98B /* PastTime.swift in Sources */,
 				E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */,
 				E049B9242554DE40004DD162 /* Date+globalLocal.swift in Sources */,
 				E049B9442556237B004DD162 /* IssueListState.swift in Sources */,
 				C32C5FCA25500430008BBDCE /* UIViewController+showLoginView.swift in Sources */,
+				C300182E255941AC00FC7470 /* LabelState.swift in Sources */,
 				E049B8B92552A014004DD162 /* UIColor+isDark.swift in Sources */,
 				C3DB04E42551089C00F0910E /* Storage.swift in Sources */,
 				C3414FA525480104003C845A /* LabelViewController.swift in Sources */,
@@ -638,12 +680,15 @@
 				E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */,
 				E049B8C62552A0A8004DD162 /* NotificationName.swift in Sources */,
 				C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */,
+				C30018472559660700FC7470 /* LabelManager.swift in Sources */,
 				E0B3D3C52546C8660040D5AF /* AppDelegate.swift in Sources */,
 				E0B3D3C72546C8660040D5AF /* SceneDelegate.swift in Sources */,
 				C3DB051D25527EDD00F0910E /* Filter.swift in Sources */,
 				E09C1EF5255158E100A1FADF /* CreateIssueNavigationViewController.swift in Sources */,
 				E0B3D40A2547EBC20040D5AF /* IssueDetailViewController.swift in Sources */,
+				C300180D2559366600FC7470 /* LabelTableViewCell.swift in Sources */,
 				E049B90D2553EC9C004DD162 /* Constant.swift in Sources */,
+				C3001836255941B500FC7470 /* LabelReactor.swift in Sources */,
 				E09C1E5B25506BF800A1FADF /* IssueDetailCell.swift in Sources */,
 				E037F27B2559490400DAD98B /* IssueComment.swift in Sources */,
 				C3DB051825527B5500F0910E /* FilterDataSource.swift in Sources */,
@@ -653,11 +698,14 @@
 				E09C1CAA254A99C400A1FADF /* HomeTableViewCell.swift in Sources */,
 				E09C1ECE25514F3B00A1FADF /* IssueViewController+UI.swift in Sources */,
 				C3414FAD2548018D003C845A /* Issue.swift in Sources */,
+				C300183E255965AE00FC7470 /* Label.swift in Sources */,
 				C3DB04E92551099F00F0910E /* AppData.swift in Sources */,
+				C300181B25593AF100FC7470 /* LabelDataSource.swift in Sources */,
 				E049B8BE2552A077004DD162 /* String+estimateSize.swift in Sources */,
 				E037F28525599D7A00DAD98B /* StateView.swift in Sources */,
 				E09C1EC425514E7100A1FADF /* IssueViewController+SearchUpdate.swift in Sources */,
 				E049B88C25526349004DD162 /* IssueListViewCell.swift in Sources */,
+				C30018282559405800FC7470 /* LabelViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
