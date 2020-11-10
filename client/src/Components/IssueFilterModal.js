@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { renderUsers, renderMilestones, renderLabels } from './IssueFilterRender';
+import { renderUsers, renderMilestones, renderLabels, renderMark } from './IssueFilterRender';
 
 const modalType = {
+  mark: {
+    title: 'Actions',
+    getRows: renderMark,
+  },
   author: {
     title: 'Filter by author',
     getRows: (users) => renderUsers({ users, type: 'author' }),

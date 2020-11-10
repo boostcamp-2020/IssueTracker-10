@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { IssueStateContext } from '../Context/IssueContext';
 import BoldText from './BoldText';
 import { Search, TriArrow } from './static/svgIcons';
 import Input from './Input';
@@ -60,6 +61,7 @@ const FilterBox = styled.div`
 const InputBox = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
   padding: 0 10px;
   svg {
     fill: ${(props) => props.theme.skyblueColor};
@@ -67,11 +69,25 @@ const InputBox = styled.div`
 `;
 
 export default () => {
+  const state = useContext(IssueStateContext);
   const [display, setDisplay] = useState(false);
-  const toggleDisplay = () => {
-    const displayValue = !display;
-    setDisplay(displayValue);
+  const [inputText, setInputText] = useState('is:open');
+
+  const toggleDisplay = () => setDisplay(!display);
+  const handleInputText = (filter = {}) => {
+    const text = Object.keys(filter).reduce((prev, key) => {
+      const value = filter[key];
+      if (!value || (Array.isArray(value) && value.length === 0)) return prev;
+      if (key === 'state') return `${prev}is:${value} `;
+      return `${prev}${key}:${value} `;
+    }, '');
+    if (text) setInputText(text);
   };
+
+  useEffect(() => {
+    handleInputText(state.filter);
+  }, [state.filter]);
+
   return (
     <Wrapper>
       <FilterWrapper>
@@ -84,7 +100,7 @@ export default () => {
         </SelectBox>
         <InputBox>
           <Search size={12} />
-          <Input placeholder="is:issue is:open" type="text" />
+          <Input placeholder="is:issue is:open" value={inputText} type="text" />
         </InputBox>
       </FilterWrapper>
     </Wrapper>

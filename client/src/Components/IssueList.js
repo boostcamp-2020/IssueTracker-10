@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-import { IssueStateContext } from '../Context/IssueContext';
+import { IssueStateContext, IssueDispatchContext } from '../Context/IssueContext';
 import IssueListHeader from './IssueListHeader';
 import IssueListRow from './IssueListRow';
 
@@ -8,7 +8,7 @@ const IssueListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 1100px;
-  margin: 0 auto;
+  margin: 0 auto 30px auto;
   border: ${(props) => props.theme.border};
   border-radius: ${(props) => props.theme.radiusSmall};
   background-color: ${(props) => props.theme.whiteColor};
@@ -16,34 +16,33 @@ const IssueListWrapper = styled.div`
 
 const IssueList = (props) => {
   const state = useContext(IssueStateContext);
-  const { issues } = state;
+  const dispatch = useContext(IssueDispatchContext);
+  const { issues, checkedIds } = state;
   const { issueHeader = {} } = props;
-  const [checkedIssues, setCheckedIssues] = useState([]);
   const [checkedLength, setCheckedLength] = useState(0);
   const [allChecked, setAllChecked] = useState(false);
 
   useEffect(() => {
-    if (issues.length > 0 && issues.length === checkedIssues.length) setAllChecked(true);
-    setCheckedLength(checkedIssues.length);
-  }, [checkedIssues]);
+    if (checkedIds.length > 0 && issues.length === checkedIds.length) setAllChecked(true);
+    setCheckedLength(checkedIds.length);
+  }, [checkedIds]);
 
   const checkOneIssue = (issueId) => {
-    if (checkedIssues.includes(issueId)) {
-      const deletedIssues = checkedIssues.filter((id) => id !== issueId);
-      setCheckedIssues(deletedIssues);
+    if (checkedIds.includes(issueId)) {
+      dispatch({ type: 'UNCHECK_ISSUE', id: issueId });
       setAllChecked(false);
-    } else setCheckedIssues([issueId, ...checkedIssues]);
+    } else dispatch({ type: 'CHECK_ISSUE', id: issueId });
   };
 
   const checkAllIssue = () => {
     if (allChecked) {
-      setCheckedIssues([]);
+      dispatch({ type: 'UNCHECK_ALL_ISSUE' });
       setAllChecked(false);
     } else {
       const ids = issues.reduce((prev, issue) => {
         return [...prev, issue.id];
       }, []);
-      setCheckedIssues(ids);
+      dispatch({ type: 'CHECK_ALL_ISSUE', ids });
       setAllChecked(true);
     }
   };
@@ -61,7 +60,7 @@ const IssueList = (props) => {
           <IssueListRow
             key={issue.id}
             {...issue}
-            checked={checkedIssues.includes(issue.id)}
+            checked={checkedIds.includes(issue.id)}
             checkOneIssue={checkOneIssue}
           />
         ))}

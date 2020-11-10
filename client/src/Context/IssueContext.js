@@ -11,6 +11,7 @@ export const initialIssueState = {
   issues: [],
   openCount: 0,
   closedCount: 0,
+  checkedIds: [],
 };
 
 export const issueReducer = (state, action) => {
@@ -106,6 +107,30 @@ export const issueReducer = (state, action) => {
         assignees: [...users],
         labels: [...labels],
         milestones: [...milestones],
+      };
+    }
+    case 'CHECK_ISSUE': {
+      return {
+        ...state,
+        checkedIds: [...state.checkedIds, action.id],
+      };
+    }
+    case 'CHECK_ALL_ISSUE': {
+      return {
+        ...state,
+        checkedIds: [...action.ids],
+      };
+    }
+    case 'UNCHECK_ISSUE': {
+      return {
+        ...state,
+        checkedIds: state.checkedIds.filter((id) => id !== action.id),
+      };
+    }
+    case 'UNCHECK_ALL_ISSUE': {
+      return {
+        ...state,
+        checkedIds: [],
       };
     }
     default:

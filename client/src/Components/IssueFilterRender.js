@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AuthStateContext } from '../Context/AuthContext';
 import { IssueStateContext, IssueDispatchContext } from '../Context/IssueContext';
@@ -42,7 +42,7 @@ export const renderUsers = ({ users, type }) => {
   const authState = useContext(AuthStateContext);
   const state = useContext(IssueStateContext);
   const dispatch = useContext(IssueDispatchContext);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(state.filter[type]);
 
   const fetchIssues = async ({ id }) => {
     const config = {
@@ -94,4 +94,35 @@ export const renderLabels = (labels) => {
 
 export const renderMilestones = (milestones) => {
   return milestones.map((milestone) => <ModalRow key={milestone.id}>{milestone.title}</ModalRow>);
+};
+
+export const renderMark = () => {
+  const authState = useContext(AuthStateContext);
+  const state = useContext(IssueStateContext);
+  const type = { closed: 0, open: 1 };
+
+  const putState = async (typeString) => {
+    const config = {
+      url: '/api/issue/state',
+      method: 'put',
+      data: {
+        state: type[typeString],
+        issueIds: state.checkedIds,
+      },
+      token: authState.token,
+    };
+    const result = await request(config);
+    return result;
+  };
+
+  const onClickMark = async (typeString) => {
+    await putState(typeString);
+  };
+
+  return (
+    <>
+      <ModalRow onClick={() => onClickMark('open')}>open</ModalRow>
+      <ModalRow onClick={() => onClickMark('closed')}>closed</ModalRow>
+    </>
+  );
 };
