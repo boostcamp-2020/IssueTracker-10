@@ -6,20 +6,26 @@ import { renderUsers, renderMilestones, renderLabels } from './SideBarList';
 import { checkedUsers, checkedLabels, checkedMilestone } from './CheckedList';
 
 const modalType = {
-  Assignees: {
+  assignees: {
+    menuTitle: 'Assignees',
     title: `Assign up to people to this issue`,
     render: renderUsers,
     content: checkedUsers,
+    type: 'SELECT_ASSIGNEES',
   },
-  Labels: {
+  labels: {
+    menuTitle: 'Labels',
     title: 'Apply Labels to this issue',
     render: renderLabels,
     content: checkedLabels,
+    type: 'SELECT_LABELS',
   },
-  Milestone: {
+  milestone: {
+    menuTitle: 'Milestone',
     title: 'Set milestone',
     render: renderMilestones,
     content: checkedMilestone,
+    type: 'SELECT_MILESTONE',
   },
 };
 
@@ -58,9 +64,9 @@ const Content = styled.ul`
   color: ${(props) => props.theme.darkgrayColor};
 `;
 
-const SideBarElement = ({ title }) => {
+const SideBarElement = ({ type }) => {
   const [modalDisplay, setModalDisplay] = useState(false);
-  const [modalInfo] = useState(modalType[title]);
+  const [modalInfo] = useState(modalType[type]);
   const toggleModal = () => {
     // TODO: 전체 화면 클릭시, 모달이 띄워져 있으면 닫히도록 이벤트 수정
     setModalDisplay(!modalDisplay);
@@ -69,10 +75,17 @@ const SideBarElement = ({ title }) => {
   return (
     <Container>
       <HeaderWrapper onClick={toggleModal}>
-        <Title>{title}</Title>
+        <Title>{modalInfo.menuTitle}</Title>
         <GearIcon size="20" />
       </HeaderWrapper>
-      {modalDisplay && <SideBarModal title={modalInfo.title} render={modalInfo.render} />}
+      {modalDisplay && (
+        <SideBarModal
+          modalType={type}
+          title={modalInfo.title}
+          render={modalInfo.render}
+          type={modalInfo.type}
+        />
+      )}
       <Content>{modalInfo.content()}</Content>
     </Container>
   );

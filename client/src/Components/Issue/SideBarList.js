@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { IssueStateContext } from '../../Context/IssueContext';
 
@@ -53,12 +53,17 @@ const MilestoneDueDate = styled.div`
   margin-top: 5px;
 `;
 
-export const renderUsers = () => {
+export const renderUsers = ({ selectedList, setSelecteList }) => {
   const { assignees } = useContext(IssueStateContext);
+  const onClickAssignee = ({ id, username, avatar }) => {
+    const data = { id, username, avatar };
+    setSelecteList([...selectedList, data]);
+  };
+
   return assignees.map((user) => {
     const { id, username, avatar } = user;
     return (
-      <ModalRow key={id}>
+      <ModalRow key={id} onClick={() => onClickAssignee(user)}>
         <Wrapper>
           <UserAvater src={avatar} alt={`${username} profile`} />
           {username}
@@ -68,10 +73,14 @@ export const renderUsers = () => {
   });
 };
 
-export const renderLabels = () => {
+export const renderLabels = ({ selectedList, setSelecteList }) => {
   const { labels } = useContext(IssueStateContext);
+  const onClickLabel = ({ id, color, title }) => {
+    const data = { id, color, title };
+    setSelecteList([...selectedList, data]);
+  };
   return labels.map((label) => (
-    <ModalRow key={label.id}>
+    <ModalRow key={label.id} onClick={() => onClickLabel(label)}>
       <Wrapper>
         <LabelImage labelColor={label.color} />
         <LabelTitle>{label.title}</LabelTitle>
@@ -81,10 +90,14 @@ export const renderLabels = () => {
   ));
 };
 
-export const renderMilestones = () => {
+export const renderMilestones = ({ setSelecteList }) => {
   const { milestones } = useContext(IssueStateContext);
+  const onClickMilestone = ({ id, title }) => {
+    const data = { id, title };
+    setSelecteList(data);
+  };
   return milestones.map((milestone) => (
-    <ModalRow key={milestone.id}>
+    <ModalRow key={milestone.id} onClick={() => onClickMilestone(milestone)}>
       <MilestoneTitle>{milestone.title}</MilestoneTitle>
       <MilestoneDueDate>{milestone.date || 'No due date'}</MilestoneDueDate>
     </ModalRow>
