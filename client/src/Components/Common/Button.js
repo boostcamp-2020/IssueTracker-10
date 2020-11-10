@@ -12,7 +12,7 @@ const Container = styled.button`
   padding: 7px 0px;
   font-size: 14px;
   &:hover {
-    cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 `;
 
