@@ -4,6 +4,7 @@ import Input from '../Common/Input';
 import GreenButton from '../Common/GreenButton';
 import { request } from '../../Api';
 import { AuthStateContext } from '../../Context/AuthContext';
+import { IssueInfoContext } from '../../Context/IssueInfoContext';
 
 const Wrapper = styled.div`
   display: flex;
@@ -58,6 +59,7 @@ const LinkToMain = styled.a`
 
 const NewIssue = () => {
   const state = useContext(AuthStateContext);
+  const issueInfoState = useContext(IssueInfoContext);
   const { token } = state;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -75,10 +77,13 @@ const NewIssue = () => {
   };
 
   const submitNewIssue = async () => {
+    const { assignees, labels, milestone } = issueInfoState;
     const data = {
       title,
       content,
-      // TODO: Assignees, labels, milestone 정보도 추가할 것
+      assignees: assignees.map((ele) => ele.id),
+      labels: labels.map((ele) => ele.id),
+      milestoneId: milestone.id,
     };
 
     const config = { url: '/api/issue', method: 'POST', data, token };
