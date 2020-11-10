@@ -4,6 +4,7 @@ import { AuthStateContext } from '../../../Context/AuthContext';
 import { LabelDispatchContext } from '../../../Context/LabelContext';
 import { getRandomColor } from '../../../utils/color';
 import LabelUpdateModalPresenter from './LabelUpdateModalPresenter';
+import { theme } from '../../../theme';
 
 export default ({ setDisplay, toggleDisplay, initLabel }) => {
   const authState = useContext(AuthStateContext);
@@ -13,8 +14,9 @@ export default ({ setDisplay, toggleDisplay, initLabel }) => {
   const [description, setDescription] = useState(initLabel.description);
   const [label, setLabel] = useState(initLabel);
   const [fontColor, setFontColor] = useState(null);
-  const cancelButtonColor = '#EFF1F4';
-  const createLabelButtonColor = '#2D9F4D';
+
+  const cancelButtonColor = theme.redColor;
+  const createLabelButtonColor = theme.greenColor;
 
   const eidtLabel = async (inputData) => {
     const config = {

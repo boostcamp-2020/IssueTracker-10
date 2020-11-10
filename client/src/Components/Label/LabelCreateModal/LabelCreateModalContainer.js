@@ -4,6 +4,7 @@ import { AuthStateContext } from '../../../Context/AuthContext';
 import { LabelDispatchContext } from '../../../Context/LabelContext';
 import { getRandomColor } from '../../../utils/color';
 import LabelCreateModalPresenter from './LabelCreateModalPresenter';
+import { theme } from '../../../theme';
 
 export default ({ setDisplay, toggleDisplay }) => {
   const authState = useContext(AuthStateContext);
@@ -18,8 +19,8 @@ export default ({ setDisplay, toggleDisplay }) => {
     description: '',
     color,
   });
-  const cancelButtonColor = '#EFF1F4';
-  const createLabelButtonColor = '#2D9F4D';
+  const cancelButtonColor = theme.redColor;
+  const createLabelButtonColor = theme.greenColor;
 
   const postLabel = async (inputData) => {
     const config = { url: '/api/label', method: 'POST', token: authState.token, data: inputData };
