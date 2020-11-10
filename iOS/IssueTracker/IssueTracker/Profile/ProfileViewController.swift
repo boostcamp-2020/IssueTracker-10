@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController {
 
 	func configureProfile(user: User) {
 		nameLabel.text = user.name
-		avatarImageView.image = UIImage(contentsOfFile: "Icon")
+		avatarImageView.image = UIImage(named: "Icon")
 		guard let url: URL = URL(string: user.avatorURL ?? "") else { return }
 		downloadImage(url: url) { (avatarImage: UIImage) in
 			DispatchQueue.main.async {
