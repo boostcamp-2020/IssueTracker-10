@@ -97,10 +97,32 @@ export const renderMilestones = (milestones) => {
 };
 
 export const renderMark = () => {
+  const authState = useContext(AuthStateContext);
+  const state = useContext(IssueStateContext);
+  const type = { closed: 0, open: 1 };
+
+  const putState = async (typeString) => {
+    const config = {
+      url: '/api/issue/state',
+      method: 'put',
+      data: {
+        state: type[typeString],
+        issueIds: state.checkedIds,
+      },
+      token: authState.token,
+    };
+    const result = await request(config);
+    return result;
+  };
+
+  const onClickMark = async (typeString) => {
+    await putState(typeString);
+  };
+
   return (
     <>
-      <ModalRow>open</ModalRow>
-      <ModalRow>closed</ModalRow>
+      <ModalRow onClick={() => onClickMark('open')}>open</ModalRow>
+      <ModalRow onClick={() => onClickMark('closed')}>closed</ModalRow>
     </>
   );
 };
