@@ -13,9 +13,9 @@ const Wrapper = styled.div`
 const NewIssue = () => {
   return (
     <Wrapper>
-      <SideBarElement title="Assignees" />
-      <SideBarElement title="Labels" />
-      <SideBarElement title="Milestone" />
+      <SideBarElement type="assignees" />
+      <SideBarElement type="labels" />
+      <SideBarElement type="milestone" />
     </Wrapper>
   );
 };
