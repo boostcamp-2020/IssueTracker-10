@@ -15,6 +15,7 @@ const Badge = styled.span`
   border-radius: ${(props) => props.theme.badgeRadius};
   font-weight: 600;
   font-size: 11px;
+  cursor: pointer;
 `;
 
 const IssueLabelBadge = (props) => {
