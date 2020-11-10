@@ -78,6 +78,7 @@ const NewIssue = () => {
 
   const submitNewIssue = async () => {
     const { assignees, labels, milestone } = issueInfoState;
+    console.log(milestone);
     const data = {
       title,
       content,
