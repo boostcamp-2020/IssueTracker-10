@@ -64,7 +64,7 @@ class PopupViewController: UIViewController {
 			self.colorTextField.resignFirstResponder()
 		}
 		else {
-			if touch.view != popUpView {
+			if touch.view != popUpView && touch.view != colorView {
 				self.dismiss(animated: false, completion: nil)
 			}
 		}
