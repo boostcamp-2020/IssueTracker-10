@@ -8,13 +8,17 @@ const Container = styled.span`
   height: 25px;
   border: 0;
   border-radius: ${(props) => props.theme.badgeRadius};
-  color: ${(props) => props.theme.blackColor};
+  color: ${(props) => props.fontColor};
   font-weight: 600;
   background-color: ${(props) => props.color};
   padding: 0px 10px;
   font-size: 12px;
 `;
 
-const LabelBadge = ({ title, color }) => <Container color={color}>{title}</Container>;
+const LabelBadge = ({ title, color, fontColor }) => (
+  <Container fontColor={fontColor} color={color}>
+    {title}
+  </Container>
+);
 
 export default LabelBadge;
