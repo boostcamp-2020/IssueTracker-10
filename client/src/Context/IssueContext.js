@@ -100,6 +100,18 @@ export const issueReducer = (state, action) => {
         issues: [...action.payload],
       };
     }
+    case 'RESET_FILTER': {
+      return {
+        ...state,
+        filter: {
+          state: 'open',
+          author: null,
+          label: [],
+          milestones: null,
+          assignees: null,
+        },
+      };
+    }
     case 'STORE_DETAIL_DATA': {
       const { users, labels, milestones } = action.payload;
       return {
