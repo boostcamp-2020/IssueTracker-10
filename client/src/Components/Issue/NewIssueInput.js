@@ -58,9 +58,9 @@ const LinkToMain = styled.a`
 `;
 
 const NewIssue = () => {
-  const state = useContext(AuthStateContext);
+  const authState = useContext(AuthStateContext);
   const issueInfoState = useContext(IssueInfoContext);
-  const { token } = state;
+  const { token, user } = authState;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [disabled, setDisabled] = useState(true);
@@ -100,7 +100,7 @@ const NewIssue = () => {
 
   return (
     <Wrapper>
-      <UserAvater src="https://user-images.githubusercontent.com/49746644/98506257-6c2d0900-229e-11eb-8e94-d5dac331df82.jpg" />
+      <UserAvater src={user.avatar} alt={`${user.username} profile`} />
       <InputWrapper>
         {/* onChange 이벤트가 발생할 때마다 현재 컴포넌트가 재렌더링 되므로 InputTitle과 InputContent를 컴포넌트 분할시키는 것도 괜찮을 것 같다..? */}
         <InputTitle type="text" placeholder="Title" required onChange={onChangeTitle} />

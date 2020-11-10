@@ -66,7 +66,7 @@ const readUserInfo = async (req, res) => {
   try {
     const { id } = req.user;
     const userInfo = await userModel.findUserById(id);
-    if (userInfo) return res.status(200).json({ userInfo });
+    if (userInfo) return res.status(200).json({ data: userInfo });
     return res.status(404).json({});
   } catch (err) {
     return res.status(500);
