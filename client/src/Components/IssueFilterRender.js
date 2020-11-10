@@ -95,3 +95,12 @@ export const renderLabels = (labels) => {
 export const renderMilestones = (milestones) => {
   return milestones.map((milestone) => <ModalRow key={milestone.id}>{milestone.title}</ModalRow>);
 };
+
+export const renderMark = () => {
+  return (
+    <>
+      <ModalRow>open</ModalRow>
+      <ModalRow>closed</ModalRow>
+    </>
+  );
+};

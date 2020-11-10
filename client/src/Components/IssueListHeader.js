@@ -45,8 +45,17 @@ const IssueListHeader = (props) => {
       <IssueCheckbox type="checkbox" onChange={checkAllIssue} checked={checked} />
       <HeaderText checkedLength={checkedLength} />
       <FilterWrapperLeft>
-        <FillterButton onClick={() => handleModal(1)}>Author ▾</FillterButton>
-        {modal === 1 && <IssueFilterModal id="author" data={users} />}
+        {checkedLength === 0 ? (
+          <>
+            <FillterButton onClick={() => handleModal(1)}>Author ▾</FillterButton>
+            {modal === 1 && <IssueFilterModal id="author" data={users} />}
+          </>
+        ) : (
+          <>
+            <FillterButton onClick={() => handleModal(1)}>Mark as ▾</FillterButton>
+            {modal === 1 && <IssueFilterModal id="mark" />}
+          </>
+        )}
       </FilterWrapperLeft>
       <FilterWrapper>
         <FillterButton onClick={() => handleModal(2)}>Label ▾</FillterButton>

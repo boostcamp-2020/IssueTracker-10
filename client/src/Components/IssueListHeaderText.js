@@ -9,6 +9,9 @@ const HeaderTextWrapper = styled.span`
   display: inline-flex;
   align-items: center;
   font-size: 15px;
+  svg {
+    fill: ${(props) => props.theme[props.color]};
+  }
 `;
 
 const CountSpanText = styled.span`
@@ -55,7 +58,7 @@ const CountText = () => {
           {openCount} open
         </CountSpanText>
       </HeaderTextWrapper>
-      <HeaderTextWrapper>
+      <HeaderTextWrapper color="redColor">
         <CheckIcon size={14} />
         <CountSpanText onClick={onClickClosed} bold={filter.state === 'closed'}>
           {closedCount} closed
