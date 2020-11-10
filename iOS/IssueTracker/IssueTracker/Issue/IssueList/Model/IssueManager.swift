@@ -25,6 +25,31 @@ class IssueManager {
         }
     }
     
+    func getIssueDetail(id: Int, completion: @escaping ((IssueDetail) -> Void)) {
+        let headers = ["Authorization": Constant.token]
+        hvNet.request("http://49.50.163.58:3000/api/issue/\(id)", method: .get, headers: headers).response { (result: HVDataResponse<IssueDetailResponse>) in
+            switch result {
+            case .success(let issues):
+                completion(issues.data)
+            case .failure:
+                print("fail")
+            }
+        }
+    }
+    
+    func getIssueComment(id: Int, completion: @escaping (([IssueComment]) -> Void)) {
+        let headers = ["Authorization": Constant.token]
+        hvNet.request("http://49.50.163.58:3000/api/issue/\(id)/comment",
+                      method: .get, headers: headers).response { (result: HVDataResponse<IssueCommentResponse>) in
+            switch result {
+            case .success(let issues):
+                completion(issues.data)
+            case .failure:
+                print("fail")
+            }
+        }
+    }
+    
     func create(title: String, content: String?) {
         let headers = ["Authorization": Constant.token]
         let parameters = ["title": title, "content": content ?? ""] as Parameters
