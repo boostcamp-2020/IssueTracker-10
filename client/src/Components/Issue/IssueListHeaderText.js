@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssueOpenIcon, CheckIcon } from '../static/svgIcons';
-import { AuthStateContext } from '../../Context/AuthContext';
 import { IssueStateContext, IssueDispatchContext } from '../../Context/IssueContext';
-import { request } from '../../Api';
 
 const HeaderTextWrapper = styled.span`
   display: inline-flex;
@@ -21,46 +19,25 @@ const CountSpanText = styled.span`
 `;
 
 const CountText = () => {
-  const authState = useContext(AuthStateContext);
   const state = useContext(IssueStateContext);
   const dispatch = useContext(IssueDispatchContext);
   const { openCount, closedCount, filter } = state;
 
-  const fetchByState = async (type) => {
-    const config = {
-      url: '/api/issue',
-      method: 'get',
-      params: {
-        ...state.filter,
-        state: type,
-      },
-      token: authState.token,
-    };
-    const { data = null } = await request(config);
-    return data;
-  };
-
-  const onClickClosed = async () => {
-    const data = await fetchByState('closed');
-    if (data) dispatch({ type: 'CLOSE', payload: data });
-  };
-
-  const onClickOpen = async () => {
-    const data = await fetchByState('open');
-    if (data) dispatch({ type: 'OPEN', payload: data });
+  const onClickMark = async (markType = 'OPEN') => {
+    dispatch({ type: markType });
   };
 
   return (
     <>
       <HeaderTextWrapper>
         <IssueOpenIcon size={14} />
-        <CountSpanText onClick={onClickOpen} bold={filter.state === 'open'}>
+        <CountSpanText onClick={() => onClickMark('OPEN')} bold={filter.state === 'open'}>
           {openCount} open
         </CountSpanText>
       </HeaderTextWrapper>
       <HeaderTextWrapper color="redColor">
         <CheckIcon size={14} />
-        <CountSpanText onClick={onClickClosed} bold={filter.state === 'closed'}>
+        <CountSpanText onClick={() => onClickMark('CLOSE')} bold={filter.state === 'closed'}>
           {closedCount} closed
         </CountSpanText>
       </HeaderTextWrapper>

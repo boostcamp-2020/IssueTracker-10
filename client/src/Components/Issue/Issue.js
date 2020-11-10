@@ -7,7 +7,7 @@ import LabelMilestoneButton from '../Common/LabelMilestoneButton';
 import GreenButton from '../Common/GreenButton';
 import { request } from '../../Api';
 import { AuthStateContext, AuthDispatchContext } from '../../Context/AuthContext';
-import { IssueDispatchContext } from '../../Context/IssueContext';
+import { IssueDispatchContext, IssueStateContext } from '../../Context/IssueContext';
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,11 +27,16 @@ const IssueHeader = styled.div`
 const Issue = ({ token }) => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
+  const issueState = useContext(IssueStateContext);
   const issueDispatch = useContext(IssueDispatchContext);
   const [issueHeader, setIssueHeader] = useState({});
 
   const fetchHeader = async () => {
-    const config = { url: '/api/all', method: 'GET', token: authState.token };
+    const config = {
+      url: '/api/all',
+      method: 'GET',
+      token: authState.token,
+    };
     const { data } = await request(config);
     if (data) {
       setIssueHeader(data);
@@ -40,7 +45,12 @@ const Issue = ({ token }) => {
   };
 
   const fetchIssues = async () => {
-    const config = { url: '/api/issue', method: 'GET', token: authState.token };
+    const config = {
+      url: '/api/issue',
+      method: 'GET',
+      token: authState.token,
+      params: issueState.filter,
+    };
     const { data } = await request(config);
     if (data) issueDispatch({ type: 'FETCH_ISSUES', payload: data });
   };
@@ -57,7 +67,7 @@ const Issue = ({ token }) => {
     return () => {
       setIssueHeader([]);
     };
-  }, [authState.token]);
+  }, [authState.token, issueState.filter]);
 
   return (
     <Wrapper>

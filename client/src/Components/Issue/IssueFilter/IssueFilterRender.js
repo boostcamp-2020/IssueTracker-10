@@ -116,27 +116,10 @@ export const renderMark = () => {
     return result;
   };
 
-  const fetchIssues = async () => {
-    const config = { url: '/api/issue', method: 'GET', token: authState.token };
-    const { data } = await request(config);
-    if (data) {
-      dispatch({ type: 'FETCH_ISSUES', payload: data });
-      dispatch({ type: 'UNCHECK_ALL_ISSUE' });
-    }
-  };
-
-  const fetchHeaders = async () => {
-    const config = { url: '/api/all', method: 'GET', token: authState.token };
-    const { data } = await request(config);
-    if (data) dispatch({ type: 'FETCH_HEADER', payload: data });
-  };
-
   const onClickMark = async (typeString) => {
     const result = await putState(typeString);
     if (result) {
       dispatch({ type: 'RESET_FILTER' });
-      await fetchIssues();
-      await fetchHeaders();
     }
   };
 

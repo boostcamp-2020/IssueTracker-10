@@ -37,7 +37,6 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           state: 'open',
         },
-        issues: [...action.payload],
       };
     }
     case 'CLOSE': {
@@ -47,7 +46,6 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           state: 'closed',
         },
-        issues: [...action.payload],
       };
     }
     case 'ALL': {
@@ -57,7 +55,6 @@ export const issueReducer = (state, action) => {
           ...state.filter,
           state: 'all',
         },
-        issues: [...action.payload],
       };
     }
     case 'SET_AUTHOR': {
@@ -78,6 +75,15 @@ export const issueReducer = (state, action) => {
           author: null,
         },
         issues: [...action.payload],
+      };
+    }
+    case 'SET_ONE_LABEL': {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          label: [action.id],
+        },
       };
     }
     case 'SET_ASSIGNEE': {
@@ -110,6 +116,7 @@ export const issueReducer = (state, action) => {
           milestones: null,
           assignees: null,
         },
+        checkedIds: [],
       };
     }
     case 'STORE_DETAIL_DATA': {

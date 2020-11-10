@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { IssueDispatchContext } from '../../Context/IssueContext';
 
 const Badge = styled.span`
   display: inline-flex;
@@ -14,11 +15,22 @@ const Badge = styled.span`
   border-radius: ${(props) => props.theme.badgeRadius};
   font-weight: 600;
   font-size: 11px;
+  cursor: pointer;
 `;
 
 const IssueLabelBadge = (props) => {
-  const { title, color } = props;
-  return <Badge color={color}>{title}</Badge>;
+  const issueDispatch = useContext(IssueDispatchContext);
+  const { id, title, color } = props;
+
+  const onClickLabel = (labelId) => {
+    issueDispatch({ type: 'SET_ONE_LABEL', id: labelId });
+  };
+
+  return (
+    <Badge onClick={() => onClickLabel(id)} color={color}>
+      {title}
+    </Badge>
+  );
 };
 
 export default IssueLabelBadge;
