@@ -11,6 +11,7 @@ class PopupViewController: UIViewController {
 	
 	let labelManager = LabelManager()
 	var label: Label?
+	var isKeyboardShown = false
 	
 	@IBOutlet weak var colorView: UIView!
 	@IBOutlet weak var popUpView: UIView!
@@ -52,12 +53,20 @@ class PopupViewController: UIViewController {
 		titleTextField.text = label?.title
 		descriptionTextField.text = label?.description
 		colorTextField.text = label?.color
+		registerForKeyboardNotifications()
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
-		if touch.view != popUpView {
-			self.dismiss(animated: false, completion: nil)
+		if isKeyboardShown {
+			self.titleTextField.resignFirstResponder()
+			self.descriptionTextField.resignFirstResponder()
+			self.colorTextField.resignFirstResponder()
+		}
+		else {
+			if touch.view != popUpView {
+				self.dismiss(animated: false, completion: nil)
+			}
 		}
 	}
 	
@@ -69,4 +78,27 @@ class PopupViewController: UIViewController {
 		return String(format: "#%06x", rgb)
 	}
 	
+	//MARK:- keyboard 관련
+	func registerForKeyboardNotifications() {
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	
+	@objc func keyboardWillShow(_ notification: Notification) {
+		guard isKeyboardShown == false else { return }
+		guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+		let diff = (self.view.frame.height - popUpView.frame.height) / 2
+		let height = keyboardSize.height - diff
+		self.popUpView.frame.origin.y -= height
+		isKeyboardShown = true
+	}
+	
+	@objc func keyboardWillHide(_ notification: Notification) {
+		guard isKeyboardShown == true else { return }
+		guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+		let diff = (self.view.frame.height - popUpView.frame.height) / 2
+		let height = keyboardSize.height - diff
+		self.popUpView.frame.origin.y += height
+		isKeyboardShown = false
+	}
 }

@@ -407,11 +407,11 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="labelCell" rowHeight="81" id="lm4-OM-naO" customClass="LabelTableViewCell" customModule="IssueTracker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="labelCell" rowHeight="81" id="lm4-OM-naO" customClass="LabelTableViewCell" customModule="IssueTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lm4-OM-naO" id="gy5-Mx-XP6">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="81"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ik-ix-0fn">
@@ -523,17 +523,17 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ree-km-Ooo">
                                         <rect key="frame" x="72" y="70" width="288" height="18.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Olo-ty-nx0">
                                         <rect key="frame" x="72" y="121" width="288" height="18.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y3z-sS-Szv">
                                         <rect key="frame" x="72" y="172" width="154" height="18.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fh-1N-Ew6" userLabel="horizon">
                                         <rect key="frame" x="30" y="145.5" width="330" height="1"/>
@@ -611,7 +611,6 @@
                                     <constraint firstItem="NZl-uD-fQI" firstAttribute="top" secondItem="15Y-KY-Yp0" secondAttribute="bottom" constant="5" id="LRd-vC-xoh"/>
                                     <constraint firstItem="i26-iD-oXm" firstAttribute="centerY" secondItem="N0y-UU-JeP" secondAttribute="centerY" id="MHy-ec-d4Q"/>
                                     <constraint firstItem="Zh7-0p-LQh" firstAttribute="top" secondItem="Xn9-gs-Img" secondAttribute="top" constant="15" id="MXb-ZZ-oFy"/>
-                                    <constraint firstAttribute="width" secondItem="Xn9-gs-Img" secondAttribute="height" multiplier="1.5:1" id="MZg-MV-wNU"/>
                                     <constraint firstItem="Zh7-0p-LQh" firstAttribute="leading" secondItem="Xn9-gs-Img" secondAttribute="leading" constant="15" id="R8u-yJ-AzL"/>
                                     <constraint firstItem="Prr-ib-8qa" firstAttribute="leading" secondItem="Xn9-gs-Img" secondAttribute="leading" constant="30" id="VmG-aK-Wtx"/>
                                     <constraint firstItem="y3z-sS-Szv" firstAttribute="centerY" secondItem="3Dw-nu-bCU" secondAttribute="centerY" id="XN1-TN-YMx"/>
@@ -626,6 +625,7 @@
                                     <constraint firstItem="Prr-ib-8qa" firstAttribute="top" secondItem="15Y-KY-Yp0" secondAttribute="bottom" constant="30" id="iqJ-3v-2o2"/>
                                     <constraint firstItem="NZl-uD-fQI" firstAttribute="leading" secondItem="Xn9-gs-Img" secondAttribute="leading" constant="30" id="lv1-BZ-JQu"/>
                                     <constraint firstItem="Olo-ty-nx0" firstAttribute="centerY" secondItem="Xn9-gs-Img" secondAttribute="centerY" id="na1-LD-ylK"/>
+                                    <constraint firstAttribute="width" secondItem="Xn9-gs-Img" secondAttribute="height" multiplier="3:2" id="prO-CO-mRy"/>
                                     <constraint firstItem="3Dw-nu-bCU" firstAttribute="top" secondItem="Prr-ib-8qa" secondAttribute="bottom" constant="30" id="ras-y8-RCu"/>
                                     <constraint firstAttribute="trailing" secondItem="0fh-1N-Ew6" secondAttribute="trailing" constant="30" id="rtp-To-dvA"/>
                                     <constraint firstItem="y3z-sS-Szv" firstAttribute="leading" secondItem="3Dw-nu-bCU" secondAttribute="trailing" constant="12" id="ug7-vd-wlv"/>
@@ -638,9 +638,9 @@
                         <viewLayoutGuide key="safeArea" id="qRE-a2-jzu"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
+                            <constraint firstItem="Xn9-gs-Img" firstAttribute="centerY" secondItem="yLK-AV-daq" secondAttribute="centerY" id="I8K-tU-D14"/>
                             <constraint firstItem="Xn9-gs-Img" firstAttribute="leading" secondItem="qRE-a2-jzu" secondAttribute="leading" constant="12" id="f75-Dv-fv1"/>
                             <constraint firstItem="qRE-a2-jzu" firstAttribute="trailing" secondItem="Xn9-gs-Img" secondAttribute="trailing" constant="12" id="uLf-hz-Kze"/>
-                            <constraint firstItem="Xn9-gs-Img" firstAttribute="centerY" secondItem="yLK-AV-daq" secondAttribute="centerY" id="xjf-bW-0gA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Xns-Ew-IYs"/>
