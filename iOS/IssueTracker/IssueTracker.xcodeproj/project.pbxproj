@@ -337,9 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				E0B3D4092547EBC20040D5AF /* IssueDetailViewController.swift */,
-				E085B102255BA8AC0016B7B1 /* CommentNavigationViewController.swift */,
 				E037F289255A354300DAD98B /* IssueDetailViewController+Collection.swift */,
-				E085B0E6255AF0870016B7B1 /* CommentCreateViewController.swift */,
 			);
 			path = Contoroller;
 			sourceTree = "<group>";
@@ -347,7 +345,6 @@
 		E037F26F25593C2A00DAD98B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E037F2A1255A53BD00DAD98B /* IssueComment.swift */,
 				E037F2A0255A53BD00DAD98B /* IssueDetail.swift */,
 			);
 			path = Model;
@@ -364,6 +361,32 @@
 				E049B9232554DE40004DD162 /* Date+globalLocal.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E085B10A255BACFC0016B7B1 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				E085B10C255BAD390016B7B1 /* Controller */,
+				E085B10B255BAD2D0016B7B1 /* Model */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		E085B10B255BAD2D0016B7B1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E037F2A1255A53BD00DAD98B /* IssueComment.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E085B10C255BAD390016B7B1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E085B0E6255AF0870016B7B1 /* CommentCreateViewController.swift */,
+				E085B102255BA8AC0016B7B1 /* CommentNavigationViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		E09C1CA0254A995B00A1FADF /* Home */ = {
@@ -437,6 +460,7 @@
 		E0B3D3C32546C8660040D5AF /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				E085B10A255BACFC0016B7B1 /* Comment */,
 				C32C5FAC254FEB33008BBDCE /* SignIn */,
 				C32C5FA7254FE962008BBDCE /* Profile */,
 				E09C1CA0254A995B00A1FADF /* Home */,
