@@ -22,8 +22,16 @@ class MileStoneViewModel {
 		}
 	}
 	
+	private func setNotification() {
+		NotificationCenter.default.addObserver(self, selector: #selector(createMileStone), name: .mileStoneDidCreated, object: nil)
+	}
+	
 	func requestGetMileStoneList() {
 		state = reactor.execute(action: .requestGetMileStoneList, currentState: state)
 		updateClosure?(state)
+	}
+	
+	@objc func createMileStone() {
+		requestGetMileStoneList()
 	}
 }

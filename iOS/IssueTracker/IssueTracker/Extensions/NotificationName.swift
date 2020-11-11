@@ -13,6 +13,7 @@ extension Notification.Name {
     static let selectedLabelChanged = Notification.Name.init("selectedLabelChanged")
 	static let labelDidCreated = Notification.Name.init("labelDidCreated")
 	static let labelDidChanged = Notification.Name.init("labelDidChanged")
+	static let mileStoneDidCreated = Notification.Name.init("mileStoneDidCreated")
 	
 	static let signInDidFinished = Notification.Name.init("signInDidFinished")
 }
