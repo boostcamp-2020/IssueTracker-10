@@ -574,7 +574,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijn-ef-vgC">
-                                                    <rect key="frame" x="8" y="37" width="41.5" height="21"/>
+                                                    <rect key="frame" x="8" y="44" width="41.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
@@ -615,7 +615,7 @@
                                                 <constraint firstItem="fKd-La-crV" firstAttribute="top" secondItem="o86-sf-64J" secondAttribute="top" constant="8" id="HoY-cR-MJg"/>
                                                 <constraint firstAttribute="trailing" secondItem="HUr-6i-f8K" secondAttribute="trailing" constant="8" id="QBG-AR-rGZ"/>
                                                 <constraint firstItem="ijn-ef-vgC" firstAttribute="leading" secondItem="o86-sf-64J" secondAttribute="leading" constant="8" id="UWM-tc-avE"/>
-                                                <constraint firstItem="ijn-ef-vgC" firstAttribute="top" secondItem="fKd-La-crV" secondAttribute="bottom" constant="8" id="WhK-Zd-smV"/>
+                                                <constraint firstItem="ijn-ef-vgC" firstAttribute="top" secondItem="fKd-La-crV" secondAttribute="bottom" constant="15" id="WhK-Zd-smV"/>
                                                 <constraint firstAttribute="trailing" secondItem="omf-Wd-22B" secondAttribute="trailing" constant="8" id="aVZ-SV-cBw"/>
                                                 <constraint firstItem="HUr-6i-f8K" firstAttribute="top" secondItem="fKd-La-crV" secondAttribute="top" id="c94-8f-MFG"/>
                                                 <constraint firstItem="bmc-Xp-idY" firstAttribute="top" secondItem="omf-Wd-22B" secondAttribute="bottom" constant="3" id="ffA-zJ-FlO"/>
@@ -808,6 +808,7 @@
                         <outlet property="dateTextField" destination="aNS-pC-Xs2" id="FjI-ve-sIE"/>
                         <outlet property="descriptionTextField" destination="RkP-wl-Pds" id="Uic-Ng-mEw"/>
                         <outlet property="popUpView" destination="B6u-2p-r0H" id="ezK-cy-rZl"/>
+                        <outlet property="popUpViewCenterYConstraint" destination="H2p-Ab-N9P" id="g98-xt-spH"/>
                         <outlet property="titleTextField" destination="pKA-ut-25h" id="6oJ-Y6-cUz"/>
                     </connections>
                 </viewController>
@@ -866,17 +867,17 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ree-km-Ooo">
                                         <rect key="frame" x="72" y="70" width="288" height="18.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Olo-ty-nx0">
                                         <rect key="frame" x="72" y="121" width="288" height="18.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y3z-sS-Szv">
                                         <rect key="frame" x="72" y="172" width="154" height="18.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fh-1N-Ew6" userLabel="horizon">
                                         <rect key="frame" x="30" y="145.5" width="330" height="1"/>
@@ -992,6 +993,7 @@
                         <outlet property="colorView" destination="N0y-UU-JeP" id="vyZ-eB-scx"/>
                         <outlet property="descriptionTextField" destination="Olo-ty-nx0" id="o0p-U8-tU4"/>
                         <outlet property="popUpView" destination="Xn9-gs-Img" id="Ib0-Vz-hZd"/>
+                        <outlet property="popUpViewCenterYConstraint" destination="I8K-tU-D14" id="qMD-El-sR9"/>
                         <outlet property="titleTextField" destination="Ree-km-Ooo" id="smd-1A-UUo"/>
                     </connections>
                 </viewController>

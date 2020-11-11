@@ -13,6 +13,7 @@ class LabelPopupViewController: UIViewController {
 	var label: Label?
 	var isKeyboardShown = false
 	
+	@IBOutlet weak var popUpViewCenterYConstraint: NSLayoutConstraint!
 	@IBOutlet weak var colorView: UIView!
 	@IBOutlet weak var popUpView: UIView!
 	@IBOutlet weak var titleTextField: UITextField!
@@ -88,18 +89,28 @@ class LabelPopupViewController: UIViewController {
 	@objc func keyboardWillShow(_ notification: Notification) {
 		guard isKeyboardShown == false else { return }
 		guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-		let diff = (self.view.frame.height - popUpView.frame.height) / 2
-		let height = keyboardSize.height - diff
-		self.popUpView.frame.origin.y -= height
-		isKeyboardShown = true
+		let bottomSpace = (self.view.frame.height - popUpView.frame.height) / 2
+		let diff = keyboardSize.height - bottomSpace + 100
+		
+		UIView.animate(withDuration: 1, animations: { () -> Void in
+			self.popUpViewCenterYConstraint.constant -= diff
+			self.view.layoutIfNeeded()
+		}, completion: {_ in
+			self.isKeyboardShown = true
+		})
 	}
 	
 	@objc func keyboardWillHide(_ notification: Notification) {
 		guard isKeyboardShown == true else { return }
 		guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-		let diff = (self.view.frame.height - popUpView.frame.height) / 2
-		let height = keyboardSize.height - diff
-		self.popUpView.frame.origin.y += height
-		isKeyboardShown = false
+		let bottomSpace = (self.view.frame.height - popUpView.frame.height) / 2
+		let diff = keyboardSize.height - bottomSpace + 100
+		
+		UIView.animate(withDuration: 1, animations: { () -> Void in
+			self.popUpViewCenterYConstraint.constant += diff
+			self.view.layoutIfNeeded()
+		}, completion: {_ in
+			self.isKeyboardShown = false
+		})
 	}
 }

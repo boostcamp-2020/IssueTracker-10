@@ -8,9 +8,11 @@
 import UIKit
 
 class MileStonePopUpViewController: UIViewController {
+	@IBOutlet weak var popUpViewCenterYConstraint: NSLayoutConstraint!
 	
 	let mileStoneManager = MileStoneManager()
 	var mileStone: Milestone?
+	var isKeyboardShown = false
 	
 	@IBOutlet weak var popUpView: UIView!
 	@IBOutlet weak var titleTextField: UITextField!
@@ -24,6 +26,21 @@ class MileStonePopUpViewController: UIViewController {
 		titleTextField.text = mileStone?.title
 		descriptionTextField.text = mileStone?.description
 		dateTextField.text = mileStone?.date
+		registerForKeyboardNotifications()
+	}
+	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		guard let touch = touches.first else { return }
+		if isKeyboardShown {
+			self.titleTextField.resignFirstResponder()
+			self.descriptionTextField.resignFirstResponder()
+			self.dateTextField.resignFirstResponder()
+		}
+		else {
+			if touch.view != popUpView {
+				self.dismiss(animated: false, completion: nil)
+			}
+		}
 	}
 	
 	@IBAction func closeButtonTouched(_ sender: Any) {
@@ -67,5 +84,39 @@ class MileStonePopUpViewController: UIViewController {
 		let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive , handler: nil)
 		alert.addAction(defaultAction)
 		present(alert, animated: false, completion: nil)
+	}
+	
+	//MARK:- keyboard 관련
+	func registerForKeyboardNotifications() {
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	
+	@objc func keyboardWillShow(_ notification: Notification) {
+		guard isKeyboardShown == false else { return }
+		guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+		let bottomSpace = (self.view.frame.height - popUpView.frame.height) / 2
+		let diff = keyboardSize.height - bottomSpace + 100
+		
+		UIView.animate(withDuration: 1, animations: { () -> Void in
+			self.popUpViewCenterYConstraint.constant -= diff
+			self.view.layoutIfNeeded()
+		}, completion: {_ in
+			self.isKeyboardShown = true
+		})
+	}
+	
+	@objc func keyboardWillHide(_ notification: Notification) {
+		guard isKeyboardShown == true else { return }
+		guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+		let bottomSpace = (self.view.frame.height - popUpView.frame.height) / 2
+		let diff = keyboardSize.height - bottomSpace + 100
+		
+		UIView.animate(withDuration: 1, animations: { () -> Void in
+			self.popUpViewCenterYConstraint.constant += diff
+			self.view.layoutIfNeeded()
+		}, completion: {_ in
+			self.isKeyboardShown = false
+		})
 	}
 }
