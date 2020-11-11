@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { LabelStateContext } from '../../Context/LabelContext';
 import BoldText from '../Common/BoldText';
 import LabelListRow from './LabelListRow';
 
@@ -25,8 +24,7 @@ const LabelHeader = styled.div`
 `;
 
 const IssueList = ({ labels }) => {
-  const labelState = useContext(LabelStateContext);
-  const headerText = `${labelState.labels.length} labels`;
+  const headerText = `${labels.length} labels`;
   return (
     <LabelListWrapper>
       <LabelHeader>
