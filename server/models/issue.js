@@ -183,7 +183,7 @@ const findIssueAll = async (query) => {
     const result = issues.reduce(
       (prev, issueData) => {
         const { state } = issueData;
-        if (!filterType || filterType === issueType.all || state === filterType) {
+        if (filterType === undefined || filterType === issueType.all || state === filterType) {
           return { ...prev, [state]: prev[state] + 1, issues: [...prev.issues, issueData] };
         }
         return { ...prev, [state]: prev[state] + 1 };
