@@ -20,6 +20,7 @@ class MileStoneViewController: UIViewController {
 		navigationController?.setToolbarHidden(false, animated: false)
 		dataSource = MileStoneDiffableDataSource(with: mileStoneCollectionView)
 		mileStoneCollectionView.collectionViewLayout = createLayout()
+		mileStoneCollectionView.delegate = self
 		binding()
 	}
 	
@@ -49,9 +50,26 @@ class MileStoneViewController: UIViewController {
 
 		let section = NSCollectionLayoutSection(group: group)
 		section.interGroupSpacing = spacing
-		section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+		section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
 
 		let layout = UICollectionViewCompositionalLayout(section: section)
 		return layout
+	}
+	
+	func viewController<T:UIViewController> (identifier: String, type: T) -> T? {
+		let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+		if let viewController: T = mainStoryboard.instantiateViewController(withIdentifier: identifier) as? T {
+			return viewController
+		}
+		return nil
+	}
+}
+
+extension MileStoneViewController: UICollectionViewDelegate {
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let mileStone = dataSource.itemIdentifier(for: indexPath)
+		guard let viewController = viewController(identifier: "MileStonePopUpViewController", type: MileStonePopUpViewController()) else { return }
+		viewController.mileStone = mileStone
+		self.present(viewController, animated: false, completion: nil)
 	}
 }

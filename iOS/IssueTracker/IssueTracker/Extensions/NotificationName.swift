@@ -14,6 +14,7 @@ extension Notification.Name {
 	static let labelDidCreated = Notification.Name.init("labelDidCreated")
 	static let labelDidChanged = Notification.Name.init("labelDidChanged")
 	static let mileStoneDidCreated = Notification.Name.init("mileStoneDidCreated")
+	static let mileStoneDidChanged = Notification.Name.init("mileStoneDidChanged")
 	
 	static let signInDidFinished = Notification.Name.init("signInDidFinished")
 }

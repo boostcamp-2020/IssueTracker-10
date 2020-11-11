@@ -10,6 +10,7 @@ import UIKit
 class MileStonePopUpViewController: UIViewController {
 	
 	let mileStoneManager = MileStoneManager()
+	var mileStone: Milestone?
 	
 	@IBOutlet weak var popUpView: UIView!
 	@IBOutlet weak var titleTextField: UITextField!
@@ -20,6 +21,9 @@ class MileStonePopUpViewController: UIViewController {
 		super.viewDidLoad()
 		self.view.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
 		popUpView.layer.cornerRadius = 5
+		titleTextField.text = mileStone?.title
+		descriptionTextField.text = mileStone?.description
+		dateTextField.text = mileStone?.date
 	}
 	
 	@IBAction func closeButtonTouched(_ sender: Any) {
@@ -33,7 +37,16 @@ class MileStonePopUpViewController: UIViewController {
 			return
 		}
 		
-		mileStoneManager.create(title: title, description: descriptionTextField.text, date: date.isEmpty ? nil : date)
+		if let mileStone = mileStone {
+			var newMileStone = mileStone
+			newMileStone.title = title
+			newMileStone.description = descriptionTextField.text
+			newMileStone.date = date
+			NotificationCenter.default.post(name: .mileStoneDidChanged, object: self, userInfo: ["mileStone":newMileStone])
+		}
+		else {
+			mileStoneManager.create(title: title, description: descriptionTextField.text, date: date.isEmpty ? nil : date)
+		}
 		self.dismiss(animated: false, completion: nil)
 	}
 	

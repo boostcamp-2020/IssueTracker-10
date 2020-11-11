@@ -25,6 +25,7 @@ class MileStoneViewModel {
 	
 	private func setNotification() {
 		NotificationCenter.default.addObserver(self, selector: #selector(createMileStone), name: .mileStoneDidCreated, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateMileStone), name: .mileStoneDidChanged, object: nil)
 	}
 	
 	func requestGetMileStoneList() {
@@ -34,5 +35,11 @@ class MileStoneViewModel {
 	
 	@objc func createMileStone() {
 		requestGetMileStoneList()
+	}
+	
+	@objc func updateMileStone(_ notification: Notification) {
+		guard let mileStone = notification.userInfo?["mileStone"] as? Milestone else { return }
+		state = reactor.execute(action: .requestUpdateMileStone(mileStone), currentState: state)
+		updateClosure?(state)
 	}
 }

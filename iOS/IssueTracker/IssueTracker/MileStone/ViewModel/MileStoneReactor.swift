@@ -13,6 +13,7 @@ class MileStoneReactor {
 	
 	enum Action {
 		case requestGetMileStoneList
+		case requestUpdateMileStone(Milestone)
 	}
 	
 	func execute(action: Action, currentState: MileStoneState) -> MileStoneState {
@@ -22,6 +23,11 @@ class MileStoneReactor {
 				var state = currentState
 				state.mileStones = mileStones
 				self.sideEffect?(state)
+			}
+			return currentState
+		case .requestUpdateMileStone(let mileStone):
+			MileStoneManager().update(with: mileStone) {
+				let _ = self.execute(action: .requestGetMileStoneList, currentState: currentState)
 			}
 			return currentState
 		}

@@ -36,7 +36,7 @@ class MileStoneCollectionViewCell: UICollectionViewCell {
 	private func prettyPrintedDate(with dateString: String?) -> String? {
 		guard let dateString = dateString else { return nil }
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+		dateFormatter.dateFormat = "yyyy-MM-dd"
 		dateFormatter.locale = Locale(identifier: "ko_KR")
 		guard let date = dateFormatter.date(from: dateString) else { return nil }
 		

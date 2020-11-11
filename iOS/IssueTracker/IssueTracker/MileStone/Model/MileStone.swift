@@ -14,9 +14,9 @@ struct MilestoneResponse: Codable {
 
 struct Milestone: Codable, Hashable {
 	let id: Int
-	let title: String
-	let description: String?
-	let date: String?
+	var title: String
+	var description: String?
+	var date: String?
 	let open: Int?
 	let closed: Int?
 	let state: Int?
