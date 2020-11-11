@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BoldText from '../Common/BoldText';
 import { CheckIcon, MilestoneIcon } from '../static/svgIcons';
@@ -38,25 +39,58 @@ const HeaderColumn = styled.div`
   }
 `;
 
-const MilestoneList = ({ openMilestone, closedMilestone }) => {
+const LinkText = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const MilestoneList = ({ openMilestone, closedMilestone, isClosedPage, setClosedPage }) => {
   const openMilestoneCount = `${openMilestone.length} Open`;
   const closedMilestoneCount = `${closedMilestone.length} Closed`;
+
+  const onClickClosed = () => {
+    setClosedPage(true);
+  };
+
+  const onClickOpen = () => {
+    setClosedPage(false);
+  };
   return (
     <MilestoneListWrapper>
       <MilestoneHeader>
         <HeaderColumn>
-          <MilestoneIcon size={20} />
-          <BoldText text={openMilestoneCount} />
+          <Link to="/milestones">
+            <LinkText onClick={onClickOpen}>
+              <MilestoneIcon size={20} />
+              <BoldText text={openMilestoneCount} />
+            </LinkText>
+          </Link>
         </HeaderColumn>
         <HeaderColumn>
-          <CheckIcon size={20} />
-          <BoldText text={closedMilestoneCount} />
+          <Link to="/milestones?state=closed">
+            <LinkText onClick={onClickClosed}>
+              <CheckIcon size={20} />
+              <BoldText text={closedMilestoneCount} />
+            </LinkText>
+          </Link>
         </HeaderColumn>
       </MilestoneHeader>
-      {openMilestone &&
-        openMilestone.map((milestone) => (
-          <MilestoneListRow key={milestone.id} milestone={milestone} />
-        ))}
+      {isClosedPage ? (
+        <>
+          {closedMilestone &&
+            closedMilestone.map((milestone) => (
+              <MilestoneListRow key={milestone.id} milestone={milestone} />
+            ))}
+        </>
+      ) : (
+        <>
+          {openMilestone &&
+            openMilestone.map((milestone) => (
+              <MilestoneListRow key={milestone.id} milestone={milestone} />
+            ))}
+        </>
+      )}
     </MilestoneListWrapper>
   );
 };

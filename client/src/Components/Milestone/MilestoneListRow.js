@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { convertTime } from '../../utils/convert';
+import getPercent from '../../utils/getPercent';
 import BoldText from '../Common/BoldText';
 import ProgressBar from '../Common/ProgressBar';
 import { CalendarIcon, TimeIcon } from '../static/svgIcons';
@@ -113,8 +114,7 @@ const MilestoneListRow = ({ milestone }) => {
   const { title, description, dateString, updatedAt, closed, open } = milestone;
   const dateTime = `Last updated about ${convertTime(updatedAt)}`;
   const total = closed + open;
-  const closedPercent = total ? `${`${(closed / total) * 100}`.toString().slice(0, 4)}%` : '0%';
-
+  const closedPercent = getPercent(closed, total);
   return (
     <Wrapper>
       <Column>

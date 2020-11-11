@@ -33,12 +33,13 @@ const ColumnContainer = styled.div`
   }
 `;
 
-const Label = ({ token }) => {
+const Milestone = ({ token, location: { search } }) => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   const milestoneState = useContext(MilestoneStateContext);
   const milestoneDispatch = useContext(MilestoneDispatchContext);
   const [display, setDisplay] = useState(false);
+  const [isClosedPage, setClosedPage] = useState(false);
   const { greenColor } = theme;
 
   const toggleDisplay = () => {
@@ -66,6 +67,7 @@ const Label = ({ token }) => {
       };
       fetchOpenMilestone();
       fetchClosedMilestone();
+      if (search) setClosedPage(true);
     }
   }, [authState.token]);
 
@@ -81,6 +83,8 @@ const Label = ({ token }) => {
       </RowContainer>
       <RowContainer>
         <MilestoneList
+          setClosedPage={setClosedPage}
+          isClosedPage={isClosedPage}
           openMilestone={milestoneState.openMilestone}
           closedMilestone={milestoneState.closeMilestone}
         />
@@ -89,4 +93,4 @@ const Label = ({ token }) => {
   );
 };
 
-export default Label;
+export default Milestone;
