@@ -18,7 +18,8 @@ const Wrapper = styled.div`
 const RowContainer = styled.div`
   margin-top: 20px;
   width: 1100px;
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
   justify-content: space-between;
 `;
@@ -27,25 +28,19 @@ const ColumnContainer = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  width: 60%;
-  &:last-child {
-    width: 10%;
-  }
 `;
 
-const Milestone = ({ token, location: { search } }) => {
+const CreateButton = styled(Button)`
+  padding: 10px;
+`;
+
+const Milestone = ({ token, location: { search }, history }) => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   const milestoneState = useContext(MilestoneStateContext);
   const milestoneDispatch = useContext(MilestoneDispatchContext);
-  const [display, setDisplay] = useState(false);
   const [isClosedPage, setClosedPage] = useState(false);
   const { greenColor } = theme;
-
-  const toggleDisplay = () => {
-    const displayValue = !display;
-    setDisplay(displayValue);
-  };
 
   useEffect(() => {
     if (!authState.token) authDispatch({ type: 'LOGIN', token });
@@ -69,7 +64,11 @@ const Milestone = ({ token, location: { search } }) => {
       fetchClosedMilestone();
       if (search) setClosedPage(true);
     }
-  }, [authState.token]);
+  }, []);
+
+  const onClickCreate = () => {
+    history.push('/milestones/new');
+  };
 
   return (
     <Wrapper>
@@ -78,7 +77,7 @@ const Milestone = ({ token, location: { search } }) => {
           <LabelMilestoneButton issueHeader="" />
         </ColumnContainer>
         <ColumnContainer>
-          <Button onClick={toggleDisplay} text="New Milestone" color={greenColor} />
+          <CreateButton onClick={onClickCreate} text="New milestone" color={greenColor} />
         </ColumnContainer>
       </RowContainer>
       <RowContainer>
