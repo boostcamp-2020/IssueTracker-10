@@ -16,6 +16,7 @@ const colors = {
 };
 
 const border = '1px solid #e1e4e8';
+const borderDashed = '1px dashed #e1e4e8';
 const radius = '10px';
 const radiusSmall = '5px';
 const badgeRadius = '2em';
@@ -24,6 +25,7 @@ const cardShadow = '3px 3px 9px #e1e4e8';
 export const theme = {
   ...colors,
   border,
+  borderDashed,
   radius,
   radiusSmall,
   cardShadow,
