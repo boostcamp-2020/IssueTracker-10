@@ -33,6 +33,13 @@ class MileStonePopUpViewController: UIViewController {
 		setTextFieldDelegate()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+			self.titleTextField.becomeFirstResponder()
+		}
+	}
+	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
 		if isKeyboardShown {
