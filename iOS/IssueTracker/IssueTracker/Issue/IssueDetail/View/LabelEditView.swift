@@ -18,7 +18,7 @@ class LabelEditView: UIView {
     var issue: Issue?
     var isEdit = false
     let editButton = UIButton()
-    var labels: [Label]? {
+    var labels: [Label] = [] {
         didSet {
             collectionView.reloadData()
         }
@@ -27,7 +27,7 @@ class LabelEditView: UIView {
     init(issue: Issue?) {
         super.init(frame: CGRect.zero)
         self.issue = issue
-        self.labels = issue?.labels
+        self.labels = issue?.labels ?? []
         commonInit()
     }
     
@@ -94,12 +94,21 @@ class LabelEditView: UIView {
 
 extension LabelEditView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return labels?.count ?? 0
+        return labels.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? LabelEditCollectionViewCell,
-              let item = labels?[indexPath.row] else { return LabelEditCollectionViewCell() }
+
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? LabelEditCollectionViewCell
+        else { return LabelEditCollectionViewCell() }
+        
+        if indexPath.row == labels.count {
+            cell.configure(item: Label(id: -1, title: "  +  ", color: "#cccccc"))
+            cell.backgroundColor = .black
+            return cell
+        }
+        
+        let item = labels[indexPath.row]
         cell.configure(item: item)
         if isEdit {
             cell.editLabelBegin()
@@ -108,8 +117,12 @@ extension LabelEditView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == labels.count {
+            print("plus")
+        }
+        
         if isEdit {
-            let object: [String : Int?] = ["issueId": issue?.id, "labelId": labels?[indexPath.row].id]
+            let object: [String : Int?] = ["issueId": issue?.id, "labelId": labels[indexPath.row].id]
             NotificationCenter.default.post(name: .removeLabelOfIssue, object: object)
         }
     }
