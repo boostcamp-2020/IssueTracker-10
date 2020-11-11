@@ -16,7 +16,9 @@ const LabelMilestoneButton = (props) => {
       <Link to="/labels">
         <LabelButton hasCount={hasCount} count={labels.length} />
       </Link>
-      <MilestoneButton hasCount={hasCount} count={milestones.length} />
+      <Link to="/milestones">
+        <MilestoneButton hasCount={hasCount} count={milestones.length} />
+      </Link>
     </Wrapper>
   );
 };
