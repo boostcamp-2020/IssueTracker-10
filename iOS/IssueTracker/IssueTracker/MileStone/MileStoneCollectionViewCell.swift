@@ -18,8 +18,10 @@ class MileStoneCollectionViewCell: UICollectionViewCell {
 	
 	func configure(mileStone: Milestone) {
 		titleLabel.text = mileStone.title
+		layoutIfNeeded()
+		titleLabel.addExternalBorder(content: mileStone.title, borderWidth: 1, whiteSpace: 3, borderColor: UIColor(named: "YearColor"))		
 		descriptionLabel.text = mileStone.description
-		dateLabel.text = mileStone.date
+		dateLabel.text = prettyPrintedDate(with: mileStone.date)
 		openCountLabel.text = "\(mileStone.open ?? 0) opened"
 		closeCountLabel.text = "\(mileStone.closed ?? 0) closed"
 		progressLabel.text = "\(calculateProgress(open: mileStone.open, close: mileStone.closed))%"
@@ -29,5 +31,22 @@ class MileStoneCollectionViewCell: UICollectionViewCell {
 		guard let open = open, let close = close, open + close != 0 else { return 0}
 		let percentage: Double = Double(close / (open + close))
 		return Int(ceil(percentage * 100))
+	}
+	
+	private func prettyPrintedDate(with dateString: String?) -> String? {
+		guard let dateString = dateString else { return nil }
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+		dateFormatter.locale = Locale(identifier: "ko_KR")
+		guard let date = dateFormatter.date(from: dateString) else { return nil }
+		
+		let calendar = Calendar.current
+		let components = calendar.dateComponents([.year, .month, .day], from: date)
+		guard let year = components.year, let month = components.month, let day = components.day else { return nil }
+		return "\(year)년\(month)월\(day)일 까지"
+	}
+	
+	override func prepareForReuse() {
+		titleLabel.removeExternalBorders()
 	}
 }
