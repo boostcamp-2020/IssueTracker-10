@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Input from '../Common/Input';
 import GreenButton from '../Common/GreenButton';
+import InputComment from './InputComment';
 import { request } from '../../Api';
 import { AuthStateContext } from '../../Context/AuthContext';
 import { IssueInfoContext } from '../../Context/IssueInfoContext';
@@ -33,34 +34,6 @@ const InputTitle = styled(Input)`
   font-size: 18px;
 `;
 
-const ContentWrapper = styled.div`
-  margin: 10px 0;
-  border: ${(props) => props.theme.border};
-  border-radius: ${(props) => props.theme.radiusSmall};
-`;
-
-const InputContent = styled.textarea`
-  width: 100%;
-  padding: 10px 15px;
-  border: none;
-  font-size: 14px;
-`;
-
-const InputFileLabel = styled.label`
-  display: block;
-  width: 100%;
-  padding: 5px 15px;
-  color: ${(props) => props.theme.darkgrayColor};
-  background: none;
-  border-top: ${(props) => props.theme.borderDashed};
-  text-align: left;
-  cursor: pointer;
-`;
-
-const InputFile = styled.input`
-  display: none;
-`;
-
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -80,7 +53,6 @@ const NewIssue = () => {
   const issueInfoState = useContext(IssueInfoContext);
   const { token, user } = authState;
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
   const [disabled, setDisabled] = useState(true);
 
   const onChangeTitle = (event) => {
@@ -89,17 +61,8 @@ const NewIssue = () => {
     return text.length === 0 ? setDisabled(true) : setDisabled(false);
   };
 
-  const onChangeContent = (event) => {
-    const text = event.target.value;
-    setContent(text);
-  };
-
-  const onChangeFile = (event) => {
-    // TODO: 이미지 파일일 경우에만 사진 업로드 및 comment에 url 추가
-  };
-
   const submitNewIssue = async () => {
-    const { assignees, labels, milestone } = issueInfoState;
+    const { content, assignees, labels, milestone } = issueInfoState;
     const data = {
       title,
       content,
@@ -125,16 +88,7 @@ const NewIssue = () => {
       <UserAvater src={user.avatar} alt={`${user.username} profile`} />
       <InputWrapper>
         <InputTitle type="text" placeholder="Title" required onChange={onChangeTitle} />
-        <ContentWrapper>
-          <InputContent placeholder="Leave a comment" rows="10" onChange={onChangeContent} />
-          <InputFileLabel htmlFor="inputFile">Attach files by selecting here</InputFileLabel>
-          <InputFile
-            type="file"
-            id="inputFile"
-            accept="image/jpg, image/png, image/jpeg"
-            onChange={onChangeFile}
-          />
-        </ContentWrapper>
+        <InputComment />
         <ButtonWrapper>
           <LinkToMain href="/">Cancel</LinkToMain>
           <GreenButton
