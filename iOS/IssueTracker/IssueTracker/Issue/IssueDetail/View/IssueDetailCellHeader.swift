@@ -24,7 +24,7 @@ class IssueDetailCellHeader: UIView {
     }
     
     func commonInit() {
-        profileImage.layer.cornerRadius = 5
+        profileImage.layer.cornerRadius = 10
         profileImage.clipsToBounds = true
         profileImage.image = UIImage(named: "Icon")
         author.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
