@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssueStateContext } from '../../Context/IssueContext';
+import { MilestoneStateContext } from '../../Context/MilestoneContext';
 import { CheckIcon } from '../static/svgIcons';
 
 const ModalRow = styled.li`
@@ -60,9 +61,7 @@ export const renderUsers = ({ selectedList, setSelecteList }) => {
   const onClickAssignee = ({ id, username, avatar }) => {
     const data = { id, username, avatar };
     if (selectedListId.includes(id)) {
-      const newList = selectedList.filter((user) => {
-        if (id !== user.id) return user;
-      });
+      const newList = selectedList.filter((user) => id !== user.id);
       return setSelecteList(newList);
     }
     return setSelecteList([...selectedList, data]);
@@ -88,9 +87,7 @@ export const renderLabels = ({ selectedList, setSelecteList }) => {
   const onClickLabel = ({ id, color, title }) => {
     const data = { id, color, title };
     if (selectedListId.includes(id)) {
-      const newList = selectedList.filter((label) => {
-        if (id !== label.id) return label;
-      });
+      const newList = selectedList.filter((label) => id !== label.id);
       return setSelecteList(newList);
     }
     return setSelecteList([...selectedList, data]);
@@ -108,19 +105,23 @@ export const renderLabels = ({ selectedList, setSelecteList }) => {
 };
 
 export const renderMilestones = ({ selectedList, setSelecteList }) => {
-  const { milestones } = useContext(IssueStateContext);
+  const { openMilestone } = useContext(MilestoneStateContext);
   const selectedListId = selectedList && selectedList.id;
-  const onClickMilestone = ({ id, title }) => {
-    const data = { id, title };
+  const onClickMilestone = ({ id, title, open, closed }) => {
+    const total = open + closed;
+    const percent = total ? `${(open / total) * 100}%` : '0%';
+    const data = { id, title, open, closed, percent };
     return selectedListId === id ? setSelecteList(null) : setSelecteList(data);
   };
-  return milestones.map((milestone) => (
+  return openMilestone.map((milestone) => (
     <ModalRow key={milestone.id} onClick={() => onClickMilestone(milestone)}>
       <MilestoneTitle>
         {milestone.title}
         {selectedListId === milestone.id && <CheckIcon />}
       </MilestoneTitle>
-      <MilestoneDueDate>{milestone.date || 'No due date'}</MilestoneDueDate>
+      <MilestoneDueDate>
+        {milestone.date ? `Due by ${milestone.dateString}` : 'No due date'}
+      </MilestoneDueDate>
     </ModalRow>
   ));
 };

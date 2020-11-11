@@ -83,7 +83,7 @@ const NewIssue = () => {
       content,
       assignees: assignees.map((ele) => ele.id),
       labels: labels.map((ele) => ele.id),
-      milestoneId: milestone.id,
+      milestoneId: milestone ? milestone.id : null,
     };
 
     const config = { url: '/api/issue', method: 'POST', data, token };
@@ -102,7 +102,6 @@ const NewIssue = () => {
     <Wrapper>
       <UserAvater src={user.avatar} alt={`${user.username} profile`} />
       <InputWrapper>
-        {/* onChange 이벤트가 발생할 때마다 현재 컴포넌트가 재렌더링 되므로 InputTitle과 InputContent를 컴포넌트 분할시키는 것도 괜찮을 것 같다..? */}
         <InputTitle type="text" placeholder="Title" required onChange={onChangeTitle} />
         <InputContent placeholder="Leave a comment" rows="10" onChange={onChangeContent} />
         <ButtonWrapper>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { IssueInfoContext, IssueInfoDispatchContext } from '../../Context/IssueInfoContext';
 import { AuthStateContext } from '../../Context/AuthContext';
@@ -40,19 +40,17 @@ const MilestoneTitle = styled.div`
   font-size: 14px;
 `;
 
-const MilestoneGraph = styled.svg`
+const MilestoneTotal = styled.div`
   width: 100%;
-  height: 20px;
-`;
-
-const MilestoneTotal = styled.path`
-  stroke: ${(props) => props.theme.darkgrayColor};
-  stroke-width: 10;
-  stroke-linecap: round;
+  max-width: 285px;
+  height: 10px;
+  background-color: ${(props) => props.theme.darkgrayColor};
+  border-radius: ${(props) => props.theme.radiusSmall};
 `;
 
 const MilestoneDone = styled(MilestoneTotal)`
-  stroke: ${(props) => props.theme.greenColor};
+  width: ${(props) => props.width};
+  background-color: ${(props) => props.theme.greenColor};
 `;
 
 export const checkedUsers = () => {
@@ -101,13 +99,11 @@ export const checkedMilestone = () => {
   if (!milestone) {
     return <Wrapper>No milestone</Wrapper>;
   }
-  // TODO: milestoneGraph를 마일스톤 open / total 개수 퍼센트로 계산하여 그리기
   return (
     <Wrapper>
-      <MilestoneGraph>
-        <MilestoneTotal d="M5 10 280 10" />
-        <MilestoneDone d="M5 10 100 10" />
-      </MilestoneGraph>
+      <MilestoneTotal>
+        <MilestoneDone width={milestone.percent} />
+      </MilestoneTotal>
       <MilestoneTitle>{milestone.title}</MilestoneTitle>
     </Wrapper>
   );
