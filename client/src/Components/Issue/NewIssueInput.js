@@ -48,7 +48,7 @@ const LinkToMain = styled.a`
   background: none;
 `;
 
-const NewIssue = () => {
+const NewIssue = ({ history }) => {
   const authState = useContext(AuthStateContext);
   const issueInfoState = useContext(IssueInfoContext);
   const { token, user } = authState;
@@ -74,13 +74,10 @@ const NewIssue = () => {
     const config = { url: '/api/issue', method: 'POST', data, token };
     const result = await request(config);
 
-    if (result.message) {
-      // TODO: 이슈 페이지 or 이슈 상세페이지로 이동
-      alert('생성 성공!');
-      return;
+    if (result) {
+      const issueId = result.id;
+      history.push(`/issue/${issueId}`);
     }
-
-    alert('생성 실패!');
   };
 
   return (

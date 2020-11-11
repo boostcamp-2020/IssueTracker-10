@@ -46,7 +46,7 @@ const createIssue = async (req, res) => {
     if (!createdData) return res.status(400).json({ message: ERROR_MSG.delete });
     const { id: issueId } = createdData;
     await commentModel.createComment({ userId: id, issueId, content });
-    return res.status(200).json({ message: SUCCESS_MSG.create });
+    return res.status(200).json({ message: SUCCESS_MSG.create, id: createdData.id });
   } catch (err) {
     return res.status(500).json({ message: ERROR_MSG.server });
   }

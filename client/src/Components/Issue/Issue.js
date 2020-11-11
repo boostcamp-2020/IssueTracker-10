@@ -109,7 +109,7 @@ const Issue = ({ token }) => {
       <IssueHeader>
         <FilterInput />
         <LabelMilestoneButton issueHeader={issueHeader} hasCount />
-        <Link to="/new">
+        <Link to="/issue/new">
           <GreenButton title="New Issue" />
         </Link>
       </IssueHeader>
