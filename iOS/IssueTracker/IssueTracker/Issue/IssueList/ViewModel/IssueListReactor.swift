@@ -21,6 +21,7 @@ class IssueListReactor {
         case checkedFilter(IssueCriteria)
 		case changeIssueCount(Int)
 		case updateShowSelectedAll
+        case refreshIssue
     }
     
     func execute(action: Action, currentState: IssueListState) -> IssueListState {
@@ -75,6 +76,14 @@ class IssueListReactor {
 			var state = currentState
 			state.isShowSelectedAll.toggle()
 			return state
+        case .refreshIssue:
+            var state = currentState
+            state.selectedLabelTitle = SelectedLabelTitle()
+            IssueManager().get { issues in
+                state.issues = issues
+                self.sideEffect?(state)
+            }
+            return state
         }
     }
 }

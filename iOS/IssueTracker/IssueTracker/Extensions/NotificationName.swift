@@ -14,6 +14,7 @@ extension Notification.Name {
 	static let labelDidCreated = Notification.Name.init("labelDidCreated")
 	static let labelDidChanged = Notification.Name.init("labelDidChanged")
     static let commentDidChanged = Notification.Name.init("commentDidChanged")
+    static let refreshIssue = Notification.Name.init("refreshIssue")
 
 	static let signInDidFinished = Notification.Name.init("signInDidFinished")
 }
