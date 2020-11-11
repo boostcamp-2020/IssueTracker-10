@@ -45,11 +45,6 @@ struct Author: Codable, Hashable {
     let avatar: String?
 }
 
-struct Milestone: Codable, Hashable {
-    let id: Int
-    let title: String
-}
-
 struct Assignee: Codable, Hashable {
     let id: Int
     let avatar: String?

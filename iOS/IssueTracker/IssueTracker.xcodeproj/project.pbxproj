@@ -27,6 +27,7 @@
 		C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FCF2548650C003C845A /* UIView+addExternalBorder.swift */; };
 		C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C359882B254AC346001F311D /* IssueFilterViewController.swift */; };
 		C35BC3A1255BB31000BD35E6 /* MileStoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3A0255BB31000BD35E6 /* MileStoneViewController.swift */; };
+		C35BC3A9255BB53B00BD35E6 /* MileStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3A8255BB53B00BD35E6 /* MileStone.swift */; };
 		C35F6B192550281D008A116B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35F6B182550281D008A116B /* User.swift */; };
 		C3DB04E42551089C00F0910E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E32551089C00F0910E /* Storage.swift */; };
 		C3DB04E92551099F00F0910E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E82551099F00F0910E /* AppData.swift */; };
@@ -130,6 +131,7 @@
 		C3414FCF2548650C003C845A /* UIView+addExternalBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addExternalBorder.swift"; sourceTree = "<group>"; };
 		C359882B254AC346001F311D /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
 		C35BC3A0255BB31000BD35E6 /* MileStoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneViewController.swift; sourceTree = "<group>"; };
+		C35BC3A8255BB53B00BD35E6 /* MileStone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStone.swift; sourceTree = "<group>"; };
 		C35F6B182550281D008A116B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C3DB04E32551089C00F0910E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C3DB04E82551099F00F0910E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				C35BC3A0255BB31000BD35E6 /* MileStoneViewController.swift */,
+				C35BC3A8255BB53B00BD35E6 /* MileStone.swift */,
 			);
 			path = MileStone;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 			files = (
 				C32C5FC225500276008BBDCE /* KeychainItem.swift in Sources */,
 				E049B8952552715F004DD162 /* LabelListView.swift in Sources */,
+				C35BC3A9255BB53B00BD35E6 /* MileStone.swift in Sources */,
 				C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */,
 				E049B8D1255316B2004DD162 /* SelectedLabels.swift in Sources */,
 				E049B9082553E6A8004DD162 /* Environment.swift in Sources */,
