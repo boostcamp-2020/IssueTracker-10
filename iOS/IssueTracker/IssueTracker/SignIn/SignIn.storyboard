@@ -2,7 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,19 +17,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dWm-Sc-9M7">
-                                <rect key="frame" x="40" y="544" width="334" height="128"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dWm-Sc-9M7">
+                                <rect key="frame" x="40" y="634" width="334" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="4is-z0-FvI"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Issue Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4y-fD-2CL">
+                                <rect key="frame" x="40" y="134" width="334" height="30"/>
+                                <color key="tintColor" name="GithubMainColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="umO-ML-Uzm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="8WV-A7-IY3">
+                                <rect key="frame" x="12" y="204" width="390" height="390"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8WV-A7-IY3" secondAttribute="height" multiplier="1:1" id="vev-0O-8AQ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rfI-oL-GnQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="rfI-oL-GnQ" firstAttribute="bottom" secondItem="dWm-Sc-9M7" secondAttribute="bottom" constant="190" id="7gc-A0-Q66"/>
+                            <constraint firstItem="rfI-oL-GnQ" firstAttribute="bottom" secondItem="dWm-Sc-9M7" secondAttribute="bottom" constant="100" id="7gc-A0-Q66"/>
+                            <constraint firstItem="x4y-fD-2CL" firstAttribute="leading" secondItem="rfI-oL-GnQ" secondAttribute="leading" constant="40" id="Cnj-af-QEh"/>
+                            <constraint firstItem="rfI-oL-GnQ" firstAttribute="trailing" secondItem="x4y-fD-2CL" secondAttribute="trailing" constant="40" id="Ma0-Rj-kOi"/>
+                            <constraint firstItem="8WV-A7-IY3" firstAttribute="top" secondItem="x4y-fD-2CL" secondAttribute="bottom" constant="40" id="QQZ-qo-9d1"/>
+                            <constraint firstItem="8WV-A7-IY3" firstAttribute="centerX" secondItem="8pW-D0-FTV" secondAttribute="centerX" id="QsF-Li-QS9"/>
+                            <constraint firstItem="dWm-Sc-9M7" firstAttribute="top" secondItem="8WV-A7-IY3" secondAttribute="bottom" constant="40" id="j9l-MM-xf1"/>
                             <constraint firstItem="rfI-oL-GnQ" firstAttribute="trailing" secondItem="dWm-Sc-9M7" secondAttribute="trailing" constant="40" id="kta-RA-xCG"/>
                             <constraint firstItem="dWm-Sc-9M7" firstAttribute="leading" secondItem="rfI-oL-GnQ" secondAttribute="leading" constant="40" id="r5v-Cf-0Fn"/>
+                            <constraint firstItem="x4y-fD-2CL" firstAttribute="top" secondItem="rfI-oL-GnQ" secondAttribute="top" constant="90" id="rNU-XW-Rlw"/>
                         </constraints>
                     </view>
                     <connections>
@@ -41,6 +64,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon" width="311" height="311"/>
+        <namedColor name="GithubMainColor">
+            <color red="0.14509803921568629" green="0.16470588235294117" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

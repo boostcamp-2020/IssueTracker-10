@@ -11,6 +11,7 @@ extension IssueViewController {
     func setupUI() {
         setupSearchController()
         setDefaultToolBar()
+		configureRefreshControl()
     }
     
     func setupSearchController() {
@@ -51,5 +52,18 @@ extension IssueViewController {
 		let deselectAllButton = UIBarButtonItem(title: "Deselect All", style: .plain, target: self, action: #selector(deselectAllButtonTouched))
 		deselectAllButton.tintColor = UIColor(named: "GithubMainColor")
 		self.navigationItem.setLeftBarButton(deselectAllButton, animated: false)
+	}
+	
+	func configureRefreshControl () {
+		issueCollectionView.refreshControl = UIRefreshControl()
+		issueCollectionView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+	}
+	
+	@objc func handleRefreshControl() {
+		NotificationCenter.default.post(name: .issueDidChanged, object: self)
+		
+		DispatchQueue.main.async {
+			self.issueCollectionView.refreshControl?.endRefreshing()
+		}
 	}
 }

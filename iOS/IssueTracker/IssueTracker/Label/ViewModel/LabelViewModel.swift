@@ -24,11 +24,11 @@ class LabelViewModel {
 	}
 	
 	private func setNotification() {
-		NotificationCenter.default.addObserver(self, selector: #selector(updateLabelCreated), name: .labelDidCreated, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(createLabel), name: .labelDidCreated, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(updateLabel), name: .labelDidChanged, object: nil)
 	}
 	
-	@objc private func updateLabelCreated(_ notification: Notification) {
+	@objc private func createLabel(_ notification: Notification) {
 		requestGetLabelList()
 	}
 	

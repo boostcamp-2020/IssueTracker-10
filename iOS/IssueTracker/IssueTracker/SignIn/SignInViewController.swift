@@ -24,10 +24,10 @@ class SignInViewController: UIViewController {
 	func setupProviderLoginView() {
 		let authorizationButton = ASAuthorizationAppleIDButton()
         let githubLoginButton = UIButton()
-        githubLoginButton.setTitle("Sign in with Gihhub", for: .normal)
+        githubLoginButton.setTitle("Sign in with GitHub", for: .normal)
         githubLoginButton.setTitleColor(.white, for: .normal)
         githubLoginButton.backgroundColor = .black
-        githubLoginButton.layer.cornerRadius = 10
+        githubLoginButton.layer.cornerRadius = 5
 		self.loginProviderStackView.addArrangedSubview(authorizationButton)
         self.loginProviderStackView.addArrangedSubview(githubLoginButton)
         authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
