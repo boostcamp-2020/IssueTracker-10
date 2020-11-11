@@ -20,7 +20,7 @@ const NewIssueWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const NewIssue = () => {
+const NewIssue = ({ history }) => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   const issueDispatch = useContext(IssueDispatchContext);
@@ -54,7 +54,7 @@ const NewIssue = () => {
     <Wrapper>
       <NewIssueWrapper>
         <IssueInfoProvider>
-          <NewIssueInput />
+          <NewIssueInput history={history} />
           <IssueSideBar />
         </IssueInfoProvider>
       </NewIssueWrapper>
