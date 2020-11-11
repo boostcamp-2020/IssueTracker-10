@@ -41,7 +41,7 @@ class MileStonePopUpViewController: UIViewController {
 			var newMileStone = mileStone
 			newMileStone.title = title
 			newMileStone.description = descriptionTextField.text
-			newMileStone.date = date
+			newMileStone.date = date.isEmpty ? nil : date
 			NotificationCenter.default.post(name: .mileStoneDidChanged, object: self, userInfo: ["mileStone":newMileStone])
 		}
 		else {
