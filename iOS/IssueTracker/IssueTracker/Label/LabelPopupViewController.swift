@@ -1,5 +1,5 @@
 //
-//  PopupViewController.swift
+//  LabelPopupViewController.swift
 //  IssueTracker
 //
 //  Created by 강민석 on 2020/11/09.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PopupViewController: UIViewController {
+class LabelPopupViewController: UIViewController {
 	
 	let labelManager = LabelManager()
 	var label: Label?
@@ -22,6 +22,7 @@ class PopupViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.view.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
+		popUpView.layer.cornerRadius = 5
 		colorView.layer.cornerRadius = 5
 		colorView.backgroundColor = label?.color.hexStringToUIColor()
 		titleTextField.text = label?.title
