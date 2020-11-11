@@ -25,4 +25,9 @@ class IssueDetailCell: UICollectionViewCell {
         content.text = comment.content
         header.configure(comment: comment)
     }
+    
+    override func prepareForReuse() {
+        content.text = ""
+        header.prepareforResue()
+    }
 }
