@@ -11,6 +11,8 @@ class CommentCreateViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     var issueID: Int!
+    let viewModel = CommentCreateViewModel(reactor: CommentCreateReactor(),
+                                           state: CommentCreateState())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,13 +31,13 @@ class CommentCreateViewController: UIViewController {
     @IBAction func closeButtonTouched(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func doneButtonTouched(_ sender: Any) {
-//        manager.create(title: title, content: textView.text)
+        viewModel.requestCreateComment(id: issueID, content: textView.text)
         self.dismiss(animated: true, completion: nil)
     }
 }
 extension CommentCreateViewController: UITextViewDelegate {
-    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
