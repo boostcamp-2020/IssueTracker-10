@@ -18,11 +18,11 @@ const Wrapper = styled.div`
 `;
 
 const RowContainer = styled.div`
-  margin-top: 20px;
-  width: 1100px;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
+  width: 1100px;
+  margin-top: 20px;
 `;
 
 const ColumnContainer = styled.div`
