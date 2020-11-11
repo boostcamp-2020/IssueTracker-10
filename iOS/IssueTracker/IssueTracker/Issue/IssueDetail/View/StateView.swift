@@ -53,7 +53,7 @@ class StateView: UIView {
         iconLeadingConstraint.constant = 10
         icon.image = UIImage(systemName: "info.circle")
         state.text = "Open"
-        self.backgroundColor = UIColor(named: "OpenColor")
+        self.backgroundColor = .systemBlue
     }
     
     func closeView() {

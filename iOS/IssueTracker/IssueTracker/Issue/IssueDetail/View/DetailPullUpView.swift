@@ -49,7 +49,7 @@ class DetailPullUpView: UIView {
         handleBar.backgroundColor = .systemGray3
         handleBar.layer.cornerRadius = 3
 
-        comment.backgroundColor = UIColor(red: 33/255, green: 74/255, blue: 122/255, alpha: 1)
+        comment.backgroundColor = UIColor(named: "YearColor")
         comment.setTitle("Comment", for: .normal)
         comment.tintColor = .white
         comment.setTitleColor(.systemGray3, for: .highlighted)
