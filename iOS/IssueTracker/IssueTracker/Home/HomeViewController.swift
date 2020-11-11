@@ -29,11 +29,15 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if indexPath.row == 0 {
+		switch indexPath.row {
+		case 0:
 			presentViewController(identifier: "IssueViewController", type: IssueViewController())
-		}
-		else {
+		case 1:
 			presentViewController(identifier: "LabelViewController", type: LabelViewController())
+		case 2:
+			presentViewController(identifier: "MileStoneViewController", type: MileStoneViewController())
+		default:
+			break
 		}
 	}
 }
