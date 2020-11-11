@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Input from '../Common/Input';
 import GreenButton from '../Common/GreenButton';
+import InputComment from './InputComment';
 import { request } from '../../Api';
 import { AuthStateContext } from '../../Context/AuthContext';
 import { IssueInfoContext } from '../../Context/IssueInfoContext';
@@ -33,16 +34,6 @@ const InputTitle = styled(Input)`
   font-size: 18px;
 `;
 
-const InputContent = styled.textarea`
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px 15px;
-  border: ${(props) => props.theme.border};
-  border-radius: ${(props) => props.theme.radiusSmall};
-  font-size: 14px;
-`;
-
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -62,7 +53,6 @@ const NewIssue = () => {
   const issueInfoState = useContext(IssueInfoContext);
   const { token, user } = authState;
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
   const [disabled, setDisabled] = useState(true);
 
   const onChangeTitle = (event) => {
@@ -71,13 +61,8 @@ const NewIssue = () => {
     return text.length === 0 ? setDisabled(true) : setDisabled(false);
   };
 
-  const onChangeContent = (event) => {
-    const text = event.target.value;
-    setContent(text);
-  };
-
   const submitNewIssue = async () => {
-    const { assignees, labels, milestone } = issueInfoState;
+    const { content, assignees, labels, milestone } = issueInfoState;
     const data = {
       title,
       content,
@@ -103,7 +88,7 @@ const NewIssue = () => {
       <UserAvater src={user.avatar} alt={`${user.username} profile`} />
       <InputWrapper>
         <InputTitle type="text" placeholder="Title" required onChange={onChangeTitle} />
-        <InputContent placeholder="Leave a comment" rows="10" onChange={onChangeContent} />
+        <InputComment />
         <ButtonWrapper>
           <LinkToMain href="/">Cancel</LinkToMain>
           <GreenButton
