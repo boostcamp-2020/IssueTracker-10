@@ -554,7 +554,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gx2-Al-A3h">
-                                    <size key="itemSize" width="414" height="76"/>
+                                    <size key="itemSize" width="414" height="77"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -566,8 +566,34 @@
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o86-sf-64J">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKd-La-crV">
+                                                    <rect key="frame" x="8" y="8" width="41.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijn-ef-vgC">
+                                                    <rect key="frame" x="8" y="37" width="41.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="systemGray2Color"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fKd-La-crV" secondAttribute="trailing" constant="8" id="6Kd-Ax-L6H"/>
+                                                <constraint firstItem="fKd-La-crV" firstAttribute="top" secondItem="o86-sf-64J" secondAttribute="top" constant="8" id="HoY-cR-MJg"/>
+                                                <constraint firstItem="ijn-ef-vgC" firstAttribute="leading" secondItem="o86-sf-64J" secondAttribute="leading" constant="8" id="UWM-tc-avE"/>
+                                                <constraint firstItem="ijn-ef-vgC" firstAttribute="top" secondItem="fKd-La-crV" secondAttribute="bottom" constant="8" id="WhK-Zd-smV"/>
+                                                <constraint firstItem="fKd-La-crV" firstAttribute="leading" secondItem="o86-sf-64J" secondAttribute="leading" constant="8" id="mAi-1E-80T"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ijn-ef-vgC" secondAttribute="trailing" constant="8" id="xhI-yX-bTA"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="414" height="75"/>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="ijn-ef-vgC" id="8hm-O3-UdK"/>
+                                            <outlet property="titleLabel" destination="fKd-La-crV" id="kXm-b2-IaP"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
