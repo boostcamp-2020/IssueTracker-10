@@ -11,7 +11,8 @@ class HomeViewController: UIViewController {
 	
 	let contents: [Content] = [
 		Content(title: "Issue", imageName: "info.circle"),
-		Content(title: "Label", imageName: "tag")
+		Content(title: "Label", imageName: "tag"),
+		Content(title: "MileStone", imageName: "signpost.right")
 	]
 		
     override func viewDidLoad() {
@@ -46,7 +47,8 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
 		content.text = contents[indexPath.row].title
-        content.image = UIImage(systemName: contents[indexPath.row].imageName)
+		content.image = UIImage(systemName: contents[indexPath.row].imageName)
+		content.imageProperties.tintColor = UIColor(named: "YearColor")
         cell.contentConfiguration = content
         return cell
     }
