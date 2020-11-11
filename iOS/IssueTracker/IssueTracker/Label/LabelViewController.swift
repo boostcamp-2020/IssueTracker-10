@@ -20,6 +20,7 @@ class LabelViewController: UIViewController {
 		navigationController?.setToolbarHidden(false, animated: false)
 		labelTableView.delegate = self
 		dataSource = LabelDiffableDataSource(with: labelTableView)
+		configureRefreshControl()
 		binding()
 	}
 	
@@ -42,6 +43,19 @@ class LabelViewController: UIViewController {
 			return viewController
 		}
 		return nil
+	}
+	
+	func configureRefreshControl () {
+		labelTableView.refreshControl = UIRefreshControl()
+		labelTableView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+	}
+	
+	@objc func handleRefreshControl() {
+		NotificationCenter.default.post(name: .labelDidCreated, object: self)
+		
+		DispatchQueue.main.async {
+			self.labelTableView.refreshControl?.endRefreshing()
+		}
 	}
 }
 
