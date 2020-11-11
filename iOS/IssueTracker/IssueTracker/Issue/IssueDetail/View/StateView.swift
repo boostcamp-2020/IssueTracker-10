@@ -57,6 +57,7 @@ class StateView: UIView {
     }
     
     func closeView() {
+        icon.image = UIImage(systemName: "checkmark.circle")
         self.backgroundColor = UIColor(named: "CloseColor")
     }
 }

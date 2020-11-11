@@ -11,9 +11,7 @@ class ProfileViewController: UIViewController {
 	
 	@IBOutlet weak var avatarImageView: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
-	
-	let imageCache = NSCache<NSURL, UIImage>()
-	
+		
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setRound(imageView: avatarImageView)
@@ -29,23 +27,10 @@ class ProfileViewController: UIViewController {
 		nameLabel.text = user.name
 		avatarImageView.image = UIImage(named: "Icon")
 		guard let url: URL = URL(string: user.avatorURL ?? "") else { return }
-		downloadImage(url: url) { (avatarImage: UIImage) in
+        ImageCache.shared.downloadImage(url: url) { (avatarImage: UIImage) in
 			DispatchQueue.main.async {
 				self.avatarImageView.image = avatarImage
 			}
-		}
-	}
-	
-	func downloadImage(url: URL, callback: @escaping(_ itemImage: UIImage) -> Void) {
-		if let imageFromCache = imageCache.object(forKey: url as NSURL) { callback(imageFromCache); return }
-		var image: UIImage = #imageLiteral(resourceName: "Icon")
-		DispatchQueue.global().async {
-			guard let data = try? Data(contentsOf: url) else { callback(image); return }
-			if let downloadedImage = UIImage(data: data) {
-				image = downloadedImage
-				self.imageCache.setObject(image, forKey: url as NSURL)
-			}
-			callback(image)
 		}
 	}
 }

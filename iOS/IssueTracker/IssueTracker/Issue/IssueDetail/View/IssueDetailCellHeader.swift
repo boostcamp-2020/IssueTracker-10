@@ -12,7 +12,7 @@ class IssueDetailCellHeader: UIView {
     let profileImage = UIImageView(frame: CGRect(x: 20, y: 25, width: 40, height: 40))
     let author = UILabel(frame: CGRect(x: 70, y: 25, width: 120, height: 20))
     let time = UILabel(frame: CGRect(x: 70, y: 45, width: 120, height: 20))
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -39,8 +39,11 @@ class IssueDetailCellHeader: UIView {
         author.text = comment.user.username
         
         time.text = "\(PastTime().agoTime(from: comment.createdAt))"
-        guard let url = URL(string: comment.user.avatar ?? ""),
-              let data = try? Data(contentsOf: url) else { return }
-        profileImage.image = UIImage(data: data)
+        guard let url = URL(string: comment.user.avatar ?? "") else { return }
+        ImageCache.shared.downloadImage(url: url) { (avatarImage: UIImage) in
+            DispatchQueue.main.async {
+                self.profileImage.image = avatarImage
+            }
+        }
     }
 }
