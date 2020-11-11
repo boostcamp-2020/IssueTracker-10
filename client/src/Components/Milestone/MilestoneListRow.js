@@ -109,7 +109,7 @@ const LinkText = styled(Text)`
   }
 `;
 
-const LabelListRow = ({ milestone }) => {
+const MilestoneListRow = ({ milestone }) => {
   const { title, description, dateString, updatedAt, closed, open } = milestone;
   const dateTime = `Last updated about ${convertTime(updatedAt)}`;
   const total = closed + open;
@@ -163,4 +163,4 @@ const LabelListRow = ({ milestone }) => {
   );
 };
 
-export default LabelListRow;
+export default MilestoneListRow;

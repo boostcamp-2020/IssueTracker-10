@@ -38,7 +38,7 @@ const HeaderColumn = styled.div`
   }
 `;
 
-const IssueList = ({ openMilestone, closedMilestone }) => {
+const MilestoneList = ({ openMilestone, closedMilestone }) => {
   const openMilestoneCount = `${openMilestone.length} Open`;
   const closedMilestoneCount = `${closedMilestone.length} Closed`;
   return (
@@ -61,4 +61,4 @@ const IssueList = ({ openMilestone, closedMilestone }) => {
   );
 };
 
-export default IssueList;
+export default MilestoneList;
