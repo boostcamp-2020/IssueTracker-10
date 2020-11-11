@@ -9,13 +9,12 @@ import UIKit
 
 class DetailPullUpView: UIView {
     
-    var height: CGFloat = 120
-    let temp = LabelListView()
-
+    var currentHeight: CGFloat = 120
+    let minHeight: CGFloat = 120
+    let maxHeight: CGFloat = UIScreen.main.bounds.height - 150
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     let comment = UIButton()
-    
-    var collectionViewHeightConstraint: NSLayoutConstraint!
+    var commentDidTouched: (()->Void)!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,14 +53,12 @@ class DetailPullUpView: UIView {
         comment.layer.cornerRadius = 10
         comment.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         addSubview(comment)
-        temp.labels = [Label(id: 1, title: "hello", color: "#3278AB"),
-                       ]
+    
         comment.addTarget(self, action: #selector(touchComment), for: .touchDown)
-
-        addSubview(temp)
-        temp.translatesAutoresizingMaskIntoConstraints = false
+//        addSubview(temp)
+//        temp.translatesAutoresizingMaskIntoConstraints = false
         comment.translatesAutoresizingMaskIntoConstraints = false
-
+//
         NSLayoutConstraint.activate([
             handleBar.centerXAnchor.constraint(equalTo: centerXAnchor),
             handleBar.topAnchor.constraint(equalTo: topAnchor, constant: 10),
@@ -73,28 +70,29 @@ class DetailPullUpView: UIView {
             comment.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             comment.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
 
-            temp.topAnchor.constraint(equalTo: comment.bottomAnchor, constant: 50),
-            temp.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            temp.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            temp.heightAnchor.constraint(equalToConstant: 60)
+//            temp.topAnchor.constraint(equalTo: comment.bottomAnchor, constant: 50),
+//            temp.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+//            temp.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+//            collectionViewHeightConstraint
         ])
     }
     
     @objc func touchComment() {
-        dragAnimation(constant: 120)
+        dragAnimation(constant: minHeight)
+        commentDidTouched()
     }
-    
+
     @objc func updatePanGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: self)
         if sender.state == .ended {
             if translation.y > 0 {
-                dragAnimation(constant: 120)
+                dragAnimation(constant: minHeight)
             } else {
-                dragAnimation(constant: UIScreen.main.bounds.height - 150)
+                dragAnimation(constant: maxHeight)
             }
         }
         if sender.state == .changed {
-            heightConstraint.constant = height - translation.y
+            heightConstraint.constant = currentHeight - translation.y
         }
     }
     
@@ -107,6 +105,6 @@ class DetailPullUpView: UIView {
                        animations: {
                         self.superview?.layoutIfNeeded()
                        },completion: nil)
-        height = constant
+        currentHeight = constant
     }
 }
