@@ -78,6 +78,7 @@ const findMilestoneListByState = async (state = 1) => {
         'date',
         [sequelize.fn('date_format', sequelize.col('date'), '%M %d, %Y'), 'dateString'],
         'state',
+        'updatedAt',
       ],
       order: [['id', 'DESC']],
       where: { state },
