@@ -14,8 +14,10 @@ class IssueDetailReactor {
     enum Action {
         case requestIssueDetail(Int)
         case requestIssueComment(Int)
+        case requestRemoveLabelOfIssue(Int, Int)
     }
     
+    @discardableResult
     func execute(action: Action, currentState: IssueDetailState) -> IssueDetailState {
         switch action {
         case .requestIssueDetail(let id):
@@ -30,6 +32,12 @@ class IssueDetailReactor {
                 var state = currentState
                 state.comments = comments
                 self.sideEffect?(state)
+            }
+            return currentState
+        case .requestRemoveLabelOfIssue(let issueId, let labelId):
+            IssueManager().removeLabelOfIssue(issueId: issueId, labelId: labelId) {
+                let id = currentState.issue.id
+                self.execute(action: .requestIssueDetail(id), currentState: currentState)
             }
             return currentState
         }
