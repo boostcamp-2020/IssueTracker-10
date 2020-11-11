@@ -58,7 +58,6 @@
 		E085B0E7255AF0870016B7B1 /* CommentCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B0E6255AF0870016B7B1 /* CommentCreateViewController.swift */; };
 		E085B0FD255BA5670016B7B1 /* CollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B0FB255BA5670016B7B1 /* CollectionFooterView.swift */; };
 		E085B0FE255BA5670016B7B1 /* CollectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E085B0FC255BA5670016B7B1 /* CollectionFooterView.xib */; };
-		E085B103255BA8AC0016B7B1 /* CommentNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B102255BA8AC0016B7B1 /* CommentNavigationViewController.swift */; };
 		E09C1C91254A917200A1FADF /* hvNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = E09C1C90254A917200A1FADF /* hvNetwork */; };
 		E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1C9B254A939500A1FADF /* IssueDataSource.swift */; };
 		E09C1CA2254A996A00A1FADF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1CA1254A996A00A1FADF /* HomeViewController.swift */; };
@@ -161,7 +160,6 @@
 		E085B0E6255AF0870016B7B1 /* CommentCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCreateViewController.swift; sourceTree = "<group>"; };
 		E085B0FB255BA5670016B7B1 /* CollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFooterView.swift; sourceTree = "<group>"; };
 		E085B0FC255BA5670016B7B1 /* CollectionFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionFooterView.xib; sourceTree = "<group>"; };
-		E085B102255BA8AC0016B7B1 /* CommentNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNavigationViewController.swift; sourceTree = "<group>"; };
 		E09C1C9B254A939500A1FADF /* IssueDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataSource.swift; sourceTree = "<group>"; };
 		E09C1CA1254A996A00A1FADF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E09C1CA9254A99C400A1FADF /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -384,7 +382,6 @@
 			isa = PBXGroup;
 			children = (
 				E085B0E6255AF0870016B7B1 /* CommentCreateViewController.swift */,
-				E085B102255BA8AC0016B7B1 /* CommentNavigationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -690,7 +687,6 @@
 				E049B8D1255316B2004DD162 /* SelectedLabels.swift in Sources */,
 				E049B9082553E6A8004DD162 /* Environment.swift in Sources */,
 				E085B0FD255BA5670016B7B1 /* CollectionFooterView.swift in Sources */,
-				E085B103255BA8AC0016B7B1 /* CommentNavigationViewController.swift in Sources */,
 				C3228A2C255A6BCD00FC8F8E /* SignInHelper.swift in Sources */,
 				E0B3D40F2547F9590040D5AF /* IssueCreateViewController.swift in Sources */,
 				E09C1EEC2551584800A1FADF /* LabelCollectionViewCell.swift in Sources */,
