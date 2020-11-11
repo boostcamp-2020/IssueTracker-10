@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { Search } from '../static/svgIcons';
@@ -32,7 +32,7 @@ const InputBox = styled.div`
   }
 `;
 
-export default withRouter(({ history }) => {
+export default withRouter(({ location: { search }, history }) => {
   const [query, setQuery] = useState('');
   const onSearchSubmit = (event) => {
     event.preventDefault();
@@ -44,6 +44,17 @@ export default withRouter(({ history }) => {
     } = event;
     setQuery(value);
   };
+
+  useEffect(() => {
+    if (search) {
+      const term = search.split('=')[1].toLowerCase().trim();
+      setQuery(term);
+    }
+    return () => {
+      setQuery('');
+    };
+  }, []);
+
   return (
     <Wrapper>
       <FilterWrapper>
