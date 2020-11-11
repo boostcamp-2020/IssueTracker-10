@@ -25,3 +25,23 @@ export const convertTime = (timeString) => {
   const days = Math.round(diff / timeUnit.DAY);
   return `${days} days ago`;
 };
+
+export const convertFilterParams = (filter) => {
+  /*
+  state: 'open',
+  author: null,
+  label: [],
+  milestone: null,
+  assignee: null,
+  */
+
+  if (filter.label && filter.label.length > 0) {
+    return {
+      ...filter,
+      label: filter.label.reduce((prev, id) => {
+        return `${prev}${id};`;
+      }, ''),
+    };
+  }
+  return filter;
+};

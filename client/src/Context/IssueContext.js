@@ -5,7 +5,7 @@ export const initialIssueState = {
     state: 'open',
     author: null,
     label: [],
-    milestones: null,
+    milestone: null,
     assignee: null,
   },
   issues: [],
@@ -79,6 +79,42 @@ export const issueReducer = (state, action) => {
         },
       };
     }
+    case 'SET_ADD_LABEL': {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          label: [...state.filter.label, action.id],
+        },
+      };
+    }
+    case 'REMOVE_LABEL': {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          label: state.filter.label.filter((id) => id !== action.id),
+        },
+      };
+    }
+    case 'SET_MILESTONE': {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          milestone: action.id,
+        },
+      };
+    }
+    case 'REMOVE_MILESTONE': {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          milestone: null,
+        },
+      };
+    }
     case 'SET_ASSIGNEE': {
       return {
         ...state,
@@ -104,7 +140,7 @@ export const issueReducer = (state, action) => {
           state: 'open',
           author: null,
           label: [],
-          milestones: null,
+          milestone: null,
           assignee: null,
         },
         checkedIds: [],

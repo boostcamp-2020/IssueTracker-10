@@ -74,8 +74,21 @@ export const renderUsers = ({ users, type }) => {
 };
 
 export const renderLabels = (labels) => {
+  const { filter } = useContext(IssueStateContext);
+  const issueDispatch = useContext(IssueDispatchContext);
+
+  const onClickLabel = (labelId) => {
+    if (filter.label.includes(labelId)) {
+      issueDispatch({ type: 'REMOVE_LABEL', id: labelId });
+    } else issueDispatch({ type: 'SET_ADD_LABEL', id: labelId });
+  };
+
   return labels.map((label) => (
-    <ModalRow key={label.id}>
+    <ModalRow
+      key={label.id}
+      onClick={() => onClickLabel(label.id)}
+      selected={filter.label.includes(label.id)}
+    >
       <Label labelColor={label.color} />
       <LabelTextWrapper>{label.title}</LabelTextWrapper>
     </ModalRow>
@@ -83,7 +96,24 @@ export const renderLabels = (labels) => {
 };
 
 export const renderMilestones = (milestones) => {
-  return milestones.map((milestone) => <ModalRow key={milestone.id}>{milestone.title}</ModalRow>);
+  const { filter } = useContext(IssueStateContext);
+  const issueDispatch = useContext(IssueDispatchContext);
+
+  const onClickMilestone = (milestoneId) => {
+    if (filter.milestone === milestoneId) {
+      issueDispatch({ type: 'REMOVE_MILESTONE' });
+    } else issueDispatch({ type: 'SET_MILESTONE', id: milestoneId });
+  };
+
+  return milestones.map((milestone) => (
+    <ModalRow
+      key={milestone.id}
+      onClick={() => onClickMilestone(milestone.id)}
+      selected={filter.milestone === milestone.id}
+    >
+      {milestone.title}
+    </ModalRow>
+  ));
 };
 
 export const renderMark = () => {

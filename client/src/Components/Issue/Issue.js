@@ -13,6 +13,7 @@ import {
   IssueStateContext,
   initialIssueState,
 } from '../../Context/IssueContext';
+import { convertFilterParams } from '../../utils/convert';
 
 const Wrapper = styled.div`
   display: flex;
@@ -74,7 +75,7 @@ const Issue = ({ token }) => {
       url: '/api/issue',
       method: 'GET',
       token: authState.token,
-      params: issueState.filter,
+      params: convertFilterParams(issueState.filter),
     };
     const { data } = await request(config);
     if (data) issueDispatch({ type: 'FETCH_ISSUES', payload: data });
@@ -82,7 +83,9 @@ const Issue = ({ token }) => {
 
   const isNonFilter = (currentFilter) => {
     const { filter } = initialIssueState;
-    return Object.keys(filter).every((key) => filter[key] === currentFilter[key]);
+    return Object.keys(filter).every(
+      (key) => JSON.stringify(filter[key]) === JSON.stringify(currentFilter[key]),
+    );
   };
 
   useEffect(() => {

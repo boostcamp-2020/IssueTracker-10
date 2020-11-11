@@ -140,7 +140,8 @@ const findIssueAll = async (query) => {
   try {
     const { label, assignee } = query;
     const filter = setFilter(query);
-    const labelFilter = label ? { where: { id: label } } : {};
+    const labelArray = label ? label.split(';') : [];
+    const labelFilter = label ? { where: { id: { [Op.in]: labelArray } } } : {};
     const assigneeFilter = assignee ? { where: { id: assignee } } : {};
 
     const issues = await issue.findAll({
