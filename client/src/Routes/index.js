@@ -6,6 +6,7 @@ import IssueDetail from '../Components/Issue/IssueDetail';
 import Label from '../Components/Label/Label';
 import NewIssue from '../Components/Issue/NewIssue';
 import Header from '../Components/Common/Header';
+import Search from '../Components/Label/Search';
 
 export default () => (
   <>
@@ -17,5 +18,6 @@ export default () => (
       <Route path="/issue/:id" component={IssueDetail} />
     </Switch>
     <Route exact path="/labels" component={Label} />
+    <Route exact path="/search" component={Search} />
   </>
 );
