@@ -9,7 +9,7 @@ export const labelReducer = (state, action) => {
     case 'GET': {
       const { labels } = action;
       return {
-        labels: [...labels, ...state.labels],
+        labels: [...labels],
       };
     }
     case 'CREATE': {
