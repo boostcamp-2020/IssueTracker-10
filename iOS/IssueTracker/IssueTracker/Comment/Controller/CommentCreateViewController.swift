@@ -33,6 +33,9 @@ class CommentCreateViewController: UIViewController {
     }
     
     @IBAction func doneButtonTouched(_ sender: Any) {
+        if textView.text == "comment" || textView.text == "" {
+            return
+        }
         viewModel.requestCreateComment(id: issueID, content: textView.text)
         self.dismiss(animated: true, completion: nil)
     }
