@@ -140,7 +140,7 @@ export const issueReducer = (state, action) => {
           state: 'open',
           author: null,
           label: [],
-          milestones: null,
+          milestone: null,
           assignee: null,
         },
         checkedIds: [],
