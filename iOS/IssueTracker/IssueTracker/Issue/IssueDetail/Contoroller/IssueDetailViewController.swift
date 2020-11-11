@@ -11,6 +11,7 @@ class IssueDetailViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
+    @IBOutlet weak var pullUPView: DetailPullUpView!
     var issue: Issue!
     var viewModel: IssueDetailViewModel!
     
@@ -20,6 +21,12 @@ class IssueDetailViewController: UIViewController {
                                          state: IssueDetailState(issue: issue))
         configureCollectionView()
         binding()
+        pullUPView.commentDidTouched = {
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = mainStoryboard.instantiateViewController(withIdentifier: "CommentCreateViewController") as? CommentNavigationViewController {
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
     }
     
     func binding() {
