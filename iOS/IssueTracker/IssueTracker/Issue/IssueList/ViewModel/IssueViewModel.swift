@@ -59,7 +59,6 @@ class IssueListViewModel {
 	}
     
     private func setNotification() {
-        
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedLabel), name: .labelDidToggled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedFilter), name: .filterDidchanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateIssueCreated), name: .issueDidChanged, object: nil)
