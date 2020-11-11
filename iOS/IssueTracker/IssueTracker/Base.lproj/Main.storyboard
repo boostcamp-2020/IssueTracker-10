@@ -549,15 +549,47 @@
                     <view key="view" contentMode="scaleToFill" id="22j-Un-1RG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wYo-FD-r7I">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gx2-Al-A3h">
+                                    <size key="itemSize" width="414" height="76"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mileStoneCell" id="Xbr-Q3-dNJ" customClass="MileStoneCollectionViewCell" customModule="IssueTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o86-sf-64J">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="414" height="75"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="hau-2d-q8b"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wYo-FD-r7I" firstAttribute="leading" secondItem="hau-2d-q8b" secondAttribute="leading" id="2Yw-Cj-zm9"/>
+                            <constraint firstItem="hau-2d-q8b" firstAttribute="bottom" secondItem="wYo-FD-r7I" secondAttribute="bottom" id="C1R-rL-QVZ"/>
+                            <constraint firstItem="hau-2d-q8b" firstAttribute="trailing" secondItem="wYo-FD-r7I" secondAttribute="trailing" id="Ni7-zI-IdA"/>
+                            <constraint firstItem="wYo-FD-r7I" firstAttribute="top" secondItem="hau-2d-q8b" secondAttribute="top" id="xCe-qo-EJQ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MileStone" id="fYX-x7-I1s"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mileStoneCollectionView" destination="wYo-FD-r7I" id="xjp-BW-dJw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSj-Bf-UyB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2235" y="2279"/>
+            <point key="canvasLocation" x="2234.7826086956525" y="2278.7946428571427"/>
         </scene>
         <!--Popup View Controller-->
         <scene sceneID="am7-SD-L6z">

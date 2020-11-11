@@ -28,6 +28,8 @@
 		C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C359882B254AC346001F311D /* IssueFilterViewController.swift */; };
 		C35BC3A1255BB31000BD35E6 /* MileStoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3A0255BB31000BD35E6 /* MileStoneViewController.swift */; };
 		C35BC3A9255BB53B00BD35E6 /* MileStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3A8255BB53B00BD35E6 /* MileStone.swift */; };
+		C35BC3AE255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3AD255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift */; };
+		C35BC3B3255BB73D00BD35E6 /* MileStoneDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3B2255BB73D00BD35E6 /* MileStoneDataSource.swift */; };
 		C35F6B192550281D008A116B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35F6B182550281D008A116B /* User.swift */; };
 		C3DB04E42551089C00F0910E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E32551089C00F0910E /* Storage.swift */; };
 		C3DB04E92551099F00F0910E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E82551099F00F0910E /* AppData.swift */; };
@@ -132,6 +134,8 @@
 		C359882B254AC346001F311D /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
 		C35BC3A0255BB31000BD35E6 /* MileStoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneViewController.swift; sourceTree = "<group>"; };
 		C35BC3A8255BB53B00BD35E6 /* MileStone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStone.swift; sourceTree = "<group>"; };
+		C35BC3AD255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneCollectionViewCell.swift; sourceTree = "<group>"; };
+		C35BC3B2255BB73D00BD35E6 /* MileStoneDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneDataSource.swift; sourceTree = "<group>"; };
 		C35F6B182550281D008A116B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C3DB04E32551089C00F0910E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C3DB04E82551099F00F0910E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
@@ -319,10 +323,20 @@
 		C35BC39C255BB2A500BD35E6 /* MileStone */ = {
 			isa = PBXGroup;
 			children = (
+				C35BC3B7255BB83800BD35E6 /* ViewModel */,
 				C35BC3A0255BB31000BD35E6 /* MileStoneViewController.swift */,
 				C35BC3A8255BB53B00BD35E6 /* MileStone.swift */,
+				C35BC3AD255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift */,
 			);
 			path = MileStone;
+			sourceTree = "<group>";
+		};
+		C35BC3B7255BB83800BD35E6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C35BC3B2255BB73D00BD35E6 /* MileStoneDataSource.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C3DB04DD2550F94000F0910E /* Util */ = {
@@ -737,6 +751,7 @@
 				C3414FA525480104003C845A /* LabelViewController.swift in Sources */,
 				E09C1E6125506C4000A1FADF /* IssueDetailCellHeader.swift in Sources */,
 				E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */,
+				C35BC3B3255BB73D00BD35E6 /* MileStoneDataSource.swift in Sources */,
 				E037F2B7255A805600DAD98B /* DetailPullUpView.swift in Sources */,
 				E049B8C62552A0A8004DD162 /* NotificationName.swift in Sources */,
 				C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */,
@@ -765,6 +780,7 @@
 				C300181B25593AF100FC7470 /* LabelDataSource.swift in Sources */,
 				C35BC3A1255BB31000BD35E6 /* MileStoneViewController.swift in Sources */,
 				E085B0E7255AF0870016B7B1 /* CommentCreateViewController.swift in Sources */,
+				C35BC3AE255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift in Sources */,
 				E049B8BE2552A077004DD162 /* String+estimateSize.swift in Sources */,
 				E037F28525599D7A00DAD98B /* StateView.swift in Sources */,
 				E09C1EC425514E7100A1FADF /* IssueViewController+SearchUpdate.swift in Sources */,

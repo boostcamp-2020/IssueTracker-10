@@ -9,10 +9,15 @@ import UIKit
 
 class MileStoneViewController: UIViewController {
 	
+	@IBOutlet weak var mileStoneCollectionView: UICollectionView!
+	
+	var dataSource: MileStoneDiffableDataSource!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationController?.navigationBar.prefersLargeTitles = true
-		navigationController?.setToolbarHidden(false, animated: false)		
+		navigationController?.setToolbarHidden(false, animated: false)
+		dataSource = MileStoneDiffableDataSource(with: mileStoneCollectionView)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
