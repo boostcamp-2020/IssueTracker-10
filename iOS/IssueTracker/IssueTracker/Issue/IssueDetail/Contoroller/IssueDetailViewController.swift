@@ -23,7 +23,8 @@ class IssueDetailViewController: UIViewController {
         binding()
         pullUPView.commentDidTouched = {
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = mainStoryboard.instantiateViewController(withIdentifier: "CommentCreateViewController") as? CommentNavigationViewController {
+            if let vc = mainStoryboard.instantiateViewController(withIdentifier: "CommentCreateViewController") as? CommentCreateViewController {
+                vc.issueID = self.issue.id
                 self.present(vc, animated: true, completion: nil)
             }
         }
