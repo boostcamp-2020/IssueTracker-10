@@ -65,6 +65,8 @@
 		E085B13E255BBCEC0016B7B1 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B13D255BBCEC0016B7B1 /* CommentManager.swift */; };
 		E085B143255BDE7B0016B7B1 /* LabelEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B142255BDE7B0016B7B1 /* LabelEditView.swift */; };
 		E085B148255BE5FF0016B7B1 /* UIVIew+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B147255BE5FF0016B7B1 /* UIVIew+Anchor.swift */; };
+		E085B161255C42B90016B7B1 /* UIView+shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B160255C42B90016B7B1 /* UIView+shake.swift */; };
+		E085B166255C48CF0016B7B1 /* LabelEditCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B165255C48CF0016B7B1 /* LabelEditCollectionViewCell.swift */; };
 		E09C1C91254A917200A1FADF /* hvNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = E09C1C90254A917200A1FADF /* hvNetwork */; };
 		E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1C9B254A939500A1FADF /* IssueDataSource.swift */; };
 		E09C1CA2254A996A00A1FADF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1CA1254A996A00A1FADF /* HomeViewController.swift */; };
@@ -174,6 +176,8 @@
 		E085B13D255BBCEC0016B7B1 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 		E085B142255BDE7B0016B7B1 /* LabelEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelEditView.swift; sourceTree = "<group>"; };
 		E085B147255BE5FF0016B7B1 /* UIVIew+Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Anchor.swift"; sourceTree = "<group>"; };
+		E085B160255C42B90016B7B1 /* UIView+shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shake.swift"; sourceTree = "<group>"; };
+		E085B165255C48CF0016B7B1 /* LabelEditCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelEditCollectionViewCell.swift; sourceTree = "<group>"; };
 		E09C1C9B254A939500A1FADF /* IssueDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataSource.swift; sourceTree = "<group>"; };
 		E09C1CA1254A996A00A1FADF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E09C1CA9254A99C400A1FADF /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -373,6 +377,7 @@
 				E049B8C52552A0A8004DD162 /* NotificationName.swift */,
 				E049B9232554DE40004DD162 /* Date+globalLocal.swift */,
 				E085B147255BE5FF0016B7B1 /* UIVIew+Anchor.swift */,
+				E085B160255C42B90016B7B1 /* UIView+shake.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -459,6 +464,7 @@
 				E037F28425599D7A00DAD98B /* StateView.swift */,
 				E037F2B6255A805600DAD98B /* DetailPullUpView.swift */,
 				E085B142255BDE7B0016B7B1 /* LabelEditView.swift */,
+				E085B165255C48CF0016B7B1 /* LabelEditCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -754,7 +760,9 @@
 				C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */,
 				E085B129255BB9500016B7B1 /* ImageCache.swift in Sources */,
 				C30018472559660700FC7470 /* LabelManager.swift in Sources */,
+				E085B161255C42B90016B7B1 /* UIView+shake.swift in Sources */,
 				E0B3D3C52546C8660040D5AF /* AppDelegate.swift in Sources */,
+				E085B166255C48CF0016B7B1 /* LabelEditCollectionViewCell.swift in Sources */,
 				E0B3D3C72546C8660040D5AF /* SceneDelegate.swift in Sources */,
 				C3DB051D25527EDD00F0910E /* Filter.swift in Sources */,
 				E037F2A3255A53BE00DAD98B /* IssueComment.swift in Sources */,
