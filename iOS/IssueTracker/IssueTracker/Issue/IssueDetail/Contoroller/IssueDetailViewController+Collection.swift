@@ -19,7 +19,6 @@ extension IssueDetailViewController {
 }
 
 extension IssueDetailViewController: UICollectionViewDataSource {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -52,7 +51,6 @@ extension IssueDetailViewController: UICollectionViewDataSource {
 }
 
 extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 100)
     }

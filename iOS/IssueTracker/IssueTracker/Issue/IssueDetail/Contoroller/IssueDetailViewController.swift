@@ -10,8 +10,8 @@ import UIKit
 class IssueDetailViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-
     @IBOutlet weak var pullUPView: DetailPullUpView!
+    
     var issue: Issue!
     var viewModel: IssueDetailViewModel!
     

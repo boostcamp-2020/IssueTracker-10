@@ -11,6 +11,7 @@ class IssueDetailCell: UICollectionViewCell {
 
     @IBOutlet weak var header: IssueDetailCellHeader!
     @IBOutlet weak var content: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         header.translatesAutoresizingMaskIntoConstraints = false
