@@ -20,6 +20,7 @@ class MileStoneViewModel {
 			self.state = state
 			self.updateClosure?(state)
 		}
+		setNotification()
 	}
 	
 	private func setNotification() {

@@ -9,6 +9,8 @@ import UIKit
 
 class MileStonePopUpViewController: UIViewController {
 	
+	let mileStoneManager = MileStoneManager()
+	
 	@IBOutlet weak var popUpView: UIView!
 	@IBOutlet weak var titleTextField: UITextField!
 	@IBOutlet weak var dateTextField: UITextField!
@@ -23,7 +25,34 @@ class MileStonePopUpViewController: UIViewController {
 	@IBAction func closeButtonTouched(_ sender: Any) {
 		self.dismiss(animated: false, completion: nil)
 	}
+	
 	@IBAction func saveButtonTouched(_ sender: Any) {
+		guard let title = titleTextField.text, title.isEmpty == false else { return }
+		guard let date = dateTextField.text, validateDate(with: date) == true else {
+			showAlert()
+			return
+		}
+		
+		mileStoneManager.create(title: title, description: descriptionTextField.text, date: date.isEmpty ? nil : date)
 		self.dismiss(animated: false, completion: nil)
+	}
+	
+	func validateDate(with dateString: String) -> Bool {
+		guard dateString.isEmpty == false else { return true }
+		let dateFormatter = DateFormatter()
+		let format = "yyyy-MM-dd"
+		dateFormatter.dateFormat = format
+		if dateFormatter.date(from: dateString) == nil {
+			return false
+		}
+		return true
+	}
+	
+	func showAlert() {
+		var alert = UIAlertController()
+		alert = UIAlertController(title: "날짜형식오류", message: "yyyy-mm-dd에 맞게 작성해주십시오(생략가능)", preferredStyle: UIAlertController.Style.alert)
+		let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive , handler: nil)
+		alert.addAction(defaultAction)
+		present(alert, animated: false, completion: nil)
 	}
 }

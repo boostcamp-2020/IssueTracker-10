@@ -570,13 +570,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKd-La-crV">
                                                     <rect key="frame" x="8" y="8" width="41.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                                    <color key="textColor" name="YearColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijn-ef-vgC">
                                                     <rect key="frame" x="8" y="37" width="41.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" systemColor="systemGray2Color"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-6i-f8K">
@@ -597,16 +597,19 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoW-pJ-HAp">
-                                                    <rect key="frame" x="314" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoW-pJ-HAp">
+                                                    <rect key="frame" x="194" y="8" width="140" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="140" id="G2b-0v-T0K"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" systemColor="systemGray2Color"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="NoW-pJ-HAp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fKd-La-crV" secondAttribute="trailing" constant="8" id="0cm-Bl-Vl3"/>
-                                                <constraint firstItem="HUr-6i-f8K" firstAttribute="leading" secondItem="NoW-pJ-HAp" secondAttribute="trailing" constant="8" id="2We-DB-cbG"/>
+                                                <constraint firstItem="HUr-6i-f8K" firstAttribute="leading" secondItem="NoW-pJ-HAp" secondAttribute="trailing" constant="30" id="2We-DB-cbG"/>
                                                 <constraint firstItem="omf-Wd-22B" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ijn-ef-vgC" secondAttribute="trailing" constant="8" id="3vd-Mc-Sws"/>
                                                 <constraint firstItem="NoW-pJ-HAp" firstAttribute="top" secondItem="fKd-La-crV" secondAttribute="top" id="ErM-EG-iQT"/>
                                                 <constraint firstItem="fKd-La-crV" firstAttribute="top" secondItem="o86-sf-64J" secondAttribute="top" constant="8" id="HoY-cR-MJg"/>
@@ -684,7 +687,7 @@
                                             <action selector="closeButtonTouched:" destination="4lE-XG-Prz" eventType="touchUpInside" id="9a1-eV-TPF"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="yyyy-mm-dd" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aNS-pC-Xs2">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="yyyy-mm-dd (생략가능)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aNS-pC-Xs2">
                                         <rect key="frame" x="80" y="121" width="280" height="18.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1062,6 +1065,9 @@
         </namedColor>
         <namedColor name="OpenColor">
             <color red="0.32549019607843138" green="0.64313725490196083" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="YearColor">
+            <color red="0.12941176470588237" green="0.29019607843137257" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
