@@ -13,6 +13,7 @@ import {
   IssueStateContext,
   initialIssueState,
 } from '../../Context/IssueContext';
+import { convertFilterParams } from '../../utils/convert';
 
 const Wrapper = styled.div`
   display: flex;
@@ -74,7 +75,7 @@ const Issue = ({ token }) => {
       url: '/api/issue',
       method: 'GET',
       token: authState.token,
-      params: issueState.filter,
+      params: convertFilterParams(issueState.filter),
     };
     const { data } = await request(config);
     if (data) issueDispatch({ type: 'FETCH_ISSUES', payload: data });
