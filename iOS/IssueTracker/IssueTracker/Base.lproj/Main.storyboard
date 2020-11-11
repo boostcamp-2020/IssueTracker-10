@@ -730,7 +730,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="RkP-wl-Pds">
                                         <rect key="frame" x="80" y="174" width="280" height="18.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2aA-BD-Ypj" userLabel="제목horizon">
                                         <rect key="frame" x="30" y="98" width="330" height="1"/>
@@ -809,6 +809,7 @@
                         <outlet property="descriptionTextField" destination="RkP-wl-Pds" id="Uic-Ng-mEw"/>
                         <outlet property="popUpView" destination="B6u-2p-r0H" id="ezK-cy-rZl"/>
                         <outlet property="popUpViewCenterYConstraint" destination="H2p-Ab-N9P" id="g98-xt-spH"/>
+                        <outlet property="saveButton" destination="YC6-eh-zBS" id="Bdv-A7-DIO"/>
                         <outlet property="titleTextField" destination="pKA-ut-25h" id="6oJ-Y6-cUz"/>
                     </connections>
                 </viewController>
@@ -877,7 +878,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y3z-sS-Szv">
                                         <rect key="frame" x="72" y="172" width="154" height="18.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fh-1N-Ew6" userLabel="horizon">
                                         <rect key="frame" x="30" y="145.5" width="330" height="1"/>
@@ -994,6 +995,7 @@
                         <outlet property="descriptionTextField" destination="Olo-ty-nx0" id="o0p-U8-tU4"/>
                         <outlet property="popUpView" destination="Xn9-gs-Img" id="Ib0-Vz-hZd"/>
                         <outlet property="popUpViewCenterYConstraint" destination="I8K-tU-D14" id="qMD-El-sR9"/>
+                        <outlet property="saveButton" destination="T6g-5Y-6Op" id="3CG-e0-776"/>
                         <outlet property="titleTextField" destination="Ree-km-Ooo" id="smd-1A-UUo"/>
                     </connections>
                 </viewController>

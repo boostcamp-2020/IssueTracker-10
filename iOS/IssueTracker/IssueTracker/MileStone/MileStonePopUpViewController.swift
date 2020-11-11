@@ -13,11 +13,13 @@ class MileStonePopUpViewController: UIViewController {
 	let mileStoneManager = MileStoneManager()
 	var mileStone: Milestone?
 	var isKeyboardShown = false
+	var textFieldOrder: [UITextField] = []
 	
 	@IBOutlet weak var popUpView: UIView!
 	@IBOutlet weak var titleTextField: UITextField!
 	@IBOutlet weak var dateTextField: UITextField!
 	@IBOutlet weak var descriptionTextField: UITextField!
+	@IBOutlet weak var saveButton: UIButton!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -27,14 +29,14 @@ class MileStonePopUpViewController: UIViewController {
 		descriptionTextField.text = mileStone?.description
 		dateTextField.text = mileStone?.date
 		registerForKeyboardNotifications()
+		textFieldOrder = [titleTextField, dateTextField, descriptionTextField]
+		setTextFieldDelegate()
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
 		if isKeyboardShown {
-			self.titleTextField.resignFirstResponder()
-			self.descriptionTextField.resignFirstResponder()
-			self.dateTextField.resignFirstResponder()
+			textFieldOrder.forEach { $0.resignFirstResponder() }
 		}
 		else {
 			if touch.view != popUpView {
@@ -47,7 +49,7 @@ class MileStonePopUpViewController: UIViewController {
 		self.dismiss(animated: false, completion: nil)
 	}
 	
-	@IBAction func saveButtonTouched(_ sender: Any) {
+	@IBAction func saveButtonTouched(_ sender: UIButton) {
 		guard let title = titleTextField.text, title.isEmpty == false else { return }
 		guard let date = dateTextField.text, validateDate(with: date) == true else {
 			showAlert()
@@ -118,5 +120,23 @@ class MileStonePopUpViewController: UIViewController {
 		}, completion: {_ in
 			self.isKeyboardShown = false
 		})
+	}
+}
+
+extension MileStonePopUpViewController: UITextFieldDelegate {
+	func setTextFieldDelegate() {
+		textFieldOrder.forEach { $0.delegate = self }
+	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		if textField == textFieldOrder.last {
+			saveButtonTouched(saveButton)
+		}
+		else {
+			guard let now = textFieldOrder.firstIndex(where: {$0 == textField}) else { return false }
+			let next = textFieldOrder[now + 1]
+			next.becomeFirstResponder()
+		}
+		return true
 	}
 }
