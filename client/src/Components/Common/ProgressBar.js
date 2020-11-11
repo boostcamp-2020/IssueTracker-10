@@ -14,6 +14,9 @@ const Container = styled.div`
     height: 15px;
     border-top-left-radius: ${(props) => props.theme.badgeRadius};
     border-bottom-left-radius: ${(props) => props.theme.badgeRadius};
+    border-top-right-radius: ${(props) => (props.percent === '100%' ? props.theme.badgeRadius : 0)};
+    border-bottom-right-radius: ${(props) =>
+      props.percent === '100%' ? props.theme.badgeRadius : 0};
     background-color: ${(props) => props.theme.blueColor};
     content: '';
   }
