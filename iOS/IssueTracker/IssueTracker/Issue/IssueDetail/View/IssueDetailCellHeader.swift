@@ -49,6 +49,6 @@ class IssueDetailCellHeader: UIView {
     func prepareforResue() {
         author.text = ""
         time.text = ""
-        self.profileImage.image = nil
+        self.profileImage.image = UIImage(named: "Icon")
     }
 }
