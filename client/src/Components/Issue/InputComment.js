@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { AuthStateContext } from '../../Context/AuthContext';
 import { IssueInfoDispatchContext } from '../../Context/IssueInfoContext';
@@ -35,6 +35,7 @@ const InputFile = styled.input`
 const InputComment = () => {
   const authState = useContext(AuthStateContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
+  const inputContent = useRef();
 
   const onChangeContent = (event) => {
     const data = event.target.value;
@@ -50,8 +51,10 @@ const InputComment = () => {
     const result = await uploadRequest(config);
     const filePath = result.data;
     const text = `![images](${filePath})\n`;
-    const inputContentElement = document.querySelector('#inputContent');
-    inputContentElement.value += text;
+    const inputContentElement = inputContent.current;
+    const inputContentText = inputContentElement.value + text;
+    issueInfoDispatch({ type: 'SET_CONTENT', data: inputContentText });
+    inputContentElement.value = inputContentText;
     target.value = null;
   };
 
@@ -59,7 +62,7 @@ const InputComment = () => {
     <ContentWrapper>
       <InputContent
         placeholder="Leave a comment"
-        id="inputContent"
+        ref={inputContent}
         rows="10"
         onChange={onChangeContent}
       />
