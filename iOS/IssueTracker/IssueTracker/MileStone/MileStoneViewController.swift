@@ -43,14 +43,14 @@ class MileStoneViewController: UIViewController {
 		let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
 		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-											  heightDimension: .absolute(75))
+											  heightDimension: .absolute(70))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 		let spacing = CGFloat(10)
 		group.interItemSpacing = .fixed(spacing)
 
 		let section = NSCollectionLayoutSection(group: group)
 		section.interGroupSpacing = spacing
-		section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+		section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 10)
 
 		let layout = UICollectionViewCompositionalLayout(section: section)
 		return layout

@@ -598,7 +598,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoW-pJ-HAp">
-                                                    <rect key="frame" x="194" y="8" width="140" height="17"/>
+                                                    <rect key="frame" x="184" y="8" width="140" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="G2b-0v-T0K"/>
                                                     </constraints>
@@ -609,7 +609,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="NoW-pJ-HAp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fKd-La-crV" secondAttribute="trailing" constant="8" id="0cm-Bl-Vl3"/>
-                                                <constraint firstItem="HUr-6i-f8K" firstAttribute="leading" secondItem="NoW-pJ-HAp" secondAttribute="trailing" constant="30" id="2We-DB-cbG"/>
+                                                <constraint firstItem="HUr-6i-f8K" firstAttribute="leading" secondItem="NoW-pJ-HAp" secondAttribute="trailing" constant="40" id="2We-DB-cbG"/>
                                                 <constraint firstItem="omf-Wd-22B" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ijn-ef-vgC" secondAttribute="trailing" constant="8" id="3vd-Mc-Sws"/>
                                                 <constraint firstItem="NoW-pJ-HAp" firstAttribute="top" secondItem="fKd-La-crV" secondAttribute="top" id="ErM-EG-iQT"/>
                                                 <constraint firstItem="fKd-La-crV" firstAttribute="top" secondItem="o86-sf-64J" secondAttribute="top" constant="8" id="HoY-cR-MJg"/>
