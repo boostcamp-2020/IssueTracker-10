@@ -1,6 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { AuthStateContext } from '../../Context/AuthContext';
 import { IssueInfoDispatchContext } from '../../Context/IssueInfoContext';
+import { uploadRequest } from '../../Api';
 
 const ContentWrapper = styled.div`
   margin: 10px 0;
@@ -31,6 +33,7 @@ const InputFile = styled.input`
 `;
 
 const InputComment = () => {
+  const authState = useContext(AuthStateContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
 
   const onChangeContent = (event) => {
@@ -38,13 +41,28 @@ const InputComment = () => {
     issueInfoDispatch({ type: 'SET_CONTENT', data });
   };
 
-  const onChangeFile = (event) => {
-    // TODO: 이미지 파일일 경우에만 사진 업로드 및 comment에 url 추가
+  const onChangeFile = async (event) => {
+    const { target } = event;
+    const data = new FormData();
+    data.append('file', target.files[0]);
+
+    const config = { url: '/api/file', method: 'POST', token: authState.token, data };
+    const result = await uploadRequest(config);
+    const filePath = result.data;
+    const text = `![images](${filePath})\n`;
+    const inputContentElement = document.querySelector('#inputContent');
+    inputContentElement.value += text;
+    target.value = null;
   };
 
   return (
     <ContentWrapper>
-      <InputContent placeholder="Leave a comment" rows="10" onChange={onChangeContent} />
+      <InputContent
+        placeholder="Leave a comment"
+        id="inputContent"
+        rows="10"
+        onChange={onChangeContent}
+      />
       <InputFileLabel htmlFor="inputFile">Attach files by selecting here</InputFileLabel>
       <InputFile
         type="file"
