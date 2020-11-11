@@ -42,7 +42,8 @@ const NewIssue = () => {
       }
     }
 
-    const config = { url: '/api/milestone?state=1', method: 'GET', token: authState.token };
+    const params = { state: 1 };
+    const config = { url: '/api/milestone', method: 'GET', token: authState.token, params };
     const { data } = await request(config);
     if (data) {
       milestonDispatch({ type: 'GET_OPEN_MILESTONE', data });

@@ -45,7 +45,7 @@ const MilestoneTotal = styled.div`
   max-width: 285px;
   height: 10px;
   background-color: ${(props) => props.theme.darkgrayColor};
-  border-radius: 5px;
+  border-radius: ${(props) => props.theme.radiusSmall};
 `;
 
 const MilestoneDone = styled(MilestoneTotal)`
