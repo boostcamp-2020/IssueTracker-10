@@ -525,7 +525,7 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Ptt-HI-RH4"/>
-                        <barButtonItem systemItem="add" id="8xx-NQ-MGf">
+                        <barButtonItem image="square.and.pencil" catalog="system" id="8xx-NQ-MGf">
                             <color key="tintColor" name="GithubMainColor"/>
                             <connections>
                                 <segue destination="Ctn-6a-v1A" kind="presentation" animates="NO" modalPresentationStyle="overCurrentContext" id="Tws-w6-q4y"/>
@@ -645,11 +645,8 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="sj0-pI-W9V"/>
-                        <barButtonItem systemItem="add" id="Vm8-V5-6UZ">
+                        <barButtonItem image="square.and.pencil" catalog="system" id="Vm8-V5-6UZ">
                             <color key="tintColor" name="GithubMainColor"/>
-                            <connections>
-                                <action selector="addButtonTouched:" destination="2ri-0Y-pQT" id="uAd-6s-ZW8"/>
-                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="MileStone" id="fYX-x7-I1s"/>
@@ -905,6 +902,7 @@
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="GithubMainColor">
             <color red="0.14509803921568629" green="0.16470588235294117" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

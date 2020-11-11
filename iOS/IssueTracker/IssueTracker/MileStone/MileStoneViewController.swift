@@ -12,6 +12,7 @@ class MileStoneViewController: UIViewController {
 	@IBOutlet weak var mileStoneCollectionView: UICollectionView!
 	
 	var dataSource: MileStoneDiffableDataSource!
+	let viewModel = MileStoneViewModel(reactor: MileStoneReactor(), state: MileStoneState())
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -19,10 +20,20 @@ class MileStoneViewController: UIViewController {
 		navigationController?.setToolbarHidden(false, animated: false)
 		dataSource = MileStoneDiffableDataSource(with: mileStoneCollectionView)
 		mileStoneCollectionView.collectionViewLayout = createLayout()
+		binding()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		navigationController?.setToolbarHidden(true, animated: false)
+	}
+	
+	func binding() {
+		viewModel.updateClosure = { state in
+			let mileStones = state.mileStones
+			self.dataSource.updateDataSource(mileStones: mileStones)
+		}
+		viewModel.updateClosure?(viewModel.state)
+		viewModel.requestGetMileStoneList()
 	}
 	
 	func createLayout() -> UICollectionViewLayout {

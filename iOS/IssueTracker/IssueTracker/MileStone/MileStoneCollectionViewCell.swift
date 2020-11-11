@@ -20,13 +20,13 @@ class MileStoneCollectionViewCell: UICollectionViewCell {
 		titleLabel.text = mileStone.title
 		descriptionLabel.text = mileStone.description
 		dateLabel.text = mileStone.date
-		openCountLabel.text = "\(mileStone.open ?? 0)"
-		closeCountLabel.text = "\(mileStone.closed ?? 0)"
+		openCountLabel.text = "\(mileStone.open ?? 0) opened"
+		closeCountLabel.text = "\(mileStone.closed ?? 0) closed"
 		progressLabel.text = "\(calculateProgress(open: mileStone.open, close: mileStone.closed))%"
 	}
 	
 	private func calculateProgress(open: Int?, close: Int?) -> Int {
-		guard let open = open, let close = close else { return 0}
+		guard let open = open, let close = close, open + close != 0 else { return 0}
 		let percentage: Double = Double(close / (open + close))
 		return Int(ceil(percentage * 100))
 	}

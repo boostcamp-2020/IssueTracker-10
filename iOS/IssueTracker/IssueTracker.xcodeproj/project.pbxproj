@@ -31,6 +31,9 @@
 		C35BC3AE255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3AD255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift */; };
 		C35BC3B3255BB73D00BD35E6 /* MileStoneDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3B2255BB73D00BD35E6 /* MileStoneDataSource.swift */; };
 		C35BC3BD255BC3CA00BD35E6 /* MileStoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3BC255BC3CA00BD35E6 /* MileStoneManager.swift */; };
+		C35BC3C2255BC45E00BD35E6 /* MileStoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3C1255BC45E00BD35E6 /* MileStoneViewModel.swift */; };
+		C35BC3C7255BC46F00BD35E6 /* MileStoneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3C6255BC46F00BD35E6 /* MileStoneState.swift */; };
+		C35BC3CC255BC47700BD35E6 /* MileStoneReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3CB255BC47700BD35E6 /* MileStoneReactor.swift */; };
 		C35F6B192550281D008A116B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35F6B182550281D008A116B /* User.swift */; };
 		C3DB04E42551089C00F0910E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E32551089C00F0910E /* Storage.swift */; };
 		C3DB04E92551099F00F0910E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E82551099F00F0910E /* AppData.swift */; };
@@ -138,6 +141,9 @@
 		C35BC3AD255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneCollectionViewCell.swift; sourceTree = "<group>"; };
 		C35BC3B2255BB73D00BD35E6 /* MileStoneDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneDataSource.swift; sourceTree = "<group>"; };
 		C35BC3BC255BC3CA00BD35E6 /* MileStoneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneManager.swift; sourceTree = "<group>"; };
+		C35BC3C1255BC45E00BD35E6 /* MileStoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneViewModel.swift; sourceTree = "<group>"; };
+		C35BC3C6255BC46F00BD35E6 /* MileStoneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneState.swift; sourceTree = "<group>"; };
+		C35BC3CB255BC47700BD35E6 /* MileStoneReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneReactor.swift; sourceTree = "<group>"; };
 		C35F6B182550281D008A116B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C3DB04E32551089C00F0910E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C3DB04E82551099F00F0910E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
@@ -337,6 +343,9 @@
 			isa = PBXGroup;
 			children = (
 				C35BC3B2255BB73D00BD35E6 /* MileStoneDataSource.swift */,
+				C35BC3C1255BC45E00BD35E6 /* MileStoneViewModel.swift */,
+				C35BC3C6255BC46F00BD35E6 /* MileStoneState.swift */,
+				C35BC3CB255BC47700BD35E6 /* MileStoneReactor.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -766,6 +775,7 @@
 				E037F2B7255A805600DAD98B /* DetailPullUpView.swift in Sources */,
 				E049B8C62552A0A8004DD162 /* NotificationName.swift in Sources */,
 				C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */,
+				C35BC3C2255BC45E00BD35E6 /* MileStoneViewModel.swift in Sources */,
 				C30018472559660700FC7470 /* LabelManager.swift in Sources */,
 				E0B3D3C52546C8660040D5AF /* AppDelegate.swift in Sources */,
 				E0B3D3C72546C8660040D5AF /* SceneDelegate.swift in Sources */,
@@ -783,6 +793,8 @@
 				E09C1E5225505EAB00A1FADF /* LeftAlignLayout.swift in Sources */,
 				E09C1E672550C59500A1FADF /* CollectionHeaderView.swift in Sources */,
 				C32C5FA3254FE854008BBDCE /* ProfileViewController.swift in Sources */,
+				C35BC3CC255BC47700BD35E6 /* MileStoneReactor.swift in Sources */,
+				C35BC3C7255BC46F00BD35E6 /* MileStoneState.swift in Sources */,
 				E09C1CAA254A99C400A1FADF /* HomeTableViewCell.swift in Sources */,
 				E09C1ECE25514F3B00A1FADF /* IssueViewController+UI.swift in Sources */,
 				C3414FAD2548018D003C845A /* Issue.swift in Sources */,
