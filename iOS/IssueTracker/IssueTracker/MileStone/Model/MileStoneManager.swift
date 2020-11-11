@@ -34,6 +34,21 @@ class MileStoneManager {
 			}
 		}
 	}
+	
+	func update(with mileStone: Milestone, completion: @escaping (() -> Void)) {
+		let id = mileStone.id
+		let headers = ["Authorization": Constant.token]
+		let parameters = ["title": mileStone.title, "description": mileStone.description, "date": mileStone.date] as Parameters
+		
+		hvNet.request("http://49.50.163.58:3000/api/milestone/\(id)", method: .put, parameter: parameters, headers: headers).response { (result: HVDataResponse<Data?>) in
+			switch result {
+			case .success:
+				completion()
+			case.failure(let error):
+				print(error.localizedDescription)
+			}
+		}
+	}
 }
 
 extension MileStoneManager {
