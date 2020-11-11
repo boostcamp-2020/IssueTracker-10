@@ -62,6 +62,7 @@ class IssueListViewModel {
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedLabel), name: .labelDidToggled, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedFilter), name: .filterDidchanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateIssueCreated), name: .issueDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateRefreshIssue), name: .refreshIssue, object: nil)
     }
     
     @objc private func updateIssueCreated(_ notification: Notification) {
@@ -81,6 +82,11 @@ class IssueListViewModel {
               let name = object["title"] as? String,
               let clicked = object["clicked"] as? Bool else { return }
         state = reactor.execute(action: .clickLabel(name, clicked), currentState: state)
+        updateClosure?(state)
+    }
+    
+    @objc private func updateRefreshIssue(_ notification: Notification) {
+        state = reactor.execute(action: .refreshIssue, currentState: state)
         updateClosure?(state)
     }
 }
