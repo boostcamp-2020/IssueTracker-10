@@ -64,7 +64,9 @@ const CommentInput = () => {
         </InputCommentWrapper>
         <ButtonWrapper>
           <StateButton>Close Issue</StateButton>
-          <Button onClick={onClickPostComment}>Comment</Button>
+          <Button disabled={!content} onClick={onClickPostComment}>
+            Comment
+          </Button>
         </ButtonWrapper>
       </ContentWrapper>
     </CommentWrapper>

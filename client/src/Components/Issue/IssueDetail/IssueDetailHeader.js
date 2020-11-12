@@ -69,6 +69,10 @@ export const CreateButton = styled.button`
   padding: 7px 12px;
   background-color: ${({ theme }) => theme.greenColor};
   font-size: 13px;
+  disabled: ${({ disabled }) => disabled};
+  &:disabled {
+    background-color: ${({ theme }) => theme.lightGrayColor};
+  }
 `;
 
 const EditButton = styled(CreateButton)`
