@@ -7,13 +7,13 @@ const Container = styled.span`
   align-items: center;
   width: fit-content;
   height: 25px;
+  padding: 0px 10px;
+  color: ${(props) => props.fontColor};
+  background-color: ${(props) => props.color};
   border: 0;
   border-radius: ${(props) => props.theme.badgeRadius};
-  color: ${(props) => props.fontColor};
-  font-weight: 600;
-  background-color: ${(props) => props.color};
-  padding: 0px 10px;
   font-size: 12px;
+  font-weight: 600;
 `;
 
 const LabelBadge = ({ title, color, fontColor }) => (

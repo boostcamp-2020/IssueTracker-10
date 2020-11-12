@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 const Container = styled.button`
   width: 100%;
+  padding: 9px 0px;
+  color: ${(props) => (props.disabled ? props.theme.redColor : props.fontColor)};
+  background-color: ${({ disabled, theme, color = '#81cc45' }) =>
+    disabled ? theme.lightGreenColor : color};
   border: 0;
   border-radius: ${(props) => props.theme.radius};
-  color: ${(props) => (props.disabled ? props.theme.redColor : props.fontColor)};
-  font-weight: 600;
-  background-color: ${(props) => (props.disabled ? props.theme.lightGreenColor : props.color)};
   text-align: center;
-  padding: 7px 0px;
   font-size: 14px;
   &:hover {
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};

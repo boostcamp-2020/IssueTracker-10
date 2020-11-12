@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import BoldText from './BoldText';
 
 const Header = styled.header`
@@ -20,6 +21,8 @@ const HeaderText = styled(BoldText)`
 
 export default () => (
   <Header>
-    <HeaderText text="IssueTracker" />
+    <Link to="/">
+      <HeaderText text="IssueTracker" />
+    </Link>
   </Header>
 );

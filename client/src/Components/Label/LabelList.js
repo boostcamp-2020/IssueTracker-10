@@ -23,12 +23,18 @@ const LabelHeader = styled.div`
   border-top-right-radius: ${(props) => props.theme.radiusSmall};
 `;
 
-const IssueList = ({ labels }) => {
+const LabelText = styled.span`
+  color: ${(props) => props.theme.whiteColor};
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const IssueList = ({ labels = [] }) => {
   const headerText = `${labels.length} labels`;
   return (
     <LabelListWrapper>
       <LabelHeader>
-        <BoldText text={headerText} />
+        <LabelText>{headerText}</LabelText>
       </LabelHeader>
       {labels && labels.map((label) => <LabelListRow key={label.id} label={label} />)}
     </LabelListWrapper>

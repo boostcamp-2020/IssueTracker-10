@@ -31,7 +31,7 @@ const Count = styled.span`
 const LabelMilestoneButton = ({ hasCount, count }) => {
   return (
     <MilestoneButton>
-      <MilestoneIcon />
+      <MilestoneIcon size={15} />
       <ButtonTitle>Milestones</ButtonTitle>
       {hasCount && <Count>{count}</Count>}
     </MilestoneButton>

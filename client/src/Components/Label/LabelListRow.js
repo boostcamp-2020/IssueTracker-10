@@ -43,7 +43,7 @@ const EditColumn = styled.div`
 `;
 
 const Button = styled.button`
-  color: ${(props) => props.theme.grayColor};
+  color: ${(props) => props.theme.darkgrayColor};
   font-size: 12px;
   margin: 0 10px;
   background: none;
