@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import CommentEditor from './CommentEditor';
-import { IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
+import { IssueInfoContext, IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
 
 export const CommentWrapper = styled.div`
   display: flex;
@@ -70,10 +70,11 @@ const IssueComment = (props) => {
   const { id, user, content, createdAt, isAuthor, isEditer } = props;
   const [edit, setEdit] = useState(false);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
+  const [comment, setComment] = useState(content);
 
   const onClickEditComment = () => {
     setEdit(true);
-    issueInfoDispatch({ type: 'SET_CONTENT', data: content });
+    issueInfoDispatch({ type: 'SET_CONTENT', data: comment });
   };
 
   return (
@@ -90,9 +91,9 @@ const IssueComment = (props) => {
           </EditorWrapper>
         </ContentHeader>
         {edit ? (
-          <CommentEditor commentId={id} setEdit={setEdit} />
+          <CommentEditor commentId={id} setEdit={setEdit} setComment={setComment} />
         ) : (
-          <Content>{content || 'No description provided.'}</Content>
+          <Content>{comment || 'No description provided.'}</Content>
         )}
       </ContentWrapper>
     </CommentWrapper>

@@ -30,7 +30,7 @@ const UpdateButton = styled(CancelButton)`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-const CommentEditer = ({ commentId, setEdit }) => {
+const CommentEditer = ({ commentId, setEdit, setComment }) => {
   const { content } = useContext(IssueInfoContext);
   const { token } = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
@@ -44,9 +44,8 @@ const CommentEditer = ({ commentId, setEdit }) => {
     const { status } = await request(config);
     if (status === 401) return authDispatch({ type: 'LOGOUT' });
     setEdit(false);
+    setComment(content);
   };
-
-  useEffect(() => {}, []);
 
   return (
     <Wrapper>
