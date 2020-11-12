@@ -26,7 +26,7 @@ class LabelEditCollectionViewCell: UICollectionViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(editLabelBegin), name: .EditLabelBegin, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(editLabelEnd), name: .EditLabelEnd, object: nil)
 
-        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.preferredMaxLayoutWidth = 120
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -40,6 +40,13 @@ class LabelEditCollectionViewCell: UICollectionViewCell {
             contentView.layoutMarginsGuide.bottomAnchor.constraint(equalTo: label.bottomAnchor),
             label.widthAnchor.constraint(lessThanOrEqualToConstant: 190)
         ])
+
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        addGestureRecognizer(longPressRecognizer)
+    }
+
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        NotificationCenter.default.post(name: .EditLabelBegin, object: nil)
     }
 
     func configure(item: Label) {
@@ -52,7 +59,7 @@ class LabelEditCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 12
         clipsToBounds = true
     }
-    
+
     @objc func editLabelBegin() {
         self.rotate()
     }
