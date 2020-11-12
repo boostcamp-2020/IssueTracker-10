@@ -63,8 +63,9 @@ class IssueListViewModel {
         NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedFilter), name: .filterDidchanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateIssueCreated), name: .issueDidChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateRefreshIssue), name: .refreshIssue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateRefreshIssue), name: .removeLabelOfIssueDone, object: nil)
     }
-    
+
     @objc private func updateIssueCreated(_ notification: Notification) {
         state = reactor.execute(action: .requestGetIssueList, currentState: state)
         updateClosure?(state)
