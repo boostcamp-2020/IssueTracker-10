@@ -103,6 +103,9 @@
 		E0F211C3255D20F700CA50EC /* LabelAppend+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211C2255D20F700CA50EC /* LabelAppend+CollectionView.swift */; };
 		E0F211D3255D243800CA50EC /* DetailAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211D2255D243800CA50EC /* DetailAnimator.swift */; };
 		E0F211D8255D245B00CA50EC /* IssueDetailViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211D7255D245B00CA50EC /* IssueDetailViewController+.swift */; };
+		E0F211EC255D26B000CA50EC /* LabelAppendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211EB255D26B000CA50EC /* LabelAppendViewModel.swift */; };
+		E0F211F1255D26D200CA50EC /* LabelAppendReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211F0255D26D200CA50EC /* LabelAppendReactor.swift */; };
+		E0F211F6255D26DB00CA50EC /* LabelAppendState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211F5255D26DB00CA50EC /* LabelAppendState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +229,9 @@
 		E0F211C2255D20F700CA50EC /* LabelAppend+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelAppend+CollectionView.swift"; sourceTree = "<group>"; };
 		E0F211D2255D243800CA50EC /* DetailAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAnimator.swift; sourceTree = "<group>"; };
 		E0F211D7255D245B00CA50EC /* IssueDetailViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IssueDetailViewController+.swift"; sourceTree = "<group>"; };
+		E0F211EB255D26B000CA50EC /* LabelAppendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAppendViewModel.swift; sourceTree = "<group>"; };
+		E0F211F0255D26D200CA50EC /* LabelAppendReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAppendReactor.swift; sourceTree = "<group>"; };
+		E0F211F5255D26DB00CA50EC /* LabelAppendState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAppendState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -615,6 +621,9 @@
 		E0F211B8255D203F00CA50EC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E0F211EB255D26B000CA50EC /* LabelAppendViewModel.swift */,
+				E0F211F0255D26D200CA50EC /* LabelAppendReactor.swift */,
+				E0F211F5255D26DB00CA50EC /* LabelAppendState.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -813,6 +822,7 @@
 				E09C1E6125506C4000A1FADF /* IssueDetailCellHeader.swift in Sources */,
 				E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */,
 				E037F2B7255A805600DAD98B /* DetailPullUpView.swift in Sources */,
+				E0F211F1255D26D200CA50EC /* LabelAppendReactor.swift in Sources */,
 				E049B8C62552A0A8004DD162 /* NotificationName.swift in Sources */,
 				C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */,
 				E085B129255BB9500016B7B1 /* ImageCache.swift in Sources */,
@@ -840,6 +850,7 @@
 				C3414FAD2548018D003C845A /* Issue.swift in Sources */,
 				C300183E255965AE00FC7470 /* Label.swift in Sources */,
 				E037F2A2255A53BE00DAD98B /* IssueDetail.swift in Sources */,
+				E0F211EC255D26B000CA50EC /* LabelAppendViewModel.swift in Sources */,
 				C3DB04E92551099F00F0910E /* AppData.swift in Sources */,
 				C300181B25593AF100FC7470 /* LabelDataSource.swift in Sources */,
 				E085B0E7255AF0870016B7B1 /* CommentCreateViewController.swift in Sources */,
@@ -852,6 +863,7 @@
 				E085B134255BBA810016B7B1 /* CommentCreateReactor.swift in Sources */,
 				E049B88C25526349004DD162 /* IssueListViewCell.swift in Sources */,
 				E085B12F255BBA720016B7B1 /* CommentCreateViewModel.swift in Sources */,
+				E0F211F6255D26DB00CA50EC /* LabelAppendState.swift in Sources */,
 				E0F211C3255D20F700CA50EC /* LabelAppend+CollectionView.swift in Sources */,
 				C30018282559405800FC7470 /* LabelViewModel.swift in Sources */,
 			);

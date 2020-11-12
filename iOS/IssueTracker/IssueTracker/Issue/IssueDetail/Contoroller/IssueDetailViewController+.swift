@@ -12,7 +12,7 @@ extension IssueDetailViewController: LabelEditViewDelegate {
         let VC = LabelAppendViewController()
         VC.modalPresentationStyle = .overCurrentContext
         VC.transitioningDelegate = self
-        VC.issue = self.issue
+        VC.issueDetail = self.viewModel.state.issue
         self.present(VC, animated: false, completion: {})
     }
 }
