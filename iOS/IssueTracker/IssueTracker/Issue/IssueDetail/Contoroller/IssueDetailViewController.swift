@@ -21,7 +21,7 @@ class IssueDetailViewController: UIViewController {
 		configureCollectionView()
 		viewModel = IssueDetailViewModel(reactor: IssueDetailReactor(),
 										 state: IssueDetailState(issue: issue))
-		dataSource = IssueDetailDataSource(collectionView: collectionView, issueDetail: issue)
+		dataSource = IssueDetailDataSource(collectionView: collectionView, issue: issue)
         setupUI()
         binding() // after setupUI
     }
