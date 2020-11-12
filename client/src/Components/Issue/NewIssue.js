@@ -24,7 +24,7 @@ const NewIssue = ({ history }) => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   const issueDispatch = useContext(IssueDispatchContext);
-  const milestonDispatch = useContext(MilestoneDispatchContext);
+  const milestoneDispatch = useContext(MilestoneDispatchContext);
 
   useEffect(async () => {
     if (authState.token) {
@@ -46,7 +46,7 @@ const NewIssue = ({ history }) => {
     const config = { url: '/api/milestone', method: 'GET', token: authState.token, params };
     const { data } = await request(config);
     if (data) {
-      milestonDispatch({ type: 'GET_OPEN_MILESTONE', data });
+      milestoneDispatch({ type: 'GET_OPEN_MILESTONE', data });
     }
   });
 
