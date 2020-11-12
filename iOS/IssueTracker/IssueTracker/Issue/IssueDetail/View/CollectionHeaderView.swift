@@ -18,7 +18,7 @@ class CollectionHeaderView: UICollectionReusableView {
         super.awakeFromNib()
     }
     
-    func configure(issue: IssueDetail) {
+    func configure(issue: Issue) {
         title.text = issue.title
         number.text = "#\(issue.id)"
         desc.text = "by \(issue.user.username) \(PastTime().agoTime(from: issue.createdAt))"
