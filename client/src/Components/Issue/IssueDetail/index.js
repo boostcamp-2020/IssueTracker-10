@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { AuthStateContext, AuthDispatchContext } from '../../../Context/AuthContext';
 import { request } from '../../../Api';
@@ -32,7 +32,6 @@ const IssueDetail = ({ match }) => {
   const issueDispatch = useContext(IssueDispatchContext);
   const milestoneDispatch = useContext(MilestoneDispatchContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
-  const [commentData, setCommentData] = useState([]);
 
   const fetchUserInfo = async () => {
     if (!authState.user.id) {
@@ -69,7 +68,7 @@ const IssueDetail = ({ match }) => {
     const config = { url: `/api/issue/${id}/comment`, method: 'GET', token: authState.token };
     const { status, data = {} } = await request(config);
     if (status === 401) authDispatch({ type: 'LOGOUT' });
-    if (data) setCommentData(data);
+    if (data) issueInfoDispatch({ type: 'SET_COMMENTS', data });
   };
 
   useEffect(() => {
@@ -85,10 +84,7 @@ const IssueDetail = ({ match }) => {
       <Header />
       <DiscussionSection>
         <CommentSection>
-          {commentData.map((comment) => {
-            const isAuthor = issueInfoState.user && issueInfoState.user.id === comment.user.id;
-            return <IssueComment key={comment.id} isAuthor={isAuthor} {...comment} />;
-          })}
+          <CommentList />
           <CommentInput />
         </CommentSection>
         <IssueSideBar />
