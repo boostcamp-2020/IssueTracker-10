@@ -82,10 +82,18 @@ class DetailPullUpView: UIView {
             labelEdit.topAnchor.constraint(equalTo: comment.bottomAnchor, constant: 35),
             labelEdit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             labelEdit.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            labelEdit.heightAnchor.constraint(equalToConstant: 300),
+            labelEdit.heightAnchor.constraint(equalToConstant: 500),
         ])
+        
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapPress))
+        singleTapGestureRecognizer.delegate = self
+        self.addGestureRecognizer(singleTapGestureRecognizer)
     }
-
+    
+    @objc func tapPress() {
+        NotificationCenter.default.post(name: .EditLabelEnd, object: nil)
+    }
+    
     @objc func touchComment() {
         dragAnimation(constant: minHeight)
         commentDidTouched()
@@ -115,5 +123,13 @@ class DetailPullUpView: UIView {
                         self.superview?.layoutIfNeeded()
                        },completion: nil)
         currentHeight = constant
+    }
+}
+
+extension DetailPullUpView: UIGestureRecognizerDelegate {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let point = gestureRecognizer.location(in: labelEdit.collectionView)
+        let indexPath = labelEdit.collectionView.indexPathForItem(at: point)
+        return indexPath == nil
     }
 }
