@@ -55,7 +55,7 @@ class LabelEditCollectionViewCell: UICollectionViewCell {
         self.layer.borderWidth = 1
         self.layer.borderColor = color.cgColor
         label.textColor = color
-        backgroundColor = .white
+        backgroundColor = UIColor(named: "LabelCellColor")
         layer.cornerRadius = 12
         clipsToBounds = true
     }

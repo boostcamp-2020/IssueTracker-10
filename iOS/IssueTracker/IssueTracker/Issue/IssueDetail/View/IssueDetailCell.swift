@@ -19,6 +19,7 @@ class IssueDetailCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             header.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width)
         ])
+        self.backgroundColor = .systemBackground
     }
 
     func configure(comment: IssueComment) {

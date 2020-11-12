@@ -52,7 +52,7 @@ extension HomeViewController: UITableViewDataSource {
         var content = cell.defaultContentConfiguration()
 		content.text = contents[indexPath.row].title
 		content.image = UIImage(systemName: contents[indexPath.row].imageName)
-		content.imageProperties.tintColor = UIColor(named: "YearColor")
+        content.imageProperties.tintColor = .systemBlue
         cell.contentConfiguration = content
         return cell
     }

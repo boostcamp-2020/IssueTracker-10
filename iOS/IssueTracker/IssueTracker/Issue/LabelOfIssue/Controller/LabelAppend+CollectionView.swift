@@ -7,19 +7,6 @@
 
 import UIKit
 
-extension LabelAppendViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.state.filteredLabel.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? LabelAppendCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(label: viewModel.state.filteredLabel[indexPath.row])
-        return cell
-    }
-}
-
 extension LabelAppendViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -27,11 +14,16 @@ extension LabelAppendViewController: UICollectionViewDelegate {
         let labelId = viewModel.state.filteredLabel[indexPath.row].id
         viewModel.requestAppendLabel(issueId: issueId, labelId: labelId)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
 }
 
 extension LabelAppendViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width * 0.8, height: 60)
+        return CGSize(width: collectionView.frame.width * 0.45, height: 70)
     }
+    
 }
