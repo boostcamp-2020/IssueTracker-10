@@ -16,6 +16,7 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.transitioningDelegate = self
         viewModel = IssueDetailViewModel(reactor: IssueDetailReactor(),
                                          state: IssueDetailState(issue: issue))
         configureCollectionView()
@@ -47,21 +48,17 @@ class IssueDetailViewController: UIViewController {
             }
         }
         pullUPView.commentDidTouched = {
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = mainStoryboard.instantiateViewController(withIdentifier: "CommentCreateViewController") as? CommentCreateViewController {
-                vc.issueID = self.issue.id
-                self.present(vc, animated: true, completion: nil)
-            }
+            self.presentCreateViewController(issue: self.issue)
         }
         viewModel.requestIssueDetail(id: issue.id)
         pullUPView.labelEdit.delegate = self
     }
-}
-
-extension IssueDetailViewController: LabelEditViewDelegate {
-    func labelEditView(_ labelEditView: LabelEditView, didSelectedPlus: Bool) {
-        let VC = LabelOfIssueCreateViewController()
-//        VC.modalPresentationStyle = .overCurrentContext
-        self.present(VC, animated: false, completion: {})
+    
+    func presentCreateViewController(issue: Issue) {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = mainStoryboard.instantiateViewController(withIdentifier: "CommentCreateViewController")
+                as? CommentCreateViewController else { return }
+        vc.issueID = issue.id
+        self.present(vc, animated: true, completion: nil)
     }
 }
