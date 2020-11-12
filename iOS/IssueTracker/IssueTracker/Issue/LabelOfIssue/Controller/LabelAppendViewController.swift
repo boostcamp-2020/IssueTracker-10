@@ -13,6 +13,7 @@ class LabelAppendViewController: UIViewController {
     var issueDetail: IssueDetail!
     var collectionView: UICollectionView!
     var viewModel = LabelAppendViewModel(reactor: LabelAppendReactor(), state: LabelAppendState())
+    var dataSource: UICollectionViewDiffableDataSource<Section, Label>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class LabelAppendViewController: UIViewController {
         viewModel.state.issueDetail = issueDetail
         viewModel.requestGetAllLabel()
         binding()
+        setupDatasource()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,9 +42,16 @@ class LabelAppendViewController: UIViewController {
     
     func binding() {
         viewModel.updateClosure = { state in
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            self.updateDataSource(labels: state.filteredLabel)
+        }
+    }
+    
+    func updateDataSource(labels: [Label]) {
+        DispatchQueue.main.async {
+            var snapshot = NSDiffableDataSourceSnapshot<Section, Label>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(labels)
+            self.dataSource.apply(snapshot, animatingDifferences: true)
         }
     }
 }
