@@ -34,7 +34,7 @@ const CreateButton = styled(Button)`
   padding: 10px;
 `;
 
-const Milestone = ({ token, location: { search }, history }) => {
+const Milestone = ({ token, location: { search, pathname }, history }) => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   const milestoneState = useContext(MilestoneStateContext);
@@ -74,7 +74,7 @@ const Milestone = ({ token, location: { search }, history }) => {
     <Wrapper>
       <RowContainer>
         <ColumnContainer>
-          <LabelMilestoneButton issueHeader="" />
+          <LabelMilestoneButton issueHeader="" pathname={pathname} />
         </ColumnContainer>
         <ColumnContainer>
           <CreateButton onClick={onClickCreate} text="New milestone" color={greenColor} />

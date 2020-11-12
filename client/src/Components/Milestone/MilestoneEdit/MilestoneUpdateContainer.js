@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import { request } from '../../../Api';
 import { AuthDispatchContext, AuthStateContext } from '../../../Context/AuthContext';
 import { MilestoneDispatchContext, MilestoneStateContext } from '../../../Context/MilestoneContext';
 import { theme } from '../../../theme';
 import MilestoneUpdatePresenter from './MilestoneUpdatePresenter';
 
-export default ({ history, token, match }) => {
+export default withRouter(({ history, token, match, location: { pathname } }) => {
   const { id } = match.params;
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
@@ -127,6 +128,7 @@ export default ({ history, token, match }) => {
 
   return (
     <MilestoneUpdatePresenter
+      pathname={pathname}
       onClickUpdateMilestone={onClickUpdateMilestone}
       onChangeTitle={onChangeTitle}
       onChangeDate={onChangeDate}
@@ -144,4 +146,4 @@ export default ({ history, token, match }) => {
       onClickToggleMilestone={onClickToggleMilestone}
     />
   );
-};
+});

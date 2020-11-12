@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import FilterInput from './IssueFilter/FilterInput';
 import IssueList from './IssueList';
 import LabelMilestoneButton from '../Common/LabelMilestoneButton';
@@ -53,7 +53,7 @@ const ResetFilter = styled.span`
   }
 `;
 
-const Issue = ({ token }) => {
+const Issue = ({ location: { pathname } }) => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   const issueState = useContext(IssueStateContext);
@@ -106,7 +106,7 @@ const Issue = ({ token }) => {
     <Wrapper>
       <IssueHeader>
         <FilterInput />
-        <LabelMilestoneButton issueHeader={issueHeader} hasCount />
+        <LabelMilestoneButton issueHeader={issueHeader} hasCount pathname={pathname} />
         <Link to="/issue/new">
           <GreenButton title="New Issue" />
         </Link>
@@ -123,4 +123,4 @@ const Issue = ({ token }) => {
   );
 };
 
-export default Issue;
+export default withRouter(Issue);
