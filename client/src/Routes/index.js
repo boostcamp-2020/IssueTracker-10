@@ -9,6 +9,7 @@ import Header from '../Components/Common/Header';
 import Search from '../Components/Label/Search';
 import Milestone from '../Components/Milestone/Milestone';
 import MilestoneCreate from '../Components/Milestone/MilestoneCreate';
+import MilestoneEdit from '../Components/Milestone/MilestoneEdit';
 
 export default () => (
   <>
@@ -23,5 +24,6 @@ export default () => (
     <Route exact path="/search" component={Search} />
     <Route exact path="/milestones" component={Milestone} />
     <Route exact path="/milestones/new" component={MilestoneCreate} />
+    <Route exact path="/milestones/:id/edit" component={MilestoneEdit} />
   </>
 );
