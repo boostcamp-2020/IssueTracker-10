@@ -1,9 +1,17 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { AuthDispatchContext, AuthStateContext } from '@Context/AuthContext';
+import { IssueInfoContext } from '@Context/IssueInfoContext';
 import { IssueStateContext } from '../../Context/IssueContext';
 import { MilestoneStateContext } from '../../Context/MilestoneContext';
 import { CheckIcon } from '../static/svgIcons';
 import getPercent from '../../utils/getPercent';
+import { request } from '../../Api';
+
+const methodType = {
+  add: 1,
+  remove: 0,
+};
 
 const ModalRow = styled.li`
   display: flex;
@@ -58,10 +66,31 @@ const MilestoneDueDate = styled.div`
 
 export const renderUsers = ({ selectedList, setSelecteList }) => {
   const { assignees } = useContext(IssueStateContext);
+  const { isCreate, id: issueId } = useContext(IssueInfoContext);
+  const { token } = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const selectedListId = selectedList.map((user) => user.id);
+
+  const fetchAssignee = async (method, id) => {
+    const data = { type: 'assignee', method, data: id };
+    const config = {
+      url: `/api/issue/${issueId}/details`,
+      method: 'POST',
+      token,
+      data,
+    };
+    const { status } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
+  };
+
   const onClickAssignee = ({ id, username, avatar }) => {
     const data = { id, username, avatar };
-    if (selectedListId.includes(id)) {
+    const isExist = selectedListId.includes(id);
+    if (!isCreate) {
+      const method = isExist ? methodType.remove : methodType.add;
+      fetchAssignee(method, id);
+    }
+    if (isExist) {
       const newList = selectedList.filter((user) => id !== user.id);
       return setSelecteList(newList);
     }
@@ -84,15 +113,37 @@ export const renderUsers = ({ selectedList, setSelecteList }) => {
 
 export const renderLabels = ({ selectedList, setSelecteList }) => {
   const { labels } = useContext(IssueStateContext);
+  const { isCreate, id: issueId } = useContext(IssueInfoContext);
+  const { token } = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const selectedListId = selectedList.map((label) => label.id);
+
+  const fetchLabel = async (method, id) => {
+    const data = { type: 'label', method, data: id };
+    const config = {
+      url: `/api/issue/${issueId}/details`,
+      method: 'POST',
+      token,
+      data,
+    };
+    const { status } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
+  };
+
   const onClickLabel = ({ id, color, title }) => {
     const data = { id, color, title };
-    if (selectedListId.includes(id)) {
-      const newList = selectedList.filter((label) => id !== label.id);
+    const isExist = selectedListId.includes(id);
+    if (!isCreate) {
+      const method = isExist ? methodType.remove : methodType.add;
+      fetchLabel(method, id);
+    }
+    if (isExist) {
+      const newList = selectedList.filter((user) => id !== user.id);
       return setSelecteList(newList);
     }
     return setSelecteList([...selectedList, data]);
   };
+
   return labels.map((label) => (
     <ModalRow key={label.id} onClick={() => onClickLabel(label)}>
       <Wrapper>
@@ -107,12 +158,34 @@ export const renderLabels = ({ selectedList, setSelecteList }) => {
 
 export const renderMilestones = ({ selectedList, setSelecteList }) => {
   const { openMilestone } = useContext(MilestoneStateContext);
+  const { isCreate, id: issueId } = useContext(IssueInfoContext);
+  const { token } = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const selectedListId = selectedList && selectedList.id;
+
+  const fetchMilestone = async (method, id) => {
+    const data = { type: 'milestone', method, data: id };
+    const config = {
+      url: `/api/issue/${issueId}/details`,
+      method: 'POST',
+      token,
+      data,
+    };
+    const { status } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
+  };
+
   const onClickMilestone = ({ id, title, open, closed }) => {
+    const isExist = selectedListId === id;
     const total = open + closed;
-    const percent = getPercent(closed, total);
+    const percent = isCreate ? getPercent(closed, total) : getPercent(closed, total + 1);
     const data = { id, title, open, closed, percent };
-    return selectedListId === id ? setSelecteList(null) : setSelecteList(data);
+    if (!isCreate) {
+      const method = isExist ? methodType.remove : methodType.add;
+      fetchMilestone(method, id);
+    }
+    if (isExist) return setSelecteList(null);
+    return setSelecteList(data);
   };
   return openMilestone.map((milestone) => (
     <ModalRow key={milestone.id} onClick={() => onClickMilestone(milestone)}>

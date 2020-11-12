@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 
 export const initIssueInfo = {
+  isCreate: true,
   title: null,
   content: undefined,
   labels: [],
@@ -51,6 +52,7 @@ export const issueInfoReducer = (state, action) => {
       return {
         ...state,
         ...data,
+        isCreate: false,
       };
     }
     default:
