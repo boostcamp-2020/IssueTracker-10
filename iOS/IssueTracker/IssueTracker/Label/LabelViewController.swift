@@ -10,8 +10,8 @@ import UIKit
 class LabelViewController: UIViewController {
 	
 	@IBOutlet weak var labelTableView: UITableView!
-	var dataSource: LabelDiffableDataSource!
 	
+	var dataSource: LabelDiffableDataSource!
 	let viewModel = LabelViewModel(reactor: LabelReactor(), state: LabelState())
 	
 	override func viewDidLoad() {
@@ -67,7 +67,7 @@ extension LabelViewController: UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let label = dataSource.itemIdentifier(for: indexPath)
-		guard let viewController = viewController(identifier: "PopupViewController", type: PopupViewController()) else { return }
+		guard let viewController = viewController(identifier: "LabelPopupViewController", type: LabelPopupViewController()) else { return }
 		viewController.label = label
 		self.present(viewController, animated: false, completion: nil)
 	}

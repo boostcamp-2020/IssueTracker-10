@@ -39,8 +39,20 @@ class LabelManager {
 		let id = label.id
 		let headers = ["Authorization": Constant.token]
 		let parameters = ["title": label.title, "description": label.description ?? "No description", "color": label.color] as Parameters
-		
 		hvNet.request("http://49.50.163.58:3000/api/label/\(id)", method: .put, parameter: parameters, headers: headers).response { (result: HVDataResponse<Data?>) in
+			switch result {
+			case .success:
+				completion()
+			case.failure(let error):
+				print(error.localizedDescription)
+			}
+		}
+	}
+	
+	func delete(with label: Label, completion: @escaping (() -> Void)) {
+		let id = label.id
+		let headers = ["Authorization": Constant.token]		
+		hvNet.request("http://49.50.163.58:3000/api/label/\(id)", method: .delete, headers: headers).response { (result: HVDataResponse<Data?>) in
 			switch result {
 			case .success:
 				completion()
