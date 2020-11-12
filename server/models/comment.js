@@ -6,6 +6,7 @@ const findAllCommentByIssueId = async (issueId) => {
     const commentInfo = await comment.findAll({
       attributes: ['id', 'content', 'createdAt', 'updatedAt'],
       where: { issueId },
+      order: ['id'],
       include: [
         {
           model: user,
