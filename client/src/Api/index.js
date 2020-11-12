@@ -33,7 +33,7 @@ export const request = async (config) => {
       ...config,
       url: process.env.BASE_URL + config.url,
     });
-    return { status: res.status, data: res.data };
+    return { status: res.status, ...res.data };
   } catch ({ response }) {
     return { status: response.status };
   }
