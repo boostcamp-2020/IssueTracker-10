@@ -245,47 +245,89 @@
             </objects>
             <point key="canvasLocation" x="2560.8695652173915" y="134.59821428571428"/>
         </scene>
-        <!--Comment Navigation View Controller-->
-        <scene sceneID="blM-6F-A4N">
-            <objects>
-                <navigationController storyboardIdentifier="CommentCreateViewController" id="KHg-VB-uci" customClass="CommentNavigationViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rV8-9t-bch">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="514-nC-uDQ" kind="relationship" relationship="rootViewController" id="ayx-lx-xtf"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Iux-nk-M88" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3530" y="135"/>
-        </scene>
         <!--새 코멘트-->
         <scene sceneID="5GZ-Vc-sNq">
             <objects>
-                <viewController id="514-nC-uDQ" customClass="CommentCreateViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommentCreateViewController" id="514-nC-uDQ" customClass="CommentCreateViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="il0-9K-GRB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pts-uC-D3G">
-                                <rect key="frame" x="201" y="289" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hI1-8P-dTe">
+                                <rect key="frame" x="20" y="59" width="53" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="pmn-FX-KEK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="closeButtonTouched:" destination="514-nC-uDQ" eventType="touchUpInside" id="8Ct-dU-CrR"/>
+                                </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upm-cc-br6">
+                                <rect key="frame" x="353" y="59" width="41" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5q0-V4-j6N"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneButtonTouched:" destination="514-nC-uDQ" eventType="touchUpInside" id="27a-Oj-WYB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새 코멘트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJL-Z1-P3t">
+                                <rect key="frame" x="20" y="109" width="125" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Comment" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gOL-qn-b8o">
+                                <rect key="frame" x="20" y="170" width="374" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="5ZU-Jb-cgV"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="514-nC-uDQ" id="OXo-Ha-IMr"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fAw-rH-DYw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Upm-cc-br6" firstAttribute="top" secondItem="fAw-rH-DYw" secondAttribute="top" constant="15" id="4j9-Ek-WVr"/>
+                            <constraint firstItem="DJL-Z1-P3t" firstAttribute="top" secondItem="hI1-8P-dTe" secondAttribute="bottom" constant="20" id="LYY-my-Cf8"/>
+                            <constraint firstItem="gOL-qn-b8o" firstAttribute="leading" secondItem="fAw-rH-DYw" secondAttribute="leading" constant="20" id="UuN-dg-RFH"/>
+                            <constraint firstItem="hI1-8P-dTe" firstAttribute="top" secondItem="fAw-rH-DYw" secondAttribute="top" constant="15" id="ag9-da-Xlb"/>
+                            <constraint firstItem="fAw-rH-DYw" firstAttribute="trailing" secondItem="Upm-cc-br6" secondAttribute="trailing" constant="20" id="bh2-37-hBX"/>
+                            <constraint firstItem="gOL-qn-b8o" firstAttribute="top" secondItem="DJL-Z1-P3t" secondAttribute="bottom" constant="20" id="cBc-mE-MYy"/>
+                            <constraint firstItem="fAw-rH-DYw" firstAttribute="trailing" secondItem="gOL-qn-b8o" secondAttribute="trailing" constant="20" id="nzb-V9-jhB"/>
+                            <constraint firstItem="hI1-8P-dTe" firstAttribute="leading" secondItem="fAw-rH-DYw" secondAttribute="leading" constant="20" id="sFa-cn-p8x"/>
+                            <constraint firstItem="DJL-Z1-P3t" firstAttribute="leading" secondItem="fAw-rH-DYw" secondAttribute="leading" constant="20" id="wmZ-wt-jxh"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="새 코멘트" id="uEP-RI-12e">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="4oh-da-he1"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="t5P-bb-Edl"/>
+                    <navigationItem key="navigationItem" title="새 코멘트" largeTitleDisplayMode="always" id="uEP-RI-12e">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="4oh-da-he1">
+                            <connections>
+                                <action selector="closeButtonTouched:" destination="514-nC-uDQ" id="Vrc-SQ-cot"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="t5P-bb-Edl">
+                            <connections>
+                                <action selector="doneButtonTouched:" destination="514-nC-uDQ" id="LWM-Au-Kqe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="gOL-qn-b8o" id="AMV-cO-FLe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lT2-IN-bdB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4338" y="137"/>
+            <point key="canvasLocation" x="3442" y="135"/>
         </scene>
         <!--필터 선택-->
         <scene sceneID="UlG-O1-fZl">

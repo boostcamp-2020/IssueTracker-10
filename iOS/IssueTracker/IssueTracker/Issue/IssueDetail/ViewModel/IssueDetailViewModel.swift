@@ -20,6 +20,7 @@ class IssueDetailViewModel {
             self.state = state
             self.updateClosure?(state)
         }
+        setNotification()
     }
     
     func requestIssueDetail(id: Int) {
@@ -29,6 +30,15 @@ class IssueDetailViewModel {
     
     func requestIssueComment(id: Int) {
         state = reactor.execute(action: .requestIssueComment(id), currentState: state)
+        updateClosure?(state)
+    }
+    
+    private func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCommentCreated), name: .commentDidChanged, object: nil)
+    }
+    
+    @objc private func updateCommentCreated(_ notification: Notification) {
+        state = reactor.execute(action: .requestIssueComment(state.issue.id), currentState: state)
         updateClosure?(state)
     }
 }

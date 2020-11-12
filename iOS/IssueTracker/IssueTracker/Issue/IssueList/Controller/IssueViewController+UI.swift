@@ -60,7 +60,7 @@ extension IssueViewController {
 	}
 	
 	@objc func handleRefreshControl() {
-		NotificationCenter.default.post(name: .issueDidChanged, object: self)
+		NotificationCenter.default.post(name: .refreshIssue, object: self)
 		
 		DispatchQueue.main.async {
 			self.issueCollectionView.refreshControl?.endRefreshing()

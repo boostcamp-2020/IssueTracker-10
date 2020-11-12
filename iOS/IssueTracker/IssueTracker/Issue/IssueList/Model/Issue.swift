@@ -27,9 +27,20 @@ struct Issue: Codable, Hashable {
     let assignees: [Assignee]
     
     mutating func setLabelState(name: String, isChecked: Bool) {
+        var idx: Int?
         for i in 0..<labels.count {
             if labels[i].title == name {
                 labels[i].state = isChecked
+                idx = i
+            }
+        }
+        if let idx = idx, isChecked && labels.count > 1{
+            let picked = labels.remove(at: idx)
+            if let first = labels.first(where: { !$0.state }) {
+                let insertIdx = Int(labels.firstIndex(of: first) ?? 0)
+                labels.insert(picked, at: insertIdx)
+            } else {
+                labels.append(picked)
             }
         }
     }
