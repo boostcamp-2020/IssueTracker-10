@@ -9,15 +9,15 @@ const Wrapper = styled.div`
 `;
 
 const LabelMilestoneButton = (props) => {
-  const { hasCount, issueHeader } = props;
+  const { hasCount, issueHeader, pathname } = props;
   const { labels = [], milestones = [] } = issueHeader;
   return (
     <Wrapper>
       <Link to="/labels">
-        <LabelButton hasCount={hasCount} count={labels.length} />
+        <LabelButton pathname={pathname} hasCount={hasCount} count={labels.length} />
       </Link>
       <Link to="/milestones">
-        <MilestoneButton hasCount={hasCount} count={milestones.length} />
+        <MilestoneButton pathname={pathname} hasCount={hasCount} count={milestones.length} />
       </Link>
     </Wrapper>
   );
