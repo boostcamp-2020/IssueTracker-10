@@ -36,6 +36,12 @@ class IssueDetailViewModel {
     private func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateCommentCreated), name: .commentDidChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateLabelOfIssue), name: .removeLabelOfIssue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateIssueDetail), name: .issueDidChanged, object: nil)
+    }
+    
+    @objc func updateIssueDetail() {
+        state = reactor.execute(action: .requestIssueDetail(state.issue.id), currentState: state)
+        updateClosure?(state)
     }
     
     @objc private func updateCommentCreated(_ notification: Notification) {
