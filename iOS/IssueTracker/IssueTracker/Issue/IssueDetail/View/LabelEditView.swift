@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LabelEditViewDelegate {
+    func labelEditView(_ labelEditView: LabelEditView, didSelectedPlus: Bool)
+}
+
 class LabelEditView: UIView {
     
     var collectionView: UICollectionView!
@@ -15,9 +19,9 @@ class LabelEditView: UIView {
         minimumLineSpacing: 10,
         sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     )
+    var delegate: LabelEditViewDelegate?
     var issue: Issue?
     var isEdit = false
-    let editButton = UIButton()
     var labels: [Label] = [] {
         didSet {
             collectionView.reloadData()
@@ -45,13 +49,7 @@ class LabelEditView: UIView {
         let label = UILabel()
         label.text = "Label"
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        
-        editButton.setTitle("Edit", for: .normal)
-        editButton.setTitleColor(.black, for: .normal)
-        editButton.setTitleColor(.systemGray, for: .highlighted)
-        editButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        editButton.addTarget(self, action: #selector(editButtonTouch), for: .touchDown)
-        
+
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: columnLayout)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -64,35 +62,31 @@ class LabelEditView: UIView {
 
         addSubview(collectionView)
         addSubview(label)
-        addSubview(editButton)
         
         label.anchor(top: topAnchor, paddingTop: 10,
                      bottom: nil, paddingBottom: 0,
                      leading: leadingAnchor, paddingLeft: 10,
                      trailing: nil, paddingRight: 0,
                      width: 50, height: 21)
-        editButton.anchor(top: topAnchor, paddingTop: 10,
-                    bottom: nil, paddingBottom: 0,
-                    leading: nil, paddingLeft: 0,
-                    trailing: trailingAnchor, paddingRight: 10,
-                    width: 50, height: 21)
-        
-        collectionView.anchor(top: label.bottomAnchor, paddingTop: 10, bottom: bottomAnchor, paddingBottom: 0, leading: leadingAnchor, paddingLeft: 0, trailing: trailingAnchor, paddingRight: 0, width: 0, height: 0)
-    }
 
-    @objc func editButtonTouch() {
-        isEdit.toggle()
-        if isEdit {
-            NotificationCenter.default.post(name: .EditLabelBegin, object: nil)
-            editButton.setTitle("done", for: .normal)
-        } else {
-            NotificationCenter.default.post(name: .EditLabelEnd, object: nil)
-            editButton.setTitle("Edit", for: .normal)
-        }
+        collectionView.anchor(top: label.bottomAnchor, paddingTop: 10, bottom: bottomAnchor, paddingBottom: 0, leading: leadingAnchor, paddingLeft: 0, trailing: trailingAnchor, paddingRight: 0, width: 0, height: 0)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(editLabelBegin), name: .EditLabelBegin, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(editLabelEnd), name: .EditLabelEnd, object: nil)
+    }
+    
+    @objc func editLabelBegin() {
+        isEdit = true
+    }
+    
+    @objc func editLabelEnd() {
+        isEdit = false
     }
 }
 
-extension LabelEditView: UICollectionViewDelegate, UICollectionViewDataSource {
+
+extension LabelEditView: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return labels.count + 1
     }
@@ -102,6 +96,10 @@ extension LabelEditView: UICollectionViewDelegate, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? LabelEditCollectionViewCell
         else { return LabelEditCollectionViewCell() }
         
+        if isEdit {
+            cell.editLabelBegin()
+        }
+        
         if indexPath.row == labels.count {
             cell.configure(item: Label(id: -1, title: "  +  ", color: "#cccccc"))
             cell.backgroundColor = .black
@@ -110,18 +108,15 @@ extension LabelEditView: UICollectionViewDelegate, UICollectionViewDataSource {
         
         let item = labels[indexPath.row]
         cell.configure(item: item)
-        if isEdit {
-            cell.editLabelBegin()
-        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == labels.count {
-            print("plus")
-        }
         
-        if isEdit {
+        if !isEdit && indexPath.row == labels.count {
+            delegate?.labelEditView(self, didSelectedPlus: true)
+        }
+        if isEdit && indexPath.row != labels.count {
             let object: [String : Int?] = ["issueId": issue?.id, "labelId": labels[indexPath.row].id]
             NotificationCenter.default.post(name: .removeLabelOfIssue, object: object)
         }
