@@ -44,7 +44,7 @@ class MileStoneViewController: UIViewController {
 		let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
 		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-											  heightDimension: .absolute(70))
+											  heightDimension: .absolute(80))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 		let spacing = CGFloat(10)
 		group.interItemSpacing = .fixed(spacing)

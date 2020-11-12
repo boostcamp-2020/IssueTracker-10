@@ -47,6 +47,12 @@ class MileStoneCollectionViewCell: UICollectionViewCell {
 	}
 	
 	override func prepareForReuse() {
+		titleLabel.text = nil
+		descriptionLabel.text = nil
+		dateLabel.text = nil
+		progressLabel.text = nil
+		openCountLabel.text = nil
+		closeCountLabel.text = nil
 		titleLabel.removeExternalBorders()
 	}
 }
