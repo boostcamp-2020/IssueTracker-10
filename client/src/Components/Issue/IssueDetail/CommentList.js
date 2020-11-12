@@ -7,15 +7,15 @@ import IssueInfoProvider from '../../Provider/IssueInfo';
 
 const Wrapper = styled.div``;
 
-const IssueDetail = ({ commentData }) => {
+const IssueDetail = () => {
   const authState = useContext(AuthStateContext);
-  const issueInfoState = useContext(IssueInfoContext);
+  const { user, comments } = useContext(IssueInfoContext);
 
   return (
     <IssueInfoProvider>
       <Wrapper>
-        {commentData.map((comment) => {
-          const isAuthor = issueInfoState.user && issueInfoState.user.id === comment.user.id;
+        {comments.map((comment) => {
+          const isAuthor = user && user.id === comment.user.id;
           const isEditer = authState.user.id === comment.user.id;
           return <IssueComment isAuthor={isAuthor} isEditer={isEditer} {...comment} />;
         })}
