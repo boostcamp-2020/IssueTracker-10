@@ -14,7 +14,7 @@
 		C3001836255941B500FC7470 /* LabelReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3001835255941B500FC7470 /* LabelReactor.swift */; };
 		C300183E255965AE00FC7470 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300183D255965AE00FC7470 /* Label.swift */; };
 		C30018472559660700FC7470 /* LabelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30018462559660700FC7470 /* LabelManager.swift */; };
-		C300184C25596F9000FC7470 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300184B25596F9000FC7470 /* PopupViewController.swift */; };
+		C300184C25596F9000FC7470 /* LabelPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300184B25596F9000FC7470 /* LabelPopupViewController.swift */; };
 		C3228A2C255A6BCD00FC8F8E /* SignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3228A2B255A6BCD00FC8F8E /* SignInHelper.swift */; };
 		C32C5FA3254FE854008BBDCE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */; };
 		C32C5FAE254FEB70008BBDCE /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */; };
@@ -26,6 +26,15 @@
 		C3414FC425481BF6003C845A /* IssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FC325481BF6003C845A /* IssueManager.swift */; };
 		C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FCF2548650C003C845A /* UIView+addExternalBorder.swift */; };
 		C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C359882B254AC346001F311D /* IssueFilterViewController.swift */; };
+		C35BC3A1255BB31000BD35E6 /* MileStoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3A0255BB31000BD35E6 /* MileStoneViewController.swift */; };
+		C35BC3A9255BB53B00BD35E6 /* MileStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3A8255BB53B00BD35E6 /* MileStone.swift */; };
+		C35BC3AE255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3AD255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift */; };
+		C35BC3B3255BB73D00BD35E6 /* MileStoneDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3B2255BB73D00BD35E6 /* MileStoneDataSource.swift */; };
+		C35BC3BD255BC3CA00BD35E6 /* MileStoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3BC255BC3CA00BD35E6 /* MileStoneManager.swift */; };
+		C35BC3C2255BC45E00BD35E6 /* MileStoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3C1255BC45E00BD35E6 /* MileStoneViewModel.swift */; };
+		C35BC3C7255BC46F00BD35E6 /* MileStoneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3C6255BC46F00BD35E6 /* MileStoneState.swift */; };
+		C35BC3CC255BC47700BD35E6 /* MileStoneReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3CB255BC47700BD35E6 /* MileStoneReactor.swift */; };
+		C35BC3D7255BEA5000BD35E6 /* MileStonePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BC3D6255BEA5000BD35E6 /* MileStonePopUpViewController.swift */; };
 		C35F6B192550281D008A116B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35F6B182550281D008A116B /* User.swift */; };
 		C3DB04E42551089C00F0910E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E32551089C00F0910E /* Storage.swift */; };
 		C3DB04E92551099F00F0910E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB04E82551099F00F0910E /* AppData.swift */; };
@@ -133,7 +142,7 @@
 		C3001835255941B500FC7470 /* LabelReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelReactor.swift; sourceTree = "<group>"; };
 		C300183D255965AE00FC7470 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		C30018462559660700FC7470 /* LabelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelManager.swift; sourceTree = "<group>"; };
-		C300184B25596F9000FC7470 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		C300184B25596F9000FC7470 /* LabelPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelPopupViewController.swift; sourceTree = "<group>"; };
 		C3228A2B255A6BCD00FC8F8E /* SignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHelper.swift; sourceTree = "<group>"; };
 		C32C5FA2254FE854008BBDCE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C32C5FAD254FEB70008BBDCE /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
@@ -146,6 +155,15 @@
 		C3414FC325481BF6003C845A /* IssueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueManager.swift; sourceTree = "<group>"; };
 		C3414FCF2548650C003C845A /* UIView+addExternalBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addExternalBorder.swift"; sourceTree = "<group>"; };
 		C359882B254AC346001F311D /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
+		C35BC3A0255BB31000BD35E6 /* MileStoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneViewController.swift; sourceTree = "<group>"; };
+		C35BC3A8255BB53B00BD35E6 /* MileStone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStone.swift; sourceTree = "<group>"; };
+		C35BC3AD255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneCollectionViewCell.swift; sourceTree = "<group>"; };
+		C35BC3B2255BB73D00BD35E6 /* MileStoneDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneDataSource.swift; sourceTree = "<group>"; };
+		C35BC3BC255BC3CA00BD35E6 /* MileStoneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneManager.swift; sourceTree = "<group>"; };
+		C35BC3C1255BC45E00BD35E6 /* MileStoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneViewModel.swift; sourceTree = "<group>"; };
+		C35BC3C6255BC46F00BD35E6 /* MileStoneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneState.swift; sourceTree = "<group>"; };
+		C35BC3CB255BC47700BD35E6 /* MileStoneReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneReactor.swift; sourceTree = "<group>"; };
+		C35BC3D6255BEA5000BD35E6 /* MileStonePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStonePopUpViewController.swift; sourceTree = "<group>"; };
 		C35F6B182550281D008A116B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C3DB04E32551089C00F0910E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C3DB04E82551099F00F0910E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
@@ -348,6 +366,38 @@
 			path = IssueList/IssueFilter;
 			sourceTree = "<group>";
 		};
+		C35BC39C255BB2A500BD35E6 /* MileStone */ = {
+			isa = PBXGroup;
+			children = (
+				C35BC3BB255BC3B500BD35E6 /* Model */,
+				C35BC3B7255BB83800BD35E6 /* ViewModel */,
+				C35BC3A0255BB31000BD35E6 /* MileStoneViewController.swift */,
+				C35BC3AD255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift */,
+				C35BC3D6255BEA5000BD35E6 /* MileStonePopUpViewController.swift */,
+			);
+			path = MileStone;
+			sourceTree = "<group>";
+		};
+		C35BC3B7255BB83800BD35E6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C35BC3B2255BB73D00BD35E6 /* MileStoneDataSource.swift */,
+				C35BC3C1255BC45E00BD35E6 /* MileStoneViewModel.swift */,
+				C35BC3C6255BC46F00BD35E6 /* MileStoneState.swift */,
+				C35BC3CB255BC47700BD35E6 /* MileStoneReactor.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C35BC3BB255BC3B500BD35E6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C35BC3A8255BB53B00BD35E6 /* MileStone.swift */,
+				C35BC3BC255BC3CA00BD35E6 /* MileStoneManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C3DB04DD2550F94000F0910E /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,12 +564,13 @@
 		E0B3D3C32546C8660040D5AF /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				E085B10A255BACFC0016B7B1 /* Comment */,
 				C32C5FAC254FEB33008BBDCE /* SignIn */,
-				C32C5FA7254FE962008BBDCE /* Profile */,
 				E09C1CA0254A995B00A1FADF /* Home */,
+				C32C5FA7254FE962008BBDCE /* Profile */,
 				E0B3D3FA2547E8280040D5AF /* Issue */,
 				E0B3D3FB2547E8320040D5AF /* Label */,
+				C35BC39C255BB2A500BD35E6 /* MileStone */,
+				E085B10A255BACFC0016B7B1 /* Comment */,
 				E049B8AC25529FB1004DD162 /* Extensions */,
 				C3DB04DD2550F94000F0910E /* Util */,
 				E0B3D3C42546C8660040D5AF /* AppDelegate.swift */,
@@ -574,7 +625,7 @@
 				C300182C2559419E00FC7470 /* ViewModel */,
 				C3414FA425480104003C845A /* LabelViewController.swift */,
 				C300180C2559366600FC7470 /* LabelTableViewCell.swift */,
-				C300184B25596F9000FC7470 /* PopupViewController.swift */,
+				C300184B25596F9000FC7470 /* LabelPopupViewController.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -782,6 +833,7 @@
 				C32C5FC225500276008BBDCE /* KeychainItem.swift in Sources */,
 				E0F211BE255D20CA00CA50EC /* LabelAppend+UI.swift in Sources */,
 				E049B8952552715F004DD162 /* LabelListView.swift in Sources */,
+				C35BC3A9255BB53B00BD35E6 /* MileStone.swift in Sources */,
 				C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */,
 				E085B148255BE5FF0016B7B1 /* UIVIew+Anchor.swift in Sources */,
 				E049B8D1255316B2004DD162 /* SelectedLabels.swift in Sources */,
@@ -807,7 +859,7 @@
 				C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */,
 				E037F28A255A354300DAD98B /* IssueDetailViewController+Collection.swift in Sources */,
 				E09C1EC925514E9E00A1FADF /* IssueViewController+CollectionViewDelegate.swift in Sources */,
-				C300184C25596F9000FC7470 /* PopupViewController.swift in Sources */,
+				C300184C25596F9000FC7470 /* LabelPopupViewController.swift in Sources */,
 				E037F2802559955100DAD98B /* PastTime.swift in Sources */,
 				E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */,
 				E049B9242554DE40004DD162 /* Date+globalLocal.swift in Sources */,
@@ -821,19 +873,23 @@
 				C3414FA525480104003C845A /* LabelViewController.swift in Sources */,
 				E09C1E6125506C4000A1FADF /* IssueDetailCellHeader.swift in Sources */,
 				E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */,
+				C35BC3B3255BB73D00BD35E6 /* MileStoneDataSource.swift in Sources */,
 				E037F2B7255A805600DAD98B /* DetailPullUpView.swift in Sources */,
 				E0F211F1255D26D200CA50EC /* LabelAppendReactor.swift in Sources */,
 				E049B8C62552A0A8004DD162 /* NotificationName.swift in Sources */,
 				C359882C254AC346001F311D /* IssueFilterViewController.swift in Sources */,
+				C35BC3C2255BC45E00BD35E6 /* MileStoneViewModel.swift in Sources */,
 				E085B129255BB9500016B7B1 /* ImageCache.swift in Sources */,
 				C30018472559660700FC7470 /* LabelManager.swift in Sources */,
 				E085B161255C42B90016B7B1 /* UIView+shake.swift in Sources */,
 				E0B3D3C52546C8660040D5AF /* AppDelegate.swift in Sources */,
 				E085B166255C48CF0016B7B1 /* LabelEditCollectionViewCell.swift in Sources */,
 				E0B3D3C72546C8660040D5AF /* SceneDelegate.swift in Sources */,
+				C35BC3D7255BEA5000BD35E6 /* MileStonePopUpViewController.swift in Sources */,
 				C3DB051D25527EDD00F0910E /* Filter.swift in Sources */,
 				E037F2A3255A53BE00DAD98B /* IssueComment.swift in Sources */,
 				E09C1EF5255158E100A1FADF /* CreateIssueNavigationViewController.swift in Sources */,
+				C35BC3BD255BC3CA00BD35E6 /* MileStoneManager.swift in Sources */,
 				E0B3D40A2547EBC20040D5AF /* IssueDetailViewController.swift in Sources */,
 				C300180D2559366600FC7470 /* LabelTableViewCell.swift in Sources */,
 				E049B90D2553EC9C004DD162 /* Constant.swift in Sources */,
@@ -845,6 +901,8 @@
 				E09C1E5225505EAB00A1FADF /* LeftAlignLayout.swift in Sources */,
 				E09C1E672550C59500A1FADF /* CollectionHeaderView.swift in Sources */,
 				C32C5FA3254FE854008BBDCE /* ProfileViewController.swift in Sources */,
+				C35BC3CC255BC47700BD35E6 /* MileStoneReactor.swift in Sources */,
+				C35BC3C7255BC46F00BD35E6 /* MileStoneState.swift in Sources */,
 				E09C1CAA254A99C400A1FADF /* HomeTableViewCell.swift in Sources */,
 				E09C1ECE25514F3B00A1FADF /* IssueViewController+UI.swift in Sources */,
 				C3414FAD2548018D003C845A /* Issue.swift in Sources */,
@@ -853,7 +911,9 @@
 				E0F211EC255D26B000CA50EC /* LabelAppendViewModel.swift in Sources */,
 				C3DB04E92551099F00F0910E /* AppData.swift in Sources */,
 				C300181B25593AF100FC7470 /* LabelDataSource.swift in Sources */,
+				C35BC3A1255BB31000BD35E6 /* MileStoneViewController.swift in Sources */,
 				E085B0E7255AF0870016B7B1 /* CommentCreateViewController.swift in Sources */,
+				C35BC3AE255BB6F300BD35E6 /* MileStoneCollectionViewCell.swift in Sources */,
 				E085B13E255BBCEC0016B7B1 /* CommentManager.swift in Sources */,
 				E0F211D8255D245B00CA50EC /* IssueDetailViewController+.swift in Sources */,
 				E085B139255BBA890016B7B1 /* CommentCreateState.swift in Sources */,

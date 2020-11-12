@@ -14,6 +14,7 @@ class LabelReactor {
 	enum Action {
 		case requestGetLabelList
 		case requestUpdateLabel(Label)
+		case requestDeleteLabel(Label)
 	}
 	
 	func execute(action: Action, currentState: LabelState) -> LabelState {
@@ -27,6 +28,11 @@ class LabelReactor {
 			return currentState
 		case .requestUpdateLabel(let label):
 			LabelManager().update(with: label) {
+				let _ = self.execute(action: .requestGetLabelList, currentState: currentState)
+			}
+			return currentState
+		case .requestDeleteLabel(let label):
+			LabelManager().delete(with: label) {
 				let _ = self.execute(action: .requestGetLabelList, currentState: currentState)
 			}
 			return currentState

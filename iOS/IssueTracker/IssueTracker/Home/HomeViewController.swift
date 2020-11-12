@@ -11,7 +11,8 @@ class HomeViewController: UIViewController {
 	
 	let contents: [Content] = [
 		Content(title: "Issue", imageName: "info.circle"),
-		Content(title: "Label", imageName: "tag")
+		Content(title: "Label", imageName: "tag"),
+		Content(title: "MileStone", imageName: "signpost.right")
 	]
 		
     override func viewDidLoad() {
@@ -28,11 +29,15 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if indexPath.row == 0 {
+		switch indexPath.row {
+		case 0:
 			presentViewController(identifier: "IssueViewController", type: IssueViewController())
-		}
-		else {
+		case 1:
 			presentViewController(identifier: "LabelViewController", type: LabelViewController())
+		case 2:
+			presentViewController(identifier: "MileStoneViewController", type: MileStoneViewController())
+		default:
+			break
 		}
 	}
 }
@@ -46,7 +51,8 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
 		content.text = contents[indexPath.row].title
-        content.image = UIImage(systemName: contents[indexPath.row].imageName)
+		content.image = UIImage(systemName: contents[indexPath.row].imageName)
+		content.imageProperties.tintColor = UIColor(named: "YearColor")
         cell.contentConfiguration = content
         return cell
     }

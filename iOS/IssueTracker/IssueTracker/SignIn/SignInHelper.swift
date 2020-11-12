@@ -40,7 +40,6 @@ class SignInHelper {
 				guard let userName = json["login"] as? String,
 					  let avatarURL = json["avatar_url"] as? String else { return }
 				AppData.user = User(name: userName, avatorURL: avatarURL, state: 1)
-				print(userName, avatarURL)
 				//서버에 요청해서 어세스토큰 받아와서 유저 디포트에 받아오기
 				self.registerUserInfo(user: AppData.user)
 			case .failure(let error):
