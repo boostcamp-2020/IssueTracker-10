@@ -49,6 +49,20 @@ class LabelManager {
 			}
 		}
 	}
+	
+	func delete(with label: Label, completion: @escaping (() -> Void)) {
+		let id = label.id
+		let headers = ["Authorization": Constant.token]
+		
+		hvNet.request("http://49.50.163.58:3000/api/label/\(id)", method: .delete, headers: headers).response { (result: HVDataResponse<Data?>) in
+			switch result {
+			case .success:
+				completion()
+			case.failure(let error):
+				print(error.localizedDescription)
+			}
+		}
+	}
 }
 
 

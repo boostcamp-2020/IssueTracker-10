@@ -26,6 +26,7 @@ class LabelViewModel {
 	private func setNotification() {
 		NotificationCenter.default.addObserver(self, selector: #selector(createLabel), name: .labelDidCreated, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(updateLabel), name: .labelDidChanged, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(requestDeleteLabel), name: .labelDidDeleted, object: nil)
 	}
 	
 	@objc private func createLabel(_ notification: Notification) {
@@ -35,6 +36,11 @@ class LabelViewModel {
 	func requestGetLabelList() {
 		state = reactor.execute(action: .requestGetLabelList, currentState: state)
 		updateClosure?(state)
+	}
+	
+	@objc func requestDeleteLabel(_ notification: Notification) {
+		guard let label = notification.userInfo?["label"] as? Label else { return }
+		state = reactor.execute(action: .requestDeleteLabel(label), currentState: state)
 	}
 	
 	@objc func updateLabel(_ notification: Notification) {
