@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { AuthStateContext } from '../../../Context/AuthContext';
+import { toast } from 'react-toastify';
+import { AuthDispatchContext, AuthStateContext } from '../../../Context/AuthContext';
 import { IssueStateContext, IssueDispatchContext } from '../../../Context/IssueContext';
 import { request } from '../../../Api';
 
@@ -118,6 +119,7 @@ export const renderMilestones = (milestones) => {
 
 export const renderMark = () => {
   const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const state = useContext(IssueStateContext);
   const dispatch = useContext(IssueDispatchContext);
   const type = { closed: 0, open: 1 };
@@ -133,6 +135,10 @@ export const renderMark = () => {
       token: authState.token,
     };
     const result = await request(config);
+    if (result.status === 401) return authDispatch({ type: 'LOGOUT' });
+    elif (result.status === 500) toast.error('Fail! 😭');
+    else (result.status === 404) toast.error('Not found! 🧐');
+    if (result) toast.success('Success! 😄');
     return result;
   };
 

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { request } from '../../../Api';
 import { AuthDispatchContext, AuthStateContext } from '../../../Context/AuthContext';
 import { MilestoneDispatchContext, MilestoneStateContext } from '../../../Context/MilestoneContext';
@@ -33,7 +34,8 @@ export default withRouter(({ history, token, match, location: { pathname } }) =>
           token: authState.token,
           params,
         };
-        const { data } = await request(config);
+        const { status, data } = await request(config);
+        if (status === 401) authDispatch({ type: 'LOGOUT' });
         if (data) milestoneDispatch({ type: 'GET_DETAIL_MILESTONE', milestone: data });
         setTitle(data.title);
         setDescription(data.description);
@@ -52,11 +54,14 @@ export default withRouter(({ history, token, match, location: { pathname } }) =>
       token: authState.token,
       data: inputData,
     };
-    await request(config);
+    const { status } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
     setState(state === 0 ? 1 : 0);
     if (state === 0) {
+      toast.success('Success! 😄');
       history.push('/milestones');
     } else {
+      toast.success('Success! 😄');
       history.push('/milestones?state=closed');
     }
   };
@@ -74,9 +79,11 @@ export default withRouter(({ history, token, match, location: { pathname } }) =>
       data: inputData,
     };
     try {
-      await request(config);
+      const { status } = await request(config);
+      if (status === 401) authDispatch({ type: 'LOGOUT' });
+      toast.success('Success! 😄');
     } catch (err) {
-      throw new Error(err.response);
+      toast.error('Fail! 😭');
     }
   };
 

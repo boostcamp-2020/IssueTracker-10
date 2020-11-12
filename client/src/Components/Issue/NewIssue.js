@@ -29,25 +29,29 @@ const NewIssue = ({ history }) => {
   useEffect(async () => {
     if (authState.token) {
       const config = { url: '/api/all', method: 'GET', token: authState.token };
-      const { data } = await request(config);
-      if (data) {
-        issueDispatch({ type: 'STORE_DETAIL_DATA', payload: data });
+      const result = await request(config);
+      if (result.status === 401) return authDispatch({ type: 'LOGOUT' });
+      if (result.data) {
+        issueDispatch({ type: 'STORE_DETAIL_DATA', payload: result.data });
       }
     }
     if (authState.user.id === null) {
       const config = { url: '/auth/user', method: 'GET', token: authState.token };
-      const { data } = await request(config);
-      if (data) {
-        authDispatch({ type: 'SET_USERINFO', data });
+      const result = await request(config);
+      if (result.status === 401) return authDispatch({ type: 'LOGOUT' });
+      if (result.data) {
+        authDispatch({ type: 'SET_USERINFO', data: result.data });
       }
     }
 
     const params = { state: 1 };
     const config = { url: '/api/milestone', method: 'GET', token: authState.token, params };
-    const { data } = await request(config);
-    if (data) {
-      milestoneDispatch({ type: 'GET_OPEN_MILESTONE', data });
+    const result = await request(config);
+    if (result.status === 401) return authDispatch({ type: 'LOGOUT' });
+    if (result.data) {
+      milestoneDispatch({ type: 'GET_OPEN_MILESTONE', data: result.data });
     }
+    return null;
   });
 
   return (
