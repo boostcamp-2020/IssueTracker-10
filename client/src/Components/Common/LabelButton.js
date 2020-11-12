@@ -31,7 +31,7 @@ const Count = styled.span`
 `;
 
 const LabelMilestoneButton = ({ hasCount, count, pathname }) => {
-  const isClicked = pathname.startsWith('/labels');
+  const isClicked = pathname ? pathname.startsWith('/labels') : false;
   return (
     <LabelButton isClicked={isClicked}>
       <LabelIcon size={15} />
