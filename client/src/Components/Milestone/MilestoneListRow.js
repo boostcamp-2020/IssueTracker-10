@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { request } from '../../Api';
 import { AuthStateContext } from '../../Context/AuthContext';
@@ -114,14 +114,13 @@ const LinkText = styled(Text)`
   }
 `;
 
-const MilestoneListRow = ({ milestone }) => {
+const MilestoneListRow = ({ milestone, history }) => {
   const { id, title, description, dateString, updatedAt, closed, open, state } = milestone;
   const dateTime = `Last updated about ${convertTime(updatedAt)}`;
   const authState = useContext(AuthStateContext);
   const milestoneDispatch = useContext(MilestoneDispatchContext);
   const total = closed + open;
   const closedPercent = getPercent(closed, total);
-  const history = useHistory();
 
   const deleteMilestone = async () => {
     const config = {
@@ -150,11 +149,6 @@ const MilestoneListRow = ({ milestone }) => {
       data: inputData,
     };
     await request(config);
-    if (state === 1) {
-      history.push('/milestones');
-    } else {
-      history.push('/milestones?state=closed');
-    }
   };
 
   const onClickDelete = () => {
@@ -163,6 +157,13 @@ const MilestoneListRow = ({ milestone }) => {
 
   const onClickToggleMilestone = () => {
     toggleMilestone();
+    if (state === 0) {
+      history.push('/milestones');
+      history.go(0);
+    } else {
+      history.push('/milestones?state=closed');
+      history.go(0);
+    }
   };
 
   return (
@@ -215,4 +216,4 @@ const MilestoneListRow = ({ milestone }) => {
   );
 };
 
-export default MilestoneListRow;
+export default withRouter(MilestoneListRow);
