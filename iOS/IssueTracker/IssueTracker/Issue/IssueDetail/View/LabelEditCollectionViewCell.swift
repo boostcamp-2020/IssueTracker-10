@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class LabelEditCollectionViewCell: UICollectionViewCell {
 
@@ -47,6 +48,7 @@ class LabelEditCollectionViewCell: UICollectionViewCell {
 
     @objc func longPressed(sender: UILongPressGestureRecognizer) {
         NotificationCenter.default.post(name: .EditLabelBegin, object: nil)
+		AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) { }
     }
 
     func configure(item: Label) {
