@@ -41,7 +41,7 @@ const InputContentLength = styled.div`
   font-size: 13px;
 `;
 
-const InputComment = () => {
+const InputComment = ({ rows = 10 }) => {
   const authState = useContext(AuthStateContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
   const { content } = useContext(IssueInfoContext);
@@ -87,7 +87,7 @@ const InputComment = () => {
       <InputContent
         placeholder="Leave a comment"
         ref={inputContent}
-        rows="10"
+        rows={rows}
         onChange={onChangeContent}
       />
       <InputContentLength ref={inputContentLength} />
