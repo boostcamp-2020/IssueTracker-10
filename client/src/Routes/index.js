@@ -9,6 +9,7 @@ import Header from '@Common/Header';
 import Search from '@Components/Label/Search';
 import Milestone from '@Components/Milestone/Milestone';
 import MilestoneCreate from '@Components/Milestone/MilestoneCreate';
+import MilestoneEdit from '@Components/Milestone/MilestoneEdit';
 import Authenticated from './Authenticated';
 
 export default () => {
@@ -26,10 +27,10 @@ export default () => {
       <Switch>
         <Authenticated exact path="/milestones" component={Milestone} />
         <Authenticated exact path="/milestones/new" component={MilestoneCreate} />
+        <Authenticated exact path="/milestones/:id/edit" component={MilestoneEdit} />
       </Switch>
       <Authenticated exact path="/labels" component={Label} />
       <Authenticated exact path="/search" component={Search} />
     </>
   );
 };
-
