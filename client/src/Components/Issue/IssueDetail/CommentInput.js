@@ -48,6 +48,13 @@ const CommentInput = () => {
   const { id, content, state } = useContext(IssueInfoContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
 
+  const fetchComments = async () => {
+    const config = { url: `/api/issue/${id}/comment`, method: 'GET', token: authState.token };
+    const { status, data = {} } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
+    if (data) issueInfoDispatch({ type: 'SET_COMMENTS', data });
+  };
+
   const onClickPostComment = async () => {
     const data = { content };
     const config = {
@@ -58,7 +65,10 @@ const CommentInput = () => {
     };
     const { status } = await request(config);
     if (status === 401) authDispatch({ type: 'LOGOUT' });
-    if (status === 200) toast.success('Success! 😄');
+    if (status === 200) {
+      issueInfoDispatch({ type: 'SET_CONTENT', data: '' });
+      fetchComments();
+    }
   };
 
   const onClickChangeIssueState = async () => {

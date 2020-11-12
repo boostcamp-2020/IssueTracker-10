@@ -62,6 +62,13 @@ export const issueInfoReducer = (state, action) => {
         state: newState,
       };
     }
+    case 'SET_COMMENTS': {
+      const comments = action.data;
+      return {
+        ...state,
+        comments,
+      };
+    }
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
