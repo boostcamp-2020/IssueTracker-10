@@ -90,6 +90,7 @@ const InputComment = ({ rows = 10 }) => {
         ref={inputContent}
         rows={rows}
         onChange={onChangeContent}
+        value={content}
       />
       <InputContentLength ref={inputContentLength} />
       <InputFileLabel htmlFor="inputFile">Attach files by selecting here</InputFileLabel>

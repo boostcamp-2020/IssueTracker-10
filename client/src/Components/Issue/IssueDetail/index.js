@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { AuthStateContext, AuthDispatchContext } from '../../../Context/AuthContext';
 import { request } from '../../../Api';
 import Header from './IssueDetailHeader';
-import IssueComment from './IssueComment';
 import CommentInput from './CommentInput';
 import IssueSideBar from '../IssueSideBar';
+import CommentList from './CommentList';
 import { IssueDispatchContext } from '../../../Context/IssueContext';
 import { MilestoneDispatchContext } from '../../../Context/MilestoneContext';
-import { IssueInfoContext, IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
+import { IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
 
 const Wrapper = styled.div`
   max-width: 1100px;
@@ -31,7 +31,6 @@ const IssueDetail = ({ match }) => {
   const { id } = match.params;
   const issueDispatch = useContext(IssueDispatchContext);
   const milestoneDispatch = useContext(MilestoneDispatchContext);
-  const issueInfoState = useContext(IssueInfoContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
   const [commentData, setCommentData] = useState([]);
 
