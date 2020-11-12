@@ -61,10 +61,10 @@ class LabelCollectionViewCell: UICollectionViewCell {
     func updateColor(flag: Bool) {
         if flag {
             self.backgroundColor = color
-            self.label.textColor = .white
+            self.label.textColor = UIColor(named: "LabelCellColor")
             
         } else {
-            self.backgroundColor = .white
+            self.backgroundColor = UIColor(named: "LabelCellColor")
             self.label.textColor = color
         }
     }
