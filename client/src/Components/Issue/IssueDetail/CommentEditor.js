@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import InputComment from '../InputComment';
+import { request } from '../../../Api';
+import { AuthStateContext, AuthDispatchContext } from '../../../Context/AuthContext';
+import { IssueInfoContext } from '../../../Context/IssueInfoContext';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -27,16 +30,29 @@ const UpdateButton = styled(CancelButton)`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-const CommentEditer = ({ setEdit }) => {
+const CommentEditer = ({ commentId, setEdit }) => {
+  const { content } = useContext(IssueInfoContext);
+  const { token } = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
+
   const onClickCancel = () => {
     setEdit(false);
   };
+  const onClickUpdateComment = async () => {
+    const data = { content };
+    const config = { url: `/api/comment/${commentId}`, method: 'PUT', data, token };
+    const { status } = await request(config);
+    if (status === 401) return authDispatch({ type: 'LOGOUT' });
+  };
+
+  useEffect(() => {}, []);
+
   return (
     <Wrapper>
       <InputComment rows={5} />
       <ButtonWrapper>
         <CancelButton onClick={onClickCancel}>Cancel</CancelButton>
-        <UpdateButton>Update comment</UpdateButton>
+        <UpdateButton onClick={onClickUpdateComment}>Update comment</UpdateButton>
       </ButtonWrapper>
     </Wrapper>
   );
