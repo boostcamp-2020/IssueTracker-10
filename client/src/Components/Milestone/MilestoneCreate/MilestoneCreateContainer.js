@@ -56,7 +56,9 @@ export default ({ history }) => {
 
   useEffect(() => {
     return () => {
-      setMilestone({});
+      setDate('');
+      setTitle('');
+      setDescription('');
     };
   }, []);
 
