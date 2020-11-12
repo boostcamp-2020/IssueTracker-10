@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { IssueInfoContext, IssueInfoDispatchContext } from '../../Context/IssueInfoContext';
 import { AuthStateContext } from '../../Context/AuthContext';
+import { getFontColor } from '../../utils/color';
 
 const Wrapper = styled.li`
   display: flex;
@@ -30,7 +31,7 @@ const Label = styled.div`
   padding: 5px 10px;
   border-radius: ${(props) => props.theme.radiusSmall};
   background-color: ${(props) => props.color};
-  color: ${(props) => props.theme.whiteColor};
+  color: ${(props) => props.fontColor};
   font-weight: 600;
 `;
 
@@ -85,10 +86,13 @@ export const checkedLabels = () => {
   }
   return labels.map((label) => {
     const { id, title, color } = label;
+    const fontColor = getFontColor(color);
 
     return (
       <Wrapper key={id}>
-        <Label color={color}>{title}</Label>
+        <Label color={color} fontColor={fontColor}>
+          {title}
+        </Label>
       </Wrapper>
     );
   });
