@@ -133,7 +133,7 @@ const MilestoneListRow = ({ milestone }) => {
       await request(config);
       if (state === 1) {
         milestoneDispatch({ type: 'DELETE_OPEN_MILESTONE', id });
-      } else {
+      } else if (state === 0) {
         milestoneDispatch({ type: 'DELETE_CLOSED_MILESTONE', id });
       }
     } catch (err) {
