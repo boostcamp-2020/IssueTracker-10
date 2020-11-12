@@ -41,7 +41,7 @@ const InputContentLength = styled.div`
   font-size: 13px;
 `;
 
-const InputComment = () => {
+const InputComment = ({ rows = 10 }) => {
   const authState = useContext(AuthStateContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
   const { content } = useContext(IssueInfoContext);
@@ -70,7 +70,7 @@ const InputComment = () => {
   };
 
   useEffect(() => {
-    const test = setTimeout(async () => {
+    const timer = setTimeout(async () => {
       const contentLength = inputContent.current.value.length;
       const inputContentLengthElement = inputContentLength.current;
       inputContentLengthElement.innerText = `${contentLength} characters`;
@@ -78,7 +78,7 @@ const InputComment = () => {
       inputContentLengthElement.innerText = '';
     }, 2000);
     return () => {
-      clearTimeout(test);
+      clearTimeout(timer);
     };
   }, [content]);
 
@@ -87,7 +87,7 @@ const InputComment = () => {
       <InputContent
         placeholder="Leave a comment"
         ref={inputContent}
-        rows="10"
+        rows={rows}
         onChange={onChangeContent}
       />
       <InputContentLength ref={inputContentLength} />

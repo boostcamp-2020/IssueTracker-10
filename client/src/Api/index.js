@@ -33,9 +33,9 @@ export const request = async (config) => {
       ...config,
       url: process.env.BASE_URL + config.url,
     });
-    return res.data;
+    return { status: res.status, ...res.data };
   } catch ({ response }) {
-    return {};
+    return { status: response.status };
   }
 };
 

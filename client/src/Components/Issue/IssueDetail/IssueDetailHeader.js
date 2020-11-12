@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssueOpenIcon, IssueClosedIcon } from '../../static/svgIcons';
 import { convertTime } from '../../../utils/convert';
+import { IssueInfoContext } from '../../../Context/IssueInfoContext';
 
 const HeaderWrapper = styled.div`
   position: relative;
@@ -68,6 +69,10 @@ export const CreateButton = styled.button`
   padding: 7px 12px;
   background-color: ${({ theme }) => theme.greenColor};
   font-size: 13px;
+  disabled: ${({ disabled }) => disabled};
+  &:disabled {
+    background-color: ${({ theme }) => theme.lightGrayColor};
+  }
 `;
 
 const EditButton = styled(CreateButton)`
@@ -76,8 +81,8 @@ const EditButton = styled(CreateButton)`
   border: ${({ theme }) => theme.border};
 `;
 
-const IssueDetailHeader = (props) => {
-  const { id, title, state, createdAt, user, commentCount } = props;
+const IssueDetailHeader = () => {
+  const { id, title, state, createdAt, user, commentCount } = useContext(IssueInfoContext);
   return (
     <HeaderWrapper>
       <TitleWrapper>
