@@ -85,6 +85,7 @@ const LabelListRow = ({ label }) => {
     try {
       const result = await request(config);
       if (result.status === 401) authDispatch({ type: 'LOGOUT' });
+      else (result.status === 404) toast.error('Not found! 🧐');
       toast.success('Success! 😄');
     } catch (err) {
       toast.error('Fail! 😭');
