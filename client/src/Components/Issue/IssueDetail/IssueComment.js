@@ -1,7 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import CommentEditor from './CommentEditor';
-import { IssueInfoContext, IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
+import { IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
+import { convertTime } from '../../../utils/convert';
 
 export const CommentWrapper = styled.div`
   display: flex;
@@ -83,7 +84,7 @@ const IssueComment = (props) => {
       <ContentWrapper>
         <ContentHeader>
           <HeaderText>
-            <Name>{user.username}</Name> commented
+            <Name>{user.username}</Name> commented {convertTime(createdAt)}
           </HeaderText>
           <EditorWrapper>
             <Badge>{isAuthor ? 'Author' : 'Member'}</Badge>
