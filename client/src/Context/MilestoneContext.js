@@ -37,11 +37,13 @@ export const milestoneReducer = (state, action) => {
     case 'DELETE_OPEN_MILESTONE': {
       return {
         openMilestone: state.openMilestone.filter((milestone) => milestone.id !== action.id),
+        closeMilestone: state.closeMilestone,
       };
     }
     case 'DELETE_CLOSED_MILESTONE': {
       return {
         closeMilestone: state.closeMilestone.filter((milestone) => milestone.id !== action.id),
+        openMilestone: state.openMilestone,
       };
     }
     default:
