@@ -9,7 +9,7 @@ import UIKit
 
 extension IssueDetailViewController: LabelEditViewDelegate {
     func labelEditView(_ labelEditView: LabelEditView, didSelectedPlus: Bool) {
-        let VC = LabelOfIssueCreateViewController()
+        let VC = LabelAppendViewController()
         VC.modalPresentationStyle = .overCurrentContext
         VC.transitioningDelegate = self
         VC.issue = self.issue

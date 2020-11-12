@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelAddCollectionViewCell: UICollectionViewCell {
+class LabelAppendCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var title: UILabel!
     

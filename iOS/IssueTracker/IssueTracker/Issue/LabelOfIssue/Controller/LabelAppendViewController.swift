@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelOfIssueCreateViewController: UIViewController {
+class LabelAppendViewController: UIViewController {
    
     let containerView = UIView()
     var issue: Issue!

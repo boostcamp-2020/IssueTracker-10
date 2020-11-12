@@ -13,9 +13,9 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
 
     private let type: PresentationType
     private let firstViewController: IssueDetailViewController
-    private let secondViewController: LabelOfIssueCreateViewController
+    private let secondViewController: LabelAppendViewController
     
-    init?(type: PresentationType, first: IssueDetailViewController, second: LabelOfIssueCreateViewController) {
+    init?(type: PresentationType, first: IssueDetailViewController, second: LabelAppendViewController) {
         self.type = type
         self.firstViewController = first
         self.secondViewController = second
