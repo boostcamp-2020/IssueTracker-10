@@ -70,7 +70,7 @@ const IssueComment = (props) => {
   const [edit, setEdit] = useState(false);
 
   const onClickEditComment = () => {
-    setEdit(!edit);
+    setEdit(true);
   };
 
   return (
@@ -87,7 +87,7 @@ const IssueComment = (props) => {
           </EditorWrapper>
         </ContentHeader>
         {edit ? (
-          <CommentEditor content={content} />
+          <CommentEditor content={content} setEdit={setEdit} />
         ) : (
           <Content>{content || 'No description provided.'}</Content>
         )}

@@ -27,12 +27,15 @@ const UpdateButton = styled(CancelButton)`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-const CommentEditer = () => {
+const CommentEditer = ({ setEdit }) => {
+  const onClickCancel = () => {
+    setEdit(false);
+  };
   return (
     <Wrapper>
       <InputComment rows={5} />
       <ButtonWrapper>
-        <CancelButton>Cancel</CancelButton>
+        <CancelButton onClick={onClickCancel}>Cancel</CancelButton>
         <UpdateButton>Update comment</UpdateButton>
       </ButtonWrapper>
     </Wrapper>
