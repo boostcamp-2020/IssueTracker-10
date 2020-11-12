@@ -49,6 +49,7 @@ export const issueInfoReducer = (state, action) => {
     case 'GET_ISSUE_INFO': {
       const { data } = action;
       return {
+        ...state,
         ...data,
       };
     }

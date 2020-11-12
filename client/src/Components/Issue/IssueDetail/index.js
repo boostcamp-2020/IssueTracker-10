@@ -36,7 +36,7 @@ const IssueDetail = ({ match }) => {
   const [commentData, setCommentData] = useState([]);
 
   const fetchUserInfo = async () => {
-    if (authState.user.id === null) {
+    if (!authState.user.id) {
       const config = { url: '/auth/user', method: 'GET', token: authState.token };
       const { data } = await request(config);
       if (data) {

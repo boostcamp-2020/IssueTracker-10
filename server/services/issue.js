@@ -71,7 +71,7 @@ const readIssueById = async (req, res) => {
     }
     const commentCount = await commentModel.commentCountById(issueId);
     issueInfo.dataValues.commentCount = commentCount;
-    if (issueInfo.mileston) {
+    if (issueInfo.milestone) {
       const { open, closed } = await issueModel.countIssuesByMilestone(issueInfo.milestone.id);
       const total = open + closed;
       const percent = `${Math.round((closed / total) * 100)}%`;
