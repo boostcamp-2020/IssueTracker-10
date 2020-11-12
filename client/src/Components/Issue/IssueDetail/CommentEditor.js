@@ -43,6 +43,7 @@ const CommentEditer = ({ commentId, setEdit }) => {
     const config = { url: `/api/comment/${commentId}`, method: 'PUT', data, token };
     const { status } = await request(config);
     if (status === 401) return authDispatch({ type: 'LOGOUT' });
+    setEdit(false);
   };
 
   useEffect(() => {}, []);
