@@ -115,7 +115,7 @@ class DetailPullUpView: UIView {
     
     func dragAnimation(constant: CGFloat) {
         self.heightConstraint.constant = constant
-        UIView.animate(withDuration: 0.8,
+        UIView.animate(withDuration: 0.6,
                        delay: 0,
                        usingSpringWithDamping: 0.8,
                        initialSpringVelocity: 0.8,

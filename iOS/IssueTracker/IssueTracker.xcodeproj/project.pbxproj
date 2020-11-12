@@ -108,7 +108,7 @@
 		E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3D43B2549AFC90040D5AF /* Criteria.swift */; };
 		E0F211AD255D15BC00CA50EC /* LabelAppendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211AB255D15BC00CA50EC /* LabelAppendCollectionViewCell.swift */; };
 		E0F211AE255D15BC00CA50EC /* LabelAppendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0F211AC255D15BC00CA50EC /* LabelAppendCollectionViewCell.xib */; };
-		E0F211BE255D20CA00CA50EC /* LabelAppend+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211BD255D20CA00CA50EC /* LabelAppend+UI.swift */; };
+		E0F211BE255D20CA00CA50EC /* LabelAppend+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211BD255D20CA00CA50EC /* LabelAppend+setup.swift */; };
 		E0F211C3255D20F700CA50EC /* LabelAppend+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211C2255D20F700CA50EC /* LabelAppend+CollectionView.swift */; };
 		E0F211D3255D243800CA50EC /* DetailAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211D2255D243800CA50EC /* DetailAnimator.swift */; };
 		E0F211D8255D245B00CA50EC /* IssueDetailViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F211D7255D245B00CA50EC /* IssueDetailViewController+.swift */; };
@@ -243,7 +243,7 @@
 		E0B3D43B2549AFC90040D5AF /* Criteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Criteria.swift; sourceTree = "<group>"; };
 		E0F211AB255D15BC00CA50EC /* LabelAppendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAppendCollectionViewCell.swift; sourceTree = "<group>"; };
 		E0F211AC255D15BC00CA50EC /* LabelAppendCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelAppendCollectionViewCell.xib; sourceTree = "<group>"; };
-		E0F211BD255D20CA00CA50EC /* LabelAppend+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelAppend+UI.swift"; sourceTree = "<group>"; };
+		E0F211BD255D20CA00CA50EC /* LabelAppend+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelAppend+setup.swift"; sourceTree = "<group>"; };
 		E0F211C2255D20F700CA50EC /* LabelAppend+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelAppend+CollectionView.swift"; sourceTree = "<group>"; };
 		E0F211D2255D243800CA50EC /* DetailAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAnimator.swift; sourceTree = "<group>"; };
 		E0F211D7255D245B00CA50EC /* IssueDetailViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IssueDetailViewController+.swift"; sourceTree = "<group>"; };
@@ -663,7 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				E085B16D255C6B8F0016B7B1 /* LabelAppendViewController.swift */,
-				E0F211BD255D20CA00CA50EC /* LabelAppend+UI.swift */,
+				E0F211BD255D20CA00CA50EC /* LabelAppend+setup.swift */,
 				E0F211C2255D20F700CA50EC /* LabelAppend+CollectionView.swift */,
 			);
 			path = Controller;
@@ -831,7 +831,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C32C5FC225500276008BBDCE /* KeychainItem.swift in Sources */,
-				E0F211BE255D20CA00CA50EC /* LabelAppend+UI.swift in Sources */,
+				E0F211BE255D20CA00CA50EC /* LabelAppend+setup.swift in Sources */,
 				E049B8952552715F004DD162 /* LabelListView.swift in Sources */,
 				C35BC3A9255BB53B00BD35E6 /* MileStone.swift in Sources */,
 				C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */,
