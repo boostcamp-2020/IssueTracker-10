@@ -169,14 +169,14 @@ export const renderMilestones = ({ selectedList, setSelecteList }) => {
   };
 
   const onClickMilestone = ({ id, title, open, closed }) => {
-    const total = open + closed;
-    const percent = getPercent(closed, total);
-    const data = { id, title, open, closed, percent };
     if (selectedListId === id) {
       if (!isCreate) fetchMilestone(methodType.remove, id);
       return setSelecteList(null);
     }
     if (!isCreate) fetchMilestone(methodType.add, id);
+    const total = open + closed;
+    const percent = isCreate ? getPercent(closed, total) : getPercent(closed, total + 1);
+    const data = { id, title, open, closed, percent };
     return setSelecteList(data);
   };
   return openMilestone.map((milestone) => (
