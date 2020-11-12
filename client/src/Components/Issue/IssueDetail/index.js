@@ -5,10 +5,10 @@ import { request } from '../../../Api';
 import Header from './IssueDetailHeader';
 import CommentInput from './CommentInput';
 import IssueSideBar from '../IssueSideBar';
-import IssueComment from './IssueComment';
+import CommentList from './CommentList';
 import { IssueDispatchContext } from '../../../Context/IssueContext';
 import { MilestoneDispatchContext } from '../../../Context/MilestoneContext';
-import { IssueInfoDispatchContext, IssueInfoContext } from '../../../Context/IssueInfoContext';
+import { IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
 
 const Wrapper = styled.div`
   max-width: 1100px;
@@ -31,6 +31,7 @@ const IssueDetail = ({ match }) => {
   const issueDispatch = useContext(IssueDispatchContext);
   const milestoneDispatch = useContext(MilestoneDispatchContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
+  const { id } = match.params;
 
   const fetchUserInfo = async () => {
     if (!authState.user.id) {
