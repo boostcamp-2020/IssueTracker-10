@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { parseCookies } from '@Util/cookie';
+import Login from '@Components/Login';
 import { AuthStateContext, AuthDispatchContext } from '../Context/AuthContext';
 
-export default ({ component: Component, page, ...rest }) => {
+export default ({ component: Component, ...rest }) => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   if (!authState.token) {
@@ -15,7 +16,7 @@ export default ({ component: Component, page, ...rest }) => {
       {...rest}
       render={({ location, ...props }) =>
         authState.token ? (
-          <CheckLogin Component={Component} page={page} {...props} location={location} />
+          <Component {...props} location={location} />
         ) : (
           <Redirect
             to={{
@@ -29,19 +30,23 @@ export default ({ component: Component, page, ...rest }) => {
   );
 };
 
-const CheckLogin = ({ Component, page, location, ...rest }) => {
+export const CheckLogin = ({ component: Component, ...rest }) => {
+  const authState = useContext(AuthStateContext);
   return (
-    <>
-      {page !== 'login' ? (
-        <Component location={location} {...rest} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/',
-            state: { from: location },
-          }}
-        />
-      )}
-    </>
+    <Route
+      {...rest}
+      render={({ location, ...props }) =>
+        authState.token ? (
+          <Redirect
+            to={{
+              pathname: '/',
+              state: { from: location },
+            }}
+          />
+        ) : (
+          <Login {...props} location={location} />
+        )
+      }
+    />
   );
 };
