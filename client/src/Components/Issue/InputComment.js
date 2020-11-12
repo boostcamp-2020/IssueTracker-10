@@ -70,7 +70,7 @@ const InputComment = () => {
   };
 
   useEffect(() => {
-    const test = setTimeout(async () => {
+    const timer = setTimeout(async () => {
       const contentLength = inputContent.current.value.length;
       const inputContentLengthElement = inputContentLength.current;
       inputContentLengthElement.innerText = `${contentLength} characters`;
@@ -78,7 +78,7 @@ const InputComment = () => {
       inputContentLengthElement.innerText = '';
     }, 2000);
     return () => {
-      clearTimeout(test);
+      clearTimeout(timer);
     };
   }, [content]);
 
