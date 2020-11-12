@@ -55,6 +55,13 @@ export const issueInfoReducer = (state, action) => {
         isCreate: false,
       };
     }
+    case 'SET_STATE': {
+      const { state: newState } = action.data;
+      return {
+        ...state,
+        state: newState,
+      };
+    }
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
