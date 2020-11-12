@@ -91,10 +91,6 @@ const Issue = ({ token }) => {
   };
 
   useEffect(() => {
-    if (!authState.token) authDispatch({ type: 'LOGIN', token });
-  }, []);
-
-  useEffect(() => {
     if (authState.token) {
       fetchHeader();
       fetchIssues();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from '@Components/Login';
-import Main from '@Components/Main';
+import Issue from '@Components/Issue/Issue';
 import IssueDetail from '@Components/Issue/IssueDetail';
 import Label from '@Components/Label/Label';
 import NewIssue from '@Components/Issue/NewIssue';
@@ -18,7 +18,7 @@ export default () => {
         <Route exact path="/login" page="login" component={Login} />
         <Header />
       </Switch>
-      <Authenticated exact path="/" component={Main} />
+      <Authenticated exact path="/" component={Issue} />
       <Switch>
         <Authenticated exact path="/issue/new" component={NewIssue} />
         <Authenticated path="/issue/:id" component={IssueDetail} />
