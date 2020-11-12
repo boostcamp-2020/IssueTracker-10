@@ -29,8 +29,8 @@ const Count = styled.span`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-const LabelMilestoneButton = ({ hasCount, count, pathname }) => {
-  const isClicked = pathname ? pathname.startsWith('/milestones') : false;
+const LabelMilestoneButton = ({ hasCount, count, pathname = false }) => {
+  const isClicked = pathname.startsWith('/milestones');
   return (
     <MilestoneButton isClicked={isClicked}>
       <MilestoneIcon size={15} />
