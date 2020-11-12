@@ -2,10 +2,15 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import { ContentWrapper, CommentWrapper, UserAvater } from './IssueComment';
-import { AuthStateContext } from '../../../Context/AuthContext';
-import { IssueInfoContext } from '../../../Context/IssueInfoContext';
+import { AuthStateContext, AuthDispatchContext } from '../../../Context/AuthContext';
+import { IssueInfoContext, IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
 import InputComment from '../InputComment';
 import { request } from '../../../Api';
+
+const issueState = {
+  open: 1,
+  closed: 0,
+};
 
 const InputHeader = styled.div`
   height: 23px;
@@ -31,14 +36,16 @@ const ButtonWrapper = styled.span`
   padding: 10px 10px;
 `;
 
-const StateButton = styled(Button)`
+const ChangeStateButton = styled(Button)`
   background-color: ${(props) => props.theme.redColor};
 `;
 
 const CommentInput = () => {
   const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const { user } = useContext(AuthStateContext);
-  const { id, content } = useContext(IssueInfoContext);
+  const { id, content, state } = useContext(IssueInfoContext);
+  const issueInfoDispatch = useContext(IssueInfoDispatchContext);
 
   const onClickPostComment = async () => {
     const data = { content };
@@ -48,8 +55,22 @@ const CommentInput = () => {
       token: authState.token,
       data,
     };
-    const result = await request(config);
-    if (result) alert('커멘트 추가 성공');
+    const { status } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
+  };
+
+  const onClickChangeIssueState = async () => {
+    const newState = state ? issueState.closed : issueState.open;
+    const data = { state: newState, issueIds: [id] };
+    const config = {
+      url: `/api/issue/state`,
+      method: 'PUT',
+      token: authState.token,
+      data,
+    };
+    const { status } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
+    if (status === 200) issueInfoDispatch({ type: 'SET_STATE', data });
   };
 
   return (
@@ -63,7 +84,10 @@ const CommentInput = () => {
           <InputComment rows={5} />
         </InputCommentWrapper>
         <ButtonWrapper>
-          <StateButton>Close Issue</StateButton>
+          <ChangeStateButton
+            text={state ? 'Close issue' : 'Reopen issue'}
+            onClick={onClickChangeIssueState}
+          />
           <Button disabled={!content} onClick={onClickPostComment} text="Comment" />
         </ButtonWrapper>
       </ContentWrapper>
