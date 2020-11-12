@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Login from '@Components/Login';
+import { Switch } from 'react-router-dom';
 import Issue from '@Components/Issue/Issue';
 import IssueDetail from '@Components/Issue/IssueDetail';
 import Label from '@Components/Label/Label';
@@ -10,13 +9,13 @@ import Search from '@Components/Label/Search';
 import Milestone from '@Components/Milestone/Milestone';
 import MilestoneCreate from '@Components/Milestone/MilestoneCreate';
 import MilestoneEdit from '@Components/Milestone/MilestoneEdit';
-import Authenticated from './Authenticated';
+import Authenticated, { CheckLogin } from './Authenticated';
 
 export default () => {
   return (
     <>
       <Switch>
-        <Route exact path="/login" page="login" component={Login} />
+        <CheckLogin exact path="/login" />
         <Header />
       </Switch>
       <Authenticated exact path="/" component={Issue} />

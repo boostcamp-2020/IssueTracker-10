@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { deleteCookies } from '@Util/cookie';
 
 export const initialAuthState = {
   token:
@@ -25,6 +26,7 @@ export const authReducer = (state, action) => {
       };
     }
     case 'LOGOUT': {
+      deleteCookies('auth', state.token);
       localStorage.removeItem('token');
       return {
         ...state,
