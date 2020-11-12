@@ -9,9 +9,10 @@ const LabelButton = styled.button`
   padding: 10px 20px;
   border: 1px solid ${(props) => props.theme.grayColor};
   border-radius: ${(props) => props.theme.radius} 0 0 ${(props) => props.theme.radius};
-  background-color: ${(props) => props.theme.skyblueColor};
+  background-color: ${(props) =>
+    props.isClicked ? props.theme.blueColor : props.theme.skyblueColor};
   svg {
-    fill: ${(props) => props.theme.whiteColor};
+    fill: ${(props) => (props.isClicked ? props.theme.skyblueColor : props.theme.blueColor)};
   }
 `;
 
@@ -29,9 +30,10 @@ const Count = styled.span`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-const LabelMilestoneButton = ({ hasCount, count }) => {
+const LabelMilestoneButton = ({ hasCount, count, pathname = false }) => {
+  const isClicked = pathname.startsWith('/labels');
   return (
-    <LabelButton>
+    <LabelButton isClicked={isClicked}>
       <LabelIcon size={15} />
       <ButtonTitle>Labels</ButtonTitle>
       {hasCount && <Count>{count}</Count>}

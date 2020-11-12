@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { request } from '../../Api';
 import { AuthStateContext, AuthDispatchContext } from '../../Context/AuthContext';
@@ -34,7 +35,8 @@ const ColumnContainer = styled.div`
   }
 `;
 
-const Label = ({ token }) => {
+const Label = ({ token, location }) => {
+  const { pathname } = location;
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   const labelState = useContext(LabelStateContext);
@@ -65,7 +67,7 @@ const Label = ({ token }) => {
     <Wrapper>
       <RowContainer>
         <ColumnContainer>
-          <LabelMilestoneButton issueHeader="" />
+          <LabelMilestoneButton issueHeader="" pathname={pathname} />
           <LabelFilter />
         </ColumnContainer>
         <ColumnContainer>
@@ -82,4 +84,4 @@ const Label = ({ token }) => {
   );
 };
 
-export default Label;
+export default withRouter(Label);

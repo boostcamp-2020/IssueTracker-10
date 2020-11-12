@@ -61,6 +61,7 @@ const ButtonRow = styled.div`
   align-items: center;
 `;
 export default ({
+  pathname,
   onClickUpdateMilestone,
   onChangeTitle,
   onChangeDate,
@@ -78,7 +79,7 @@ export default ({
   return (
     <Wrapper>
       <RowContainer>
-        <LabelMilestoneButton issueHeader="" />
+        <LabelMilestoneButton issueHeader="" pathname={pathname} />
       </RowContainer>
       <RowContainer>
         <InputMilestone value={title || ''} onChange={onChangeTitle} placeholder="Title" />
