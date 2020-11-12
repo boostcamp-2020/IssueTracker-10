@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { getFontColor } from '@Util/color';
 import { request } from '../../Api';
 import { AuthStateContext } from '../../Context/AuthContext';
 import { LabelDispatchContext } from '../../Context/LabelContext';
@@ -68,6 +69,8 @@ const LabelListRow = ({ label }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const authState = useContext(AuthStateContext);
   const labelDispatch = useContext(LabelDispatchContext);
+  const fontColor = getFontColor(color);
+
   const toggleDisplay = () => {
     setDisplay(!display);
   };
@@ -106,7 +109,7 @@ const LabelListRow = ({ label }) => {
         ) : (
           <>
             <BadgeColumn>
-              <LabelBadge title={title} color={color} />
+              <LabelBadge title={title} color={color} fontColor={fontColor} />
             </BadgeColumn>
             <DescriptColumn>
               <DescriptText>{description}</DescriptText>
