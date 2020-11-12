@@ -6,6 +6,7 @@ const findAllCommentByIssueId = async (issueId) => {
     const commentInfo = await comment.findAll({
       attributes: ['id', 'content', 'createdAt', 'updatedAt'],
       where: { issueId },
+      order: ['id'],
       include: [
         {
           model: user,
@@ -45,7 +46,7 @@ const createComment = async (commentData) => {
 const commentCountById = async (id) => {
   try {
     const commentCount = comment.count({
-      where: { id },
+      where: { issueId: id },
     });
 
     return commentCount;
