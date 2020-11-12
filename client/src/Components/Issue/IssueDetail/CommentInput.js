@@ -58,7 +58,7 @@ const CommentInput = () => {
     };
     const { status } = await request(config);
     if (status === 401) authDispatch({ type: 'LOGOUT' });
-    if (result) toast.success('Success! 😄');
+    if (status === 200) toast.success('Success! 😄');
   };
 
   const onClickChangeIssueState = async () => {
