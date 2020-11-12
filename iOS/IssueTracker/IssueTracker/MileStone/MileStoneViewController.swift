@@ -21,6 +21,7 @@ class MileStoneViewController: UIViewController {
 		dataSource = MileStoneDiffableDataSource(with: mileStoneCollectionView)
 		mileStoneCollectionView.collectionViewLayout = createLayout()
 		mileStoneCollectionView.delegate = self
+		configureRefreshControl()
 		binding()
 	}
 	
@@ -62,6 +63,19 @@ class MileStoneViewController: UIViewController {
 			return viewController
 		}
 		return nil
+	}
+	
+	func configureRefreshControl () {
+		mileStoneCollectionView.refreshControl = UIRefreshControl()
+		mileStoneCollectionView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+	}
+	
+	@objc func handleRefreshControl() {
+		NotificationCenter.default.post(name: .mileStoneDidCreated, object: self)
+		
+		DispatchQueue.main.async {
+			self.mileStoneCollectionView.refreshControl?.endRefreshing()
+		}
 	}
 }
 

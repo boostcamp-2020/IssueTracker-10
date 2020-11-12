@@ -10,8 +10,8 @@ import UIKit
 class LabelViewController: UIViewController {
 	
 	@IBOutlet weak var labelTableView: UITableView!
-	var dataSource: LabelDiffableDataSource!
 	
+	var dataSource: LabelDiffableDataSource!
 	let viewModel = LabelViewModel(reactor: LabelReactor(), state: LabelState())
 	
 	override func viewDidLoad() {
