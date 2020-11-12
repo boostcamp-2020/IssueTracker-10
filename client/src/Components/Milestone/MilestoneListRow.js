@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { request } from '../../Api';
+import { AuthStateContext } from '../../Context/AuthContext';
+import { MilestoneDispatchContext } from '../../Context/MilestoneContext';
 import { convertTime } from '../../utils/convert';
 import getPercent from '../../utils/getPercent';
 import BoldText from '../Common/BoldText';
@@ -111,10 +115,56 @@ const LinkText = styled(Text)`
 `;
 
 const MilestoneListRow = ({ milestone }) => {
-  const { title, description, dateString, updatedAt, closed, open } = milestone;
+  const { id, title, description, dateString, updatedAt, closed, open, state } = milestone;
   const dateTime = `Last updated about ${convertTime(updatedAt)}`;
+  const authState = useContext(AuthStateContext);
+  const milestoneDispatch = useContext(MilestoneDispatchContext);
   const total = closed + open;
   const closedPercent = getPercent(closed, total);
+  const history = useHistory();
+
+  const deleteMilestone = async () => {
+    const config = {
+      url: `/api/milestone/${id}`,
+      method: 'DELETE',
+      token: authState.token,
+    };
+    try {
+      await request(config);
+      if (state === 1) {
+        milestoneDispatch({ type: 'DELETE_OPEN_MILESTONE', id });
+      } else {
+        milestoneDispatch({ type: 'DELETE_CLOSED_MILESTONE', id });
+      }
+    } catch (err) {
+      throw new Error(err.response);
+    }
+  };
+
+  const toggleMilestone = async () => {
+    const inputData = { state: state === 0 ? 1 : 0 };
+    const config = {
+      url: `/api/milestone/${id}/state`,
+      method: 'PUT',
+      token: authState.token,
+      data: inputData,
+    };
+    await request(config);
+    if (state === 1) {
+      history.push('/milestones');
+    } else {
+      history.push('/milestones?state=closed');
+    }
+  };
+
+  const onClickDelete = () => {
+    deleteMilestone();
+  };
+
+  const onClickToggleMilestone = () => {
+    toggleMilestone();
+  };
+
   return (
     <Wrapper>
       <Column>
@@ -154,9 +204,11 @@ const MilestoneListRow = ({ milestone }) => {
           </ProgressInfo>
         </Row>
         <Row>
-          <LinkText>Edit</LinkText>
-          <LinkText>Close</LinkText>
-          <LinkText>Delete</LinkText>
+          <Link to={`milestones/${id}/edit`}>
+            <LinkText>Edit</LinkText>
+          </Link>
+          <LinkText onClick={onClickToggleMilestone}>{state === 0 ? 'Open' : 'Close'}</LinkText>
+          <LinkText onClick={onClickDelete}>Delete</LinkText>
         </Row>
       </Column>
     </Wrapper>
