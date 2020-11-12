@@ -70,7 +70,7 @@ const CancelWrapper = styled.div`
   }
 `;
 
-export default withRouter(({ location: { search }, token }) => {
+export default withRouter(({ location: { search, pathname }, token }) => {
   const query = search.split('=')[1].toLowerCase().trim();
 
   const authState = useContext(AuthStateContext);
@@ -90,8 +90,9 @@ export default withRouter(({ location: { search }, token }) => {
     if (authState.token) {
       const fetchLabels = async () => {
         const config = { url: '/api/label', method: 'GET', token: authState.token };
-        const { data } = await request(config);
-        if (data) labelDispatch({ type: 'GET', labels: data });
+        const result = await request(config);
+        if (result.status === 401) authDispatch({ type: 'LOGOUT' });
+        if (result.data) labelDispatch({ type: 'GET', labels: result.data });
       };
       fetchLabels();
     }
@@ -101,7 +102,7 @@ export default withRouter(({ location: { search }, token }) => {
     <Wrapper>
       <RowContainer>
         <ColumnContainer>
-          <LabelMilestoneButton issueHeader="" />
+          <LabelMilestoneButton issueHeader="" pathname={pathname} />
           <LabelFilter />
         </ColumnContainer>
       </RowContainer>

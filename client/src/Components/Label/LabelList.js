@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import BoldText from '../Common/BoldText';
 import LabelListRow from './LabelListRow';
 
 const LabelListWrapper = styled.div`

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 import Button from './Button';
 import { ContentWrapper, CommentWrapper, UserAvater } from './IssueComment';
-import { AuthStateContext, AuthDispatchContext } from '../../../Context/AuthContext';
+import { AuthDispatchContext, AuthStateContext } from '../../../Context/AuthContext';
 import { IssueInfoContext, IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
 import InputComment from '../InputComment';
 import { request } from '../../../Api';
@@ -57,6 +58,7 @@ const CommentInput = () => {
     };
     const { status } = await request(config);
     if (status === 401) authDispatch({ type: 'LOGOUT' });
+    if (status === 200) toast.success('Success! 😄');
   };
 
   const onClickChangeIssueState = async () => {

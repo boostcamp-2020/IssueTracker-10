@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { request } from '../../Api';
-import { AuthStateContext } from '../../Context/AuthContext';
+import { AuthDispatchContext, AuthStateContext } from '../../Context/AuthContext';
 import { MilestoneDispatchContext } from '../../Context/MilestoneContext';
 import { convertTime } from '../../utils/convert';
 import getPercent from '../../utils/getPercent';
@@ -118,6 +119,7 @@ const MilestoneListRow = ({ milestone, history }) => {
   const { id, title, description, dateString, updatedAt, closed, open, state } = milestone;
   const dateTime = `Last updated about ${convertTime(updatedAt)}`;
   const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const milestoneDispatch = useContext(MilestoneDispatchContext);
   const total = closed + open;
   const closedPercent = getPercent(closed, total);
@@ -129,14 +131,16 @@ const MilestoneListRow = ({ milestone, history }) => {
       token: authState.token,
     };
     try {
-      await request(config);
+      const { status } = await request(config);
+      if (status === 401) authDispatch({ type: 'LOGOUT' });
       if (state === 1) {
         milestoneDispatch({ type: 'DELETE_OPEN_MILESTONE', id });
       } else if (state === 0) {
         milestoneDispatch({ type: 'DELETE_CLOSED_MILESTONE', id });
       }
+      toast.success('Success! 😄');
     } catch (err) {
-      throw new Error(err.response);
+      toast.error('Fail! 😭');
     }
   };
 
@@ -148,7 +152,8 @@ const MilestoneListRow = ({ milestone, history }) => {
       token: authState.token,
       data: inputData,
     };
-    await request(config);
+    const { status } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
   };
 
   const onClickDelete = () => {

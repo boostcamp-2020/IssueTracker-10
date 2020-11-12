@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { getFontColor } from '@Util/color';
+import { toast } from 'react-toastify';
 import { request } from '../../Api';
-import { AuthStateContext } from '../../Context/AuthContext';
+import { AuthDispatchContext, AuthStateContext } from '../../Context/AuthContext';
 import { LabelDispatchContext } from '../../Context/LabelContext';
 import LabelBadge from './LabelBadge';
 import LabelUpdateModal from './LabelUpdateModal';
@@ -68,6 +69,7 @@ const LabelListRow = ({ label }) => {
   const [display, setDisplay] = useState(false);
   const [displayModal, setDisplayModal] = useState(false);
   const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const labelDispatch = useContext(LabelDispatchContext);
   const fontColor = getFontColor(color);
 
@@ -81,9 +83,12 @@ const LabelListRow = ({ label }) => {
   const deleteLabel = async (inputData) => {
     const config = { url: `/api/label/${inputData.id}`, method: 'DELETE', token: authState.token };
     try {
-      await request(config);
+      const result = await request(config);
+      if (result.status === 401) authDispatch({ type: 'LOGOUT' });
+      else (result.status === 404) toast.error('Not found! 🧐');
+      toast.success('Success! 😄');
     } catch (err) {
-      throw new Error(err.response);
+      toast.error('Fail! 😭');
     }
   };
 
