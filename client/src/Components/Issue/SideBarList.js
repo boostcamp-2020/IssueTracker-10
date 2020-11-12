@@ -85,12 +85,15 @@ export const renderUsers = ({ selectedList, setSelecteList }) => {
 
   const onClickAssignee = ({ id, username, avatar }) => {
     const data = { id, username, avatar };
-    if (selectedListId.includes(id)) {
-      if (!isCreate) fetchAssignee(methodType.remove, id);
+    const isExist = selectedListId.includes(id);
+    if (!isCreate) {
+      const method = isExist ? methodType.remove : methodType.add;
+      fetchAssignee(method, id);
+    }
+    if (isExist) {
       const newList = selectedList.filter((user) => id !== user.id);
       return setSelecteList(newList);
     }
-    if (!isCreate) fetchAssignee(methodType.add, id);
     return setSelecteList([...selectedList, data]);
   };
 
@@ -129,14 +132,18 @@ export const renderLabels = ({ selectedList, setSelecteList }) => {
 
   const onClickLabel = ({ id, color, title }) => {
     const data = { id, color, title };
-    if (selectedListId.includes(id)) {
-      if (!isCreate) fetchLabel(methodType.remove, id);
-      const newList = selectedList.filter((label) => id !== label.id);
+    const isExist = selectedListId.includes(id);
+    if (!isCreate) {
+      const method = isExist ? methodType.remove : methodType.add;
+      fetchLabel(method, id);
+    }
+    if (isExist) {
+      const newList = selectedList.filter((user) => id !== user.id);
       return setSelecteList(newList);
     }
-    if (!isCreate) fetchLabel(methodType.add, id);
     return setSelecteList([...selectedList, data]);
   };
+
   return labels.map((label) => (
     <ModalRow key={label.id} onClick={() => onClickLabel(label)}>
       <Wrapper>
@@ -169,14 +176,15 @@ export const renderMilestones = ({ selectedList, setSelecteList }) => {
   };
 
   const onClickMilestone = ({ id, title, open, closed }) => {
-    if (selectedListId === id) {
-      if (!isCreate) fetchMilestone(methodType.remove, id);
-      return setSelecteList(null);
-    }
-    if (!isCreate) fetchMilestone(methodType.add, id);
+    const isExist = selectedListId === id;
     const total = open + closed;
     const percent = isCreate ? getPercent(closed, total) : getPercent(closed, total + 1);
     const data = { id, title, open, closed, percent };
+    if (!isCreate) {
+      const method = isExist ? methodType.remove : methodType.add;
+      fetchMilestone(method, id);
+    }
+    if (isExist) return setSelecteList(null);
     return setSelecteList(data);
   };
   return openMilestone.map((milestone) => (
