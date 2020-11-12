@@ -1,5 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+// import MarkdownPreview from '@uiw/react-markdown-preview';
+// import ReactMarkdown from 'react-markdown';
+import Markdown from './Markdown';
+
+window.process = { cwd: () => '' };
 
 export const CommentWrapper = styled.div`
   display: flex;
@@ -65,7 +70,7 @@ const IssueComment = (props) => {
           </HeaderText>
           <Badge>{isAuthor ? 'Author' : 'Member'}</Badge>
         </ContentHeader>
-        <Content>{content || 'No description provided.'}</Content>
+        <Content>{content ? <Markdown source={content} /> : 'No description provided.'}</Content>
       </ContentWrapper>
     </CommentWrapper>
   );

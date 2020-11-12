@@ -27,6 +27,7 @@ const InputFileLabel = styled.label`
   background: none;
   border-top: ${(props) => props.theme.borderDashed};
   text-align: left;
+  font-size: 13px;
   cursor: pointer;
 `;
 

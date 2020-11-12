@@ -63,7 +63,7 @@ const CommentInput = () => {
           <InputComment rows={5} />
         </InputCommentWrapper>
         <ButtonWrapper>
-          <StateButton>Close Issue</StateButton>
+          <StateButton text="Close Issue" />
           <Button disabled={!content} onClick={onClickPostComment} text="Comment" />
         </ButtonWrapper>
       </ContentWrapper>

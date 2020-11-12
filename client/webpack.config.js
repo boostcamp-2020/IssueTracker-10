@@ -14,7 +14,7 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    fallback: { path: require.resolve('path-browserify') },
   },
   devtool: 'eval-cheap-source-map',
   devServer: {
@@ -53,5 +53,8 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({ filename: 'app.css' }),
     new Dotenv(),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
   ],
 };
