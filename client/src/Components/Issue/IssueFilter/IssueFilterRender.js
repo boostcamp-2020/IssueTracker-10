@@ -136,6 +136,8 @@ export const renderMark = () => {
     };
     const result = await request(config);
     if (result.status === 401) return authDispatch({ type: 'LOGOUT' });
+    elif (result.status === 500) toast.error('Fail! 😭');
+    else (result.status === 404) toast.error('Not found! 🧐');
     if (result) toast.success('Success! 😄');
     return result;
   };
