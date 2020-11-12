@@ -46,7 +46,7 @@ const createComment = async (commentData) => {
 const commentCountById = async (id) => {
   try {
     const commentCount = comment.count({
-      where: { id },
+      where: { issueId: id },
     });
 
     return commentCount;
