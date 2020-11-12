@@ -10,25 +10,26 @@ export default ({ setDisplay, toggleDisplay }) => {
   const authState = useContext(AuthStateContext);
   const labelState = useContext(LabelStateContext);
   const labelDispatch = useContext(LabelDispatchContext);
+  const [id, setId] = useState(null);
   const [color, setColor] = useState(null);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [fontColor, setFontColor] = useState(null);
   const [isExist, setIsExist] = useState(false);
-  const [label, setLabel] = useState({
-    id: '',
-    title: '',
-    description: '',
-    color,
-  });
+  const [label, setLabel] = useState({});
   const cancelButtonColor = theme.redColor;
   const createLabelButtonColor = theme.greenColor;
 
-  const postLabel = async (inputData) => {
+  const postLabel = async () => {
+    const inputData = {
+      title,
+      description,
+      color,
+    };
     const config = { url: '/api/label', method: 'POST', token: authState.token, data: inputData };
     try {
       const data = await request(config);
-      setLabel({ ...label, id: data.id });
+      if (data.id) labelDispatch({ type: 'CREATE', label: { id: data.id, ...inputData } });
     } catch (err) {
       throw new Error(err.response);
     }
@@ -36,7 +37,7 @@ export default ({ setDisplay, toggleDisplay }) => {
 
   const clickCreateLabelButton = () => {
     postLabel(label);
-    labelDispatch({ type: 'CREATE', label });
+
     setColor('');
     setTitle('');
     setColor(getRandomColor());
@@ -58,18 +59,22 @@ export default ({ setDisplay, toggleDisplay }) => {
       color: randomColor,
     });
     return () => {
-      setLabel({ id: '', title: '', description: '', color });
+      setId('');
+      setTitle('');
+      setDescription('');
+      setLabel({});
     };
   }, []);
 
   useEffect(() => {
     setLabel({
       ...label,
+      id,
       color,
       title,
       description,
     });
-  }, [color, title, description]);
+  }, [id, color, title, description]);
 
   const onChangeTitle = (event) => {
     const {
