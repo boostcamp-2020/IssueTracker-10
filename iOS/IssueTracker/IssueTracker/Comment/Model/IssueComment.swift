@@ -12,7 +12,11 @@ struct IssueCommentResponse: Decodable{
     let data: [IssueComment]
 }
 
-struct IssueComment: Decodable {
+struct IssueComment: Decodable, Hashable {
+	static func == (lhs: IssueComment, rhs: IssueComment) -> Bool {
+		return lhs.id == rhs.id
+	}
+	
     let id: Int
     let content: String
     let createdAt: String
