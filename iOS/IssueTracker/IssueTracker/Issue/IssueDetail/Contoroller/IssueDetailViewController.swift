@@ -11,15 +11,17 @@ class IssueDetailViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     var pullUPView: DetailPullUpView!
+	var dataSource: IssueDetailDataSource!
     var viewModel: IssueDetailViewModel!
     var issue: Issue!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.transitioningDelegate = self
-        viewModel = IssueDetailViewModel(reactor: IssueDetailReactor(),
-                                         state: IssueDetailState(issue: issue))
-        configureCollectionView()
+		configureCollectionView()
+		viewModel = IssueDetailViewModel(reactor: IssueDetailReactor(),
+										 state: IssueDetailState(issue: issue))
+		dataSource = IssueDetailDataSource(collectionView: collectionView, issueDetail: issue)
         setupUI()
         binding() // after setupUI
     }
@@ -42,10 +44,8 @@ class IssueDetailViewController: UIViewController {
     
     func binding() {
         viewModel.updateClosure = { state in
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.pullUPView.labelEdit.labels = state.issue.labels
-            }
+			self.dataSource.updateDataSource(comments: state.comments)
+			self.pullUPView.labelEdit.labels = state.issue.labels
         }
         pullUPView.commentDidTouched = {
             self.presentCreateViewController(issue: self.issue)

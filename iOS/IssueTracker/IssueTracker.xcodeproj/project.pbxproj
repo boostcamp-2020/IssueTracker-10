@@ -21,6 +21,7 @@
 		C32C5FB3254FEBC9008BBDCE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FB2254FEBC9008BBDCE /* SignInViewController.swift */; };
 		C32C5FC225500276008BBDCE /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FC125500276008BBDCE /* KeychainItem.swift */; };
 		C32C5FCA25500430008BBDCE /* UIViewController+showLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C5FC925500430008BBDCE /* UIViewController+showLoginView.swift */; };
+		C340F217255D52ED0076619B /* IssueDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C340F216255D52ED0076619B /* IssueDetailDataSource.swift */; };
 		C3414FA525480104003C845A /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FA425480104003C845A /* LabelViewController.swift */; };
 		C3414FAD2548018D003C845A /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FAC2548018D003C845A /* Issue.swift */; };
 		C3414FC425481BF6003C845A /* IssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3414FC325481BF6003C845A /* IssueManager.swift */; };
@@ -150,6 +151,7 @@
 		C32C5FBA254FF1D7008BBDCE /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		C32C5FC125500276008BBDCE /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
 		C32C5FC925500430008BBDCE /* UIViewController+showLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+showLoginView.swift"; sourceTree = "<group>"; };
+		C340F216255D52ED0076619B /* IssueDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailDataSource.swift; sourceTree = "<group>"; };
 		C3414FA425480104003C845A /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		C3414FAC2548018D003C845A /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		C3414FC325481BF6003C845A /* IssueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueManager.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 		E037F2552559329900DAD98B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C340F216255D52ED0076619B /* IssueDetailDataSource.swift */,
 				E037F2A7255A53CA00DAD98B /* IssueDetailReactor.swift */,
 				E037F2A8255A53CA00DAD98B /* IssueDetailState.swift */,
 				E037F2A9255A53CA00DAD98B /* IssueDetailViewModel.swift */,
@@ -872,6 +875,7 @@
 				C3DB04E42551089C00F0910E /* Storage.swift in Sources */,
 				C3414FA525480104003C845A /* LabelViewController.swift in Sources */,
 				E09C1E6125506C4000A1FADF /* IssueDetailCellHeader.swift in Sources */,
+				C340F217255D52ED0076619B /* IssueDetailDataSource.swift in Sources */,
 				E0B3D43C2549AFC90040D5AF /* Criteria.swift in Sources */,
 				C35BC3B3255BB73D00BD35E6 /* MileStoneDataSource.swift in Sources */,
 				E037F2B7255A805600DAD98B /* DetailPullUpView.swift in Sources */,
