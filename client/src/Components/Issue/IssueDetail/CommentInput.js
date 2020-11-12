@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { CreateButton as Button } from './IssueDetailHeader';
 import { ContentWrapper, CommentWrapper, UserAvater } from './IssueComment';
-import { IssueInfoContext } from '../../../Context/IssueInfoContext';
+import { AuthStateContext } from '../../../Context/AuthContext';
 
 const InputHeader = styled.div`
   height: 23px;
@@ -41,7 +41,7 @@ const StateButton = styled(Button)`
 `;
 
 const CommentInput = () => {
-  const { user } = useContext(IssueInfoContext);
+  const { user } = useContext(AuthStateContext);
 
   return (
     <CommentWrapper>
