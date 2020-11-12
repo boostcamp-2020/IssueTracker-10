@@ -66,7 +66,8 @@ const Issue = ({ token }) => {
       method: 'GET',
       token: authState.token,
     };
-    const { data } = await request(config);
+    const { status, data } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
     if (data) setIssueHeader(data);
   };
 
@@ -77,7 +78,8 @@ const Issue = ({ token }) => {
       token: authState.token,
       params: convertFilterParams(issueState.filter),
     };
-    const { data } = await request(config);
+    const { status, data } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
     if (data) issueDispatch({ type: 'FETCH_ISSUES', payload: data });
   };
 

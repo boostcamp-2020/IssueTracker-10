@@ -25,6 +25,7 @@ export const authReducer = (state, action) => {
       };
     }
     case 'LOGOUT': {
+      localStorage.removeItem('token');
       return {
         ...state,
         token: '',
