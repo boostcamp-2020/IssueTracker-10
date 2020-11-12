@@ -24,7 +24,9 @@ class LabelEditView: UIView {
     var isEdit = false
     var labels: [Label] = [] {
         didSet {
-            collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -73,6 +75,14 @@ class LabelEditView: UIView {
         
         NotificationCenter.default.addObserver(self, selector: #selector(editLabelBegin), name: .EditLabelBegin, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(editLabelEnd), name: .EditLabelEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateIssueDetail), name: .issueDidChanged, object: nil)
+    }
+    
+    @objc func updateIssueDetail() {
+        guard let id = issue?.id else { return }
+        IssueManager().getIssueDetail(id: id, completion: { issueDetail in
+            self.labels = issueDetail.labels
+        })
     }
     
     @objc func editLabelBegin() {
