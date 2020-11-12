@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import CommentEditor from './CommentEditor';
 
 export const CommentWrapper = styled.div`
   display: flex;
@@ -24,7 +25,8 @@ export const ContentWrapper = styled.div`
 `;
 
 const ContentHeader = styled.div`
-  position: relative;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   padding: 10px;
   color: ${(props) => props.theme.whiteColor};
@@ -48,24 +50,47 @@ const Content = styled.div`
 `;
 
 const Badge = styled.span`
-  position: absolute;
-  right: 10px;
+  padding: 3px;
+  border: 1px solid ${(props) => props.theme.whiteColor};
+  border-radius: ${(props) => props.theme.radiusSmall};
   font-size: 13px;
 `;
 
+const EditButton = styled.button`
+  margin-left: 10px;
+  padding: 0;
+  background: none;
+  font-size: 15px;
+`;
+
+const EditorWrapper = styled.div``;
+
 const IssueComment = (props) => {
-  const { id, user, content, createdAt, isAuthor } = props;
+  const { id, user, content, createdAt, isAuthor, isEditer } = props;
+  const [edit, setEdit] = useState(false);
+
+  const onClickEditComment = () => {
+    setEdit(!edit);
+  };
+
   return (
-    <CommentWrapper>
+    <CommentWrapper key={id}>
       <UserAvater src={user.avatar} />
       <ContentWrapper>
         <ContentHeader>
           <HeaderText>
             <Name>{user.username}</Name> commented
           </HeaderText>
-          <Badge>{isAuthor ? 'Author' : 'Member'}</Badge>
+          <EditorWrapper>
+            <Badge>{isAuthor ? 'Author' : 'Member'}</Badge>
+            {isEditer ? <EditButton onClick={onClickEditComment}>Edit</EditButton> : null}
+          </EditorWrapper>
         </ContentHeader>
-        <Content>{content || 'No description provided.'}</Content>
+        {edit ? (
+          <CommentEditor content={content} />
+        ) : (
+          <Content>{content || 'No description provided.'}</Content>
+        )}
       </ContentWrapper>
     </CommentWrapper>
   );

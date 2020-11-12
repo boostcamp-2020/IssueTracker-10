@@ -88,7 +88,8 @@ const IssueDetail = ({ match }) => {
         <CommentSection>
           {commentData.map((comment) => {
             const isAuthor = issueInfoState.user && issueInfoState.user.id === comment.user.id;
-            return <IssueComment isAuthor={isAuthor} {...comment} />;
+            const isEditer = authState.user.id === comment.user.id;
+            return <IssueComment isAuthor={isAuthor} isEditer={isEditer} {...comment} />;
           })}
           <CommentInput />
         </CommentSection>
