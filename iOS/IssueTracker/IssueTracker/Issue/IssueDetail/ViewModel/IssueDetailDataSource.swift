@@ -11,11 +11,11 @@ class IssueDetailDataSource {
 	
 	var dataSource: UICollectionViewDiffableDataSource<Section, IssueComment>!
 	let collectionView: UICollectionView
-	let issueDetail: Issue
+	let issue: Issue
 	
-	init(collectionView: UICollectionView, issueDetail: Issue) {
+	init(collectionView: UICollectionView, issue: Issue) {
 		self.collectionView = collectionView
-		self.issueDetail = issueDetail
+		self.issue = issue
 		configureDataSource()
 	}
 	
@@ -27,8 +27,6 @@ class IssueDetailDataSource {
 		static let detailCell = "DetailCell"
 		static let detailHeader = "DetailHeader"
 		static let detailFooter = "DetailFooter"
-		static let sectionHeaderElementKind = "section-header-element-kind"
-		static let sectionFooterElementKind = "section-footer-element-kind"
 	}
 	
 	func configureDataSource() {
@@ -46,7 +44,7 @@ class IssueDetailDataSource {
 		dataSource.supplementaryViewProvider = { (view, kind, indexPath) -> UICollectionReusableView? in
 			if kind == UICollectionView.elementKindSectionHeader {
 				if let headerView = self.collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Identifier.detailHeader, for: indexPath) as? CollectionHeaderView {
-					headerView.configure(issue: self.issueDetail)
+					headerView.configure(issue: self.issue)
 					return headerView
 				}
 			}
