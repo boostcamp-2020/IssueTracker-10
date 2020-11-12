@@ -13,7 +13,7 @@ class IssueDetailViewController: UIViewController {
     var pullUPView: DetailPullUpView!
     var viewModel: IssueDetailViewModel!
     var issue: Issue!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = IssueDetailViewModel(reactor: IssueDetailReactor(),
@@ -54,5 +54,14 @@ class IssueDetailViewController: UIViewController {
             }
         }
         viewModel.requestIssueDetail(id: issue.id)
+        pullUPView.labelEdit.delegate = self
+    }
+}
+
+extension IssueDetailViewController: LabelEditViewDelegate {
+    func labelEditView(_ labelEditView: LabelEditView, didSelectedPlus: Bool) {
+        let VC = LabelOfIssueCreateViewController()
+//        VC.modalPresentationStyle = .overCurrentContext
+        self.present(VC, animated: false, completion: {})
     }
 }
