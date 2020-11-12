@@ -12,7 +12,8 @@
     "import/prefer-default-export": 0,
     "semi": "error",
     "id-denylist": ["error", "e", "cb", "callback"],
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "import/no-unresolved": "off"
   },
   "globals": {
     "window": true,
