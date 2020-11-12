@@ -26,10 +26,15 @@ const FilterWrapper = styled.div`
 const InputBox = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
   padding: 0 10px;
   svg {
     fill: ${(props) => props.theme.skyblueColor};
   }
+`;
+
+const Form = styled.form`
+  width: 100%;
 `;
 
 export default withRouter(({ location: { search }, history }) => {
@@ -60,14 +65,14 @@ export default withRouter(({ location: { search }, history }) => {
       <FilterWrapper>
         <InputBox>
           <Search size={12} />
-          <form onSubmit={onSearchSubmit}>
+          <Form onSubmit={onSearchSubmit}>
             <Input
               placeholder="Search all labels"
               value={query}
               type="text"
               onChange={onChangeQuery}
             />
-          </form>
+          </Form>
         </InputBox>
       </FilterWrapper>
     </Wrapper>

@@ -69,7 +69,7 @@ const Label = ({ token }) => {
           <LabelFilter />
         </ColumnContainer>
         <ColumnContainer>
-          <Button onClick={toggleDisplay} text="New label" color="#2D9F4C" />
+          <Button onClick={toggleDisplay} text="New label" />
         </ColumnContainer>
       </RowContainer>
       <RowContainer>
