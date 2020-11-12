@@ -8,6 +8,11 @@ import { CheckIcon } from '../static/svgIcons';
 import getPercent from '../../utils/getPercent';
 import { request } from '../../Api';
 
+const methodType = {
+  add: 1,
+  remove: 0,
+};
+
 const ModalRow = styled.li`
   display: flex;
   flex-direction: column;
@@ -81,11 +86,11 @@ export const renderUsers = ({ selectedList, setSelecteList }) => {
   const onClickAssignee = ({ id, username, avatar }) => {
     const data = { id, username, avatar };
     if (selectedListId.includes(id)) {
-      if (!isCreate) fetchAssignee(0, id);
+      if (!isCreate) fetchAssignee(methodType.remove, id);
       const newList = selectedList.filter((user) => id !== user.id);
       return setSelecteList(newList);
     }
-    if (!isCreate) fetchAssignee(1, id);
+    if (!isCreate) fetchAssignee(methodType.add, id);
     return setSelecteList([...selectedList, data]);
   };
 
@@ -125,11 +130,11 @@ export const renderLabels = ({ selectedList, setSelecteList }) => {
   const onClickLabel = ({ id, color, title }) => {
     const data = { id, color, title };
     if (selectedListId.includes(id)) {
-      if (!isCreate) fetchLabel(0, id);
+      if (!isCreate) fetchLabel(methodType.remove, id);
       const newList = selectedList.filter((label) => id !== label.id);
       return setSelecteList(newList);
     }
-    if (!isCreate) fetchLabel(1, id);
+    if (!isCreate) fetchLabel(methodType.add, id);
     return setSelecteList([...selectedList, data]);
   };
   return labels.map((label) => (
@@ -168,10 +173,10 @@ export const renderMilestones = ({ selectedList, setSelecteList }) => {
     const percent = getPercent(closed, total);
     const data = { id, title, open, closed, percent };
     if (selectedListId === id) {
-      if (!isCreate) fetchMilestone(0, id);
+      if (!isCreate) fetchMilestone(methodType.remove, id);
       return setSelecteList(null);
     }
-    if (!isCreate) fetchMilestone(1, id);
+    if (!isCreate) fetchMilestone(methodType.add, id);
     return setSelecteList(data);
   };
   return openMilestone.map((milestone) => (

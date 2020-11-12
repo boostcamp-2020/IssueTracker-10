@@ -38,39 +38,38 @@ const IssueDetail = ({ match }) => {
   const fetchUserInfo = async () => {
     if (!authState.user.id) {
       const config = { url: '/auth/user', method: 'GET', token: authState.token };
-      const { data } = await request(config);
-      if (data) {
-        authDispatch({ type: 'SET_USERINFO', data });
-      }
+      const { status, data } = await request(config);
+      if (status === 401) authDispatch({ type: 'LOGOUT' });
+      if (data) authDispatch({ type: 'SET_USERINFO', data });
     }
   };
 
   const fetchIssueAllData = async () => {
     const config = { url: '/api/all', method: 'GET', token: authState.token };
-    const { data } = await request(config);
-    if (data) {
-      issueDispatch({ type: 'STORE_DETAIL_DATA', payload: data });
-    }
+    const { status, data } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
+    if (data) issueDispatch({ type: 'STORE_DETAIL_DATA', payload: data });
   };
 
   const fetchMilestoneData = async () => {
     const params = { state: 1 };
     const config = { url: '/api/milestone', method: 'GET', token: authState.token, params };
-    const { data } = await request(config);
-    if (data) {
-      milestoneDispatch({ type: 'GET_OPEN_MILESTONE', data });
-    }
+    const { status, data } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
+    if (data) milestoneDispatch({ type: 'GET_OPEN_MILESTONE', data });
   };
 
   const fetchIssueData = async () => {
     const config = { url: `/api/issue/${id}`, method: 'GET', token: authState.token };
-    const { data = {} } = await request(config);
+    const { status, data = {} } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
     if (data) issueInfoDispatch({ type: 'GET_ISSUE_INFO', data });
   };
 
   const fetchComments = async () => {
     const config = { url: `/api/issue/${id}/comment`, method: 'GET', token: authState.token };
-    const { data = {} } = await request(config);
+    const { status, data = {} } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
     if (data) setCommentData(data);
   };
 
