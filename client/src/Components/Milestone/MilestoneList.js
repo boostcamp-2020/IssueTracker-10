@@ -46,8 +46,8 @@ const LinkText = styled.div`
 `;
 
 const MilestoneList = ({ openMilestone, closedMilestone, isClosedPage, setClosedPage }) => {
-  const openMilestoneCount = `${openMilestone.length} Open`;
-  const closedMilestoneCount = `${closedMilestone.length} Closed`;
+  const openMilestoneCount = `${openMilestone ? openMilestone.length : 0} Open`;
+  const closedMilestoneCount = `${closedMilestone ? closedMilestone.length : 0} Closed`;
 
   const onClickClosed = () => {
     setClosedPage(true);

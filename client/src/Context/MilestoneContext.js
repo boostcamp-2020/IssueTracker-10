@@ -21,6 +21,12 @@ export const milestoneReducer = (state, action) => {
         closeMilestone,
       };
     }
+    case 'CREATE_MILESTONE': {
+      const { milestone } = action;
+      return {
+        openMilestone: [milestone, ...state.openMilestone],
+      };
+    }
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
