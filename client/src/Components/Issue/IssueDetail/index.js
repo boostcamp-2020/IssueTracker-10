@@ -5,6 +5,8 @@ import { request } from '../../../Api';
 import Header from './IssueDetailHeader';
 import IssueComment from './IssueComment';
 import CommentInput from './CommentInput';
+import IssueSideBar from '../IssueSideBar';
+import { IssueInfoContext, IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
 
 const Wrapper = styled.div`
   max-width: 1100px;
@@ -18,23 +20,20 @@ const DiscussionSection = styled.section`
 const CommentSection = styled.section`
   display: flex;
   flex-direction: column;
-  flex: 1;
-`;
-
-const SidebarSection = styled.section`
-  flex: 0.4;
+  width: 100%;
 `;
 
 const IssueDetail = ({ match }) => {
   const authState = useContext(AuthStateContext);
   const { id } = match.params;
-  const [issueData, setIssueData] = useState({});
+  const issueInfoState = useContext(IssueInfoContext);
+  const issueInfoDispatch = useContext(IssueInfoDispatchContext);
   const [commentData, setCommentData] = useState([]);
 
   const fetchIssueData = async () => {
     const config = { url: `/api/issue/${id}`, method: 'GET', token: authState.token };
     const { data = {} } = await request(config);
-    if (data) setIssueData(data);
+    if (data) issueInfoDispatch({ type: 'GET_ISSUE_INFO', data });
   };
 
   const fetchComments = async () => {
@@ -50,16 +49,16 @@ const IssueDetail = ({ match }) => {
 
   return (
     <Wrapper>
-      <Header {...issueData} />
+      <Header />
       <DiscussionSection>
         <CommentSection>
           {commentData.map((comment) => {
-            const isAuthor = issueData.user && issueData.user.id === comment.id;
+            const isAuthor = issueInfoState.user && issueInfoState.user.id === comment.id;
             return <IssueComment isAuthor={isAuthor} {...comment} />;
           })}
-          <CommentInput {...issueData} />
+          <CommentInput />
         </CommentSection>
-        <SidebarSection />
+        <IssueSideBar />
       </DiscussionSection>
     </Wrapper>
   );

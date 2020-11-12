@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { CreateButton as Button } from './IssueDetailHeader';
 import { ContentWrapper, CommentWrapper, UserAvater } from './IssueComment';
+import { IssueInfoContext } from '../../../Context/IssueInfoContext';
 
 const InputHeader = styled.div`
   height: 23px;
@@ -39,8 +40,8 @@ const StateButton = styled(Button)`
   background-color: ${(props) => props.theme.redColor};
 `;
 
-const CommentInput = (props) => {
-  const { user } = props;
+const CommentInput = () => {
+  const { user } = useContext(IssueInfoContext);
 
   return (
     <CommentWrapper>

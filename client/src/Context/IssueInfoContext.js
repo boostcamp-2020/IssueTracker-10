@@ -46,6 +46,12 @@ export const issueInfoReducer = (state, action) => {
         milestone,
       };
     }
+    case 'GET_ISSUE_INFO': {
+      const { data } = action;
+      return {
+        ...data,
+      };
+    }
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
