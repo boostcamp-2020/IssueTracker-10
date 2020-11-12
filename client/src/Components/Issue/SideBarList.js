@@ -109,7 +109,7 @@ export const renderMilestones = ({ selectedList, setSelecteList }) => {
   const selectedListId = selectedList && selectedList.id;
   const onClickMilestone = ({ id, title, open, closed }) => {
     const total = open + closed;
-    const percent = total ? `${(open / total) * 100}%` : '0%';
+    const percent = total ? `${(closed / total) * 100}%` : '0%';
     const data = { id, title, open, closed, percent };
     return selectedListId === id ? setSelecteList(null) : setSelecteList(data);
   };
