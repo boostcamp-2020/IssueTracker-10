@@ -7,3 +7,8 @@ export const parseCookies = (cookiesString) => {
       return { ...prev, [key]: value };
     }, {});
 };
+
+export const deleteCookies = (key, value) => {
+  const strCookie = `${key}=${encodeURIComponent(value)}; max-age=0`;
+  document.cookie = strCookie;
+};

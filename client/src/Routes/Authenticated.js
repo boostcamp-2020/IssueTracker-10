@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { parseCookies } from '@Util/parse';
+import { parseCookies } from '@Util/cookie';
 import { AuthStateContext, AuthDispatchContext } from '../Context/AuthContext';
 
 export default ({ component: Component, page, ...rest }) => {
