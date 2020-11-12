@@ -96,7 +96,7 @@ class IssueManager {
         }
 	}
     
-    func removeLabelOfIssue(issueId: Int, labelId: Int, completion: @escaping (() -> Void)) {
+    func removeLabelOfIssue(issueId: Int, labelId: Int, completion: (() -> Void)?) {
         
         let parameters: Parameters = ["type" : "label", "method" : 0, "data": labelId]
         let headers = ["Authorization": Constant.token]
@@ -104,7 +104,21 @@ class IssueManager {
         hvNet.request("http://49.50.163.58:3000/api/issue/\(issueId)/details", method: .post, parameter: parameters, headers: headers).response { (result: HVDataResponse<Data?>) in
             switch result {
             case .success:
-                completion()
+                completion?()
+            case.failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func appendLabelOfIssue(issueId: Int, labelId: Int, completion: (() -> Void)?) {
+        
+        let parameters: Parameters = ["type" : "label", "method" : 1, "data": labelId]
+        let headers = ["Authorization": Constant.token]
+        hvNet.request("http://49.50.163.58:3000/api/issue/\(issueId)/details", method: .post, parameter: parameters, headers: headers).response { (result: HVDataResponse<Data?>) in
+            switch result {
+            case .success:
+                completion?()
             case.failure(let error):
                 print(error.localizedDescription)
             }
