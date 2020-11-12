@@ -13,9 +13,9 @@ export default ({ component: Component, page, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={({ location, ...props }) =>
         authState.token ? (
-          <CheckLogin Component={Component} page={page} {...rest} />
+          <CheckLogin Component={Component} page={page} {...props} location={location} />
         ) : (
           <Redirect
             to={{
@@ -29,22 +29,19 @@ export default ({ component: Component, page, ...rest }) => {
   );
 };
 
-const CheckLogin = ({ Component, page, ...rest }) => {
+const CheckLogin = ({ Component, page, location, ...rest }) => {
   return (
-    <Route
-      {...rest}
-      render={({ location, ...props }) =>
-        page !== 'login' ? (
-          <Component location={location} {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/',
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
+    <>
+      {page !== 'login' ? (
+        <Component location={location} {...rest} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/',
+            state: { from: location },
+          }}
+        />
+      )}
+    </>
   );
 };

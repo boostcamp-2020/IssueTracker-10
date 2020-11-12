@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { AuthDispatchContext } from '@Context/AuthContext';
 import BoldText from './BoldText';
 
 const Header = styled.header`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,10 +21,23 @@ const HeaderText = styled(BoldText)`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-export default () => (
-  <Header>
-    <Link to="/">
-      <HeaderText text="IssueTracker" />
-    </Link>
-  </Header>
-);
+const LogoutButton = styled.button`
+  position: absolute;
+  right: 20px;
+  padding: 5px 10px;
+  color: ${(props) => props.theme.blueColor};
+`;
+
+export default () => {
+  const authDispatch = useContext(AuthDispatchContext);
+  const onClickLogout = () => authDispatch({ type: 'LOGOUT' });
+
+  return (
+    <Header>
+      <Link to="/">
+        <HeaderText text="IssueTracker" />
+      </Link>
+      <LogoutButton onClick={onClickLogout}>Logout</LogoutButton>
+    </Header>
+  );
+};
