@@ -6,6 +6,7 @@ import { MilestoneDispatchContext } from '../../../Context/MilestoneContext';
 import MilestoneCreatePresenter from './MilestoneCreatePresenter';
 
 export default ({ history }) => {
+  const [id, setId] = useState(null);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [date, setDate] = useState(null);
@@ -30,7 +31,8 @@ export default ({ history }) => {
       data: inputData,
     };
     try {
-      await request(config);
+      const { milestoneId } = await request(config);
+      setId(milestoneId);
     } catch (err) {
       throw new Error(err.response);
     }
@@ -45,14 +47,18 @@ export default ({ history }) => {
   useEffect(() => {
     setMilestone({
       ...milestone,
+      id,
       title,
       description,
       date,
     });
+  }, [id, title, description, date]);
+
+  useEffect(() => {
     return () => {
       setMilestone({});
     };
-  }, [title, description, date]);
+  }, []);
 
   const onChangeTitle = (event) => {
     const {
