@@ -67,6 +67,7 @@
 		E085B148255BE5FF0016B7B1 /* UIVIew+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B147255BE5FF0016B7B1 /* UIVIew+Anchor.swift */; };
 		E085B161255C42B90016B7B1 /* UIView+shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B160255C42B90016B7B1 /* UIView+shake.swift */; };
 		E085B166255C48CF0016B7B1 /* LabelEditCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B165255C48CF0016B7B1 /* LabelEditCollectionViewCell.swift */; };
+		E085B16E255C6B8F0016B7B1 /* LabelOfIssueCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085B16D255C6B8F0016B7B1 /* LabelOfIssueCreateViewController.swift */; };
 		E09C1C91254A917200A1FADF /* hvNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = E09C1C90254A917200A1FADF /* hvNetwork */; };
 		E09C1C9C254A939500A1FADF /* IssueDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1C9B254A939500A1FADF /* IssueDataSource.swift */; };
 		E09C1CA2254A996A00A1FADF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C1CA1254A996A00A1FADF /* HomeViewController.swift */; };
@@ -178,6 +179,7 @@
 		E085B147255BE5FF0016B7B1 /* UIVIew+Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Anchor.swift"; sourceTree = "<group>"; };
 		E085B160255C42B90016B7B1 /* UIView+shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shake.swift"; sourceTree = "<group>"; };
 		E085B165255C48CF0016B7B1 /* LabelEditCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelEditCollectionViewCell.swift; sourceTree = "<group>"; };
+		E085B16D255C6B8F0016B7B1 /* LabelOfIssueCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelOfIssueCreateViewController.swift; sourceTree = "<group>"; };
 		E09C1C9B254A939500A1FADF /* IssueDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataSource.swift; sourceTree = "<group>"; };
 		E09C1CA1254A996A00A1FADF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E09C1CA9254A99C400A1FADF /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 			children = (
 				E0B3D4092547EBC20040D5AF /* IssueDetailViewController.swift */,
 				E037F289255A354300DAD98B /* IssueDetailViewController+Collection.swift */,
+				E085B16D255C6B8F0016B7B1 /* LabelOfIssueCreateViewController.swift */,
 			);
 			path = Contoroller;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 				C3DB050E25526E2A00F0910E /* FilterIssueNavigationViewController.swift in Sources */,
 				E049B8AE25529FED004DD162 /* String+hexToUIColor.swift in Sources */,
 				E0B3D3C92546C8660040D5AF /* ViewController.swift in Sources */,
+				E085B16E255C6B8F0016B7B1 /* LabelOfIssueCreateViewController.swift in Sources */,
 				E09C1CA2254A996A00A1FADF /* HomeViewController.swift in Sources */,
 				E037F2AC255A53CA00DAD98B /* IssueDetailViewModel.swift in Sources */,
 				C3414FD02548650C003C845A /* UIView+addExternalBorder.swift in Sources */,
