@@ -71,10 +71,12 @@ const readIssueById = async (req, res) => {
     }
     const commentCount = await commentModel.commentCountById(issueId);
     issueInfo.dataValues.commentCount = commentCount;
-    const { open, closed } = await issueModel.countIssuesByMilestone(issueInfo.milestone.id);
-    const total = open + closed;
-    const percent = `${Math.round((closed / total) * 100)}%`;
-    issueInfo.dataValues.milestone.dataValues.percent = percent;
+    if (issueInfo.mileston) {
+      const { open, closed } = await issueModel.countIssuesByMilestone(issueInfo.milestone.id);
+      const total = open + closed;
+      const percent = `${Math.round((closed / total) * 100)}%`;
+      issueInfo.dataValues.milestone.dataValues.percent = percent;
+    }
     return res.status(200).json({ message: SUCCESS_MSG.read, data: issueInfo });
   } catch (err) {
     return res.status(500).json({ message: ERROR_MSG.server });
