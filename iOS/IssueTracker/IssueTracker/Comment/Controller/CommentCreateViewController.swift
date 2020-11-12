@@ -34,6 +34,7 @@ class CommentCreateViewController: UIViewController {
     
     @IBAction func doneButtonTouched(_ sender: Any) {
         if textView.text == "comment" || textView.text == "" {
+            textView.shake()
             return
         }
         viewModel.requestCreateComment(id: issueID, content: textView.text)

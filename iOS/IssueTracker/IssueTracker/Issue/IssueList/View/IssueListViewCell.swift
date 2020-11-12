@@ -28,6 +28,7 @@ class IssueListViewCell: UICollectionViewCell {
         title.text = issue.title
         desc.text = "#\(issue.id) opened \(PastTime().agoTime(from: issue.createdAt)) by \(issue.user.username)"
         labelListView.labels = issue.labels
+
         if issue.state == 0 {
             infoImage.image = UIImage(systemName: "checkmark.circle")
             infoImage.tintColor = .systemRed

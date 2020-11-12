@@ -18,8 +18,9 @@ extension IssueViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard viewModel.state.isEditting else {
-            let issue = viewModel.state.issues[indexPath.row]
-            presentDetailViewController(issue: issue)
+            if let issue = dataSource.dataSource.itemIdentifier(for: indexPath) {
+                presentDetailViewController(issue: issue)
+            }
             return
         }
         

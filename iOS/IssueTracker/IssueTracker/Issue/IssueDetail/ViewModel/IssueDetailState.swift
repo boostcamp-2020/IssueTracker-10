@@ -8,6 +8,7 @@
 import Foundation
 
 struct IssueDetailState {
+    
     var issue: IssueDetail
     var comments: [IssueComment]
     

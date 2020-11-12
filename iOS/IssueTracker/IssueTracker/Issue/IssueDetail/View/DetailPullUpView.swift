@@ -9,25 +9,30 @@ import UIKit
 
 class DetailPullUpView: UIView {
     
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-
+    var labelEdit: LabelEditView!
+    var heightConstraint: NSLayoutConstraint!
+    let comment = UIButton()
     var currentHeight: CGFloat = 120
     let minHeight: CGFloat = 120
     let maxHeight: CGFloat = UIScreen.main.bounds.height - 150
-    let comment = UIButton()
     var commentDidTouched: (()->Void)!
+
+    init(frame: CGRect, issue: Issue) {
+        super.init(frame: frame)
+        commonInit(issue: issue)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        commonInit(issue: nil)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
+        commonInit(issue: nil)
     }
 
-    func commonInit() {
+    func commonInit(issue: Issue?) {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(updatePanGesture))
         self.addGestureRecognizer(gesture)
         self.backgroundColor = .systemGray3
@@ -40,23 +45,28 @@ class DetailPullUpView: UIView {
         self.layer.shadowRadius = 5
         self.backgroundColor = .systemGray6
  
-        
         let handleBar = UIView()
         handleBar.backgroundColor = .systemGray3
         handleBar.layer.cornerRadius = 3
-        handleBar.translatesAutoresizingMaskIntoConstraints = false
 
-        comment.backgroundColor = UIColor(red: 33/255, green: 74/255, blue: 122/255, alpha: 1)
+        comment.backgroundColor = UIColor(named: "YearColor")
         comment.setTitle("Comment", for: .normal)
         comment.tintColor = .white
         comment.setTitleColor(.systemGray3, for: .highlighted)
         comment.layer.cornerRadius = 10
         comment.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         comment.addTarget(self, action: #selector(touchComment), for: .touchDown)
-        comment.translatesAutoresizingMaskIntoConstraints = false
        
+        labelEdit = LabelEditView(issue: issue)
+
         addSubview(handleBar)
         addSubview(comment)
+        addSubview(labelEdit)
+        
+        handleBar.translatesAutoresizingMaskIntoConstraints = false
+        comment.translatesAutoresizingMaskIntoConstraints = false
+        labelEdit.translatesAutoresizingMaskIntoConstraints = false
+
 
         NSLayoutConstraint.activate([
             handleBar.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -68,7 +78,20 @@ class DetailPullUpView: UIView {
             comment.heightAnchor.constraint(equalToConstant: 40),
             comment.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             comment.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            
+            labelEdit.topAnchor.constraint(equalTo: comment.bottomAnchor, constant: 35),
+            labelEdit.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            labelEdit.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            labelEdit.heightAnchor.constraint(equalToConstant: 500),
         ])
+        
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapPress))
+        singleTapGestureRecognizer.delegate = self
+        self.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    
+    @objc func tapPress() {
+        NotificationCenter.default.post(name: .EditLabelEnd, object: nil)
     }
     
     @objc func touchComment() {
@@ -100,5 +123,13 @@ class DetailPullUpView: UIView {
                         self.superview?.layoutIfNeeded()
                        },completion: nil)
         currentHeight = constant
+    }
+}
+
+extension DetailPullUpView: UIGestureRecognizerDelegate {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let point = gestureRecognizer.location(in: labelEdit.collectionView)
+        let indexPath = labelEdit.collectionView.indexPathForItem(at: point)
+        return indexPath == nil
     }
 }

@@ -32,7 +32,9 @@ class IssueCreateViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func doneButtonTouched(_ sender: Any) {
-        guard let title = titleTextFeild.text, title != "" else { return }
+        guard let title = titleTextFeild.text, title != "" else {
+            titleTextFeild.shake()
+            return }
         manager.create(title: title, content: textView.text)
         self.dismiss(animated: true, completion: nil)
     }

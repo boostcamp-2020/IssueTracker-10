@@ -25,4 +25,8 @@ struct Label: Codable, Hashable {
 		case description
 		case color
 	}
+    
+    static func == (lhs: Label, rhs: Label) -> Bool {
+        return lhs.id == rhs.id && lhs.state == rhs.state
+    }
 }
