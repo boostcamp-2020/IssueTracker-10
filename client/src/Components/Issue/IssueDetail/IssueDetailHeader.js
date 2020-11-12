@@ -63,7 +63,7 @@ const ButtonWrapper = styled.span`
   display: flex;
 `;
 
-const CreateButton = styled.button`
+export const CreateButton = styled.button`
   margin-left: 10px;
   padding: 7px 12px;
   background-color: ${({ theme }) => theme.greenColor};
@@ -78,7 +78,6 @@ const EditButton = styled(CreateButton)`
 
 const IssueDetailHeader = (props) => {
   const { id, title, state, createdAt, user, commentCount } = props;
-  console.log(props);
   return (
     <HeaderWrapper>
       <TitleWrapper>

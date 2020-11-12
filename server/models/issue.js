@@ -82,7 +82,7 @@ const findIssueById = async (id) => {
       include: [
         {
           model: user,
-          attributes: ['id', 'username'],
+          attributes: ['id', 'username', 'avatar'],
           required: true,
         },
         {
