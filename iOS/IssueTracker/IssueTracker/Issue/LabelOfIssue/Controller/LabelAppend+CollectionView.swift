@@ -9,13 +9,13 @@ import UIKit
 
 extension LabelAppendViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredLabel.count
+        return viewModel.state.filteredLabel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? LabelAppendCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(label: filteredLabel[indexPath.row])
+        cell.configure(label: viewModel.state.filteredLabel[indexPath.row])
         return cell
     }
 }
@@ -23,7 +23,9 @@ extension LabelAppendViewController: UICollectionViewDataSource {
 extension LabelAppendViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        IssueManager().appendLabelOfIssue(issueId: issue.id, labelId: filteredLabel[indexPath.row].id, completion: nil)
+        let issueId = viewModel.state.issueId
+        let labelId = viewModel.state.filteredLabel[indexPath.row].id
+        viewModel.requestAppendLabel(issueId: issueId, labelId: labelId)
     }
 }
 

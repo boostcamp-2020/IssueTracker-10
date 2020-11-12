@@ -10,23 +10,17 @@ import UIKit
 class LabelAppendViewController: UIViewController {
    
     let containerView = UIView()
-    var issue: Issue!
-    var totalLabel: [Label] = []
-    var filteredLabel: [Label] {
-        get { totalLabel.filter{ !issue.labels.contains($0) } }
-    }
+    var issueDetail: IssueDetail!
     var collectionView: UICollectionView!
-
+    var viewModel = LabelAppendViewModel(reactor: LabelAppendReactor(), state: LabelAppendState())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         setupUI()
-        LabelManager().get(completion: { labels in
-            self.totalLabel = labels
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        })
+        viewModel.state.issueDetail = issueDetail
+        viewModel.requestGetAllLabel()
+        binding()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,6 +35,14 @@ class LabelAppendViewController: UIViewController {
         guard let touch = touches.first else { return }
         if touch.view != containerView {
             self.dismiss(animated: false, completion: nil)
+        }
+    }
+    
+    func binding() {
+        viewModel.updateClosure = { state in
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
 }
