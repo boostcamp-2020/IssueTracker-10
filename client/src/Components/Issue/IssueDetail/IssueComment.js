@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import CommentEditor from './CommentEditor';
 import { IssueInfoDispatchContext } from '../../../Context/IssueInfoContext';
 import { convertTime } from '../../../utils/convert';
+import Markdown from './Markdown';
+
+window.process = { cwd: () => '' };
 
 export const CommentWrapper = styled.div`
   display: flex;
@@ -94,7 +97,7 @@ const IssueComment = (props) => {
         {edit ? (
           <CommentEditor commentId={id} setEdit={setEdit} setComment={setComment} />
         ) : (
-          <Content>{comment || 'No description provided.'}</Content>
+          <Content>{content ? <Markdown source={content} /> : 'No description provided.'}</Content>
         )}
       </ContentWrapper>
     </CommentWrapper>
