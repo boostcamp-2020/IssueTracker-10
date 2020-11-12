@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { IssueOpenIcon, IssueClosedIcon } from '../../static/svgIcons';
-import { convertTime } from '../../../utils/convert';
-import { IssueInfoContext } from '../../../Context/IssueInfoContext';
+import { convertTime } from '@Util/convert';
+import { IssueOpenIcon, IssueClosedIcon } from '@Svg/svgIcons';
+import { IssueInfoContext } from '@Context/IssueInfoContext';
+import IssueTitle from './IssueTitle';
+import IssueTitleEditor from './IssueTitleEditor';
 
 const HeaderWrapper = styled.div`
   position: relative;
@@ -11,23 +13,6 @@ const HeaderWrapper = styled.div`
   padding-bottom: 30px;
   color: ${(props) => props.theme.blackColor};
   border-bottom: ${(props) => props.theme.border};
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const IssueTitle = styled.span`
-  margin-right: 5px;
-  font-size: 30px;
-`;
-
-const IssueNumber = styled.span`
-  color: ${(props) => props.theme.darkgrayColor};
-  font-size: 30px;
-  font-weight: 300;
 `;
 
 const SubTextWrapper = styled.div`
@@ -57,38 +42,17 @@ const OpenedTime = styled.span`
   color: ${({ theme }) => theme.darkgrayColor};
 `;
 
-const ButtonWrapper = styled.span`
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  display: flex;
-`;
-
-export const CreateButton = styled.button`
-  margin-left: 10px;
-  padding: 7px 12px;
-  background-color: ${({ theme }) => theme.greenColor};
-  font-size: 13px;
-  disabled: ${({ disabled }) => disabled};
-  &:disabled {
-    background-color: ${({ theme }) => theme.lightGrayColor};
-  }
-`;
-
-const EditButton = styled(CreateButton)`
-  color: ${({ theme }) => theme.blackColor};
-  background-color: ${({ theme }) => theme.whiteColor};
-  border: ${({ theme }) => theme.border};
-`;
-
 const IssueDetailHeader = () => {
   const { id, title, state, createdAt, user, commentCount } = useContext(IssueInfoContext);
+  const [isEdit, setIsEdit] = useState(false);
+
   return (
     <HeaderWrapper>
-      <TitleWrapper>
-        <IssueTitle>{title}</IssueTitle>
-        <IssueNumber>#{id}</IssueNumber>
-      </TitleWrapper>
+      {isEdit ? (
+        <IssueTitleEditor id={id} title={title} setIsEdit={setIsEdit} />
+      ) : (
+        <IssueTitle id={id} title={title} setIsEdit={setIsEdit} />
+      )}
       <SubTextWrapper>
         <StateBadge state={state}>
           {state ? <IssueOpenIcon size={14} /> : <IssueClosedIcon size={14} />}
@@ -99,10 +63,6 @@ const IssueDetailHeader = () => {
           opened this issue {convertTime(createdAt)} ・ comments {commentCount}
         </OpenedTime>
       </SubTextWrapper>
-      <ButtonWrapper>
-        <EditButton>Edit</EditButton>
-        <CreateButton>New Issue</CreateButton>
-      </ButtonWrapper>
     </HeaderWrapper>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { CreateButton as Button } from './IssueDetailHeader';
+import Button from './Button';
 import { ContentWrapper, CommentWrapper, UserAvater } from './IssueComment';
 import { AuthStateContext } from '../../../Context/AuthContext';
 import { IssueInfoContext } from '../../../Context/IssueInfoContext';
@@ -64,9 +64,7 @@ const CommentInput = () => {
         </InputCommentWrapper>
         <ButtonWrapper>
           <StateButton>Close Issue</StateButton>
-          <Button disabled={!content} onClick={onClickPostComment}>
-            Comment
-          </Button>
+          <Button disabled={!content} onClick={onClickPostComment} text="Comment" />
         </ButtonWrapper>
       </ContentWrapper>
     </CommentWrapper>

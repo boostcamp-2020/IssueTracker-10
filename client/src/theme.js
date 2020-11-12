@@ -17,10 +17,12 @@ const colors = {
 
 const border = '1px solid #e1e4e8';
 const borderDashed = '1px dashed #e1e4e8';
+const borderFocus = '1px solid #0f4c81';
 const radius = '10px';
 const radiusSmall = '5px';
 const badgeRadius = '2em';
 const cardShadow = '3px 3px 9px #e1e4e8';
+const focusShadow = '0 0 5px #a0b8d0';
 
 export const theme = {
   ...colors,
@@ -30,6 +32,8 @@ export const theme = {
   radiusSmall,
   cardShadow,
   badgeRadius,
+  focusShadow,
+  borderFocus,
 };
 
 export const GlobalStyle = createGlobalStyle`
