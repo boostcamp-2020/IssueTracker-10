@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { toast } from 'react-toastify';
 import { request } from '../../../Api';
-import { AuthStateContext } from '../../../Context/AuthContext';
+import { AuthDispatchContext, AuthStateContext } from '../../../Context/AuthContext';
 import { LabelDispatchContext, LabelStateContext } from '../../../Context/LabelContext';
 import { getRandomColor } from '../../../utils/color';
 import LabelCreateModalPresenter from './LabelCreateModalPresenter';
@@ -8,6 +9,7 @@ import { theme } from '../../../theme';
 
 export default ({ setDisplay, toggleDisplay }) => {
   const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const labelState = useContext(LabelStateContext);
   const labelDispatch = useContext(LabelDispatchContext);
   const [id, setId] = useState(null);
@@ -28,11 +30,14 @@ export default ({ setDisplay, toggleDisplay }) => {
     };
     const config = { url: '/api/label', method: 'POST', token: authState.token, data: inputData };
     try {
-      const data = await request(config);
-      if (data.id) labelDispatch({ type: 'CREATE', label: { id: data.id, ...inputData } });
+      const result = await request(config);
+      if (result.status === 401) authDispatch({ type: 'LOGOUT' });
+      if (result.id) labelDispatch({ type: 'CREATE', label: { id: result.id, ...inputData } });
+      toast.success('Success! 😄');
     } catch (err) {
-      throw new Error(err.response);
+      toast.error('Fail! 😭');
     }
+    return null;
   };
 
   const clickCreateLabelButton = () => {

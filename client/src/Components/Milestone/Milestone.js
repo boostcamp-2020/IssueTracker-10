@@ -51,13 +51,15 @@ const Milestone = ({ token, location: { search, pathname }, history }) => {
       const fetchOpenMilestone = async () => {
         const params = { state: 1 };
         const config = { url: '/api/milestone', method: 'GET', token: authState.token, params };
-        const { data } = await request(config);
+        const { data, status } = await request(config);
+        if (status === 401) authDispatch({ type: 'LOGOUT' });
         if (data) milestoneDispatch({ type: 'GET_OPEN_MILESTONE', data });
       };
       const fetchClosedMilestone = async () => {
         const params = { state: 0 };
         const config = { url: '/api/milestone', method: 'GET', token: authState.token, params };
-        const { data } = await request(config);
+        const { data, status } = await request(config);
+        if (status === 401) authDispatch({ type: 'LOGOUT' });
         if (data) milestoneDispatch({ type: 'GET_CLOSE_MILESTONE', data });
       };
       fetchOpenMilestone();

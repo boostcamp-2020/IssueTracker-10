@@ -56,8 +56,9 @@ const Label = ({ token, location }) => {
     if (authState.token) {
       const fetchLabels = async () => {
         const config = { url: '/api/label', method: 'GET', token: authState.token };
-        const { data } = await request(config);
-        if (data) labelDispatch({ type: 'GET', labels: data });
+        const result = await request(config);
+        if (result.status === 401) authDispatch({ type: 'LOGOUT' });
+        if (result.data) labelDispatch({ type: 'GET', labels: result.data });
       };
       fetchLabels();
     }

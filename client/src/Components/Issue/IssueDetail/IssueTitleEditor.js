@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { IssueInfoDispatchContext } from '@Context/IssueInfoContext';
 import { AuthStateContext, AuthDispatchContext } from '@Context/AuthContext';
+import { toast } from 'react-toastify';
 import { request } from '../../../Api';
 
 const EditorWrapper = styled.div`
@@ -57,6 +58,7 @@ const IssueTitleEditor = (props) => {
     if (status === 200) {
       infoDispatch({ type: 'SET_TITLE', data: writtenTitle });
       setIsEdit(false);
+      toast.success('Success! 😄');
     }
   };
 

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 import Button from './Button';
 import { ContentWrapper, CommentWrapper, UserAvater } from './IssueComment';
-import { AuthStateContext } from '../../../Context/AuthContext';
+import { AuthDispatchContext, AuthStateContext } from '../../../Context/AuthContext';
 import { IssueInfoContext } from '../../../Context/IssueInfoContext';
 import InputComment from '../InputComment';
 import { request } from '../../../Api';
@@ -37,6 +38,7 @@ const StateButton = styled(Button)`
 
 const CommentInput = () => {
   const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const { user } = useContext(AuthStateContext);
   const { id, content } = useContext(IssueInfoContext);
 
@@ -49,7 +51,9 @@ const CommentInput = () => {
       data,
     };
     const result = await request(config);
-    if (result) alert('커멘트 추가 성공');
+    if (result.status === 401) return authDispatch({ type: 'LOGOUT' });
+    if (result) toast.success('Success! 😄');
+    return null;
   };
 
   return (

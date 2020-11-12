@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { theme } from '../../../theme';
-import { AuthStateContext } from '../../../Context/AuthContext';
+import { AuthDispatchContext, AuthStateContext } from '../../../Context/AuthContext';
 import { request } from '../../../Api';
 import { MilestoneDispatchContext } from '../../../Context/MilestoneContext';
 import MilestoneCreatePresenter from './MilestoneCreatePresenter';
@@ -12,6 +13,7 @@ export default ({ history }) => {
   const [date, setDate] = useState(null);
   const [milestone, setMilestone] = useState({});
   const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const milestoneDispatch = useContext(MilestoneDispatchContext);
 
   const helpText =
@@ -31,10 +33,12 @@ export default ({ history }) => {
       data: inputData,
     };
     try {
-      const { milestoneId } = await request(config);
+      const { status, milestoneId } = await request(config);
+      if (status === 401) authDispatch({ type: 'LOGOUT' });
       setId(milestoneId);
+      toast.success('Success! 😄');
     } catch (err) {
-      throw new Error(err.response);
+      toast.error('Fail! 😭');
     }
   };
 

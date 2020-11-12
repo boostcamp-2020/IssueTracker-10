@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 import Input from '../Common/Input';
 import GreenButton from '../Common/GreenButton';
 import InputComment from './InputComment';
 import { request } from '../../Api';
-import { AuthStateContext } from '../../Context/AuthContext';
+import { AuthDispatchContext, AuthStateContext } from '../../Context/AuthContext';
 import { IssueInfoContext } from '../../Context/IssueInfoContext';
 
 const Wrapper = styled.div`
@@ -50,6 +51,7 @@ const LinkToMain = styled.a`
 
 const NewIssue = ({ history }) => {
   const authState = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const issueInfoState = useContext(IssueInfoContext);
   const { token, user } = authState;
   const [title, setTitle] = useState('');
@@ -73,11 +75,13 @@ const NewIssue = ({ history }) => {
 
     const config = { url: '/api/issue', method: 'POST', data, token };
     const result = await request(config);
-
+    if (result.status === 401) return authDispatch({ type: 'LOGOUT' });
     if (result) {
+      toast.success('Success! 😄');
       const issueId = result.id;
       history.push(`/issue/${issueId}`);
     }
+    return null;
   };
 
   return (
