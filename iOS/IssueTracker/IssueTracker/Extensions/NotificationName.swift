@@ -18,6 +18,7 @@ extension Notification.Name {
     static let EditLabelBegin = Notification.Name.init("EditLabelBegin")
     static let EditLabelEnd = Notification.Name.init("EditLabelEnd")
     static let removeLabelOfIssue = Notification.Name.init("removeLabelOfIssue")
+    static let removeLabelOfIssueDone = Notification.Name.init("removeLabelOfIssueDone")
     static let addLabelOfIssue = Notification.Name.init("addLabelOfIssue")
 
 	static let signInDidFinished = Notification.Name.init("signInDidFinished")
