@@ -1,11 +1,11 @@
 # IssueTracker Project
 
-> 부스트캠프 그룹프로젝트 팀 10
+> 부스트캠프 그룹프로젝트 팀 10 (👨‍👩‍👦‍👦  왕10리)
+
+![image](https://user-images.githubusercontent.com/43198553/99027417-84f43200-25b0-11eb-9ed6-e732acf4fb48.png)
 
 ## Member
-> 팀원을 소개합니다!
-
-👨‍👩‍👦‍👦왕10리
+> 왕십리 팀원을 소개합니다!
 
 > 🐳 **공태경** [J012]  [@Taeg92](https://github.com/Taeg92) <br/>
  🐈 **박수연** [J079]  [@Park-SooYeon](https://github.com/Park-SooYeon) <br/>
@@ -42,12 +42,17 @@
        \_feat/{기능}#이슈번호
 ```
 
----
+### deploy
 
-## 1️⃣ Server
-> Server에 관한 설명입니다.
+```
+서버 배포 링크 : http://49.50.163.58:3000 
+웹 배포 링크 : http://49.50.163.58
+```
 
-### 1. root/pacakage.json
+- `pm2` 기반으로 nCloud 서버에 백엔드 배포
+- `nginx`로 React 배포
+
+### root/pacakage.json
 
 ```json
 "devDependencies": {
@@ -66,39 +71,10 @@
  }
 ```
 - airbnb style로 eslint & prettier 설정
-​
-### 2. server/package.json
 
-```json
-"dependencies": {
-    "axios": "^0.21.0",
-    "jsonwebtoken": "^8.5.1",
-    "helmet": "^4.1.1",
-    "sequelize": "^6.3.5",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "uuid": "^8.3.1"
-},
-"devDependencies": {
-    "cors": "^2.8.5",
-    "mocha": "^8.2.0",
-    "should": "^13.2.3",
-    "supertest": "^6.0.0"
-}
-```
-- mysql을 쉽게 다루기 위해 **객체와 관계형 데이터베이스의 관계를 매핑 해주는 도구** `sequelize`를 사용하였습니다.
-- server의 앱의 취약성을 보완하기 위해 `helmet` 모듈을 사용.
-- cors issue 해결을 위해 `cors` 모듈 사용
-- TDD 개발에 필요한 모듈 : `mocha`, `supertest`, `should`
-- OAuth 때 필요한 http request 요청 -> `uuid`, `axios` 설치
-​
-### 3. deploy
+---
 
-```
-배포 링크 : http://49.50.163.58:3000
-```
 
-- `pm2` 기반으로 nCloud 서버에 배포
 
 ## 2️⃣ iOS
 
