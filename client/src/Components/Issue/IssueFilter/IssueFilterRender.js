@@ -68,7 +68,7 @@ export const renderUsers = ({ users, type }) => {
     const { id, username, avatar } = user;
     return (
       <ModalRow key={id} onClick={() => onClickUser(id)} selected={selectedUser === id}>
-        {avatar ? <UserAvater src={avatar} alt={`${username} profile`} /> : <Unknown size="18px" />}
+        {avatar ? <UserAvater src={avatar} alt={`${username} profile`} /> : <Unknown size="20px" />}
         {username}
       </ModalRow>
     );
