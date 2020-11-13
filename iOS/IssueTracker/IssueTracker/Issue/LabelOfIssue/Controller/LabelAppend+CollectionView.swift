@@ -21,9 +21,7 @@ extension LabelAppendViewController: UICollectionViewDelegate {
 }
 
 extension LabelAppendViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width * 0.45, height: 70)
+        return CGSize(width: collectionView.frame.width * 0.42, height: 70)
     }
-    
 }

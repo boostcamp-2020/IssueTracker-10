@@ -20,11 +20,10 @@ class LabelAppendCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(label: Label) {
-        let color = label.color.hexStringToUIColor().withAlphaComponent(0.95)
+        let color = label.color.hexStringToUIColor().withAlphaComponent(0.9)
         backgroundColor = color
         layer.cornerRadius = 15
         title.text = label.title
         title.textColor = color.isDark ? .white : .black
     }
-
 }
