@@ -33,8 +33,25 @@ export const request = async (config) => {
       ...config,
       url: process.env.BASE_URL + config.url,
     });
+    return { status: res.status, ...res.data };
+  } catch ({ response }) {
+    return { status: response.status };
+  }
+};
+
+export const uploadRequest = async (config) => {
+  try {
+    const res = await axios({
+      headers: {
+        Authorization: config.token,
+        'Content-Type': 'multipart/form-data',
+      },
+      ...config,
+      url: process.env.BASE_URL + config.url,
+    });
+
     return res.data;
   } catch ({ response }) {
-    return {};
+    return null;
   }
 };

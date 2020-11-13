@@ -13,6 +13,7 @@ public enum Environment {
       enum Plist {
         static let clientId = "CLIENT_ID"
         static let clientSecret = "CLIENT_SECRET"
+		static let masterToken = "MASTER_TOKEN"
       }
     }
     
@@ -35,4 +36,10 @@ public enum Environment {
         }
         return secret
     }()
+	static let masterToken: String = {
+		guard let token = Environment.infoDictionary[Keys.Plist.masterToken] as? String else {
+			fatalError("API Key not set in plist for this environment")
+		}
+		return token
+	}()
 }

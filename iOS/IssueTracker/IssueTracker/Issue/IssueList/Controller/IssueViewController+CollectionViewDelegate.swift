@@ -17,8 +17,10 @@ extension IssueViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard isEditing == true else {
-            presentViewController(identifier: "IssueDetailViewController", type: IssueDetailViewController(), option: .push)
+        guard viewModel.state.isEditting else {
+            if let issue = dataSource.dataSource.itemIdentifier(for: indexPath) {
+                presentDetailViewController(issue: issue)
+            }
             return
         }
         
@@ -29,10 +31,14 @@ extension IssueViewController: UICollectionViewDelegate {
 		else {
 			cell?.backgroundColor = nil
 		}
+		
+		viewModel.updateIssueCount(count: collectionView.indexPathsForSelectedItems?.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = nil
+		
+		viewModel.updateIssueCount(count: collectionView.indexPathsForSelectedItems?.count ?? 0)
     }
 }

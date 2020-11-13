@@ -46,7 +46,7 @@ const createIssue = async (req, res) => {
     if (!createdData) return res.status(400).json({ message: ERROR_MSG.delete });
     const { id: issueId } = createdData;
     await commentModel.createComment({ userId: id, issueId, content });
-    return res.status(200).json({ message: SUCCESS_MSG.create });
+    return res.status(200).json({ message: SUCCESS_MSG.create, id: createdData.id });
   } catch (err) {
     return res.status(500).json({ message: ERROR_MSG.server });
   }
@@ -54,9 +54,8 @@ const createIssue = async (req, res) => {
 
 const readIssueAll = async (req, res) => {
   try {
-    // const { state, author, label, milestone, assignee, search } = req.query;
-    const issueList = await issueModel.findIssueAll({ state: 'open', ...req.query });
-    return res.status(200).json({ message: SUCCESS_MSG.read, data: issueList });
+    const result = await issueModel.findIssueAll({ state: 'open', ...req.query });
+    return res.status(200).json({ message: SUCCESS_MSG.read, data: { ...result } });
   } catch (err) {
     return res.status(500).json({ message: ERROR_MSG.server });
   }
@@ -70,9 +69,14 @@ const readIssueById = async (req, res) => {
     if (!issueInfo) {
       return res.status(404).json({ message: ERROR_MSG.notFound });
     }
-
     const commentCount = await commentModel.commentCountById(issueId);
     issueInfo.dataValues.commentCount = commentCount;
+    if (issueInfo.milestone) {
+      const { open, closed } = await issueModel.countIssuesByMilestone(issueInfo.milestone.id);
+      const total = open + closed;
+      const percent = `${Math.round((closed / total) * 100)}%`;
+      issueInfo.dataValues.milestone.dataValues.percent = percent;
+    }
     return res.status(200).json({ message: SUCCESS_MSG.read, data: issueInfo });
   } catch (err) {
     return res.status(500).json({ message: ERROR_MSG.server });

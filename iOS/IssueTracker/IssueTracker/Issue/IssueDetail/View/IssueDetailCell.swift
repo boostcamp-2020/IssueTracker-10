@@ -11,9 +11,24 @@ class IssueDetailCell: UICollectionViewCell {
 
     @IBOutlet weak var header: IssueDetailCellHeader!
     @IBOutlet weak var content: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        header.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            header.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width)
+        ])
+        self.backgroundColor = .systemBackground
     }
 
+    func configure(comment: IssueComment) {
+        content.text = comment.content
+        header.configure(comment: comment)
+    }
+    
+    override func prepareForReuse() {
+        content.text = ""
+        header.prepareforResue()
+    }
 }

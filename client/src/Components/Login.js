@@ -4,7 +4,8 @@ import { authRequest } from '../Api';
 import { GitHubLogo } from './static/svgIcons';
 
 const Wrapper = styled.div`
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background-color: ${(props) => props.theme.blueColor};
   color: ${(props) => props.theme.blackColor};
 `;
