@@ -18,7 +18,7 @@ class IssueManager {
         hvNet.request("http://49.50.163.58:3000/api/issue/?state=all", method: .get, headers: headers).response { (result: HVDataResponse<IssueResponse>) in
             switch result {
             case .success(let issues):
-                completion(issues.data)
+                completion(issues.data.issues)
             case .failure:
                 completion([])
             }

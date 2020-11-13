@@ -28,7 +28,7 @@ extension LabelAppendViewController {
             containerView.heightAnchor.constraint(equalTo: containerView.widthAnchor)
         ])
 
-        collectionView.anchor(top: containerView.topAnchor, paddingTop: 10, bottom: containerView.bottomAnchor, paddingBottom: 10, leading: containerView.leadingAnchor, paddingLeft: 10, trailing: containerView.trailingAnchor, paddingRight: 10, width: 0, height: 0)
+        collectionView.anchor(top: containerView.topAnchor, paddingTop: 15, bottom: containerView.bottomAnchor, paddingBottom: 15, leading: containerView.leadingAnchor, paddingLeft: 15, trailing: containerView.trailingAnchor, paddingRight: 15, width: 0, height: 0)
     }
     
     enum Section {
