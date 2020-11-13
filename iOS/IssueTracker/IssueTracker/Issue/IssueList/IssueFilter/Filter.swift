@@ -29,7 +29,6 @@ class Filters {
 		Filter(criteria: CloseCriteria(), description: "닫힌 이슈들", isApply: false),
 		Filter(criteria: AuthorCriteria(name: AppData.user.name), description: "내가 작성한 이슈들", isApply: false),
 		Filter(criteria: AssignedCriteria(name: AppData.user.name), description: "나한테 할당된 이슈들", isApply: false),
-		Filter(criteria: CommentCriteria(), description: "내가 댓글을 남긴 이슈들", isApply: false)
 	]
 	
 	func changeApplies() {
