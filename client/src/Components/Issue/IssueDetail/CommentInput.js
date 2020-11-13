@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from './Button';
 import { ContentWrapper, CommentWrapper, UserAvater } from './IssueComment';
@@ -41,7 +42,7 @@ const ChangeStateButton = styled(Button)`
   background-color: ${(props) => props.theme.redColor};
 `;
 
-const CommentInput = () => {
+const CommentInput = ({ history }) => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   const { user } = useContext(AuthStateContext);
@@ -85,7 +86,10 @@ const CommentInput = () => {
     };
     const { status } = await request(config);
     if (status === 401) authDispatch({ type: 'LOGOUT' });
-    if (status === 200) issueInfoDispatch({ type: 'SET_STATE', data });
+    if (status === 200) {
+      issueInfoDispatch({ type: 'SET_STATE', data });
+      history.go(0);
+    }
   };
 
   return (
@@ -110,4 +114,4 @@ const CommentInput = () => {
   );
 };
 
-export default CommentInput;
+export default withRouter(CommentInput);
