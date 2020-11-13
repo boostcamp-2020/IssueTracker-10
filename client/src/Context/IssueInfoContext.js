@@ -69,6 +69,13 @@ export const issueInfoReducer = (state, action) => {
         comments,
       };
     }
+    case 'SET_COMMENT_COUNT': {
+      const commentCount = action.data;
+      return {
+        ...state,
+        commentCount,
+      };
+    }
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

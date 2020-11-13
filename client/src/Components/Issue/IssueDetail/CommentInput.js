@@ -45,14 +45,17 @@ const CommentInput = () => {
   const authState = useContext(AuthStateContext);
   const authDispatch = useContext(AuthDispatchContext);
   const { user } = useContext(AuthStateContext);
-  const { id, content, state } = useContext(IssueInfoContext);
+  const { id, commentCount, content, state } = useContext(IssueInfoContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
 
   const fetchComments = async () => {
     const config = { url: `/api/issue/${id}/comment`, method: 'GET', token: authState.token };
     const { status, data = {} } = await request(config);
     if (status === 401) authDispatch({ type: 'LOGOUT' });
-    if (data) issueInfoDispatch({ type: 'SET_COMMENTS', data });
+    if (data) {
+      issueInfoDispatch({ type: 'SET_COMMENTS', data });
+      issueInfoDispatch({ type: 'SET_COMMENT_COUNT', data: commentCount + 1 });
+    }
   };
 
   const onClickPostComment = async () => {
