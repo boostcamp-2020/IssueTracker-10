@@ -108,4 +108,5 @@ iOSInjectionProject/
 ### Xcode Patch ###
 **/xcshareddata/WorkspaceSettings.xcsettings
 *.mlmodel
+*.xcconfig
 # End of https://www.gitignore.io/api/xcode,swift,cocoapods
