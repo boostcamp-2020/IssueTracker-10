@@ -14,10 +14,7 @@ protocol LabelEditViewDelegate {
 class LabelEditView: UIView {
     
     var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, Label>!
-    enum Section {
-        case main
-    }
+	
     let columnLayout = LeftAlignFlowLayout(
         minimumInteritemSpacing: 10,
         minimumLineSpacing: 10,
@@ -29,7 +26,9 @@ class LabelEditView: UIView {
     var addLabel = Label(id: -1, title: "  +  ", color: "#19426b")
     var labels: [Label] = [] {
         didSet {
-            updateDataSource(labels: self.labels + [addLabel])
+			DispatchQueue.main.async {
+				self.collectionView.reloadData()
+			}
         }
     }
     
@@ -57,13 +56,13 @@ class LabelEditView: UIView {
 
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: columnLayout)
         collectionView.delegate = self
+		collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(LabelEditCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.collectionViewLayout = columnLayout
         collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.isScrollEnabled = false
         collectionView.backgroundColor = .clear
-        setupDatasource()
         addSubview(collectionView)
         addSubview(label)
         
@@ -78,32 +77,6 @@ class LabelEditView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(editLabelBegin), name: .EditLabelBegin, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(editLabelEnd), name: .EditLabelEnd, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateIssueDetail), name: .issueDidChanged, object: nil)
-    }
-    
-    func setupDatasource() {
-        let cellProvider = { (collectionView: UICollectionView, indexPath: IndexPath, label: Label) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? LabelEditCollectionViewCell
-            else { return LabelEditCollectionViewCell() }
-            
-            if self.isEdit {
-                cell.editLabelBegin()
-            }
-        
-            let item = label
-            cell.configure(item: item)
-        
-            return cell
-        }
-        dataSource = UICollectionViewDiffableDataSource<Section, Label>(collectionView: collectionView, cellProvider: cellProvider)
-    }
-    
-    func updateDataSource(labels: [Label]) {
-        DispatchQueue.main.async {
-            var snapshot = NSDiffableDataSourceSnapshot<Section, Label>()
-            snapshot.appendSections([.main])
-            snapshot.appendItems(labels)
-            self.dataSource.apply(snapshot, animatingDifferences: true)
-        }
     }
     
     @objc func updateIssueDetail() {
@@ -133,4 +106,30 @@ extension LabelEditView: UICollectionViewDelegate {
             NotificationCenter.default.post(name: .removeLabelOfIssue, object: object)
         }
     }
+}
+
+extension LabelEditView: UICollectionViewDataSource {
+
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return labels.count + 1
+	}
+
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? LabelEditCollectionViewCell
+		else { return LabelEditCollectionViewCell() }
+
+		if isEdit {
+			cell.editLabelBegin()
+		}
+
+		if indexPath.row == labels.count {
+			cell.configure(item: addLabel)
+			return cell
+		}
+
+		let item = labels[indexPath.row]
+		cell.configure(item: item)
+		return cell
+	}
 }
