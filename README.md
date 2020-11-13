@@ -2,6 +2,9 @@
 
 > 부스트캠프 그룹프로젝트 팀 10
 
+<p align="center"><img src="https://octodex.github.com/images/steroidtocat.png" width="70%"></p>
+
+
 ## Member
 > 팀원을 소개합니다!
 
