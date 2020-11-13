@@ -1,4 +1,4 @@
-const { milestone } = require('./database');
+const { sequelize, milestone } = require('./database');
 const ERROR_MSG = require('../services/errorMessages');
 
 const milestoneType = {
@@ -71,7 +71,15 @@ const findMilestoneAll = async () => {
 const findMilestoneListByState = async (state = 1) => {
   try {
     const milestones = await milestone.findAll({
-      attributes: ['id', 'title', 'description', 'date', 'state'],
+      attributes: [
+        'id',
+        'title',
+        'description',
+        'date',
+        [sequelize.fn('date_format', sequelize.col('date'), '%M %d, %Y'), 'dateString'],
+        'state',
+        'updatedAt',
+      ],
       order: [['id', 'DESC']],
       where: { state },
       raw: true,

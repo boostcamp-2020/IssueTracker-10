@@ -1,11 +1,17 @@
 import { createContext } from 'react';
+import { deleteCookies } from '@Util/cookie';
 
 export const initialAuthState = {
   token:
-    localStorage.getItem('token') && localStorage.getItem('token') !== 'undefined'
+    localStorage.getItem('token') && localStorage.getItem('token') !== 'null'
       ? localStorage.getItem('token')
       : '',
   isLoggedIn: false,
+  user: {
+    id: null,
+    username: '',
+    avatar: null,
+  },
 };
 
 export const authReducer = (state, action) => {
@@ -20,10 +26,19 @@ export const authReducer = (state, action) => {
       };
     }
     case 'LOGOUT': {
+      deleteCookies('auth', state.token);
+      localStorage.removeItem('token');
       return {
         ...state,
         token: '',
         isLoggedIn: false,
+      };
+    }
+    case 'SET_USERINFO': {
+      const user = action.data;
+      return {
+        ...state,
+        user,
       };
     }
     default:
