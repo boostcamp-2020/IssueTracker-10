@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssueDispatchContext } from '../../Context/IssueContext';
+import { getFontColor } from '../../utils/color';
 
 const Badge = styled.span`
   display: inline-flex;
@@ -9,7 +10,7 @@ const Badge = styled.span`
   height: 19px;
   margin: 1px 4px 0 0;
   padding: 0px 7px;
-  color: ${(props) => props.theme.blackColor};
+  color: ${(props) => props.fontColor};
   background-color: ${(props) => props.color};
   border: 0;
   border-radius: ${(props) => props.theme.badgeRadius};
@@ -21,13 +22,14 @@ const Badge = styled.span`
 const IssueLabelBadge = (props) => {
   const issueDispatch = useContext(IssueDispatchContext);
   const { id, title, color } = props;
+  const fontColor = getFontColor(color);
 
   const onClickLabel = (labelId) => {
     issueDispatch({ type: 'SET_ONE_LABEL', id: labelId });
   };
 
   return (
-    <Badge onClick={() => onClickLabel(id)} color={color}>
+    <Badge onClick={() => onClickLabel(id)} color={color} fontColor={fontColor}>
       {title}
     </Badge>
   );
