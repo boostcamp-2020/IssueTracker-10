@@ -82,7 +82,7 @@ const IssueComment = (props) => {
   };
 
   return (
-    <CommentWrapper key={id}>
+    <CommentWrapper>
       <UserAvater src={user.avatar} />
       <ContentWrapper>
         <ContentHeader>
@@ -97,7 +97,7 @@ const IssueComment = (props) => {
         {edit ? (
           <CommentEditor commentId={id} setEdit={setEdit} setComment={setComment} />
         ) : (
-          <Content>{content ? <Markdown source={content} /> : 'No description provided.'}</Content>
+          <Content>{comment ? <Markdown source={comment} /> : 'No description provided.'}</Content>
         )}
       </ContentWrapper>
     </CommentWrapper>
