@@ -28,27 +28,27 @@ class OpenCriteria: IssueCriteria {
 
 class AuthorCriteria: IssueCriteria {
 	
-	let author: Author
+	let name: String
 	
-	init(author: Author) {
-		self.author = author
+	init(name: String) {
+		self.name = name
 	}
 	
 	func apply(issues: [Issue]) -> [Issue] {
-		return issues.filter { $0.user == author }
+		return issues.filter { $0.user.username == name }
 	}
 }
 
 class AssignedCriteria: IssueCriteria {
 	
-	let assignee: Assignee
+	let name: String
 	
-	init(assignee: Assignee) {
-		self.assignee = assignee
+	init(name: String) {
+		self.name = name
 	}
 	
 	func apply(issues: [Issue]) -> [Issue] {
-		return issues.filter { $0.assignees.contains(assignee) }
+		return issues.filter { $0.assignees.filter { $0.username == name }.count > 0  }
 	}
 }
 

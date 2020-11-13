@@ -30,6 +30,12 @@ class IssueDiffableDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.issueCell, for: indexPath)
             if let issueCell = cell as? IssueListViewCell {
                 issueCell.configure(issue: issue)
+				if issueCell.isSelected == true {
+					issueCell.backgroundColor = UIColor.systemGray6
+				}
+				else {
+					issueCell.backgroundColor = nil
+				}
                 return issueCell
             }
             return nil
@@ -48,10 +54,12 @@ class IssueDiffableDataSource {
     }
     
     func updateDataSource(issues: [Issue]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Issue>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(issues)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        DispatchQueue.main.async {
+            var snapshot = NSDiffableDataSourceSnapshot<Section, Issue>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(issues)
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
     }
     
     func itemIdentifier(for indexPath: IndexPath) -> Issue? {

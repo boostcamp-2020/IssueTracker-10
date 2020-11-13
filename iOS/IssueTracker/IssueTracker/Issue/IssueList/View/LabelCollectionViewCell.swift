@@ -14,12 +14,16 @@ class LabelCollectionViewCell: UICollectionViewCell {
     var isclicked = false
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        setup()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        setup()
+    }
+    
+    func setup() {
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.preferredMaxLayoutWidth = 120
         label.numberOfLines = 1
@@ -34,18 +38,8 @@ class LabelCollectionViewCell: UICollectionViewCell {
             contentView.layoutMarginsGuide.bottomAnchor.constraint(equalTo: label.bottomAnchor),
             label.widthAnchor.constraint(lessThanOrEqualToConstant: 190)
         ])
-        NotificationCenter.default.addObserver(self, selector: #selector(labelToggled), name: .labelDidToggled, object: nil)
     }
-    
-    @objc private func labelToggled(_ notification: Notification) {
-        if let object = notification.object as? [String: Any] {
-            guard let name = object["title"] as? String,
-                  let clicked = object["clicked"] as? Bool,
-                  name == label.text else { return }
-            updateColor(flag: clicked)
-        }
-    }
-    
+
     func configure(item: Label) {
         color = item.color.hexStringToUIColor()
         label.text = item.title
@@ -55,7 +49,7 @@ class LabelCollectionViewCell: UICollectionViewCell {
         backgroundColor = .white
         layer.cornerRadius = 12
         clipsToBounds = true
-        isclicked = SelectedLabels.shared.contains(title: item.title)
+        isclicked = item.state
         updateColor(flag: isclicked)
     }
     
@@ -67,10 +61,10 @@ class LabelCollectionViewCell: UICollectionViewCell {
     func updateColor(flag: Bool) {
         if flag {
             self.backgroundColor = color
-            self.label.textColor = .white
+            self.label.textColor = UIColor(named: "LabelCellColor")
             
         } else {
-            self.backgroundColor = .white
+            self.backgroundColor = UIColor(named: "LabelCellColor")
             self.label.textColor = color
         }
     }

@@ -2,14 +2,15 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="IssueDetailCell" customModule="IssueTracker" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DetailCell" id="gTV-IL-0wX" customClass="IssueDetailCell" customModule="IssueTracker" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="266" height="153"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -17,17 +18,16 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elA-p7-IEp" customClass="IssueDetailCellHeader" customModule="IssueTracker" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="266" height="70"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="0.0" y="0.0" width="266" height="80"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="70" id="aAS-Wh-put"/>
+                            <constraint firstAttribute="height" constant="80" id="aAS-Wh-put"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem sdfsdfsdlf sfklsdmf sdfs sf fds fsdf sd ffsdf df sdf ssdflkms sdflksm fsldkfm sdlkf msldkfm sldfm slkdfm alsdfmlkasdf" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pka-yg-Lb1">
-                        <rect key="frame" x="10" y="70" width="256" height="83"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test Comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pka-yg-Lb1">
+                        <rect key="frame" x="20" y="80" width="246" height="53"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="YYQ-3q-34N"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="YYQ-3q-34N"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -39,9 +39,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="elA-p7-IEp" secondAttribute="trailing" id="62O-mf-McH"/>
-                <constraint firstItem="Pka-yg-Lb1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="MlG-Ox-rFS"/>
+                <constraint firstItem="Pka-yg-Lb1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="MlG-Ox-rFS"/>
                 <constraint firstItem="Pka-yg-Lb1" firstAttribute="top" secondItem="elA-p7-IEp" secondAttribute="bottom" id="Qgi-sv-nKc"/>
-                <constraint firstAttribute="bottom" secondItem="Pka-yg-Lb1" secondAttribute="bottom" id="Tw1-MG-Qo8"/>
+                <constraint firstAttribute="bottom" secondItem="Pka-yg-Lb1" secondAttribute="bottom" constant="20" id="Tw1-MG-Qo8"/>
                 <constraint firstItem="elA-p7-IEp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="VuK-KK-DEK"/>
                 <constraint firstItem="elA-p7-IEp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YEC-aM-2xQ"/>
                 <constraint firstAttribute="trailing" secondItem="Pka-yg-Lb1" secondAttribute="trailing" id="ch0-fa-yka"/>
@@ -54,4 +54,9 @@
             <point key="canvasLocation" x="149.27536231884059" y="159.04017857142856"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
