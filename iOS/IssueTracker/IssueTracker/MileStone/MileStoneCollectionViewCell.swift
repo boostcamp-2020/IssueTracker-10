@@ -28,9 +28,9 @@ class MileStoneCollectionViewCell: UICollectionViewCell {
 	}
 	
 	private func calculateProgress(open: Int?, close: Int?) -> Int {
-		guard let open = open, let close = close, open + close != 0 else { return 0}
-		let percentage: Double = Double(close / (open + close))
-		return Int(ceil(percentage * 100))
+		guard let open = open, let close = close, (open + close) != 0 else { return 0}
+		let percentage: Double = Double(close) / Double(open + close) * 100
+		return Int(floor(percentage))
 	}
 	
 	private func prettyPrintedDate(with dateString: String?) -> String? {
