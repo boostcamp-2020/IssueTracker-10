@@ -26,7 +26,7 @@ class LabelEditView: UIView {
     var delegate: LabelEditViewDelegate?
     var issue: Issue?
     var isEdit = false
-    var addLabel = Label(id: -1, title: "  +  ", color: "#cccccc")
+    var addLabel = Label(id: -1, title: "  +  ", color: "#19426b")
     var labels: [Label] = [] {
         didSet {
             updateDataSource(labels: self.labels + [addLabel])
@@ -88,9 +88,10 @@ class LabelEditView: UIView {
             if self.isEdit {
                 cell.editLabelBegin()
             }
-            
+        
             let item = label
             cell.configure(item: item)
+        
             return cell
         }
         dataSource = UICollectionViewDiffableDataSource<Section, Label>(collectionView: collectionView, cellProvider: cellProvider)
