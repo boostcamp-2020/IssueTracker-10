@@ -1,8 +1,14 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { IssueInfoContext, IssueInfoDispatchContext } from '../../Context/IssueInfoContext';
-import { AuthStateContext } from '../../Context/AuthContext';
+import { AuthStateContext, AuthDispatchContext } from '../../Context/AuthContext';
 import { getFontColor } from '../../utils/color';
+import { request } from '../../Api';
+
+const methodType = {
+  add: 1,
+  remove: 0,
+};
 
 const Wrapper = styled.li`
   display: flex;
@@ -25,7 +31,6 @@ const AssignSelf = styled.button`
   }
 `;
 
-/* TODO: 라벨 색에 따라 font 색 변경 */
 const Label = styled.div`
   width: 100%;
   padding: 5px 10px;
@@ -55,10 +60,23 @@ const MilestoneDone = styled(MilestoneTotal)`
 `;
 
 export const checkedUsers = () => {
-  const { assignees } = useContext(IssueInfoContext);
+  const { id: issueId, assignees } = useContext(IssueInfoContext);
   const issueInfoDispatch = useContext(IssueInfoDispatchContext);
-  const { user: loginUser } = useContext(AuthStateContext);
+  const { user: loginUser, token } = useContext(AuthStateContext);
+  const authDispatch = useContext(AuthDispatchContext);
+  const fetchAssignee = async (method, id) => {
+    const data = { type: 'assignee', method, data: id };
+    const config = {
+      url: `/api/issue/${issueId}/details`,
+      method: 'POST',
+      token,
+      data,
+    };
+    const { status } = await request(config);
+    if (status === 401) authDispatch({ type: 'LOGOUT' });
+  };
   const onClickSelf = () => {
+    fetchAssignee(methodType.add, loginUser.id);
     issueInfoDispatch({ type: 'SELECT_ASSIGNEES', data: [loginUser] });
   };
   if (assignees.length === 0) {
