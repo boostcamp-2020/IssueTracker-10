@@ -45,6 +45,10 @@
        \_feat/{기능}#이슈번호
 ```
 
+- [Back-end ⚙️](https://github.com/boostcamp-2020/IssueTracker-10/-tree/master/server)
+- [iOS 🍎](https://github.com/boostcamp-2020/IssueTracker-10/tree/master/iOS)
+- [Front-end 🎨](https://github.com/boostcamp-2020/IssueTracker-10/tree/master/client)
+
 ### deploy
 
 ```
