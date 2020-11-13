@@ -89,7 +89,12 @@ export default withRouter(({ history, token, match, location: { pathname } }) =>
 
   const onClickUpdateMilestone = () => {
     updateMilestone();
-    history.push('/milestones');
+    if (state === 1) {
+      history.push('/milestones');
+    } else {
+      history.push('/milestones?state=closed');
+    }
+    history.go(0);
   };
 
   const onClickCancelMilestone = () => {
