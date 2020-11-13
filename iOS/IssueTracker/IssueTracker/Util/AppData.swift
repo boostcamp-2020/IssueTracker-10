@@ -7,7 +7,20 @@
 
 import Foundation
 
+
+struct Key {
+	static let user = "user"
+	static let apply = "apply"
+	static let token = "token"
+}
+
 struct AppData {
-	@Storage(key: User.Key.user.rawValue, defaultValue: User.basic)
+	@Storage(key: Key.user, defaultValue: User.basic)
 	static var user: User
+	
+	@Storage(key: Key.apply, defaultValue: Filters.defaultApplies)
+	static var applies: [Bool]
+	
+	@Storage(key: Key.token, defaultValue: "")
+	static var token: String
 }

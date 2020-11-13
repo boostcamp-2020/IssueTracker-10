@@ -13,10 +13,10 @@ extension UIView {
 		static let ExternalBorderName = "externalBorder"
 	}
 	
-	func addExternalBorder(content: String, borderWidth: CGFloat, whiteSpace: CGFloat = 0, borderColor: UIColor) {
+	func addExternalBorder(content: String, borderWidth: CGFloat, whiteSpace: CGFloat = 0, borderColor: UIColor? = UIColor.black) {
 		let externalBorder = CALayer()
 		externalBorder.frame = CGRect(x: -(borderWidth + whiteSpace), y: -(borderWidth + whiteSpace), width: frame.size.width + (whiteSpace + borderWidth) * 2, height: frame.size.height + (whiteSpace + borderWidth) * 2)
-		externalBorder.borderColor = borderColor.cgColor
+		externalBorder.borderColor = borderColor?.cgColor
 		externalBorder.borderWidth = borderWidth
 		externalBorder.cornerRadius = 4
 		externalBorder.name = Constants.ExternalBorderName

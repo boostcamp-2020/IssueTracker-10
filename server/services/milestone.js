@@ -24,8 +24,8 @@ const createMilestone = async (req, res) => {
     if (!checkValidation.createOrUpdate(milestoneData)) {
       return res.status(400).json({ message: ERROR_MSG.invalid });
     }
-    await milestoneModel.createMilestone(milestoneData);
-    return res.status(200).json({ message: SUCCESS_MSG.create });
+    const { id } = await milestoneModel.createMilestone(milestoneData);
+    return res.status(200).json({ message: SUCCESS_MSG.create, id });
   } catch (err) {
     return res.status(500).json({ message: ERROR_MSG.server });
   }

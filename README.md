@@ -15,6 +15,8 @@
 
 *요란한 음료, 대용량 아메리카노와 함께 하는 우리 팀~*
 
+<p align="center"><img src="https://octodex.github.com/images/steroidtocat.png" width="30%"></p>
+
 ## WIKI 🗒
 >[WIKI에 놀러오세요~](https://github.com/boostcamp-2020/IssueTracker-10/wiki)
 >

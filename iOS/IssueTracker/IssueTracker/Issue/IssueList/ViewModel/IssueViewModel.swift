@@ -1,70 +1,92 @@
 //
-//  IssueViewModel.swift
+//  IssueViewModel2.swift
 //  IssueTracker
 //
-//  Created by 채훈기 on 2020/10/29.
+//  Created by 채훈기 on 2020/11/07.
 //
 
 import Foundation
-import hvNetwork
 
-let tempLabels = [Label(id: 0, title: "backend", color: "#111111"),
-                  Label(id: 0, title: "document", color: "#fd3887"),
-                  Label(id: 0, title: "review request", color: "#bd3d21"),
-                  Label(id: 0, title: "frontend", color: "#ce12aa"),
-                  Label(id: 0, title: "refactoring", color: "#bd3d21"),
-                  ]
-
-class IssueViewModel {
+class IssueListViewModel {
     
-    let issueManager = IssueManager()
-    var issueApplyToDatasource: (([Issue], IssueCriteria? ) -> Void)?
-    var issues: [Issue] = [Issue.empty]
-    var selectedLabels = SelectedLabels.shared
-	var criteriaFromFilterView: IssueCriteria = EmptyCriteria()
-    var combineFilter: IssueCriteria {
-        get {
-            let selected = self.criteriaFromFilterView
-            let title = TitleCriteria(input: inputText)
-            let labels = selectedLabels.labelsTitle.map { LabelNameCriteria(name: $0) }
-            return AndCriteria(criterias: [selected, title, AndCriteria(criterias: labels)])
+    let reactor: IssueListReactor
+    var state: IssueListState
+    var updateClosure: ((IssueListState) -> Void)?
+        
+    init(reactor: IssueListReactor, state: IssueListState) {
+        self.reactor = reactor
+        self.state = state
+        reactor.sideEffect = { state in
+            self.state = state
+            self.updateClosure?(state)
         }
-    }
-    var inputText = "" {
-        didSet {
-            updateIssues()
-        }
+        setNotification()
     }
     
-    init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(issueDidChanged), name: .issueDidChanged, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(filterDidchanged), name: .filterDidchanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(selectedLabelChanged), name: .selectedLabelChanged, object: nil)
-        updateIssues()
+    func update(searchInput text: String) {
+        state = reactor.execute(action: .searchIssueTitle(text), currentState: state)
+        updateClosure?(state)
     }
     
-	@objc func filterDidchanged(_ notification: Notification) {
-		guard let filters = notification.userInfo?["filters"] as? [IssueCriteria] else { return }
-		let combineCriterias = AndCriteria(criterias: filters)
-		criteriaFromFilterView = combineCriterias
-		updateIssues()
+    func requestGetIssueList() {
+        state = reactor.execute(action: .requestGetIssueList, currentState: state)
+        updateClosure?(state)
+    }
+    
+    func requestDelete(issues: [Issue]) {
+        state = reactor.execute(action: .requestIssueDelete(issues), currentState: state)
+        updateClosure?(state)
+    }
+    
+    func requestClose(issues: [Issue]) {
+        state = reactor.execute(action: .requestIssueClose(issues), currentState: state)
+        updateClosure?(state)
+    }
+    
+    func updateIsEditModeToggle() {
+        state = reactor.execute(action: .toggleIsEditMode, currentState: state)
+        updateClosure?(state)
+    }
+	
+	func updateIssueCount(count: Int) {
+		state = reactor.execute(action: .changeIssueCount(count), currentState: state)
+		updateClosure?(state)
 	}
 	
-    @objc func selectedLabelChanged() {
-        updateIssues()
+	func updateSelectedAllMode() {
+		state = reactor.execute(action: .updateShowSelectedAll, currentState: state)
+		updateClosure?(state)
+	}
+    
+    private func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedLabel), name: .labelDidToggled, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSelectedFilter), name: .filterDidchanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateIssueCreated), name: .issueDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateRefreshIssue), name: .refreshIssue, object: nil)
+    }
+
+    @objc private func updateIssueCreated(_ notification: Notification) {
+        state = reactor.execute(action: .requestGetIssueList, currentState: state)
+        updateClosure?(state)
     }
     
-    @objc func issueDidChanged() {
-        updateIssues()
+    @objc private func updateSelectedFilter(_ notification: Notification) {
+        guard let filters = notification.userInfo?["filters"] as? [IssueCriteria] else { return }
+        let combine = AndCriteria(criterias: filters)
+        state = reactor.execute(action: .checkedFilter(combine), currentState: state)
+        updateClosure?(state)        
     }
     
-	func updateIssues() {
-        issueManager.get { [weak self] issues in
-            guard let self = self else { return }
-            self.issues = issues
-            DispatchQueue.main.async {
-                self.issueApplyToDatasource?(self.issues, self.combineFilter)
-            }
-        }
+    @objc private func updateSelectedLabel(_ notification: Notification) {
+        guard let object = notification.object as? [String: Any],
+              let name = object["title"] as? String,
+              let clicked = object["clicked"] as? Bool else { return }
+        state = reactor.execute(action: .clickLabel(name, clicked), currentState: state)
+        updateClosure?(state)
+    }
+    
+    @objc private func updateRefreshIssue(_ notification: Notification) {
+        state = reactor.execute(action: .refreshIssue, currentState: state)
+        updateClosure?(state)
     }
 }

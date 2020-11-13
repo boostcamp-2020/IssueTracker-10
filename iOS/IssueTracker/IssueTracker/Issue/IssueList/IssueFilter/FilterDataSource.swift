@@ -41,6 +41,10 @@ class FilterDiffableDataSource {
 			var content = cell.defaultContentConfiguration()
 			content.text = filterContent.description
 			cell.contentConfiguration = content
+			cell.isSelected = filterContent.isApply
+			if cell.isSelected {
+				tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+			}
 			return cell
 		}		
 		
@@ -52,6 +56,7 @@ class FilterDiffableDataSource {
 	
 	func initSnapshot() -> NSDiffableDataSourceSnapshot<Section, Filter> {
 		let filterContents = Filters()
+		filterContents.changeApplies()
 		let max = filterContents.contents.count
 		let state = Array(filterContents.contents[0..<2])
 		let option = Array(filterContents.contents[2..<max])

@@ -25,8 +25,8 @@ const createLabel = async (labelData) => {
       raw: true,
     });
     if (isExistLabel) return false;
-    await label.create({ title, description, color });
-    return true;
+    const { id } = await label.create({ title, description, color });
+    return id;
   } catch (err) {
     throw new Error(errorMessages.label.createFailed);
   }

@@ -62,10 +62,10 @@ db.comment.belongsTo(db.user, {
 
 // issue-comment 1:N 관계
 db.issue.hasMany(db.comment, {
-  foreignKey: 'issueId',
+  foreignKey: { name: 'issueId', allowNull: false },
 });
 db.comment.belongsTo(db.issue, {
-  foreignKey: 'issueId',
+  foreignKey: { name: 'issueId', allowNull: false },
   onDelete: 'CASCADE',
 });
 
