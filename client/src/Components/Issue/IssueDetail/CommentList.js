@@ -17,7 +17,9 @@ const IssueDetail = () => {
         {comments.map((comment) => {
           const isAuthor = user && user.id === comment.user.id;
           const isEditer = authState.user.id === comment.user.id;
-          return <IssueComment isAuthor={isAuthor} isEditer={isEditer} {...comment} />;
+          return (
+            <IssueComment key={comment.id} isAuthor={isAuthor} isEditer={isEditer} {...comment} />
+          );
         })}
       </Wrapper>
     </IssueInfoProvider>
