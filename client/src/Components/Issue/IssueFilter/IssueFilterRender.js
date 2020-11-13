@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import Unknown from '@Common/Unknown';
 import { AuthDispatchContext, AuthStateContext } from '../../../Context/AuthContext';
 import { IssueStateContext, IssueDispatchContext } from '../../../Context/IssueContext';
 import { request } from '../../../Api';
@@ -67,7 +68,7 @@ export const renderUsers = ({ users, type }) => {
     const { id, username, avatar } = user;
     return (
       <ModalRow key={id} onClick={() => onClickUser(id)} selected={selectedUser === id}>
-        <UserAvater src={avatar} alt={`${username} profile`} />
+        {avatar ? <UserAvater src={avatar} alt={`${username} profile`} /> : <Unknown size="18px" />}
         {username}
       </ModalRow>
     );
