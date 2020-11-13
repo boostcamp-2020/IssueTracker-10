@@ -9,8 +9,16 @@ import Foundation
 
 
 struct IssueResponse: Codable {
+    
     let message: String
-    let data: [Issue]
+    let data: IssueDataResponse
+}
+
+struct IssueDataResponse: Codable {
+   
+    let closedCount: Int
+    let openCount: Int
+    let issues: [Issue]
 }
 
 struct Issue: Codable, Hashable {
