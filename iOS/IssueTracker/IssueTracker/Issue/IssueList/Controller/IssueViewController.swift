@@ -28,6 +28,7 @@ class IssueViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.requestGetIssueList()
         navigationController?.setToolbarHidden(false, animated: false)
     }
     
@@ -45,7 +46,6 @@ class IssueViewController: UIViewController {
 			self.updateIsEdit(flag: state.isEditting, count: state.issueCount, isShowSelectedAll: state.isShowSelectedAll)
         }
         viewModel.updateClosure?(viewModel.state)
-        viewModel.requestGetIssueList()
     }
     
 	func updateIsEdit(flag: Bool, count: Int, isShowSelectedAll: Bool) {
